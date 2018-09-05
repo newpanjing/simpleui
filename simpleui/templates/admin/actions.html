@@ -1,0 +1,53 @@
+{% load i18n %}
+{% load admin_urls static admin_list %}
+<div class="actions">
+
+    <input type="hidden" name="action" value=""/>
+
+    {% for field in action_form.fields.action.choices %}
+        {% if field.0 %}
+
+            {% if field.0 == 'delete_selected' %}
+                <button data-name="{{ field.0 }}" type="button" class="layui-btn layui-btn-danger">
+                    <i class="layui-icon"></i>
+                    选中删除
+                </button>
+            {% else %}
+                <button data-name="{{ field.0 }}" type="button" class="layui-btn">
+                    {{ field.1 }}
+                </button>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if has_add_permission %}
+        {% url cl.opts|admin_urlname:'add' as add_url %}
+        <button type="button" url="{% add_preserved_filters add_url is_popup to_field %}"
+                class="layui-btn layui-btn-normal">
+            <i class="layui-icon"></i>
+            {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+        </button>
+    {% endif %}
+<a href="?all" class="showall layui-btn" style="color: white;text-decoration: none">
+    <i class="layui-icon">&#xe63c;</i>
+    {% trans 'Show all' %}
+</a>
+{{ cl.result_count }}条数据
+{% if cl.formset and cl.result_count %}
+<input type="submit" name="_save" class="default" value="{% trans 'Save' %}"/>{% endif %}
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".actions button").click(function () {
+            var url = $(this).attr("url");
+            if (url) {
+                window.location.href = url;
+                return;
+            } else {
+                var name = $(this).attr("data-name");
+                $("#changelist-form input[name='action']").val(name);
+                $("#changelist-form").submit();
+            }
+        });
+    });
+</script>

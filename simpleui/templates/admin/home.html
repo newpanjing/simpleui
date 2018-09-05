@@ -1,0 +1,59 @@
+{% load i18n static %}
+
+<div id="home">
+
+    <div class="site-title">
+        <fieldset>
+            <legend><a name="table">快捷导航</a></legend>
+        </fieldset>
+    </div>
+
+    <ul class="site-doc-icon">
+        {% if app_list %}
+            {% for app in app_list %}
+                {% for model in app.models %}
+                    <li class="open" url="{{ model.admin_url }}">
+                        <i class="layui-icon">&#xe653;</i>
+                        <div class="doc-icon-name">{{ model.name }}</div>
+                    </li>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <div class="site-title">
+        <fieldset>
+            <legend><a name="table">{% trans 'Recent actions' %}</a></legend>
+        </fieldset>
+    </div>
+    {% load log %}
+    {% get_admin_log 10 as admin_log for_user user %}
+    {% if admin_log %}
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <td>描述</td>
+                <td>模块</td>
+                <td>用户</td>
+                <td>时间</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entry in admin_log %}
+                <tr>
+                    <td>{{ entry }}</td>
+                    <td>{{ entry.content_type }}</td>
+                    <td>{{ entry.user }}</td>
+                    <td>{{ entry.action_time }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".site-doc-icon li").click(function () {
+            addTab($(this),$(this).find(".doc-icon-name").text(),$(this).attr("url"))
+        });
+    });
+</script>

@@ -1,0 +1,56 @@
+{% load admin_list %}
+{% load i18n %}
+<div style="text-align: center">
+    <div class="layui-box layui-laypage layui-laypage-molv" id="pagination">
+        {% if pagination_required %}
+            <a href="javascript:;" class="layui-laypage-prev">上一页</a>
+            {% for i in page_range %}
+                {% if cl.page_num == i %}
+                    <span data-page="{{ i }}">{{ i }}</span>
+                {% elif i == '.' %}
+                    <span class="layui-laypage-spr">…</span>
+                {% else %}
+                    <a href="javascript:;" data-page="{{ i }}">{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+            <a href="javascript:;" class="layui-laypage-next">下一页</a>
+        {% endif %}
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var _cl ={{ cl.page_num }};
+        $("#pagination *[data-page!='']").each(function () {
+            var page = $(this).attr("data-page")
+            if (!page) {
+                return;
+            }
+            page = parseInt(page);
+            _cl = parseInt(_cl);
+
+            if (page == _cl) {
+                $(this).addClass("layui-laypage-curr");
+                $(this).html('<em class="layui-laypage-em" style="background-color:#1E9FFF;"></em>' +
+                    '<em>' + (page + 1) + '</em>');
+            } else {
+                $(this).text(page + 1);
+                $(this).attr("href", "?p=" + page);
+            }
+        });
+        //处理上一页和下一页
+        if (_cl == 0) {
+            $(".layui-laypage-prev").addClass("layui-disabled");
+        } else {
+            $(".layui-laypage-prev").attr("href", "?p=" + (_cl - 1));
+        }
+        {#var total = $(".layui-laypage-next").prev().text();#}
+        {#total = parseInt(total);#}
+        var total ={{cl.paginator.count}};
+
+        if (_cl == (total - 1)) {
+            $(".layui-laypage-next").addClass("layui-disabled");
+        } else {
+            $(".layui-laypage-next").attr("href", "?p=" + (_cl + 1));
+        }
+    });
+</script>
