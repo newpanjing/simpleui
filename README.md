@@ -4,6 +4,8 @@ django admin 美化，采用layui 作为基本框架，改写大部分页面
 
 + 安装
 > pip install django-simpleui
++ 或者克隆源码本地安装
+> python setup.py sdist install
 + 项目 settings.py 的INSTALLED_APPS 第一行加入
 > `simpleui`
 
