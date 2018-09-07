@@ -20,9 +20,9 @@ django admin 美化，采用layui 作为基本框架，改写大部分页面
 # 效果图
 
 ## 主页
-![主页](https://github.com/newpanjing/simpleui/blob/master/images/主页.png)
+![主页](https://github.com/newpanjing/simpleui/raw/master/images/主页.png)
 ## 列表页
-![列表](https://github.com/newpanjing/simpleui/blob/master/images/列表页.png)
+![列表](https://github.com/newpanjing/simpleui/raw/master/images/列表页.png)
 ## 登录页
-![登录页](https://github.com/newpanjing/simpleui/blob/master/images/登录页.png)
+![登录页](https://github.com/newpanjing/simpleui/raw/master/images/登录页.png)
  
