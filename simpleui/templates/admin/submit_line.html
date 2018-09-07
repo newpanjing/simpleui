@@ -1,6 +1,6 @@
 {% load i18n admin_urls %}
 <div class="submit-row">
-<button type="button" class="layui-btn" onclick="window.history.go(-1)" style="float: left">返回</button>
+<button type="button" class="layui-btn" onclick="window.history.go(-1)" style="float: left;margin-right: 10px;margin-bottom: 10px;">返回</button>
 {% if show_save %}<input type="submit" value="{% trans 'Save' %}" class="default" name="_save" />{% endif %}
 {% if show_delete_link %}
     {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
