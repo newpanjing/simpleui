@@ -6,7 +6,7 @@ long_description = "\n".join([
 
 setup(
     name='django-simpleui',
-    version='1.3.6',
+    version='1.4',
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,
