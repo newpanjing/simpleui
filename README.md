@@ -8,6 +8,7 @@ django admin 美化，采用layui 作为基本框架，改写大部分页面
 > python setup.py sdist install
 + 项目 settings.py 的INSTALLED_APPS 第一行加入
 > `simpleui`
++ i18n 50%支持
 
 # 采用 simpleui的网站
 1. [贝塔博客](https://www.88cto.com)
