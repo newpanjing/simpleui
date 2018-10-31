@@ -20,12 +20,12 @@ django admin 美化，采用layui 作为基本框架，改写大部分页面
 # 效果图
 
 ## 主页
-![主页](https://github.com/newpanjing/simpleui/blob/master/images/主页.png)
+![主页](https://github.com/newpanjing/simpleui/raw/master/images/主页.png)
 ## 列表页
-![列表](https://github.com/newpanjing/simpleui/blob/master/images/列表页.png)
+![列表](https://github.com/newpanjing/simpleui/raw/master/images/列表页.png)
 ## 登录页
-![登录页](https://github.com/newpanjing/simpleui/blob/master/images/登录页.png)
-
+![登录页](https://github.com/newpanjing/simpleui/raw/master/images/登录页.png)
+ 
 
 # 更新日志
 ## version 1.4
@@ -38,10 +38,10 @@ django admin 美化，采用layui 作为基本框架，改写大部分页面
 
 # v1.4版预览图
 
-![img](https://github.com/newpanjing/simpleui/blob/master/images/图片1.png)
-![img](https://github.com/newpanjing/simpleui/blob/master/images/图片2.png)
-![img](https://github.com/newpanjing/simpleui/blob/master/images/图片3.png)
-![img](https://github.com/newpanjing/simpleui/blob/master/images/图片4.png)
-![img](https://github.com/newpanjing/simpleui/blob/master/images/图片5.png)
+![img](https://github.com/newpanjing/simpleui/raw/master/images/图片1.png)
+![img](https://github.com/newpanjing/simpleui/raw/master/images/图片2.png)
+![img](https://github.com/newpanjing/simpleui/raw/master/images/图片3.png)
+![img](https://github.com/newpanjing/simpleui/raw/master/images/图片4.png)
+![img](https://github.com/newpanjing/simpleui/raw/master/images/图片5.png)
 
 > 改版本的图标猜测功能可能不大完善，大家可以提issue 来完善。
