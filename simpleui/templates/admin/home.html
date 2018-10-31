@@ -1,10 +1,10 @@
-{% load i18n static %}
+{% load i18n static simpletags%}
 
 <div id="home">
 
     <div class="site-title">
         <fieldset>
-            <legend><a name="table">快捷导航</a></legend>
+            <legend><a name="table">{{ '应用'|get_icon }}快捷导航</a></legend>
         </fieldset>
     </div>
 
@@ -13,7 +13,7 @@
             {% for app in app_list %}
                 {% for model in app.models %}
                     <li class="open" url="{{ model.admin_url }}">
-                        <i class="layui-icon">&#xe653;</i>
+                        {{ model.name|get_icon }}
                         <div class="doc-icon-name">{{ model.name }}</div>
                     </li>
                 {% endfor %}
@@ -22,7 +22,7 @@
     </ul>
     <div class="site-title">
         <fieldset>
-            <legend><a name="table">{% trans 'Recent actions' %}</a></legend>
+            <legend><a name="table">{{ '最近操作'|get_icon }}最近操作</a></legend>
         </fieldset>
     </div>
     {% load log %}
@@ -41,7 +41,7 @@
             {% for entry in admin_log %}
                 <tr>
                     <td>{{ entry }}</td>
-                    <td>{{ entry.content_type }}</td>
+                    <td>{{ entry.content_type|get_icon }}{{ entry.content_type }}</td>
                     <td>{{ entry.user }}</td>
                     <td>{{ entry.action_time }}</td>
                 </tr>
@@ -49,6 +49,20 @@
             </tbody>
         </table>
     {% endif %}
+
+<style type="text/css">
+    #copyright{
+        color: #ccc;
+    }
+    #copyright a{
+        color: #ccc;
+    }
+</style>
+<div id="copyright">
+    <p>Simpleui</p>
+    <p>项目主页:<a href="https://www.88cto.com/project/simpleui/" target="_blank">https://www.88cto.com/project/simpleui/</a></p>
+    <p>Github:<a href="https://github.com/newpanjing/simpleui" target="_blank">https://github.com/newpanjing/simpleui</a> </p>
+</div>
 </div>
 <script type="text/javascript">
     $(function () {

@@ -25,4 +25,23 @@ django admin 美化，采用layui 作为基本框架，改写大部分页面
 ![列表](https://github.com/newpanjing/simpleui/blob/master/images/列表页.png)
 ## 登录页
 ![登录页](https://github.com/newpanjing/simpleui/blob/master/images/登录页.png)
- 
+
+
+# 更新日志
+## version 1.4
+1. 由于django无法自定义图标，所以采用猜测的方式来给菜单显示图标
+2. 修复select下拉框bug
+3. 修复错误提示不显示bug
+4. 图标使用最新版layui 2.4.4
+5. 导入jieba分词，用于猜测图标
+
+
+# v1.4版预览图
+
+![img](https://github.com/newpanjing/simpleui/blob/master/images/图片1.png)
+![img](https://github.com/newpanjing/simpleui/blob/master/images/图片2.png)
+![img](https://github.com/newpanjing/simpleui/blob/master/images/图片3.png)
+![img](https://github.com/newpanjing/simpleui/blob/master/images/图片4.png)
+![img](https://github.com/newpanjing/simpleui/blob/master/images/图片5.png)
+
+> 改版本的图标猜测功能可能不大完善，大家可以提issue 来完善。

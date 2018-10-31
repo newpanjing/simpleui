@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load admin_urls static admin_list %}
+{% load admin_urls static admin_list simpletags%}
 <div class="actions">
 
     <input type="hidden" name="action" value=""/>
@@ -14,7 +14,7 @@
                 </button>
             {% else %}
                 <button data-name="{{ field.0 }}" type="button" class="layui-btn">
-                    {{ field.1 }}
+                    {{ field.1|get_icon }}{{ field.1 }}
                 </button>
             {% endif %}
         {% endif %}
@@ -32,7 +32,7 @@
     <i class="layui-icon">&#xe63c;</i>
     {% trans 'Show all' %}
 </a>
-{{ cl.result_count }}条数据
+
 {% if cl.formset and cl.result_count %}
 <input type="submit" name="_save" class="default" value="{% trans 'Save' %}"/>{% endif %}
 </div>

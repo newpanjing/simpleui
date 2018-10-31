@@ -6,7 +6,7 @@ long_description = "\n".join([
 
 setup(
     name='django-simpleui',
-    version='1.3.5',
+    version='1.3.6',
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,
@@ -16,5 +16,5 @@ setup(
     long_description=long_description,
     author_email='newpanjing@icloud.com',
     description='django admin 后台模板',
-    install_requires=['django'],
+    install_requires=['django', 'jieba'],
 )
