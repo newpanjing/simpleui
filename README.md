@@ -9,6 +9,13 @@ django admin 美化，采用layui 作为基本框架，改写大部分页面
 + 项目 settings.py 的INSTALLED_APPS 第一行加入
 > `simpleui`
 
+# 采用 simpleui的网站
+1. [贝塔博客](https://www.88cto.com)
+2. [奇客网](https://www.qikenet.com)
+3. [WeNat](https://www.wezoz.com)
+4. [72WO](https://www.72wo.com)
+5. [12APM](https://www.12apm.com)
+
 # 美化页面
 ----
  + 登录页
