@@ -21,10 +21,13 @@
                                     {% for option in spec.lookup_choices %}
                                         <option value="{{ option.0 }}">{{ option.1 }}</option>
                                     {% endfor %}
-                                {% else %}
+                                {% elif spec.field.choices %}
                                     {% for option in spec.field.choices %}
                                         <option value="{{ option.0 }}">{{ option.1 }}</option>
                                     {% endfor %}
+                                {% else %}
+                                    <option value="True">True</option>
+                                    <option value="False">False</option>
                                 {% endif %}
                             </select>
                         </div>
