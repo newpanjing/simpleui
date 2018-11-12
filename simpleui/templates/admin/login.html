@@ -15,7 +15,7 @@
 <body>
 
 <div class="login-main">
-    <header class="layui-elip">后台登录</header>
+    <header class="layui-elip">{{ site_header }}</header>
     <form class="layui-form" action="{{ app_path }}" method="post" id="login-form">
         {% csrf_token %}
         <div class="layui-input-inline">
