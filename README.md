@@ -39,6 +39,9 @@ django admin 美化，采用layui 作为基本框架，改写大部分页面
 ## version 1.4.2
 1. 修复布尔类型下拉框无法显示bug
 
+## version 1.4.3
+1. 修正登录页面标题显示
+
 # v1.4版预览图
 
 ![img](https://github.com/newpanjing/simpleui/raw/master/images/图片1.png)
