@@ -1,12 +1,19 @@
+import sys
 from setuptools import setup
 
-long_description = "\n".join([
-    open('README.md', 'r').read(),
-])
+if sys.version_info < (3, 0):
+
+    long_description = "\n".join([
+        open('README.md', 'r').read(),
+    ])
+else:
+    long_description = "\n".join([
+        open('README.md', 'r', encoding='utf-8').read(),
+    ])
 
 setup(
     name='django-simpleui',
-    version='1.4.3',
+    version='1.4.4',
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,
