@@ -5,13 +5,17 @@ django admin 美化主题，采用layui 作为基本框架，改写大部分页�
 ## 说明
 + 安装
 ```python
-pip3 install django-simpleui
+pip install django-simpleui
+```
++ 升级
+```python
+pip install django-simpleui --upgrade
 ```
 + 克隆源码本地安装
 ```shell
 git clone https://github.com/newpanjing/simpleui
 cd simpleui
-python3 setup.py sdist install
+python setup.py sdist install
 ```
 + 项目 settings.py 的INSTALLED_APPS 第一行加入
 > `simpleui`
