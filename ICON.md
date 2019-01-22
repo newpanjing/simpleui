@@ -1,12 +1,7 @@
-import jieba
-from django import template
-from django.utils.html import format_html
-from django.conf import settings
-import os
+# 图标列表
 
-register = template.Library()
-
-icons = [{
+```python
+[{
     "name": "半星",
     "cls": "layui-icon-rate-half"
 }, {
@@ -427,68 +422,4 @@ icons = [{
     "name": "导入",
     "cls": "layui-icon-add-circle-fine"
 }]
-
-
-def find_icon(key):
-    for d in icons:
-        name = d.get('name')
-        if name.find(key) != -1 or key.find(name) != -1:
-            return d.get('cls')
-
-    return None
-
-
-@register.filter
-def get_icon(name):
-    # 默认为文件图标
-    cls = "layui-icon-file"
-    try:
-        # 系统模块是proxy，分词会报错
-        name = str(name)
-        seg_list = jieba.lcut_for_search(name, HMM=True)
-        for key in seg_list:
-
-            val = find_icon(key)
-            if val:
-                cls = val
-                break
-
-        # print(seg_list)
-        # print(cls)
-    except:
-        pass
-
-    return format_html('<i class="layui-icon {}"></i>', cls)
-
-
-@register.filter
-def test(obj):
-    print(obj)
-
-
-@register.simple_tag(takes_context=True)
-def home_page(context):
-    '''
-    处理首页，通过设置判断打开的是默认页还是自定义的页面
-    :return:
-    '''
-    home = __get_config('SIMPLEUI_HOME_PAGE')
-    if home:
-        context['home'] = home
-
-    title = __get_config('SIMPLEUI_HOME_TITLE')
-    if not title:
-        title = '首页'
-
-    icon = __get_config('SIMPLEUI_HOME_ICON')
-    if not icon:
-        icon = 'layui-icon-console'
-
-    context['title'] = format_html('<i class="layui-icon {}"></i>{}', icon, title)
-
-    return ''
-
-
-def __get_config(name):
-    value = os.environ.get(name, getattr(settings, name, None))
-    return value
+```

@@ -25,6 +25,23 @@ python setup.py sdist install
 ```python
 python3 manage.py collectstatic
 ```
+## 修改首页
+本主题提供了一个默认的首页，由于不同业务的需求，需要定制首页可以按照如下操作进行
+
+在自己项目的settings.py中加入：
+
+```python
+
+# 首页配置
+SIMPLEUI_HOME_PAGE = 'https://www.baidu.com'
+# 首页标题
+SIMPLEUI_HOME_TITLE = '百度一下你就知道'
+# 首页图标
+SIMPLEUI_HOME_ICON = 'layui-icon-rate'
+
+```
+三项配置都是选填，不填都会有默认值。
+[图标列表](/ICON.md)
 
 ## 自动配图标功能
 + 自动配图标功能采用jieba分词插件对菜单项进行分词，然后在simpletags.py中进行匹配
@@ -67,6 +84,9 @@ python3 manage.py collectstatic
 + 修复pip 安装失败bug
     > 部分用户设置的pip，是Python2的版本，导致安装失败
 + 去掉首页代码库标识     
+
+## version 1.4.5
++ 增加自定义首页功能
 
 ## v1.4版预览图
 

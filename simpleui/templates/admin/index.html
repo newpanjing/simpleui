@@ -1,5 +1,6 @@
 {% load i18n static %}
 {% load simpletags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +66,8 @@
                             <dl class="layui-nav-child">
                                 {% for model in app.models %}
                                     {% if model.admin_url %}
-                                        <dd><a href="javascript:;" href-url="{{ model.admin_url }}">{{ model.name|get_icon }}{{ model.name }}</a>
+                                        <dd><a href="javascript:;" href-url="{{ model.admin_url }}">
+                                            {{ model.name|get_icon }}{{ model.name }}</a>
                                         </dd>
                                     {% endif %}
                                 {% endfor %}
@@ -80,13 +82,25 @@
     <!-- body -->
     <div class="layui-body my-body">
         <div class="layui-tab layui-tab-card my-tab" lay-filter="card" lay-allowClose="true">
+            {% home_page %}
             <ul class="layui-tab-title">
+                {% if not home %}
                 <li class="layui-this" lay-id="1"><span>{{ '仪表盘'|get_icon }}仪表盘</span></li>
+                {% endif %}
             </ul>
             <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    {% include 'admin/home.html' %}
-                </div>
+                {% if home %}
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            addTab(null, '{{ title }}', '{{ home }}')
+                        }
+                    </script>
+                {% else %}
+                    <div class="layui-tab-item layui-show">
+                        {% include 'admin/home.html' %}
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>
