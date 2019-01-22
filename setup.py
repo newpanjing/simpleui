@@ -13,7 +13,7 @@ else:
 
 setup(
     name='django-simpleui',
-    version='1.4.4',
+    version='1.4.5',
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,
