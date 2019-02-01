@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 from setuptools import setup
 
@@ -13,7 +14,7 @@ else:
 
 setup(
     name='django-simpleui',
-    version='1.4.5',
+    version='1.4.6',
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,

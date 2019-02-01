@@ -87,6 +87,9 @@ SIMPLEUI_HOME_ICON = 'layui-icon-rate'
 
 ## version 1.4.5
 + 增加自定义首页功能
+## version 1.4.6
++ 加入 `# -*- coding: utf-8 -*-` 以支持python2
+
 
 ## v1.4版预览图
 
