@@ -2,7 +2,8 @@
 {% load simpletags %}
 {% if cl.search_fields or cl.has_filters %}
     <div id="toolbar">
-        <form id="changelist-search" method="get">
+        <form id="changelist-search" method="get" onsubmit="processForm(this)">
+            <input type="hidden" name="p" value=""/>
             <div class="layui-form"><!-- DIV needed for valid HTML -->
                 <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Search"/></label>
                 {% if cl.search_fields %}
@@ -14,13 +15,24 @@
                     {% for spec in cl.filter_specs %}
 
                         <div class="layui-inline">
+
+                            {% if spec.links %}
+                                <input type="input" class="date_field" data-name="{{spec.field_path}}" data-json="{{spec|date_to_json}}" placeholder="{{spec.title}}"/>
+                                <input type="hidden" name="{{spec.field_generic}}gte"/>
+                                <input type="hidden" name="{{spec.field_generic}}lt"/>
+                            {% else %}
                             <select data-name="{{ spec.lookup_kwarg }}" lay-search>
                                 <option value="">全部{{ spec.title }}</option>
-
                                 {% if spec.lookup_choices %}
-                                    {% for option in spec.lookup_choices %}
-                                        <option value="{{ option.0 }}">{{ option.1 }}</option>
-                                    {% endfor %}
+                                    {% if spec.lookup_choices.query %}
+                                        {% for option in spec.lookup_choices %}
+                                            <option value="{{ option }}">{{ option }}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for option in spec.lookup_choices %}
+                                            <option value="{{ option.0 }}">{{ option.1 }}</option>
+                                        {% endfor %}
+                                    {% endif %}
                                 {% elif spec.field.choices %}
                                     {% for option in spec.field.choices %}
                                         <option value="{{ option.0 }}">{{ option.1 }}</option>
@@ -30,6 +42,7 @@
                                     <option value="False">False</option>
                                 {% endif %}
                             </select>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -76,6 +89,38 @@
                         input.val(val);
                     }
                 })
+            });
+
+            function format_datetime(d) {
+                for(i in d){
+                    if (d[i] < 10) {
+                        d[i] = '0' + d[i];
+                    }
+                }
+                //2019-03-01 00:00:00+08:00
+                return d.year + '-' + d.month + '-' + d.date + ' ' + d.hours + ":" + d.minutes + ':' + d.seconds+'+08:00';
+            }
+
+            layui.use('laydate', function () {
+                var date = new Date();
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '.date_field'
+                    // , type: 'datetime'
+                    , type: 'date'
+                    , range: true
+                    // max:date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()
+                    ,done:function (value,begin,end) {
+
+                        var obj = $(this.elem);
+                        var name = obj.attr('data-name');
+                        //2019-03-01 00:00:00+08:00
+                        var d = begin;
+                        obj.parent().find('input[name="' + name + '__gte"]').val(format_datetime(begin));
+                        obj.parent().find('input[name="' + name + '__lt"]').val(format_datetime(end));
+
+                    }
+                });
             });
         }
     </script>

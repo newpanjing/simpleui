@@ -192,7 +192,7 @@ layui.use(['layer', 'element', 'util'], function () {
     // 右键提示框菜单操作-刷新页面
     $(document).on('click', '.card-refresh', function () {
         // 窗体对象
-        var ifr = $(document).find('.my-body .layui-tab-content .layui-tab-item iframe').eq(cardIdx);
+        var ifr = $(document).find('.my-body .layui-tab-content .layui-tab-item iframe').eq(cardIdx-1);
         // 刷新当前页
         ifr.attr('src', ifr.attr('src'));
         // 切换到当前选项卡
@@ -312,4 +312,14 @@ layui.use(['layer', 'element', 'util'], function () {
 
     // 初始化
     init();
+
+    window.processForm=function (obj) {
+        $(obj).find("*[name]").each(function () {
+            var val = $(this).val();
+            if(val==""){
+                $(this).removeAttr('name');
+            }
+        });
+        return false;
+    }
 });

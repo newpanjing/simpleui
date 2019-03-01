@@ -14,7 +14,7 @@ else:
 
 setup(
     name='django-simpleui',
-    version='1.4.6',
+    version='1.4.7',
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,

@@ -5,6 +5,7 @@ from django import template
 from django.utils.html import format_html
 from django.conf import settings
 import os
+import json
 
 register = template.Library()
 
@@ -466,7 +467,12 @@ def get_icon(name):
 @register.filter
 def test(obj):
     print(obj)
+    # pass
+    return ''
 
+@register.filter
+def date_to_json(obj):
+    return json.dumps(obj.date_params)
 
 @register.simple_tag(takes_context=True)
 def home_page(context):
