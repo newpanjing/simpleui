@@ -1,6 +1,16 @@
-django admin simpleui
+django admin theme simpleui
 -----
-django admin 美化主题，采用layui 作为基本框架，改写大部分页面
+django admin theme 美化主题，采用layui 作为基本框架，改写大部分原生页面，改变原来的单页为多标签的后台。可以做到后台零开发，直接提供给用户使用。
+只需要修改settings.py文件加入simpleui即可生效使用。
+
+
+![img](https://github.com/newpanjing/simpleui/raw/master/images/图片1.png)
+# 在线Demo
+> 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
+
++ 地址：[https://www.88cto.com/admin/](https://www.88cto.com/admin/)
++ 用户名：demo
++ 密码：demo123456
 
 ## 说明
 + 安装
@@ -62,33 +72,7 @@ SIMPLEUI_HOME_ICON = 'layui-icon-rate'
  + 历史
  
 ## 更新日志
-
-### version 1.4
-
-+ 由于django无法自定义图标，所以采用猜测的方式来给菜单显示图标
-+ 修复select下拉框bug
-+ 修复错误提示不显示bug
-+ 图标使用最新版layui 2.4.4
-+ 导入jieba分词，用于猜测图标
-
-## version 1.4.1
-+ 取消日志输出
-
-## version 1.4.2
-+ 修复布尔类型下拉框无法显示bug
-
-## version 1.4.3
-+ 修正登录页面标题显示
-
-## version 1.4.4
-+ 修复pip 安装失败bug
-    > 部分用户设置的pip，是Python2的版本，导致安装失败
-+ 去掉首页代码库标识     
-
-## version 1.4.5
-+ 增加自定义首页功能
-## version 1.4.6
-+ 加入 `# -*- coding: utf-8 -*-` 以支持python2
++ [详细更新日志](/HISTORY.md)
 
 ## version 1.4.7
 - [x] 标题页点击刷新菜单无效
@@ -97,13 +81,23 @@ SIMPLEUI_HOME_ICON = 'layui-icon-rate'
 - [X] 在list_filter中，不能按时间过滤(增加了时间区域选择，由于django的限制，暂时不能很好的发挥作用)
       
 
+## 预览图
 
-## v1.4版预览图
-
-![img](https://github.com/newpanjing/simpleui/raw/master/images/图片1.png)
 ![img](https://github.com/newpanjing/simpleui/raw/master/images/图片2.png)
 ![img](https://github.com/newpanjing/simpleui/raw/master/images/图片3.png)
 ![img](https://github.com/newpanjing/simpleui/raw/master/images/图片4.png)
 ![img](https://github.com/newpanjing/simpleui/raw/master/images/图片5.png)
 
+## 自动配图标
 > 改版本的图标猜测功能可能不大完善，大家可以提issue 来完善。
+
+## 2.0版本建议收集
+大家对2.0版有任何建议都可以在此提出，近期将着手开发2.0版本，将采用元件的UI + VUE进行开发。让这个主题更加的现代化和人性化。
+[https://github.com/newpanjing/simpleui/issues/9](https://github.com/newpanjing/simpleui/issues/9)
+
+## 扫码领红包:
+![支付宝扫码领红包](https://github.com/newpanjing/simpleui/raw/master/images/alipay_qrcode.png)
+
+## 赞助💰
+如果你觉得simpleui对你有帮助，你可以赞助我们一杯开发，鼓励我们继续开发维护下去。
+![扫码赞助](https://github.com/newpanjing/simpleui/raw/master/images/pay.png)
