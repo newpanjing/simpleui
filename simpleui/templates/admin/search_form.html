@@ -17,7 +17,7 @@
                         <div class="layui-inline">
 
                             {% if spec.links %}
-                                <input type="input" class="date_field" data-name="{{spec.field_path}}" data-json="{{spec|date_to_json}}" placeholder="{{spec.title}}"/>
+                                <input type="input" class="date_field" data-name="{{spec.field_path}}" placeholder="{{spec.title}}"/>
                                 <input type="hidden" name="{{spec.field_generic}}gte"/>
                                 <input type="hidden" name="{{spec.field_generic}}lt"/>
                             {% else %}
