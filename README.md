@@ -12,6 +12,9 @@ django admin theme 美化主题，采用layui 作为基本框架，改写大部�
 + 用户名：demo
 + 密码：demo123456
 
+## QQ群
++ QQ群号:786576510
+
 ## 说明
 + 安装
 ```python
