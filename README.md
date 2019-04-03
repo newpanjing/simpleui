@@ -53,6 +53,22 @@ python setup.py sdist install
 ```
 用pip或者源码方式安装simpleui后，在自己项目的settings.py文件中INSTALLED_APPS的第一行加入`simpleui`
 
+ 举个例子🌰：
+  ```python
+    # Application definition
+
+    INSTALLED_APPS = [
+        'simpleui',
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        ...
+    ]
+  ```
+
 ## 常见问题:
 
 1. 如果关闭debug模式后，请执行以下命令将simpleui静态文件静态文件克隆到根目录
