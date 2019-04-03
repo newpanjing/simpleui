@@ -3,9 +3,8 @@ django admin theme simpleui
 django admin theme 美化主题，采用layui 作为基本框架，改写大部分原生页面，改变原来的单页为多标签的后台。可以做到后台零开发，直接提供给用户使用。
 只需要修改settings.py文件加入simpleui即可生效使用。
 
-[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
-
+![img](https://github.com/newpanjing/simpleui/raw/master/images/图片1.png)
 # 在线Demo
 > 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
 
@@ -88,7 +87,7 @@ SIMPLEUI_HOME_ICON = 'layui-icon-rate'
 - [X] 修复日期bug      
 
 ## 预览图
-![img](https://github.com/newpanjing/simpleui/raw/master/images/图片1.png)
+
 ![img](https://github.com/newpanjing/simpleui/raw/master/images/图片2.png)
 ![img](https://github.com/newpanjing/simpleui/raw/master/images/图片3.png)
 ![img](https://github.com/newpanjing/simpleui/raw/master/images/图片4.png)
