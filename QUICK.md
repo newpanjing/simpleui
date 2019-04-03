@@ -2,7 +2,7 @@ simpleui 快速上手指南
 -----
 有很多同学会误解simpleui，认为下载、安装simpleui后，启动就可以直接使用。但是simpleui是在django的基础上进行优化的，所以请先自行用命令行、IDE[创建一个django项目](#创建一个django项目)，然后[修改默认后台模板为simpleui](#修改默认后台模板为simpleui)
 
-在开始入门之前，请花1分钟了解下[settings.py](#settings.py%20找不到)文件，
+在开始入门之前，请花1分钟了解下[settings.py](#settingspy-找不到)文件，
 它在接下来的过程中尤为重要。
 
 # 入门指引
@@ -18,7 +18,7 @@ simpleui 快速上手指南
   + [源码安装到本地](#源码安装到本地)
 
 # 常见问题
-  + [settings.py](#settings.py%20找不到)
+  + [settings.py](#settingspy-找不到)
   + [python版本问题](#python版本问题)
   + [无法启动](#无法启动)
 
