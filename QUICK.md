@@ -21,6 +21,7 @@ simpleui 快速上手指南
   + [settings.py](#settingspy-找不到)
   + [python版本问题](#python版本问题)
   + [无法启动](#无法启动)
+  + [样式正常加载显示不正常](#样式正常加载显示不正常)
 
 ---
 
@@ -65,6 +66,10 @@ DEBUG = True
 2. 克隆静态资源到项目的静态目录，然后交由nginx处理
 ```shell
     python3 manage.py collectstatic
+```
+如果克隆报错提示找不到静态目录，请先在settings.py指定静态目录
+```python
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 ```
 
 ## 启动项目查看效果
@@ -130,3 +135,12 @@ python setup.py sdist install
     + 使用源码安装时如果出错，请指定python版本，python3 和 pip3
   ### 无法启动
   可能由于某些未知的问题，导致项目无法启动，请不要放弃simpleui，你可以提[issue](https://github.com/newpanjing/simpleui/issues)，或者直接加入QQ群：786576510，我们将协助解决。
+  
+  ### 样式正常加载显示不正常
+  在win8 系统中 可能会遇到，css以及其他文件全部正常加载，但是显示不正常。这是因为响应头为application/x-css，而不是text/css，造成浏览器不正常解析。
+  #### 解决办法：
+1.运行cmd： 输入regedit 并回车
+    
+2.在注册表HKEY_CLASSES_ROOT中找到.css 点击.css文件夹  修改Content Type 为 text/css
+
+参考连接：[https://blog.csdn.net/sun754276603/article/details/46989965](https://blog.csdn.net/sun754276603/article/details/46989965)

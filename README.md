@@ -12,6 +12,7 @@ Django admin theme the simpleui
   <a href="https://github.com/996icu/996.ICU/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-Anti%20996-blue.svg"></a>
   <a href="https://github.com/alibaba/ice"><img src="https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg"></a>
   <a href="https://pypi.org/project/django-simpleui/#history"><img src="https://img.shields.io/pypi/v/django-simpleui.svg"></a>
+<a href="https://python.org"><img src="https://img.shields.io/badge/python->=3.7.x-green.svg"></a>
 </p>
 
 ---
