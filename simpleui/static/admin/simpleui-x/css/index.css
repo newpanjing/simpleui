@@ -1,0 +1,63 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar {
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+}
+
+.menu .el-menu {
+    border-right: 0px;
+}
+
+.menu, .menu .el-menu-item-group {
+    color: rgb(191, 203, 217);
+    background-color: rgb(48, 65, 86);
+}
+
+.menu .el-menu-item:hover {
+    background-color: #001528 !important;
+}
+
+.is-active .el-submenu__title{
+    color: rgb(64, 158, 255) !important;
+}
+
+.menu .el-menu-item {
+    color: rgb(191, 203, 217) !important;
+    background-color: #1f2d3d !important;
+}
+
+.menu .el-submenu__title {
+    color: rgb(191, 203, 217) !important;
+    background-color: rgb(48, 65, 86);
+}
+
+.menu .el-submenu__title:hover, .is-opened .el-submenu__title {
+    background-color: #263445 !important;
+}
+
+.menu .el-menu-item-group__title {
+    display: none;
+}
+
+.logo-wrap {
+    margin: 0;
+    color: #fff;
+    font-weight: 600;
+    line-height: 50px;
+    font-size: 14px;
+    font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+    vertical-align: middle;
+    padding: 0px 5px;
+
+}
+
+.logo-wrap img {
+    max-width: 30px;
+    margin-bottom: -10px;
+}

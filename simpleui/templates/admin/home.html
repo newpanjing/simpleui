@@ -1,69 +1,41 @@
-{% load i18n static simpletags%}
+{% load i18n static simpletags %}
 
 <div id="home">
-
-    <div class="site-title">
-        <fieldset>
-            <legend><a name="table">{{ '应用'|get_icon }}快捷导航</a></legend>
-        </fieldset>
-    </div>
 
     <ul class="site-doc-icon">
         {% if app_list %}
             {% for app in app_list %}
-                {% for model in app.models %}
-                    <li class="open" url="{{ model.admin_url }}">
-                        {{ model.name|get_icon }}
-                        <div class="doc-icon-name">{{ model.name }}</div>
-                    </li>
-                {% endfor %}
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                      <span>{{ app.name }}</span>
+                            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+                      </div>
+                        {% for model in app.models %}
+                            <div class="open" url="{{ model.admin_url }}">
+                                {{ model.name|get_icon }}
+                                <div class="doc-icon-name">{{ model.name }}</div>
+                            </div>
+                        {% endfor %}
+                </el-card>
             {% endfor %}
         {% endif %}
     </ul>
-    <div class="site-title">
-        <fieldset>
-            <legend><a name="table">{{ '最近操作'|get_icon }}最近操作</a></legend>
-        </fieldset>
-    </div>
+
     {% load log %}
     {% get_admin_log 10 as admin_log for_user user %}
     {% if admin_log %}
-        <table class="layui-table">
-            <thead>
-            <tr>
-                <td>描述</td>
-                <td>模块</td>
-                <td>用户</td>
-                <td>时间</td>
-            </tr>
-            </thead>
-            <tbody>
-            {% for entry in admin_log %}
-                <tr>
-                    <td>{{ entry }}</td>
-                    <td>{{ entry.content_type|get_icon }}{{ entry.content_type }}</td>
-                    <td>{{ entry.user }}</td>
-                    <td>{{ entry.action_time }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="block">
+            <el-timeline>
+                {% for entry in admin_log %}
+                    <el-timeline-item timestamp="{{ entry.action_time }}" placement="top">
+                        <el-card>
+                            <p>{{ entry.user }} {{ entry.action_time }}</p>
+                            <h4>{{ entry.content_type }}: {{ entry }}</h4>
+                        </el-card>
+                    </el-timeline-item>
+                {% endfor %}
+            </el-timeline>
+        </div>
     {% endif %}
 
-<style type="text/css">
-    #copyright{
-        color: #ccc;
-    }
-    #copyright a{
-        color: #ccc;
-    }
-</style>
-
 </div>
-<script type="text/javascript">
-    $(function () {
-        $(".site-doc-icon li").click(function () {
-            addTab($(this),$(this).find(".doc-icon-name").text(),$(this).attr("url"))
-        });
-    });
-</script>
