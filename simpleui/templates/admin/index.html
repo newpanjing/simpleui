@@ -21,11 +21,11 @@
 {% autoescape off %}
     {% menus %}
 {% endautoescape %}
-<div id="main">
+<div id="main" @click="mainClick($event)">
     <el-container :style="{height: height+'px'}">
 
-        <el-aside v-if="!fold" width="200px" class="menu">
-            <div class="logo-wrap">
+        <el-aside width="auto" class="menu">
+            <div class="logo-wrap" v-if="!fold">
                 <el-row>
                     <el-col :span="4">
                         <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
@@ -37,7 +37,7 @@
             </div>
 
 
-            <el-menu default-active="1" class="el-menu-vertical-demo" :default-active="menuActive">
+            <el-menu default-active="1" class="el-menu-vertical-demo" :default-active="menuActive" :collapse="fold">
                 <div v-for="(item,i) in menus">
 
                     <el-menu-item v-if="!item.models" :index="(i+1)+''" @click="openTab(item,(i+1)+'')">
@@ -49,13 +49,13 @@
                     <el-submenu v-else :index="(i+1)+''">
                         <template slot="title">
                             <i :class="item.icon"></i>
-                            <span slot="title" v-text="item.name"></span>
+                            <span v-if="!fold" slot="title" v-text="item.name"></span>
                         </template>
 
-                        <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name">
-                            <el-menu-item :index="(i+1)+'-'+j" v-text="sub.name" @click="openTab(sub,(i+1)+'-'+j)">
+                        <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
+                            <el-menu-item :index="(i+1)+'-'+j" @click="openTab(sub,(i+1)+'-'+j)">
                                 <i :class="sub.icon"></i>
-                                <span v-text="sub.name"></span>
+                                <span slot="title" v-text="sub.name"></span>
                             </el-menu-item>
                         </el-menu-item-group>
 
@@ -84,20 +84,23 @@
                                 {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
                             </el-button>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item icon="el-icon-edit" @click.native="changePassword()">修改密码
+                                <el-dropdown-item icon="far fa-edit" @click.native="changePassword()">修改密码
                                 </el-dropdown-item>
                                 <el-dropdown-item icon="el-icon-close" @click.native="logout()">退出登录</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
-
                     </el-col>
                 </el-row>
             </el-header>
             <el-main>
-                <el-tabs v-model="tabModel" type="border-card" editable style="height: 100%" @edit="handleTabsEdit" @tab-click="tabClick">
+                <el-tabs v-model="tabModel" type="border-card" editable style="height: 100%" @edit="handleTabsEdit"
+                         @tab-click="tabClick">
 
                     <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id"
                                  :key="item.id">
+                        <span slot="label" @contextmenu.prevent="contextmenu(item,$event)"><i
+                                :class="item.icon"></i><span
+                                v-text="item.name"></span></span>
                         <div v-if="index==0">
                             {% include './home.html' %}
                         </div>
@@ -108,6 +111,14 @@
             </el-main>
         </el-container>
     </el-container>
+
+    <ul v-if="popup.show" class="el-dropdown-menu el-popper"
+        :style="{position: 'absolute',top: popup.top+'px',left: popup.left+'px'}" x-placement="top-end">
+        <li v-for="(item,index) in popup.menus" tabindex="-1" class="el-dropdown-menu__item"
+            @click="item.handler(popup.tab,item)"><i :class="item.icon"></i><span
+                v-text="item.text"></span>
+        </li>
+    </ul>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>

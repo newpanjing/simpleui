@@ -9,13 +9,61 @@
             timeline: true,
             tabs: [{
                 id: '0',
-                index:'1',
-                name: '首页'
+                index: '1',
+                name: '首页',
+                icon: 'el-icon-menu'
             }],
             tabModel: 0,
             tabIndex: 0,
             menus: [],
-            menuActive: '1'
+            menuActive: '1',
+            popup: {
+                left: 0,
+                top: 0,
+                show: false,
+                tab: null,
+                menus: [{
+                    text: '刷新',
+                    icon: 'el-icon-refresh',
+                    handler: function (tab, item) {
+                        var url = tab.url.split('?')[0];
+                        tab.url = url + '?_=' + new Date().getTime()
+                    }
+                }, {
+                    text: '关闭当前',
+                    icon: 'el-icon-circle-close-outline',
+                    handler: function (tab, item) {
+                        app.handleTabsEdit(tab.id, 'remove');
+                    }
+                }, {
+                    text: '全部关闭',
+                    icon: 'el-icon-close',
+                    handler: function (tab, item) {
+
+                        app.$confirm('您确定要关闭全部标签吗?', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(function () {
+                            app.tabs.forEach((tab, index) => {
+                                if (index != 0) {
+                                    app.handleTabsEdit(tab.id, 'remove');
+                                }
+                            });
+                            app.menuActive = '1';
+                        }).catch(function () {
+
+                        });
+
+                    }
+                }, {
+                    text: '新标签打开',
+                    icon: 'el-icon-news',
+                    handler: function (tab, item) {
+                        window.open(tab.url);
+                    }
+                }]
+            }
         },
         created: function () {
             var self = this;
@@ -26,9 +74,21 @@
             this.menus = window.menus
         },
         methods: {
+            contextmenu: function (item, e) {
+                //home没有popup menu
+                if(item.index=='1'){
+                    return;
+                }
+                this.popup.tab = item;
+                this.popup.left = e.clientX;
+                this.popup.top = e.clientY;
+                this.popup.show = true;
+            },
+            mainClick: function (e) {
+                this.popup.show = false;
+            },
             tabClick: function (tab) {
                 var index = this.tabs[tab.index].index;
-            console.log(index)
                 this.menuActive = index;
             },
             handleTabsEdit: function (targetName, action) {
@@ -41,10 +101,12 @@
                             var temp = self.tabs[index + 1] || self.tabs[index - 1];
                             if (temp) {
                                 next = temp.id;
+                                self.menuActive = temp.index;
                             }
                         }
                     });
                     this.tabModel = next;
+
                     if (targetName != 0) {
                         this.tabs = this.tabs.filter(tab => tab.id !== targetName);
                     }
@@ -86,7 +148,7 @@
             }
             ,
             changePassword: function () {
-                this.openTab({url: '/admin/password_change/', icon: '', name: '修改密码'})
+                this.openTab({url: '/admin/password_change/', icon: 'far fa-edit', name: '修改密码'})
             }
             ,
             logout: function () {
@@ -96,7 +158,9 @@
                     type: 'warning'
                 }).then(function () {
                     window.location.href = '/admin/logout';
-                })
+                }).catch(function () {
+
+                });
             }
             ,
             goIndex: function () {
@@ -125,6 +189,9 @@
             ,
             displayTimeline: function () {
                 this.timeline = !this.timeline;
+            },
+            report: function () {
+                window.open('https://github.com/newpanjing/simpleui/issues')
             }
         }
     })

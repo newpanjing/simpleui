@@ -6,7 +6,7 @@
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
                     <span>{{ user }}</span>
-                    <el-button style="float: right; padding: 3px 0" type="text">修改密码</el-button>
+                    <el-button style="float: right; padding: 3px 0" @click="changePassword()" type="text">修改密码</el-button>
                 </div>
                 <el-row>
                     <el-col :span="3" class="icon">
@@ -57,7 +57,7 @@
                 <div slot="header" class="clearfix">
                     <i class="fas fa-code"></i>
                     <span>simpleui主页</span>
-                    <el-button style="float: right; padding: 3px 0" type="text">报告问题</el-button>
+                    <el-button style="float: right; padding: 3px 0" type="text" @click="report()">报告问题</el-button>
                 </div>
                 <el-row>
                     <el-col :span="3" class="icon">

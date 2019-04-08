@@ -15,7 +15,8 @@ html, body {
 .menu .el-menu {
     border-right: 0px;
 }
-.menu .el-menu .is-active{
+
+.menu .el-menu .is-active {
     color: rgb(64, 158, 255) !important;
 }
 
@@ -59,6 +60,7 @@ html, body {
     font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
     vertical-align: middle;
     padding: 0px 5px;
+    min-width: 200px;
 
 }
 
@@ -74,6 +76,20 @@ html, body {
 #home .icon .fa, #home .icon .fas, #home .icon .fa, #home .icon .fab {
     font-size: 35px;
     /*color: #3f9eff;*/
+}
+
+.menu .fa, .menu .fas, .menu .far, .menu .fab {
+    margin-right: 5px;
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.el-tabs .fa, .el-tabs .fas, .el-tabs .far, .el-tabs .fab {
+    margin-right: 5px;
+    text-align: center;
+    font-size: 14px;
 }
 
 #home .info-card .el-card {
@@ -105,13 +121,15 @@ html, body {
     padding: 0px;
     overflow: hidden;
 }
-.el-main .el-tab-pane{
+
+.el-main .el-tab-pane {
     height: 100%;
     margin: 0px;
     padding: 0px;
 }
+
 .el-tabs__content {
-    padding: 0px!important;
+    padding: 0px !important;
     height: calc(100% - 39px);
     overflow: auto;
 }
@@ -122,9 +140,14 @@ html, body {
     border: none;
     outline: none;
 }
-.el-tabs__new-tab{
+
+.el-tabs__new-tab {
     display: none;
 }
-#home .timeline{
+
+#home .timeline {
     margin: 10px;
+}
+.el-tabs__item{
+    user-select: none;
 }
