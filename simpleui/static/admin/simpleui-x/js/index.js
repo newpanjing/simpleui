@@ -9,10 +9,13 @@
             timeline: true,
             tabs: [{
                 id: '0',
+                index:'1',
                 name: '首页'
             }],
             tabModel: 0,
-            tabIndex: 0
+            tabIndex: 0,
+            menus: [],
+            menuActive: '1'
         },
         created: function () {
             var self = this;
@@ -20,10 +23,15 @@
                 self.height = document.documentElement.clientHeight || document.body.clientHeight
             }
             window.app = this;
+            this.menus = window.menus
         },
         methods: {
+            tabClick: function (tab) {
+                var index = this.tabs[tab.index].index;
+            console.log(index)
+                this.menuActive = index;
+            },
             handleTabsEdit: function (targetName, action) {
-                console.log(targetName)
 
                 var self = this;
                 if (action === 'remove') {
@@ -43,8 +51,7 @@
                 }
             }
             ,
-            openTab: function (data) {
-
+            openTab: function (data, index) {
 
                 var exists = null;
                 //判断是否存在，存在就直接打开
@@ -60,6 +67,7 @@
                     this.tabModel = exists.id;
                 } else {
                     data.id = new Date().getTime() + "" + Math.random();
+                    data.index = index;
                     this.tabs.push(data);
                     this.tabModel = data.id;
                 }

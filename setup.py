@@ -25,6 +25,6 @@ setup(
     author='panjing',
     long_description=long_description,
     author_email='newpanjing@icloud.com',
-    description='django admin 后台模板',
-    install_requires=['django', 'jieba'],
+    description='django admin theme 后台模板',
+    install_requires=['django'],
 )

@@ -15,6 +15,9 @@ html, body {
 .menu .el-menu {
     border-right: 0px;
 }
+.menu .el-menu .is-active{
+    color: rgb(64, 158, 255) !important;
+}
 
 .menu, .menu .el-menu-item-group {
     color: rgb(191, 203, 217);
