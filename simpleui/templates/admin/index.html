@@ -21,6 +21,7 @@
 
 <div id="main">
     <el-container :style="{height: height+'px'}">
+
         <el-aside v-if="!fold" width="200px" class="menu">
             <div class="logo-wrap">
                 <el-row>
@@ -33,13 +34,15 @@
                 </el-row>
             </div>
             <el-menu :default-openeds="['1']">
-            <el-menu-item
-                    @click="openTab({})"
-                    index="0"><i class="fas fa-tachometer-alt"></i>首页</el-menu-item>
+                <el-menu-item
+                        @click="openTab({})"
+                        index="0"><i class="fas fa-tachometer-alt"></i>首页
+                </el-menu-item>
                 {% if app_list %}
                     {% for app in app_list %}
                         <el-submenu index="{{ forloop.counter }}">
-                            <template slot="title"><i class="el-icon-message"></i>{{ app.name|get_icon }} {{ app.name }}</template>
+                            <template slot="title"><i class="el-icon-message"></i>{{ app.name|get_icon }} {{ app.name }}
+                            </template>
                             <el-menu-item-group>
                                 {% for model in app.models %}
                                     {% if model.admin_url %}
@@ -64,7 +67,8 @@
                         </el-tooltip>
                     </el-col>
                     <el-col :span="4">
-                        <el-button icon="fas fa-arrows-alt" @click="goZoom()" circle></el-button>
+                        <el-button :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
+                                   @click="goZoom()" circle></el-button>
                         <el-button icon="fas fa-globe-americas" @click="goIndex()" circle></el-button>
                         <el-dropdown>
                             <el-button>
@@ -80,12 +84,18 @@
 
                     </el-col>
                 </el-row>
-
-
             </el-header>
-
             <el-main>
-                {% include './home.html' %}
+                <el-tabs v-model="tabModel" type="border-card" editable style="height: 100%" @edit="handleTabsEdit">
+
+                    <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id" :key="item.id">
+                        <div v-if="index==0">
+                            {% include './home.html' %}
+                        </div>
+                        <iframe v-else :src="item.url"></iframe>
+                    </el-tab-pane>
+
+                </el-tabs>
             </el-main>
         </el-container>
     </el-container>

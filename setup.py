@@ -12,9 +12,11 @@ else:
         open('README.md', 'r', encoding='utf-8').read(),
     ])
 
+vsersion = '1.4.8'
+
 setup(
     name='django-simpleui',
-    version='1.4.8',
+    version=vsersion,
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,

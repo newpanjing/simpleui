@@ -1,41 +1,101 @@
 {% load i18n static simpletags %}
 
 <div id="home">
+    <el-row class="info-card">
+        <el-col :span="6">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <span>{{ user }}</span>
+                    <el-button style="float: right; padding: 3px 0" type="text">修改密码</el-button>
+                </div>
+                <el-row>
+                    <el-col :span="3" class="icon">
+                        <i class="fa fa-user"></i>
+                    </el-col>
+                    <el-col :span="21">
+                        <el-button>主题设置</el-button>
+                        <el-button>切换主题</el-button>
+                    </el-col>
+                </el-row>
+            </el-card>
+        </el-col>
 
-    <ul class="site-doc-icon">
-        {% if app_list %}
-            {% for app in app_list %}
-                <el-card class="box-card">
-                    <div slot="header" class="clearfix">
-                      <span>{{ app.name }}</span>
-                            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-                      </div>
-                        {% for model in app.models %}
-                            <div class="open" url="{{ model.admin_url }}">
-                                {{ model.name|get_icon }}
-                                <div class="doc-icon-name">{{ model.name }}</div>
-                            </div>
-                        {% endfor %}
-                </el-card>
-            {% endfor %}
-        {% endif %}
-    </ul>
+        <el-col :span="6">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <span>服务器</span>
+                </div>
+                <el-row>
+                    <el-col :span="3" class="icon">
+                        <i class="fas fa-server"></i>
+                    </el-col>
+                    <el-col :span="21">
+                        {% get_server_info %}
+                    </el-col>
+                </el-row>
+            </el-card>
+        </el-col>
 
-    {% load log %}
-    {% get_admin_log 10 as admin_log for_user user %}
-    {% if admin_log %}
-        <div class="block">
-            <el-timeline>
-                {% for entry in admin_log %}
-                    <el-timeline-item timestamp="{{ entry.action_time }}" placement="top">
-                        <el-card>
-                            <p>{{ entry.user }} {{ entry.action_time }}</p>
-                            <h4>{{ entry.content_type }}: {{ entry }}</h4>
-                        </el-card>
-                    </el-timeline-item>
-                {% endfor %}
-            </el-timeline>
+        <el-col :span="6">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <span>应用信息</span>
+                </div>
+                <el-row>
+                    <el-col :span="3" class="icon">
+                        <i class="fab fa-python"></i>
+                    </el-col>
+                    <el-col :span="21">
+                        {% get_app_info %}
+                    </el-col>
+                </el-row>
+            </el-card>
+        </el-col>
+
+        <el-col :span="6">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <i class="fas fa-code"></i>
+                    <span>simpleui主页</span>
+                    <el-button style="float: right; padding: 3px 0" type="text">报告问题</el-button>
+                </div>
+                <el-row>
+                    <el-col :span="3" class="icon">
+                        <i class="fab fa-stripe-s"></i>
+                    </el-col>
+                    <el-col :span="21">
+                        <el-button icon="fab fa-git">Gitee</el-button>
+                        <el-button icon="fab fa-github">Github</el-button>
+                    </el-col>
+                </el-row>
+            </el-card>
+        </el-col>
+
+    </el-row>
+
+    <el-card class="timeline">
+        <div slot="header" class="clearfix">
+            <span>操作记录</span>
+            <el-button style="float: right; padding: 3px 0" type="text"
+                       :icon="timeline?'el-icon-arrow-up':'el-icon-arrow-down'" @click="displayTimeline()"></el-button>
         </div>
-    {% endif %}
-
+        {% load log %}
+        {% get_admin_log 10 as admin_log for_user user %}
+        {% if admin_log %}
+            <transition name="el-zoom-in-top">
+                <div class="block" v-if="timeline">
+                    <el-timeline>
+                        {% for entry in admin_log %}
+                            <el-timeline-item timestamp="{{ entry.action_time }}" placement="top">
+                                <el-card>
+                                    <p>{{ entry.user }} {{ entry.action_time }}</p>
+                                    <h4>{{ entry.content_type }}: {{ entry }}</h4>
+                                </el-card>
+                            </el-timeline-item>
+                        {% endfor %}
+                    </el-timeline>
+                </div>
+            </transition>
+        {% endif %}
+    </el-card>
 </div>
