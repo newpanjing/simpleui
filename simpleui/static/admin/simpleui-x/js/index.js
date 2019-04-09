@@ -4,15 +4,9 @@
         data: {
             height: 1000,
             fold: false,
-            foldIcon: 'el-icon-arrow-left',
             zoom: false,
             timeline: true,
-            tabs: [{
-                id: '0',
-                index: '1',
-                name: '首页',
-                icon: 'el-icon-menu'
-            }],
+            tabs: [home],
             tabModel: 0,
             tabIndex: 0,
             menus: [],
@@ -154,10 +148,8 @@
             foldClick: function () {
                 console.log('11')
                 if (this.fold) {
-                    this.foldIcon = 'el-icon-arrow-left'
                     this.fold = false;
                 } else {
-                    this.foldIcon = 'el-icon-arrow-right'
                     this.fold = true;
                 }
             }

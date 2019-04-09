@@ -1,4 +1,4 @@
-{% load i18n static %}<!DOCTYPE html>
+{% load i18n static simpletags %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
@@ -20,7 +20,8 @@
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}?_=20180905"/>
         {% if LANGUAGE_BIDI %}
-            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>{% endif %}
+            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>
+        {% endif %}
     {% endblock %}
     {% block blockbots %}
         <meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
@@ -35,11 +36,26 @@
 <div id="container">
 
     {% block messages %}
-        {% if messages %}
-            <ul class="messagelist">{% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-            {% endfor %}</ul>
-        {% endif %}
+        {% autoescape off %}
+            {% load_message %}
+        {% endautoescape %}
+        <script type="text/javascript">
+            new Vue({
+                created: function () {
+                    var self = this;
+
+                    messages.forEach(item => {
+                        self.$notify({
+                            title: '提示',
+                            message: item.msg,
+                            type: item.tag
+                        });
+                    });
+
+                }
+            })
+        </script>
+
     {% endblock messages %}
 
     <div class="menu-content">

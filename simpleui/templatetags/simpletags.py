@@ -51,9 +51,10 @@ def home_page(context):
 
     icon = __get_config('SIMPLEUI_HOME_ICON')
     if not icon:
-        icon = 'layui-icon-console'
+        icon = 'el-icon-menu'
 
-    context['title'] = format_html('<i class="layui-icon {}"></i>{}', icon, title)
+    context['title'] = title
+    context['icon'] = icon
 
     return ''
 
@@ -97,11 +98,7 @@ def format_table(dict):
 @register.simple_tag(takes_context=True)
 def menus(context):
     data = []
-    data.append({
-        'name': '首页',
-        'active': True,
-        'icon': 'fas fa-home'
-    })
+
     app_list = context.get('app_list')
     for app in app_list:
         models = []
@@ -136,3 +133,17 @@ def get_icon(obj):
     if not temp:
         return 'far fa-file'
     return temp
+
+
+@register.simple_tag(takes_context=True)
+def load_message(context):
+    messages = context.get('messages')
+    array = []
+
+    for msg in messages:
+        array.append({
+            'msg': msg.message,
+            'tag': msg.tags
+        })
+
+    return '<script type="text/javascript"> var messages={}</script>'.format(array)

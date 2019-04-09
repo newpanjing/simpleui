@@ -11,6 +11,9 @@ html, body {
     background: #fff;
     box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 }
+.navbar .el-button{
+    border: none;
+}
 
 .menu .el-menu {
     border-right: 0px;
@@ -131,7 +134,7 @@ html, body {
 .el-tabs__content {
     padding: 0px !important;
     height: calc(100% - 39px);
-    overflow: auto;
+    overflow: hidden;
 }
 
 .el-tabs__content iframe {
@@ -144,10 +147,20 @@ html, body {
 .el-tabs__new-tab {
     display: none;
 }
-
+#home{
+    height: 100%;
+    overflow: auto;
+}
 #home .timeline {
     margin: 10px;
 }
 .el-tabs__item{
     user-select: none;
+}
+.showHideBtn{
+    display: inline-block;
+}
+.el-button .fas,.el-button .far,.el-button .fab,.el-button .fa{
+    width: 14px;
+    height: 14px;
 }
