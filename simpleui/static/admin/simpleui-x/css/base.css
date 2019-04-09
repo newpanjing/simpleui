@@ -1,0 +1,15 @@
+.simpleui-form-item{
+    display: inline-block;
+    width: auto;
+}
+#changelist #toolbar form input{
+    padding-left: 30px!important;
+}
+.el-link-btn{
+    text-decoration: none!important;
+    color: #606266!important;
+}
+#pagination{
+    text-align: center;
+    margin-top: 10px;
+}

@@ -3,9 +3,14 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css"
-          href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}?_=20180905"/>
-    <link rel="stylesheet" href="{% static '/admin/simpleui//layui/css/layui.css' %}">
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+
     {% block extrastyle %}{% endblock %}
     {% if LANGUAGE_BIDI %}
         <link rel="stylesheet" type="text/css"
@@ -65,7 +70,5 @@
         <div id="footer"></div>{% endblock %}
 </div>
 <!-- END Container -->
-<script type="text/javascript" src="{% static '/admin/simpleui/layui/layui.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui/static/js/vip_comm.js' %}?_=20190122"></script>
 </body>
 </html>

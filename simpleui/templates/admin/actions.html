@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load admin_urls static admin_list simpletags%}
+{% load admin_urls static admin_list simpletags %}
 <div class="actions">
 
     <input type="hidden" name="action" value=""/>
@@ -8,44 +8,60 @@
         {% if field.0 %}
 
             {% if field.0 == 'delete_selected' %}
-                <button data-name="{{ field.0 }}" type="button" class="layui-btn layui-btn-danger">
-                    <i class="layui-icon"></i>
-                    选中删除
-                </button>
+                <el-button type="danger" data-name="{{ field.0 }}" icon="el-icon-delete">选中删除</el-button>
             {% else %}
-                <button data-name="{{ field.0 }}" type="button" class="layui-btn">
-                    {{ field.1|get_icon }}{{ field.1 }}
-                </button>
+                <el-button data-name="{{ field.0 }}">{{ field.1 }}</el-button>
             {% endif %}
         {% endif %}
     {% endfor %}
 
     {% if has_add_permission %}
         {% url cl.opts|admin_urlname:'add' as add_url %}
-        <button type="button" url="{% add_preserved_filters add_url is_popup to_field %}"
-                class="layui-btn layui-btn-normal">
-            <i class="layui-icon"></i>
-            {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-        </button>
-    {% endif %}
-<a href="?all" class="showall layui-btn" style="color: white;text-decoration: none">
-    <i class="layui-icon">&#xe63c;</i>
-    {% trans 'Show all' %}
-</a>
 
-{% if cl.formset and cl.result_count %}
-<input type="submit" name="_save" class="default" value="{% trans 'Save' %}"/>{% endif %}
+        <el-button type="primary" icon="el-icon-plus" url="{% add_preserved_filters add_url is_popup to_field %}">
+            {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+        </el-button>
+    {% endif %}
+
+    <el-button icon="el-icon-tickets"
+               href="?{% if cl.is_popup %}_popup=1{% endif %}">{% trans "Show all" %}({{ cl.full_result_count }})
+    </el-button>
+
+    {% if cl.formset and cl.result_count %}
+        <input type="hidden" name="_save" value="{% trans 'Save' %}"/>
+        <el-button icon="el-icon-check" type="success" @click="formSubmit()">{% trans 'Save' %}</el-button>
+    {% endif %}
 </div>
 <script type="text/javascript">
+    new Vue({
+        el: '.actions',
+        data: {},
+        methods: {
+            formSubmit: function () {
+                $("#changelist-form").submit();
+            }
+        }
+    })
     $(function () {
         $(".actions button").click(function () {
             var url = $(this).attr("url");
             if (url) {
                 window.location.href = url;
                 return;
-            } else {
+            } else if ($(this).attr('data-name')) {
                 var name = $(this).attr("data-name");
                 $("#changelist-form input[name='action']").val(name);
+
+                $("#changelist-form [name='_save']").removeAttr('name');
+
+                $("#changelist-form [name!='']").each(function () {
+                    var obj = $(this);
+                    if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
+                        obj.removeAttr('name');
+                    }
+                });
+                $("#changelist-form").submit();
+            } else {
                 $("#changelist-form").submit();
             }
         });

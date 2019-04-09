@@ -36,6 +36,16 @@
                         app.handleTabsEdit(tab.id, 'remove');
                     }
                 }, {
+                    text: '关闭其他',
+                    icon: 'far fa-copy',
+                    handler: function (tab) {
+                        app.tabs.forEach(item=>{
+                            if (item.id != tab.id) {
+                                app.handleTabsEdit(item.id, 'remove');
+                            }
+                        })
+                    }
+                }, {
                     text: '全部关闭',
                     icon: 'el-icon-close',
                     handler: function (tab, item) {
@@ -76,7 +86,7 @@
         methods: {
             contextmenu: function (item, e) {
                 //home没有popup menu
-                if(item.index=='1'){
+                if (item.index == '1') {
                     return;
                 }
                 this.popup.tab = item;

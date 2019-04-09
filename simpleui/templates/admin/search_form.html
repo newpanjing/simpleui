@@ -1,127 +1,109 @@
 {% load i18n static %}
 {% load simpletags %}
 {% if cl.search_fields or cl.has_filters %}
+    <script type="text/javascript">
+        function preSubmit() {
+            $('#changelist-search').find("input[name!='']").each(function () {
+                if ($(this).val() == '') {
+                    $(this).removeAttr('name');
+                }
+            });
+        }
+    </script>
     <div id="toolbar">
-        <form id="changelist-search" method="get" onsubmit="processForm(this)">
+        <form id="changelist-search" method="get" onsubmit="preSubmit(this)">
             <input type="hidden" name="p" value=""/>
-            <div class="layui-form"><!-- DIV needed for valid HTML -->
-                <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Search"/></label>
+            <div class="simpleui-form"><!-- DIV needed for valid HTML -->
+
                 {% if cl.search_fields %}
-                    <input class="" type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar"
-                           autofocus placeholder="搜索" fields="{{ cl.search_fields|join:"," }}"/>
+
+                    <el-input class="simpleui-form-item"
+                              clearable
+                              name="{{ search_var }}"
+                              placeholder="请输入内容"
+                              prefix-icon="el-icon-search"
+                              v-model="searchInput" @keyup.enter.native="formSubmit()">
+                    </el-input>
                 {% endif %}
                 {% if cl.has_filters %}
 
                     {% for spec in cl.filter_specs %}
 
-                        <div class="layui-inline">
-
-                            {% if spec.links %}
-                                <input type="input" class="date_field" data-name="{{spec.field_path}}" placeholder="{{spec.title}}"/>
-                                <input type="hidden" name="{{spec.field_generic}}gte"/>
-                                <input type="hidden" name="{{spec.field_generic}}lt"/>
-                            {% else %}
-                            <select data-name="{{ spec.lookup_kwarg }}" lay-search>
-                                <option value="">全部{{ spec.title }}</option>
+                        {% if spec.links %}
+                            <input type="input" class="date_field" data-name="{{ spec.field_path }}"
+                                   placeholder="{{ spec.title }}"/>
+                            <input type="hidden" name="{{ spec.field_generic }}gte"/>
+                            <input type="hidden" name="{{ spec.field_generic }}lt"/>
+                            <div>date</div>
+                        {% else %}
+                            <input type="hidden" v-model="{{ spec.lookup_kwarg }}" name="{{ spec.lookup_kwarg }}"/>
+                            <el-select v-model="{{ spec.lookup_kwarg }}" clearable
+                                       placeholder="请选择{{ spec.title }}">
                                 {% if spec.lookup_choices %}
                                     {% if spec.lookup_choices.query %}
                                         {% for option in spec.lookup_choices %}
-                                            <option value="{{ option }}">{{ option }}</option>
+                                            <el-option label="{{ option }}" value="{{ option }}"></el-option>
                                         {% endfor %}
                                     {% else %}
                                         {% for option in spec.lookup_choices %}
-                                            <option value="{{ option.0 }}">{{ option.1 }}</option>
+                                            <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
                                         {% endfor %}
                                     {% endif %}
                                 {% elif spec.field.choices %}
                                     {% for option in spec.field.choices %}
-                                        <option value="{{ option.0 }}">{{ option.1 }}</option>
+                                        <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
                                     {% endfor %}
                                 {% else %}
-                                    <option value="True">True</option>
-                                    <option value="False">False</option>
+                                    <el-option label="True" value="True"></el-option>
+                                    <el-option label="False" value="False"></el-option>
                                 {% endif %}
-                            </select>
-                            {% endif %}
-                        </div>
+                            </el-select>
+
+                        {% endif %}
+
                     {% endfor %}
                 {% endif %}
-                {#                <input type="submit" value="{% trans 'Search' %}"/>#}
-                <button type="submit" class="layui-btn">
-                    <i class="layui-icon">&#xe615;</i>
-                    {% trans 'Search' %}
-                </button>
+                <el-button type="primary" icon="el-icon-search" @click="formSubmit()">{% trans 'Search' %}</el-button>
+
                 {% if show_result_count %}
                     <span class="small quiet">{% blocktrans count counter=cl.result_count %}{{ counter }} result
                     {% plural %}找到{{ counter }}条 {% endblocktrans %} </span>
                 {% endif %}
-                    <a href="?{% if cl.is_popup %}_popup=1{% endif %}">{% if cl.show_full_result_count %}
-                        {% blocktrans with full_result_count=cl.full_result_count %}总共{{ full_result_count }}条
-                        {% endblocktrans %}{% else %}{% trans "Show all" %}{% endif %}
-                    </a>
 
                 {% for pair in cl.params.items %}
-                    {% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>
+                    {% if pair.0 != search_var %}
+                        <input type="hidden" class="form-params" data-name="{{ pair.0 }}" value="{{ pair.1 }}"/>
                     {% endif %}
                 {% endfor %}
             </div>
         </form>
     </div>
     <script type="text/javascript">
-        window.onload = function () {
-
-            //默认值
-            $("#changelist-search input[type='hidden']").each(function () {
-                var name = $(this).attr("name");
-                if (name) {
-                    $("#changelist-search select[data-name='" + name + "']").val($(this).val());
-                }
-            });
-
-            layui.use('form', function (form) {
-                form.on("select", function (target) {
-                    var val = target.value;
-                    var name = $(target.elem).attr("data-name");
-                    var input = $("#changelist-search input[name='" + name + "']")
-                    if (input.length == 0) {
-                        $("#changelist-search").append('<input type="hidden" name="' + name + '" value="' + val + '"/>')
-                    } else {
-                        input.val(val);
-                    }
+        new Vue({
+            el: '#toolbar',
+            data: {
+                searchInput: '{{ cl.query }}',
+                {% if cl.has_filters %}
+                    {% for spec in cl.filter_specs %}
+                        '{{ spec.lookup_kwarg }}': ''
+                    {% endfor %}
+                {% endif %}
+            },
+            created: function () {
+                var self = this;
+                $('.form-params').each(function () {
+                    var key = $(this).attr('data-name');
+                    var value = $(this).val();
+                    self[key] = value;
                 })
-            });
-
-            function format_datetime(d) {
-                for(i in d){
-                    if (d[i] < 10) {
-                        d[i] = '0' + d[i];
-                    }
+            },
+            methods: {
+                formSubmit: function () {
+                    preSubmit();
+                    document.getElementById('changelist-search').submit();
                 }
-                //2019-03-01 00:00:00+08:00
-                return d.year + '-' + d.month + '-' + d.date + ' ' + d.hours + ":" + d.minutes + ':' + d.seconds+'+08:00';
             }
+        })
 
-            layui.use('laydate', function () {
-                var date = new Date();
-                var laydate = layui.laydate;
-                laydate.render({
-                    elem: '.date_field'
-                    // , type: 'datetime'
-                    , type: 'date'
-                    , range: true
-                    // max:date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()
-                    ,done:function (value,begin,end) {
-
-                        var obj = $(this.elem);
-                        var name = obj.attr('data-name');
-                        //2019-03-01 00:00:00+08:00
-                        var d = begin;
-                        obj.parent().find('input[name="' + name + '__gte"]').val(format_datetime(begin));
-                        obj.parent().find('input[name="' + name + '__lt"]').val(format_datetime(end));
-
-                    }
-                });
-            });
-        }
     </script>
 {% endif %}

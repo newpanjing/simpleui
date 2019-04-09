@@ -76,41 +76,41 @@
     color: #666;
 }
 
-#changelist #toolbar form input {
-    border-radius: 4px;
-    font-size: 14px;
-    padding: 5px;
-    color: #333;
-}
+/*#changelist #toolbar form input {*/
+/*    border-radius: 4px;*/
+/*    font-size: 14px;*/
+/*    padding: 5px;*/
+/*    color: #333;*/
+/*}*/
 
-#changelist #toolbar form #searchbar {
-    height: 32px;
-    border: 1px solid #ccc;
-    padding: 2px 5px;
-    margin: 0;
-    vertical-align: top;
-    font-size: 13px;
-}
+/*#changelist #toolbar form #searchbar {*/
+/*    height: 32px;*/
+/*    border: 1px solid #ccc;*/
+/*    padding: 2px 5px;*/
+/*    margin: 0;*/
+/*    vertical-align: top;*/
+/*    font-size: 13px;*/
+/*}*/
 
-#changelist #toolbar form #searchbar:focus {
-    border-color: #999;
-}
+/*#changelist #toolbar form #searchbar:focus {*/
+/*    border-color: #999;*/
+/*}*/
 
-#changelist #toolbar form input[type="submit"] {
-    border: 1px solid #ccc;
-    padding: 2px 10px;
-    margin: 0;
-    vertical-align: middle;
-    background: #fff;
-    box-shadow: 0 -15px 20px -10px rgba(0, 0, 0, 0.15) inset;
-    cursor: pointer;
-    color: #333;
-}
+/*#changelist #toolbar form input[type="submit"] {*/
+/*    border: 1px solid #ccc;*/
+/*    padding: 2px 10px;*/
+/*    margin: 0;*/
+/*    vertical-align: middle;*/
+/*    background: #fff;*/
+/*    box-shadow: 0 -15px 20px -10px rgba(0, 0, 0, 0.15) inset;*/
+/*    cursor: pointer;*/
+/*    color: #333;*/
+/*}*/
 
-#changelist #toolbar form input[type="submit"]:focus,
-#changelist #toolbar form input[type="submit"]:hover {
-    border-color: #999;
-}
+/*#changelist #toolbar form input[type="submit"]:focus,*/
+/*#changelist #toolbar form input[type="submit"]:hover {*/
+/*    border-color: #999;*/
+/*}*/
 
 #changelist #changelist-search img {
     vertical-align: middle;

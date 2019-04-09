@@ -1,68 +1,34 @@
 {% load admin_list %}
 {% load i18n %}
-<div style="text-align: center">
-    <div class="layui-box layui-laypage layui-laypage-molv" id="pagination">
-        {% if pagination_required %}
-            <a href="javascript:;" class="layui-laypage-prev">上一页</a>
-            {% for i in page_range %}
-                {% if cl.page_num == i %}
-                    <span data-page="{{ i }}">{{ i }}</span>
-                {% elif i == '.' %}
-                    <span class="layui-laypage-spr">…</span>
-                {% else %}
-                    <a href="javascript:;" data-page="{{ i }}">{{ i }}</a>
-                {% endif %}
-            {% endfor %}
-            <a href="javascript:;" class="layui-laypage-next">下一页{{ request.GET.p }}</a>
-        {% endif %}
-    </div>
+{% load simpletags %}
+<div id="pagination">
+    {% if pagination_required %}
+        <el-pagination
+                background
+                @current-change="handleCurrentChange"
+                :current-page="{{ cl.page_num }}+1"
+                :page-size="{{ cl.list_per_page }}"
+                layout="total,prev, pager, next, jumper"
+                :total="{{ cl.result_count }}">
+        </el-pagination>
+    {% endif %}
 </div>
 <script type="text/javascript">
     $(function () {
+        new Vue({
+            el: "#pagination",
+            data: {},
+            methods: {
+                handleCurrentChange:function (page) {
+                    page_go(page-1);
+                }
+            }
+        })
 
         function page_go(p) {
             $("#changelist-search input[name='p']").val(p);
             $("#changelist-search").submit();
         }
 
-        var _cl ={{ cl.page_num }};
-        $("#pagination *[data-page!='']").each(function () {
-            var page = $(this).attr("data-page")
-            if (!page) {
-                return;
-            }
-            page = parseInt(page);
-            _cl = parseInt(_cl);
-
-            if (page == _cl) {
-                $(this).addClass("layui-laypage-curr");
-                $(this).html('<em class="layui-laypage-em" style="background-color:#1E9FFF;"></em>' +
-                    '<em>' + (page + 1) + '</em>');
-            } else {
-                $(this).text(page + 1);
-                $(this).data('page', page);
-                $(this).click(function () {
-                    page_go($(this).data().page);
-                });
-            }
-        });
-        //处理上一页和下一页
-        if (_cl == 0) {
-            $(".layui-laypage-prev").addClass("layui-disabled");
-        } else {
-            $(".layui-laypage-prev").click(function () {
-                page_go(_cl - 1)
-            });
-        }
-
-        var total ={{cl.paginator.count}};
-
-        if (_cl == (total - 1)) {
-            $(".layui-laypage-next").addClass("layui-disabled");
-        } else {
-            $(".layui-laypage-next").click(function () {
-                page_go(_cl+1)
-            });
-        }
     });
 </script>

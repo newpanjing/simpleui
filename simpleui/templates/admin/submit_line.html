@@ -1,12 +1,42 @@
 {% load i18n admin_urls %}
 <div class="submit-row">
-<button type="button" class="layui-btn" onclick="window.history.go(-1)" style="float: left;margin-right: 10px;margin-bottom: 10px;">返回</button>
-{% if show_save %}<input type="submit" value="{% trans 'Save' %}" class="default" name="_save" />{% endif %}
-{% if show_delete_link %}
-    {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
-    <p class="deletelink-box"><a href="{% add_preserved_filters delete_url %}" class="deletelink">{% trans "Delete" %}</a></p>
-{% endif %}
-{% if show_save_as_new %}<input type="submit" value="{% trans 'Save as new' %}" name="_saveasnew"/>{% endif %}
-{% if show_save_and_add_another %}<input type="submit" value="{% trans 'Save and add another' %}" name="_addanother" />{% endif %}
-{% if show_save_and_continue %}<input type="submit" value="{% trans 'Save and continue editing' %}" name="_continue" />{% endif %}
+    <el-button type="button" icon="el-icon-arrow-left" onclick="window.history.go(-1)"
+               style="float: left;margin-right: 10px;margin-bottom: 10px;">返回
+    </el-button>
+    {% if show_delete_link %}
+        {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
+        <el-button icon="el-icon-delete" type="danger" @click="del('{% add_preserved_filters delete_url %}')" style="float: left">{% trans "Delete" %}</el-button>
+    {% endif %}
+    {% if show_save_as_new %}
+        <el-button type="primary" @click="formSubmit('_saveasnew',$event)">{% trans 'Save as new' %}</el-button>
+    {% endif %}
+    {% if show_save_and_add_another %}
+        <el-button type="primary" @click="formSubmit('_addanother',$event)">{% trans 'Save and add another' %}</el-button>
+    {% endif %}
+    {% if show_save_and_continue %}
+        <el-button type="primary" @click="formSubmit('_continue',$event)">{% trans 'Save and continue editing' %}</el-button>
+    {% endif %}
+    {% if show_save %}
+        <el-button @click="formSubmit('_save',$event)" type="primary">{% trans 'Save' %}</el-button>
+    {% endif %}
+    <input type="hidden" :name="actionName" value="">
 </div>
+<script type="text/javascript">
+    new Vue({
+        el: '.submit-row',
+        data: {
+            actionName: '',
+            actionValue: ''
+        },
+        methods: {
+            del: function (url) {
+                window.location.href = url;
+            },
+            formSubmit: function (name,e) {
+                this.actionName = name;
+                this.actionValue = '';
+                $("form").submit();
+            }
+        }
+    })
+</script>
