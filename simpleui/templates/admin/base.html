@@ -52,9 +52,7 @@
         {% block pretitle %}{% endblock %}
         {% block content_title %}
             {% if title %}
-                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                  <legend>{{ title }}</legend>
-                </fieldset>
+                {{ title }}
             {% endif %}
         {% endblock %}
         {% block content %}

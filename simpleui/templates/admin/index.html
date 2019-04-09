@@ -58,12 +58,10 @@
                                 <span slot="title" v-text="sub.name"></span>
                             </el-menu-item>
                         </el-menu-item-group>
-
                     </el-submenu>
 
                 </div>
             </el-menu>
-
 
         </el-aside>
         <el-container>
@@ -73,12 +71,18 @@
                         <el-tooltip class="item" effect="dark" content="显示或隐藏菜单" placement="top-start">
                             <el-button @click="foldClick()" :icon="foldIcon"></el-button>
                         </el-tooltip>
+                        <el-breadcrumb style="display: inline-block;" separator="/">
+                            <el-breadcrumb-item>首页</el-breadcrumb-item>
+                            {% verbatim myclode %}
+                                <el-breadcrumb-item v-for="item in breadcrumbs">{{ item }}</el-breadcrumb-item>
+                            {% endverbatim myclode %}
+                        </el-breadcrumb>
                     </el-col>
 
                     <el-col :span="4">
                         <el-button :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
                                    @click="goZoom()" circle></el-button>
-                        <el-button icon="fas fa-globe-americas" @click="goIndex()" circle></el-button>
+                        <el-button icon="fas fa-home" @click="goIndex()" circle></el-button>
                         <el-dropdown>
                             <el-button>
                                 <i class="fas fa-user"></i>

@@ -111,7 +111,8 @@ def menus(context):
                     'name': str(m.get('name')),
                     'icon': get_icon(m.get('object_name')),
                     'url': m.get('admin_url'),
-                    'addUrl': m.get('add_url')
+                    'addUrl': m.get('add_url'),
+                    'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
                 })
 
         module = {

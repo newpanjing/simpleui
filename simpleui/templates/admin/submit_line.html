@@ -5,36 +5,37 @@
     </el-button>
     {% if show_delete_link %}
         {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
-        <el-button icon="el-icon-delete" type="danger" @click="del('{% add_preserved_filters delete_url %}')" style="float: left">{% trans "Delete" %}</el-button>
+        <el-button icon="el-icon-delete" type="danger" @click="del('{% add_preserved_filters delete_url %}')"
+                   style="float: left">{% trans "Delete" %}</el-button>
     {% endif %}
     {% if show_save_as_new %}
-        <el-button type="primary" @click="formSubmit('_saveasnew',$event)">{% trans 'Save as new' %}</el-button>
+        <el-button type="primary"
+                   @click="formSubmit('_saveasnew','{% trans 'Save as new' %}',$event)">{% trans 'Save as new' %}</el-button>
     {% endif %}
     {% if show_save_and_add_another %}
-        <el-button type="primary" @click="formSubmit('_addanother',$event)">{% trans 'Save and add another' %}</el-button>
+        <el-button type="primary"
+                   @click="formSubmit('_addanother','{% trans 'Save and add another' %}',$event)">{% trans 'Save and add another' %}</el-button>
     {% endif %}
     {% if show_save_and_continue %}
-        <el-button type="primary" @click="formSubmit('_continue',$event)">{% trans 'Save and continue editing' %}</el-button>
+        <el-button type="primary"
+                   @click="formSubmit('_continue','{% trans 'Save and continue editing' %}',$event)">{% trans 'Save and continue editing' %}</el-button>
     {% endif %}
     {% if show_save %}
-        <el-button @click="formSubmit('_save',$event)" type="primary">{% trans 'Save' %}</el-button>
+        <el-button @click="formSubmit('_save','{% trans 'Save' %}',$event)" type="primary">{% trans 'Save' %}</el-button>
     {% endif %}
-    <input type="hidden" :name="actionName" value="">
+    <input type="hidden" name="actionName" value="actionValue" id="actionName">
 </div>
 <script type="text/javascript">
     new Vue({
         el: '.submit-row',
         data: {
-            actionName: '',
-            actionValue: ''
         },
         methods: {
             del: function (url) {
                 window.location.href = url;
             },
-            formSubmit: function (name,e) {
-                this.actionName = name;
-                this.actionValue = '';
+            formSubmit: function (name, v, e) {
+                $("#actionName").attr('name', name).val(v);
                 $("form").submit();
             }
         }

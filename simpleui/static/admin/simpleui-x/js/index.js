@@ -17,6 +17,7 @@
             tabIndex: 0,
             menus: [],
             menuActive: '1',
+            breadcrumbs:[],
             popup: {
                 left: 0,
                 top: 0,
@@ -98,8 +99,10 @@
                 this.popup.show = false;
             },
             tabClick: function (tab) {
-                var index = this.tabs[tab.index].index;
+                var item=this.tabs[tab.index];
+                var index = item.index;
                 this.menuActive = index;
+                this.breadcrumbs = item.breadcrumbs;
             },
             handleTabsEdit: function (targetName, action) {
 
@@ -112,6 +115,7 @@
                             if (temp) {
                                 next = temp.id;
                                 self.menuActive = temp.index;
+                                self.breadcrumbs = temp.breadcrumbs;
                             }
                         }
                     });
@@ -125,6 +129,7 @@
             ,
             openTab: function (data, index) {
 
+                this.breadcrumbs = data.breadcrumbs;
                 var exists = null;
                 //判断是否存在，存在就直接打开
                 for (var i = 0; i < this.tabs.length; i++) {

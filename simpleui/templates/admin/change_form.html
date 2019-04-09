@@ -12,12 +12,17 @@
     <div id="content-main">
         {% block object-tools %}
             {% if change %}{% if not is_popup %}
+
                 <ul class="object-tools">
                     {% block object-tools-items %}
                         <li>
+                        <el-dialog title="{% trans "History" %}" :visible.sync="dialogTableVisible">
+                            <iframe frameborder="0" :src="url" width="100%" height="300"></iframe>
+                        </el-dialog>
                             {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
-                            <a href="{% add_preserved_filters history_url %}"
-                               class="historylink">{% trans "History" %}</a>
+
+                            <el-button @click="go_url('{% add_preserved_filters history_url %}')" class="historylink"
+                                       icon="fas fa-history">{% trans "History" %}</el-button>
                         </li>
                         {% if has_absolute_url %}
                             <li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>
@@ -33,10 +38,16 @@
                 {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}"/>{% endif %}
                 {% if save_on_top %}{% block submit_buttons_top %}{% submit_row %}{% endblock %}{% endif %}
                 {% if errors %}
-                    <p class="errornote">
-                        {% if errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}
-                            {% trans "Please correct the errors below." %}{% endif %}
-                    </p>
+                    <div id="alert">
+                        <el-alert
+                                title="{% if errors|length == 1 %}
+                            {% trans "Please correct the error below." %}
+                        {% else %}
+                            {% trans "Please correct the errors below." %}
+                        {% endif %}"
+                                type="error">
+                        </el-alert>
+                    </div>
                     {{ adminform.form.non_field_errors }}
                 {% endif %}
 
@@ -73,5 +84,26 @@
 
             </div>
         </form>
+
     </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '.object-tools',
+            data: {
+                dialogTableVisible: false,
+                url:''
+            },
+            methods: {
+                go_url: function (url) {
+                    this.url = url;
+                    this.dialogTableVisible = true;
+                }
+            }
+        })
+        if (document.getElementById('alert')) {
+            new Vue({
+                el: '#alert'
+            })
+        }
+    </script>
 {% endblock %}
