@@ -26,14 +26,14 @@
 
         <el-aside width="auto" class="menu">
             <div class="logo-wrap" v-if="!fold">
-                <el-row>
-                    <el-col :span="4">
+                <div class="float-wrap">
+                    <div class="left">
                         <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
-                    </el-col>
-                    <el-col :span="20">
+                    </div>
+                    <div class="left">
                         <span>{{ site_header }}</span>
-                    </el-col>
-                </el-row>
+                    </div>
+                </div>
             </div>
 
 
@@ -66,8 +66,8 @@
         </el-aside>
         <el-container>
             <el-header class="navbar" style="font-size: 12px;padding: 10px;height: auto">
-                <el-row>
-                    <el-col :span="20">
+                <div class="float-wrap">
+                    <div class="left">
                         <el-button circle :icon="fold?'fas fa-chevron-right':'fas fa-chevron-left'"
                                    style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
                         <el-breadcrumb style="display: inline-block;" separator="/">
@@ -77,9 +77,9 @@
                                 <el-breadcrumb-item v-for="item in breadcrumbs" :key="item">{{ item }}</el-breadcrumb-item>
                             {% endverbatim myclode %}
                         </el-breadcrumb>
-                    </el-col>
+                    </div>
 
-                    <el-col :span="4">
+                    <div class="right">
                         <el-button :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
                                    @click="goZoom()" circle></el-button>
                         <el-button icon="fas fa-home" @click="goIndex()" circle></el-button>
@@ -98,8 +98,8 @@
                                 </el-dropdown-menu>
                             {% endverbatim mycode %}
                         </el-dropdown>
-                    </el-col>
-                </el-row>
+                    </div>
+                </div>
             </el-header>
             <el-main>
                 <el-tabs v-model="tabModel" type="border-card" editable style="height: 100%" @edit="handleTabsEdit"
@@ -146,6 +146,11 @@
                 v-text="item.text"></span>
         </li>
     </ul>
+
+    <el-dialog title="{% trans 'Change password' %}" :visible.sync="pwdDialog.show">
+        <iframe frameborder="0" :src="pwdDialog.url" width="100%" height="500"></iframe>
+    </el-dialog>
+
 </div>
 <script type="text/javascript">
     {% if home %}

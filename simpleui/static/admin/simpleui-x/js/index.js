@@ -13,6 +13,7 @@
             menuActive: '1',
             breadcrumbs: [],
             language: window.language,
+            pwdDialog: {},
             popup: {
                 left: 0,
                 top: 0,
@@ -80,9 +81,12 @@
             var self = this;
             window.onload = window.onresize = function () {
                 self.height = document.documentElement.clientHeight || document.body.clientHeight
+                var width = document.documentElement.clientWidth || document.body.clientWidth;
+                self.fold = width < 800;
             }
             window.app = this;
             this.menus = window.menus
+
         },
         methods: {
             contextmenu: function (item, e) {
@@ -161,8 +165,17 @@
             }
             ,
             changePassword: function () {
-                this.openTab({url: '/admin/password_change/', icon: 'far fa-edit', name: language.change_password})
-                app.breadcrumbs = [language.change_password];
+                var width = document.documentElement.clientWidth || document.body.clientWidth;
+                if (width > 800) {
+                    this.pwdDialog = {
+                        url: '/admin/password_change/',
+                        name: language.change_password,
+                        show: true
+                    };
+                } else {
+                    this.openTab({url: '/admin/password_change/', icon: 'far fa-edit', name: language.change_password})
+                    app.breadcrumbs = [language.change_password];
+                }
             }
             ,
             logout: function () {

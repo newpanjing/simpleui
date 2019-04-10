@@ -11,7 +11,8 @@ html, body {
     background: #fff;
     box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 }
-.navbar .el-button{
+
+.navbar .el-button {
     border: none;
     background-color: inherit;
 }
@@ -148,20 +149,68 @@ html, body {
 .el-tabs__new-tab {
     display: none;
 }
-#home{
+
+#home {
     height: 100%;
     overflow: auto;
 }
+
 #home .timeline {
     margin: 10px;
 }
-.el-tabs__item{
+
+.el-tabs__item {
     user-select: none;
 }
-.showHideBtn{
+
+.showHideBtn {
     display: inline-block;
 }
-.el-button .fas,.el-button .far,.el-button .fab,.el-button .fa{
+
+.el-button .fas, .el-button .far, .el-button .fab, .el-button .fa {
     width: 14px;
     height: 14px;
 }
+
+.clearfix, .float-wrap {
+    display: block
+}
+
+.clearfix:after, .float-wrap:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+.float-wrap .left {
+    float: left;
+}
+
+.float-wrap .right {
+    float: right;
+}
+
+@media screen and (max-width: 1000px) {
+    #home .el-col-6 {
+        width: 50%;
+    }
+
+    #content {
+        margin: 0px;
+        padding: 0px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #home .el-col-6 {
+        width: 100%;
+    }
+
+    .float-wrap .right {
+        float: left;
+    }
+
+}
+
