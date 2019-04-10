@@ -12,6 +12,7 @@
             menus: [],
             menuActive: '1',
             breadcrumbs:[],
+            language:window.language,
             popup: {
                 left: 0,
                 top: 0,
@@ -155,13 +156,14 @@
             }
             ,
             changePassword: function () {
-                this.openTab({url: '/admin/password_change/', icon: 'far fa-edit', name: '修改密码'})
+                this.openTab({url: '/admin/password_change/', icon: 'far fa-edit', name: language.change_password})
+                app.breadcrumbs = [language.change_password];
             }
             ,
             logout: function () {
-                this.$confirm('您确定要退出登录吗?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                this.$confirm(language.confirm, '提示', {
+                    confirmButtonText: language.yes,
+                    cancelButtonText: language.no,
                     type: 'warning'
                 }).then(function () {
                     window.location.href = '/admin/logout';

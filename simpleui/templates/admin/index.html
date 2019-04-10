@@ -68,10 +68,12 @@
             <el-header class="navbar" style="font-size: 12px;padding: 10px;height: auto">
                 <el-row>
                     <el-col :span="20">
-                        <el-button circle :icon="fold?'fas fa-chevron-right':'fas fa-chevron-left'" style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
+                        <el-button circle :icon="fold?'fas fa-chevron-right':'fas fa-chevron-left'"
+                                   style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
                         <el-breadcrumb style="display: inline-block;" separator="/">
                             {% verbatim myclode %}
-                                <el-breadcrumb-item>{{ menus[0].name }}</el-breadcrumb-item>
+                                <el-breadcrumb-item><i :class="menus[0].icon"></i>{{ menus[0].name }}
+                                </el-breadcrumb-item>
                                 <el-breadcrumb-item v-for="item in breadcrumbs">{{ item }}</el-breadcrumb-item>
                             {% endverbatim myclode %}
                         </el-breadcrumb>
@@ -86,11 +88,15 @@
                                 <i class="fas fa-user"></i>
                                 {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
                             </el-button>
-                            <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item icon="far fa-edit" @click.native="changePassword()">修改密码
-                                </el-dropdown-item>
-                                <el-dropdown-item icon="el-icon-close" @click.native="logout()">退出登录</el-dropdown-item>
-                            </el-dropdown-menu>
+                            {% verbatim mycode %}
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item icon="far fa-edit"
+                                                      @click.native="changePassword()">{{ language.change_password }}
+                                    </el-dropdown-item>
+                                    <el-dropdown-item icon="el-icon-close"
+                                                      @click.native="logout()">{{ language.logout }}</el-dropdown-item>
+                                </el-dropdown-menu>
+                            {% endverbatim mycode %}
                         </el-dropdown>
                     </el-col>
                 </el-row>
@@ -159,7 +165,13 @@
         };
     {% endif %}
     menus.unshift(home);
-
+    window.language = {
+        change_password: '{% trans 'Change password' %}',
+        logout: '{% trans 'Log out' %}',
+        yes: '{% trans 'Yes' %}',
+        no: '{% trans 'No' %}',
+        confirm:'{% trans 'Are you sure?' %}'
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
