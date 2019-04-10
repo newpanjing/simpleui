@@ -85,7 +85,7 @@
                 searchInput: '{{ cl.query }}',
                 {% if cl.has_filters %}
                     {% for spec in cl.filter_specs %}
-                        '{{ spec.lookup_kwarg }}': ''
+                        '{{ spec.lookup_kwarg }}': '',
                     {% endfor %}
                 {% endif %}
             },
