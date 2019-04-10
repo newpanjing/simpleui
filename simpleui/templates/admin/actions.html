@@ -4,32 +4,32 @@
 
     <input type="hidden" name="action" value=""/>
 
+    {% if has_add_permission %}
+        {% url cl.opts|admin_urlname:'add' as add_url %}
+
+        <el-button type="primary" icon="el-icon-plus" url="{% add_preserved_filters add_url is_popup to_field %}">
+            {% trans 'Add' %}
+        </el-button>
+    {% endif %}
     {% for field in action_form.fields.action.choices %}
         {% if field.0 %}
 
             {% if field.0 == 'delete_selected' %}
-                <el-button type="danger" data-name="{{ field.0 }}" icon="el-icon-delete">选中删除</el-button>
+                <el-button type="danger" data-name="{{ field.0 }}" icon="el-icon-delete">{% trans 'Delete' %}</el-button>
             {% else %}
                 <el-button data-name="{{ field.0 }}">{{ field.1 }}</el-button>
             {% endif %}
         {% endif %}
     {% endfor %}
 
-    {% if has_add_permission %}
-        {% url cl.opts|admin_urlname:'add' as add_url %}
 
-        <el-button type="primary" icon="el-icon-plus" url="{% add_preserved_filters add_url is_popup to_field %}">
-            {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-        </el-button>
-    {% endif %}
-
-    <el-button icon="el-icon-tickets"
-               href="?{% if cl.is_popup %}_popup=1{% endif %}">{% trans "Show all" %}({{ cl.full_result_count }})
-    </el-button>
+{#    <el-button icon="el-icon-tickets"#}
+{#               href="?{% if cl.is_popup %}_popup=1{% endif %}">{% trans "Show all" %}({{ cl.full_result_count }})#}
+{#    </el-button>#}
 
     {% if cl.formset and cl.result_count %}
         <input type="hidden" name="_save" value="{% trans 'Save' %}"/>
-        <el-button icon="el-icon-check" type="success" @click="formSubmit()">{% trans 'Save' %}</el-button>
+        <el-button icon="el-icon-circle-check-outline" type="success" @click="formSubmit()">{% trans 'Save' %}</el-button>
     {% endif %}
 </div>
 <script type="text/javascript">

@@ -48,7 +48,8 @@
                         self.$notify({
                             title: '提示',
                             message: item.msg,
-                            type: item.tag
+                            type: item.tag,
+                            dangerouslyUseHTMLString: true
                         });
                     });
 

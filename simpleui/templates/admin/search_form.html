@@ -20,7 +20,7 @@
                     <el-input class="simpleui-form-item"
                               clearable
                               name="{{ search_var }}"
-                              placeholder="请输入内容"
+                              :placeholder="placeholder"
                               prefix-icon="el-icon-search"
                               v-model="searchInput" @keyup.enter.native="formSubmit()">
                     </el-input>
@@ -38,7 +38,7 @@
                         {% else %}
                             <input type="hidden" v-model="{{ spec.lookup_kwarg }}" name="{{ spec.lookup_kwarg }}"/>
                             <el-select v-model="{{ spec.lookup_kwarg }}" clearable
-                                       placeholder="请选择{{ spec.title }}">
+                                       placeholder="{{ spec.title }}">
                                 {% if spec.lookup_choices %}
                                     {% if spec.lookup_choices.query %}
                                         {% for option in spec.lookup_choices %}
@@ -66,8 +66,7 @@
                 <el-button type="primary" icon="el-icon-search" @click="formSubmit()">{% trans 'Search' %}</el-button>
 
                 {% if show_result_count %}
-                    <span class="small quiet">{% blocktrans count counter=cl.result_count %}{{ counter }} result
-                    {% plural %}找到{{ counter }}条 {% endblocktrans %} </span>
+                    <span class="small quiet">{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}_popup=1{% endif %}">{% if cl.show_full_result_count %}{% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}{% else %}{% trans "Show all" %}{% endif %}</a>)</span>
                 {% endif %}
 
                 {% for pair in cl.params.items %}
@@ -79,9 +78,10 @@
         </form>
     </div>
     <script type="text/javascript">
-        new Vue({
+        var searchApp=new Vue({
             el: '#toolbar',
             data: {
+                placeholder:'{% trans 'Search' %}',
                 searchInput: '{{ cl.query }}',
                 {% if cl.has_filters %}
                     {% for spec in cl.filter_specs %}

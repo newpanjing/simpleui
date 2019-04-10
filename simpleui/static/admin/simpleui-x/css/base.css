@@ -3,7 +3,7 @@
     width: auto;
 }
 #changelist #toolbar form input{
-    padding-left: 30px!important;
+    /*padding-left: 30px!important;*/
 }
 .el-link-btn{
     text-decoration: none!important;
@@ -12,4 +12,17 @@
 #pagination{
     text-align: center;
     margin-top: 10px;
+}
+.actions .el-button {
+    margin-right: 10px;
+    margin-left: 0px;
+}
+#content{
+    padding: 0px;
+}
+#content #changelist-form{
+    padding: 0px 20px;
+}
+#changelist #toolbar{
+    margin-bottom: 0px!important;
 }

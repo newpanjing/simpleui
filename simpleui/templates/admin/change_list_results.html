@@ -1,4 +1,4 @@
-{% load i18n static simpletags%}
+{% load i18n static simpletags %}
 {% if result_hidden_fields %}
     <div class="hiddenfields">{# DIV for HTML validation #}
         {% for item in result_hidden_fields %}{{ item }}{% endfor %}
@@ -51,30 +51,34 @@
 
 <script type="text/javascript">
     $(function () {
-        dict = {}
-        $("#result_list thead th").each(function () {
+        try {
+            dict = {}
+            $("#result_list thead th").each(function () {
 
-            var key = $(this).attr("class").split("-")[1]
-            var value = $(this).text().replace(/ |\r|\n|\t/g, "")
-            if (value != "") {
-                dict[key] = value;
-            }
-        })
-        var buffer = []
-        var fields = $("#searchbar").attr("fields")
-        if (fields && fields != "") {
-            var array = fields.split(",");
-            for (var i in array) {
-                var f = array[i];
-                var name = dict[f]
-                if (!name) {
-                    name = f;
+                var key = $(this).attr("class").split("-")[1]
+                var value = $(this).text().replace(/ |\r|\n|\t/g, "")
+                if (value != "") {
+                    dict[key] = value;
                 }
-                buffer.push(name)
+            })
+            var buffer = []
+            var fields = ['{{ cl.search_fields|join:"','" }}']
+            if (fields) {
+                for (var i in fields) {
+                    var f = fields[i];
+                    var name = dict[f]
+                    if (!name) {
+                        name = f;
+                    }
+                    buffer.push(name)
+                }
             }
-        }
 
-        var placeholder = "搜索" + buffer.join(",")
-        $("#searchbar").attr("placeholder", placeholder)
+            var placeholder = "{% trans 'Search' %}" + buffer.join(",")
+            searchApp.placeholder = placeholder;
+        } catch (e) {
+            console.warn('error!please report to github:https://github.com/newpanjing/simpleui/issues');
+            console.error(e);
+        }
     });
 </script>
