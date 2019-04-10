@@ -1,6 +1,6 @@
 {% load i18n admin_urls %}
 <div class="submit-row">
-    <el-button type="button" icon="el-icon-arrow-left" onclick="window.history.go(-1)"
+    <el-button type="button" icon="el-icon-arrow-left" @click="prev()"
                style="float: left;margin-right: 10px;margin-bottom: 10px;">返回
     </el-button>
     {% if show_delete_link %}
@@ -21,15 +21,15 @@
                    @click="formSubmit('_continue','{% trans 'Save and continue editing' %}',$event)">{% trans 'Save and continue editing' %}</el-button>
     {% endif %}
     {% if show_save %}
-        <el-button @click="formSubmit('_save','{% trans 'Save' %}',$event)" type="primary">{% trans 'Save' %}</el-button>
+        <el-button @click="formSubmit('_save','{% trans 'Save' %}',$event)"
+                   type="primary">{% trans 'Save' %}</el-button>
     {% endif %}
     <input type="hidden" name="actionName" value="actionValue" id="actionName">
 </div>
 <script type="text/javascript">
     new Vue({
         el: '.submit-row',
-        data: {
-        },
+        data: {},
         methods: {
             del: function (url) {
                 window.location.href = url;
@@ -37,6 +37,14 @@
             formSubmit: function (name, v, e) {
                 $("#actionName").attr('name', name).val(v);
                 $("form").submit();
+            },
+            prev: function () {
+                var referrer = document.referrer;
+                if (referrer && document.URL != referrer) {
+                    window.location.href = referrer;
+                } else {
+                    window.history.go(-1);
+                }
             }
         }
     })

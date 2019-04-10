@@ -9,16 +9,15 @@
 {% block extrastyle %}{{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}"/>{% endblock %}
 {% block content %}
-    <div id="content-main">
+    <div id="content-main" class="form-main">
         {% block object-tools %}
             {% if change %}{% if not is_popup %}
-
                 <ul class="object-tools">
                     {% block object-tools-items %}
                         <li>
-                        <el-dialog title="{% trans "History" %}" :visible.sync="dialogTableVisible">
-                            <iframe frameborder="0" :src="url" width="100%" height="300"></iframe>
-                        </el-dialog>
+                            <el-dialog title="{% trans "History" %}" :visible.sync="dialogTableVisible">
+                                <iframe frameborder="0" :src="url" width="100%" height="300"></iframe>
+                            </el-dialog>
                             {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
 
                             <el-button @click="go_url('{% add_preserved_filters history_url %}')" class="historylink"
@@ -87,19 +86,21 @@
 
     </div>
     <script type="text/javascript">
-        new Vue({
-            el: '.object-tools',
-            data: {
-                dialogTableVisible: false,
-                url:''
-            },
-            methods: {
-                go_url: function (url) {
-                    this.url = url;
-                    this.dialogTableVisible = true;
+        if ($(".object-tools").length!=0) {
+            new Vue({
+                el: '.object-tools',
+                data: {
+                    dialogTableVisible: false,
+                    url: ''
+                },
+                methods: {
+                    go_url: function (url) {
+                        this.url = url;
+                        this.dialogTableVisible = true;
+                    }
                 }
-            }
-        })
+            })
+        }
         if (document.getElementById('alert')) {
             new Vue({
                 el: '#alert'

@@ -72,9 +72,9 @@
                                    style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
                         <el-breadcrumb style="display: inline-block;" separator="/">
                             {% verbatim myclode %}
-                                <el-breadcrumb-item><i :class="menus[0].icon"></i>{{ menus[0].name }}
+                                <el-breadcrumb-item><i :class="menus[0].icon" :key="menus[0].name"></i>{{ menus[0].name }}
                                 </el-breadcrumb-item>
-                                <el-breadcrumb-item v-for="item in breadcrumbs">{{ item }}</el-breadcrumb-item>
+                                <el-breadcrumb-item v-for="item in breadcrumbs" :key="item">{{ item }}</el-breadcrumb-item>
                             {% endverbatim myclode %}
                         </el-breadcrumb>
                     </el-col>
@@ -131,7 +131,7 @@
                                 {% include './home.html' %}
                             {% endif %}
                         </div>
-                        <iframe v-else :src="item.url"></iframe>
+                        <iframe v-else :src="item.url" :id="item.id"></iframe>
                     </el-tab-pane>
 
                 </el-tabs>

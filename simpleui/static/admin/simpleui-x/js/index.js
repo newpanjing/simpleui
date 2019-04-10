@@ -11,8 +11,8 @@
             tabIndex: 0,
             menus: [],
             menuActive: '1',
-            breadcrumbs:[],
-            language:window.language,
+            breadcrumbs: [],
+            language: window.language,
             popup: {
                 left: 0,
                 top: 0,
@@ -22,8 +22,13 @@
                     text: '刷新',
                     icon: 'el-icon-refresh',
                     handler: function (tab, item) {
-                        var url = tab.url.split('?')[0];
-                        tab.url = url + '?_=' + new Date().getTime()
+                        try {
+                            document.getElementById(tab.id).contentWindow.location.reload(true);
+                        } catch (e) {
+                            console.log(e)
+                            var url = tab.url.split('?')[0];
+                            tab.url = url + '?_=' + new Date().getTime()
+                        }
                     }
                 }, {
                     text: '关闭当前',
@@ -35,7 +40,7 @@
                     text: '关闭其他',
                     icon: 'far fa-copy',
                     handler: function (tab) {
-                        app.tabs.forEach(item=>{
+                        app.tabs.forEach(item => {
                             if (item.id != tab.id) {
                                 app.handleTabsEdit(item.id, 'remove');
                             }
@@ -94,7 +99,7 @@
                 this.popup.show = false;
             },
             tabClick: function (tab) {
-                var item=this.tabs[tab.index];
+                var item = this.tabs[tab.index];
                 var index = item.index;
                 this.menuActive = index;
                 this.breadcrumbs = item.breadcrumbs;

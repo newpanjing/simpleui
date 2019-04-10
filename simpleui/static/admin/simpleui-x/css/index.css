@@ -13,6 +13,7 @@ html, body {
 }
 .navbar .el-button{
     border: none;
+    background-color: inherit;
 }
 
 .menu .el-menu {
@@ -58,7 +59,7 @@ html, body {
     margin: 0;
     color: #fff;
     font-weight: 600;
-    line-height: 50px;
+    line-height: 58px;
     font-size: 14px;
     font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
     vertical-align: middle;
