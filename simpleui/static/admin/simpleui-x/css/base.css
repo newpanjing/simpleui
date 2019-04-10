@@ -57,7 +57,7 @@
         padding: 0px;
     }
     #content{
-        padding: 0px!important;
+        padding:0px 3px!important;
     }
 
     .simpleui-form .el-input{
