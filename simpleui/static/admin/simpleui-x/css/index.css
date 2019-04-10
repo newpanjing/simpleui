@@ -191,7 +191,15 @@ html, body {
 .float-wrap .right {
     float: right;
 }
-
+#home .box-card .el-card__body .el-button{
+    display: block;
+    margin: 10px 0px;
+    float: none;
+    width: 100%;
+}
+.el-breadcrumb__item .fas{
+    margin-right: 5px;
+}
 @media screen and (max-width: 1000px) {
     #home .el-col-6 {
         width: 50%;
@@ -213,4 +221,3 @@ html, body {
     }
 
 }
-

@@ -5,69 +5,50 @@
         <el-col :span="6">
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                    <span>{{ user }}</span>
-                    <el-button style="float: right; padding: 3px 0" @click="changePassword()" type="text">{% trans 'Change password' %}</el-button>
+                    <span><i class="fa fa-user"></i>{{ user }}</span>
+                    <el-button style="float: right; padding: 3px 0" @click="changePassword()"
+                               type="text">{% trans 'Change password' %}</el-button>
                 </div>
-                <el-row>
-                    <el-col :span="3" class="icon">
-                        <i class="fa fa-user"></i>
-                    </el-col>
-                    <el-col :span="21">
-                        <el-button>主题设置</el-button>
-                        <el-button>切换主题</el-button>
-                    </el-col>
-                </el-row>
+                <div>
+                    <el-button icon="fas fa-pencil-alt">自定义主题</el-button>
+                    <el-button icon="fas fa-palette">切换设置</el-button>
+                </div>
             </el-card>
         </el-col>
 
         <el-col :span="6">
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                    <span>服务器</span>
+                    <span><i class="fas fa-server"></i>服务器</span>
                 </div>
-                <el-row>
-                    <el-col :span="3" class="icon">
-                        <i class="fas fa-server"></i>
-                    </el-col>
-                    <el-col :span="21">
-                        {% get_server_info %}
-                    </el-col>
-                </el-row>
+                <div>
+                    {% get_server_info %}
+                </div>
             </el-card>
         </el-col>
 
         <el-col :span="6">
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                    <span>应用信息</span>
+                    <span><i class="fab fa-python"></i>应用信息</span>
                 </div>
-                <el-row>
-                    <el-col :span="3" class="icon">
-                        <i class="fab fa-python"></i>
-                    </el-col>
-                    <el-col :span="21">
-                        {% get_app_info %}
-                    </el-col>
-                </el-row>
+                <div>
+                    {% get_app_info %}
+                </div>
             </el-card>
         </el-col>
 
         <el-col :span="6">
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                    <i class="fas fa-code"></i>
-                    <span>simpleui主页</span>
+
+                    <span><i class="fab fa-stripe-s"></i>simpleui主页</span>
                     <el-button style="float: right; padding: 3px 0" type="text" @click="report()">报告问题</el-button>
                 </div>
-                <el-row>
-                    <el-col :span="3" class="icon">
-                        <i class="fab fa-stripe-s"></i>
-                    </el-col>
-                    <el-col :span="21">
-                        <el-button icon="fab fa-git">Gitee</el-button>
-                        <el-button icon="fab fa-github">Github</el-button>
-                    </el-col>
-                </el-row>
+                <div>
+                    <el-button icon="fas fa-code" @click="openUrl('https://gitee.com/tompeppa/simpleui')">Gitee</el-button>
+                    <el-button icon="fab fa-github" @click="openUrl('https://github.com/newpanjing/simpleui')">Github</el-button>
+                </div>
             </el-card>
         </el-col>
 

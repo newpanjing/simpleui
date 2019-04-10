@@ -89,6 +89,9 @@
 
         },
         methods: {
+            openUrl:function(url){
+                window.open(url);
+            },
             contextmenu: function (item, e) {
                 //home没有popup menu
                 if (item.index == '1') {
