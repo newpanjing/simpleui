@@ -4,6 +4,8 @@ import django
 from django import template
 from django.utils.html import format_html
 from django.conf import settings
+from django.utils.safestring import mark_safe
+
 import os
 import json
 
@@ -224,11 +226,18 @@ def get_icon(obj):
 def load_message(context):
     messages = context.get('messages')
     array = []
-
-    for msg in messages:
-        array.append({
-            'msg': msg.message,
-            'tag': msg.tags
-        })
+    if messages:
+        for msg in messages:
+            array.append({
+                'msg': msg.message,
+                'tag': msg.tags
+            })
 
     return '<script type="text/javascript"> var messages={}</script>'.format(array)
+
+
+@register.simple_tag(takes_context=True)
+def context_to_json(context):
+    json_str = '{}'
+
+    return mark_safe(json_str)

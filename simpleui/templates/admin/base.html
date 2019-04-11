@@ -1,89 +1,97 @@
-{% load i18n static simpletags %}<!DOCTYPE html>
-{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-<head>
-    <title>{% block title %}{% endblock %}</title>
+{% load i18n static simpletags %}
+{% if request.GET.e == 'simpleui_json' %}
+    {% comment %}由于无法改写django代码，只能利用错误代码来判断，从而输出json{% endcomment %}
+    {% context_to_json %}
+{% else %}
 
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+    <!DOCTYPE html>
+    {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+    <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
 
-    {% block extrastyle %}{% endblock %}
-    {% if LANGUAGE_BIDI %}
-        <link rel="stylesheet" type="text/css"
-              href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
-    {% block extrahead %}{% endblock %}
-    {% block responsive %}
-        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}?_=20180905"/>
+        <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+        <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+
+        {% block extrastyle %}{% endblock %}
         {% if LANGUAGE_BIDI %}
-            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>
-        {% endif %}
-    {% endblock %}
-    {% block blockbots %}
-        <meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
-    <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
-</head>
-{% load i18n %}
-
-<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
-      data-admin-utc-offset="{% now "Z" %}">
-
-<!-- Container -->
-<div id="container">
-
-    {% block messages %}
-        {% autoescape off %}
-            {% load_message %}
-        {% endautoescape %}
-        <script type="text/javascript">
-            new Vue({
-                created: function () {
-                    var self = this;
-
-                    messages.forEach(item => {
-                        self.$notify({
-                            title: '提示',
-                            message: item.msg,
-                            type: item.tag,
-                            dangerouslyUseHTMLString: true
-                        });
-                    });
-
-                }
-            })
-        </script>
-
-    {% endblock messages %}
-
-    <div class="menu-content">
-        {% for app in app_list %}
-            {{ app }}
-        {% endfor %}
-    </div>
-    <!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
-        {% block pretitle %}{% endblock %}
-        {% block content_title %}
-            {% if title %}
-                <div style="display: none">{{ title }}</div>
+            <link rel="stylesheet" type="text/css"
+                  href="
+                          {% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
+        {% block extrahead %}{% endblock %}
+        {% block responsive %}
+            <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}?_=20180905"/>
+            {% if LANGUAGE_BIDI %}
+                <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>
             {% endif %}
         {% endblock %}
-        {% block content %}
-            {% block object-tools %}{% endblock %}
-            {{ content }}
-        {% endblock %}
-        {% block sidebar %}{% endblock %}
-        <br class="clear"/>
-    </div>
-    <!-- END Content -->
+        {% block blockbots %}
+            <meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
+        <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
+    </head>
+    {% load i18n %}
 
-    {% block footer %}
-        <div id="footer"></div>{% endblock %}
-</div>
-<!-- END Container -->
-</body>
-</html>
+    <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+          data-admin-utc-offset="{% now "Z" %}">
+
+    <!-- Container -->
+    <div id="container">
+
+        {% block messages %}
+            {% autoescape off %}
+                {% load_message %}
+            {% endautoescape %}
+            <script type="text/javascript">
+                new Vue({
+                    created: function () {
+                        var self = this;
+
+                        messages.forEach(item => {
+                            self.$notify({
+                                title: '提示',
+                                message: item.msg,
+                                type: item.tag,
+                                dangerouslyUseHTMLString: true
+                            });
+                        });
+
+                    }
+                })
+            </script>
+
+        {% endblock messages %}
+
+        <div class="menu-content">
+            {% for app in app_list %}
+                {{ app }}
+            {% endfor %}
+        </div>
+        <!-- Content -->
+        <div id="content" class="{% block coltype %}colM{% endblock %}">
+            {% block pretitle %}{% endblock %}
+            {% block content_title %}
+                {% if title %}
+                    <div style="display: none">{{ title }}</div>
+                {% endif %}
+            {% endblock %}
+            {% block content %}
+                {% block object-tools %}{% endblock %}
+                {{ content }}
+            {% endblock %}
+            {% block sidebar %}{% endblock %}
+            <br class="clear"/>
+        </div>
+        <!-- END Content -->
+
+        {% block footer %}
+            <div id="footer"></div>{% endblock %}
+    </div>
+    <!-- END Container -->
+    </body>
+    </html>
+{% endif %}
