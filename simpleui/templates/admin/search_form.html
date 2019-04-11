@@ -33,14 +33,14 @@
                     {% for spec in cl.filter_specs %}
                         {% if spec|get_date_type == 'date' or spec|get_date_type == 'datetime' %}
 
-                             <el-date-picker
-                                  v-model="{{ spec.field.name }}"
-                                  @change="change{{ spec|get_date_type|capfirst }}"
-                                  type="{{ spec|get_date_type }}range"
-                                  range-separator="至"
-                                  start-placeholder="{{ spec.title }}开始"
-                                  end-placeholder="{{ spec.title }}结束">
-                                </el-date-picker>
+                            <el-date-picker
+                                    v-model="{{ spec.field.name }}"
+                                    @change="change{{ spec|get_date_type|capfirst }}"
+                                    type="{{ spec|get_date_type }}range"
+                                    range-separator="至"
+                                    start-placeholder="{{ spec.title }}开始"
+                                    end-placeholder="{{ spec.title }}结束">
+                            </el-date-picker>
 
                             <input type="hidden" v-model="{{ spec.field_generic }}gte"
                                    name="{{ spec.field_generic }}gte"/>
@@ -48,10 +48,15 @@
                                    name="{{ spec.field_generic }}lt"/>
 
                         {% else %}
+
                             <input type="hidden" v-model="{{ spec.lookup_kwarg }}" name="{{ spec.lookup_kwarg }}"/>
                             <el-select v-model="{{ spec.lookup_kwarg }}" clearable
                                        placeholder="{{ spec.title }}">
-                                {% if spec.lookup_choices %}
+                                {% if spec|get_date_type == 'time' %}
+                                    {% for option in spec.lookup_choices %}
+                                        <el-option label="{{ option }}" value="{{ option|to_str}}"></el-option>
+                                    {% endfor %}
+                                {% elif spec.lookup_choices %}
                                     {% if spec.lookup_choices.query %}
                                         {% for option in spec.lookup_choices %}
                                             <el-option label="{{ option }}" value="{{ option }}"></el-option>
@@ -141,13 +146,13 @@
                     {% for spec in cl.filter_specs %}
                         {% if spec.links %}
                             '{{ spec.field_path }}': function (newValue, oldValue) {
-                                var type='{{ spec | get_date_type }}'
+                                var type = '{{ spec | get_date_type }}'
                                 if (newValue) {
 
-                                    if(type=='date') {
+                                    if (type == 'date') {
                                         this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd');
                                         this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd')
-                                    }else if(type=='datetime'){
+                                    } else if (type == 'datetime') {
                                         this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd hh:mm:ss+08:00');
                                         this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd hh:mm:ss+08:00')
                                     }
@@ -163,7 +168,7 @@
                 changeDate: function (d1, d2) {
                     console.log(arguments)
                 },
-                changeDatetime:function(d1,d2){
+                changeDatetime: function (d1, d2) {
                     console.log(arguments)
                 },
                 formSubmit: function () {

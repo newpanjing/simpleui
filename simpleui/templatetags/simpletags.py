@@ -19,9 +19,9 @@ register = template.Library()
 @register.filter
 def get_icon(name):
     # 默认为文件图标
-    cls = "layui-icon-file"
+    cls = ""
 
-    return format_html('<i class="layui-icon {}"></i>', cls)
+    return format_html('<i class="icon {}"></i>', cls)
 
 
 @register.simple_tag(takes_context=True)
@@ -108,6 +108,11 @@ def test(obj):
     print(obj)
     # pass
     return ''
+
+
+@register.filter
+def to_str(obj):
+    return str(obj)
 
 
 @register.filter
