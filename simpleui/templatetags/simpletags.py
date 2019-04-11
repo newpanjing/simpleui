@@ -11,6 +11,7 @@ import platform
 import socket
 
 import simpleui
+from django.db import models
 
 register = template.Library()
 
@@ -21,6 +22,85 @@ def get_icon(name):
     cls = "layui-icon-file"
 
     return format_html('<i class="layui-icon {}"></i>', cls)
+
+
+@register.simple_tag(takes_context=True)
+def context_test(context):
+    print(context)
+    pass
+
+
+# context.get('cl').filter_specs[1].links
+@register.simple_tag(takes_context=True)
+def load_dates(context):
+    data = {}
+    cl = context.get('cl')
+    if cl.has_filters:
+        for spec in cl.filter_specs:
+            field = spec.field
+            field_type = None
+            if isinstance(field, models.DateTimeField):
+                field_type = 'datetime'
+            elif isinstance(field, models.DateField):
+                field_type = 'date'
+            elif isinstance(field, models.TimeField):
+                field_type = 'time'
+
+            if field_type:
+                data[field.name] = field_type
+    context['date_field'] = data
+
+    return '<script type="text/javascript">var searchDates={}</script>'.format(json.dumps(data))
+
+
+@register.filter
+def get_date_type(spec):
+    field = spec.field
+    field_type = ''
+    if isinstance(field, models.DateTimeField):
+        field_type = 'datetime'
+    elif isinstance(field, models.DateField):
+        field_type = 'date'
+    elif isinstance(field, models.TimeField):
+        field_type = 'time'
+
+    return field_type
+
+
+@register.filter
+def date_wrap(spec):
+    html = ''
+
+    field = spec.field
+    if isinstance(field, models.DateTimeField):
+        html = '<el-date-picker v-model="{}" ' \
+               '@change="change" ' \
+               'type="datetimerange" ' \
+               'range-separator="至" ' \
+               'start-placeholder="{}开始" ' \
+               'end-placeholder="{}结束">' \
+               '</el-date-picker>'.format(field.name, spec.title, spec.title)
+
+    elif isinstance(field, models.DateField):
+        html = '<el-date-picker v-model="{}" ' \
+               '@change="change" ' \
+               'type="daterange" ' \
+               'range-separator="至" ' \
+               'start-placeholder="{}开始" ' \
+               'end-placeholder="{}结束">' \
+               '</el-date-picker>'.format(field.name, spec.title, spec.title)
+    elif isinstance(field, models.TimeField):
+        html = '<el-time-picker ' \
+               'is-range ' \
+               'v-model="{}" ' \
+               '@change="change" ' \
+               'range-separator="至" ' \
+               'start-placeholder="{}时间" ' \
+               'end-placeholder="{}时间" ' \
+               'placeholder="选择时间范围"> ' \
+               '</el-time-picker>'
+
+    return html
 
 
 @register.filter

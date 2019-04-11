@@ -10,6 +10,9 @@
             });
         }
     </script>
+    {% autoescape off %}
+        {% load_dates %}
+    {% endautoescape %}
     <div id="toolbar">
         <form id="changelist-search" method="get" onsubmit="preSubmit(this)">
             <input type="hidden" name="p" value=""/>
@@ -28,13 +31,22 @@
                 {% if cl.has_filters %}
 
                     {% for spec in cl.filter_specs %}
+                        {% if spec|get_date_type == 'date' or spec|get_date_type == 'datetime' %}
 
-                        {% if spec.links %}
-                            <input type="input" class="date_field" data-name="{{ spec.field_path }}"
-                                   placeholder="{{ spec.title }}"/>
-                            <input type="hidden" name="{{ spec.field_generic }}gte"/>
-                            <input type="hidden" name="{{ spec.field_generic }}lt"/>
-                            <div>date</div>
+                             <el-date-picker
+                                  v-model="{{ spec.field.name }}"
+                                  @change="change{{ spec|get_date_type|capfirst }}"
+                                  type="{{ spec|get_date_type }}range"
+                                  range-separator="至"
+                                  start-placeholder="{{ spec.title }}开始"
+                                  end-placeholder="{{ spec.title }}结束">
+                                </el-date-picker>
+
+                            <input type="hidden" v-model="{{ spec.field_generic }}gte"
+                                   name="{{ spec.field_generic }}gte"/>
+                            <input type="hidden" v-model="{{ spec.field_generic }}lt"
+                                   name="{{ spec.field_generic }}lt"/>
+
                         {% else %}
                             <input type="hidden" v-model="{{ spec.lookup_kwarg }}" name="{{ spec.lookup_kwarg }}"/>
                             <el-select v-model="{{ spec.lookup_kwarg }}" clearable
@@ -66,7 +78,11 @@
                 <el-button type="primary" icon="el-icon-search" @click="formSubmit()">{% trans 'Search' %}</el-button>
 
                 {% if show_result_count %}
-                    <span class="small quiet">{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}_popup=1{% endif %}">{% if cl.show_full_result_count %}{% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}{% else %}{% trans "Show all" %}{% endif %}</a>)</span>
+                    <span class="small quiet">{% blocktrans count counter=cl.result_count %}{{ counter }} result
+                        {% plural %}{{ counter }} results{% endblocktrans %} (<a
+                            href="?{% if cl.is_popup %}_popup=1{% endif %}">{% if cl.show_full_result_count %}
+                        {% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total
+                        {% endblocktrans %}{% else %}{% trans "Show all" %}{% endif %}</a>)</span>
                 {% endif %}
 
                 {% for pair in cl.params.items %}
@@ -78,14 +94,37 @@
         </form>
     </div>
     <script type="text/javascript">
-        var searchApp=new Vue({
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1,                 //月份
+                "d+": this.getDate(),                    //日
+                "h+": this.getHours(),                   //小时
+                "m+": this.getMinutes(),                 //分
+                "s+": this.getSeconds(),                 //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds()             //毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        var searchApp = new Vue({
             el: '#toolbar',
             data: {
-                placeholder:'{% trans 'Search' %}',
+                placeholder: '{% trans 'Search' %}',
                 searchInput: '{{ cl.query }}',
                 {% if cl.has_filters %}
                     {% for spec in cl.filter_specs %}
-                        '{{ spec.lookup_kwarg }}': '',
+                        {% if spec.links %}
+                            '{{ spec.field_path }}': '',
+                            '{{ spec.field_generic }}gte': '',
+                            '{{ spec.field_generic }}lt': '',
+                        {% else %}
+                            '{{ spec.lookup_kwarg }}': '',
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
             },
@@ -97,7 +136,36 @@
                     self[key] = value;
                 })
             },
+            watch: {
+                {% if cl.has_filters %}
+                    {% for spec in cl.filter_specs %}
+                        {% if spec.links %}
+                            '{{ spec.field_path }}': function (newValue, oldValue) {
+                                var type='{{ spec | get_date_type }}'
+                                if (newValue) {
+
+                                    if(type=='date') {
+                                        this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd');
+                                        this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd')
+                                    }else if(type=='datetime'){
+                                        this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd hh:mm:ss+08:00');
+                                        this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd hh:mm:ss+08:00')
+                                    }
+                                }
+                                {#console.log(newValue)#}
+                                {#console.log(oldValue)#}
+                            },
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            },
             methods: {
+                changeDate: function (d1, d2) {
+                    console.log(arguments)
+                },
+                changeDatetime:function(d1,d2){
+                    console.log(arguments)
+                },
                 formSubmit: function () {
                     preSubmit();
                     document.getElementById('changelist-search').submit();

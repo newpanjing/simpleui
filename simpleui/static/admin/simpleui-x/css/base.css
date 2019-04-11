@@ -48,6 +48,31 @@
     margin-bottom: 0px !important;
 }
 
+a:link, a:visited {
+    color: #3f9eff;
+    text-decoration: none;
+}
+
+.object-tools{
+    margin-top: 0px;
+}
+
+.vTextField{
+    outline: none;
+}
+td, th {
+    vertical-align: inherit;
+    border-bottom: none;
+}
+.row2 {
+    background: #fafafa;
+}
+tbody tr:hover td,tbody tr:hover th{
+    background-color: #ebf5ff;
+}
+.form-row{
+    border-bottom: none!important;
+}
 @media (max-width: 767px) {
     .submit-row > * {
         margin-left: 0px !important;
@@ -66,6 +91,9 @@
         padding-right: 0px!important;
         margin: 0px;
         margin-right: 10px;
+    }
+    .object-tools{
+        margin-top: 10px;
     }
     .el-pagination{
         white-space: inherit;
