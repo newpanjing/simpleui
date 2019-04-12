@@ -1,2 +1,2 @@
 def get_version():
-    return '1.4.8'
+    return '2.0-beta'

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys
 from setuptools import setup
+import simpleui
 
 if sys.version_info < (3, 0):
 
@@ -12,11 +13,9 @@ else:
         open('README.md', 'r', encoding='utf-8').read(),
     ])
 
-vsersion = '1.4.8'
-
 setup(
     name='django-simpleui',
-    version=vsersion,
+    version=simpleui.get_version(),
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,
