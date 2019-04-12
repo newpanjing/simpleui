@@ -155,10 +155,13 @@ def __get_config(name):
 def get_server_info():
     dict = {
         '网络名': platform.node(),
-        'IP': socket.gethostbyname(socket.gethostname()),
         '操作系统': platform.platform(),
         '处理器核心': os.cpu_count()
     }
+    try:
+        dict['IP'] = socket.gethostbyname(socket.gethostname())
+    except:
+        dict['IP'] = '无法获取'
 
     return format_table(dict)
 
