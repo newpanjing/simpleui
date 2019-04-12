@@ -200,6 +200,9 @@ html, body {
 .el-breadcrumb__item .fas{
     margin-right: 5px;
 }
+.float-wrap span{
+    margin-left: 10px;
+}
 @media screen and (max-width: 1000px) {
     #home .el-col-6 {
         width: 50%;

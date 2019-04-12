@@ -99,3 +99,14 @@ tbody tr:hover td,tbody tr:hover th{
         white-space: inherit;
     }
 }
+@media (max-width: 1024px) {
+    .change-list .filtered .results, .change-list .filtered .paginator, .filtered #toolbar, .filtered .actions, .filtered div.xfull{
+        margin-right: 0px!important;
+    }
+    #changelist-search > div{
+        max-width: 100%!important;
+    }
+    #content{
+        padding: 0px!important;
+    }
+}
