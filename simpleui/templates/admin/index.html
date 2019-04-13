@@ -15,12 +15,12 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}">
-{#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">#}
-{#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/element.css' %}">#}
-{#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/black.css' %}">#}
-{#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/light.css' %}">#}
-{#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/green.css' %}">#}
-{#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/blue.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/element.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/black.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/light.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/green.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/blue.css' %}">#}
 
 
 </head>
@@ -29,6 +29,9 @@
     {% menus %}
 {% endautoescape %}
 <div id="main" @click="mainClick($event)">
+
+    <link v-if="theme!=''" rel="stylesheet" :href="theme">
+
     <el-container :style="{height: height+'px'}">
 
         <el-aside width="auto" class="menu">
@@ -79,15 +82,18 @@
                                    style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
                         <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
                             {% verbatim myclode %}
-                                <el-breadcrumb-item><i :class="menus[0].icon" :key="menus[0].name"></i>{{ menus[0].name }}
+                                <el-breadcrumb-item><i :class="menus[0].icon"
+                                                       :key="menus[0].name"></i>{{ menus[0].name }}
                                 </el-breadcrumb-item>
-                                <el-breadcrumb-item v-for="item in breadcrumbs" :key="item">{{ item }}</el-breadcrumb-item>
+                                <el-breadcrumb-item v-for="item in breadcrumbs"
+                                                    :key="item">{{ item }}</el-breadcrumb-item>
                             {% endverbatim myclode %}
                         </el-breadcrumb>
                     </div>
 
                     <div class="right">
-                        <el-button v-if="!small" :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
+                        <el-button v-if="!small"
+                                   :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
                                    @click="goZoom()" circle></el-button>
                         <el-button icon="fas fa-home" @click="goIndex()" circle></el-button>
                         <el-dropdown>
@@ -99,6 +105,9 @@
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item icon="far fa-edit"
                                                       @click.native="changePassword()">{{ language.change_password }}
+                                    </el-dropdown-item>
+                                    <el-dropdown-item icon="fas fa-palette"
+                                                      @click.native="themeDialogVisible=true">切换主题
                                     </el-dropdown-item>
                                     <el-dropdown-item icon="el-icon-close"
                                                       @click.native="logout()">{{ language.logout }}</el-dropdown-item>
@@ -158,6 +167,26 @@
         <iframe frameborder="0" :src="pwdDialog.url" width="100%" height="500"></iframe>
     </el-dialog>
 
+
+    <el-dialog
+            title="切换主题"
+            :visible.sync="themeDialogVisible"
+            width="30%">
+        <div>
+            <table class="simpleui-table">
+                <tr>
+                    <td style="text-align:center">主题名</td>
+                    <td width="50">操作</td>
+                </tr>
+
+                <tr v-for="item in themes" :key="item.text">
+                    <td style="text-align: center" v-text="item.text"></td>
+                    <td><el-button type="primary" @click="setTheme('{% static '/admin/simpleui-x/theme/' %}',item)">设置</el-button></td>
+                </tr>
+            </table>
+        </div>
+    </el-dialog>
+
 </div>
 <script type="text/javascript">
     {% if home %}
@@ -182,11 +211,12 @@
         logout: '{% trans 'Log out' %}',
         yes: '{% trans 'Yes' %}',
         no: '{% trans 'No' %}',
-        confirm:'{% trans 'Are you sure?' %}'
+        confirm: '{% trans 'Are you sure?' %}'
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}"></script>
 </body>
 </html>

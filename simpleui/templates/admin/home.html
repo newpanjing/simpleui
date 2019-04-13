@@ -10,8 +10,7 @@
                                type="text">{% trans 'Change password' %}</el-button>
                 </div>
                 <div>
-                    <el-button icon="fas fa-pencil-alt">自定义主题</el-button>
-                    <el-button icon="fas fa-palette">切换设置</el-button>
+                    <el-button icon="fas fa-palette" @click="themeDialogVisible=true">切换主题</el-button>
                 </div>
             </el-card>
         </el-col>

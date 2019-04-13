@@ -14,7 +14,43 @@
             breadcrumbs: [],
             language: window.language,
             pwdDialog: {},
+            themeDialogVisible: false,
             small: false,
+            themes: [
+                {
+                    "text": "默认"
+                },
+                {
+                    "text": "Simpleui-x",
+                    "file": "simpleui.css"
+                },
+                {
+                    "text": "Element-UI",
+                    "file": "element.css"
+                },
+                {
+                    "text": "layui",
+                    "file": "layui.css"
+                },
+                {
+                    "text": "橙色",
+                    "file": "orange.css"
+                },
+                {
+                    "text": "黑色",
+                    "file": "black.css"
+                },
+                {
+                    "text": "绿色",
+                    "file": "green.css"
+                },
+                {
+                    "text": "淡雅",
+                    "file": "light.css"
+                }
+            ],
+            theme: "",
+            themeName: "",
             popup: {
                 left: 0,
                 top: 0,
@@ -89,8 +125,20 @@
             window.app = this;
             this.menus = window.menus
 
+            this.theme = getCookie('theme');
+            this.themeName = getCookie('theme_name');
+
         },
         methods: {
+            setTheme: function (url, item) {
+                if (item.file && item.file != '') {
+                    this.theme = url + item.file;
+                } else {
+                    this.theme = '';
+                }
+                setCookie('theme', this.theme);
+                setCookie('theme_name', item.text);
+            },
             openUrl: function (url) {
                 window.open(url);
             },
