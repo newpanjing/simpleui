@@ -158,7 +158,8 @@
             }
         },
         methods: {
-            setTheme: function (url, item) {
+            setTheme: function (item) {
+                var url = window.themeUrl;
                 if (item.file && item.file != '') {
                     this.theme = url + item.file;
                 } else {
