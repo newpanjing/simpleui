@@ -20,7 +20,8 @@
 {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/black.css' %}">#}
 {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/light.css' %}">#}
 {#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/green.css' %}">#}
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/blue.css' %}">
+{#    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/blue.css' %}">#}
+
 
 </head>
 <body>
@@ -76,7 +77,7 @@
                     <div class="left">
                         <el-button circle :icon="fold?'fas fa-chevron-right':'fas fa-chevron-left'"
                                    style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
-                        <el-breadcrumb style="display: inline-block;" separator="/">
+                        <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
                             {% verbatim myclode %}
                                 <el-breadcrumb-item><i :class="menus[0].icon" :key="menus[0].name"></i>{{ menus[0].name }}
                                 </el-breadcrumb-item>
@@ -86,7 +87,7 @@
                     </div>
 
                     <div class="right">
-                        <el-button :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
+                        <el-button v-if="!small" :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
                                    @click="goZoom()" circle></el-button>
                         <el-button icon="fas fa-home" @click="goIndex()" circle></el-button>
                         <el-dropdown>

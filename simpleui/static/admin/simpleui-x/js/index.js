@@ -14,6 +14,7 @@
             breadcrumbs: [],
             language: window.language,
             pwdDialog: {},
+            small: false,
             popup: {
                 left: 0,
                 top: 0,
@@ -83,13 +84,14 @@
                 self.height = document.documentElement.clientHeight || document.body.clientHeight
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
                 self.fold = width < 800;
+                self.small = width < 800;
             }
             window.app = this;
             this.menus = window.menus
 
         },
         methods: {
-            openUrl:function(url){
+            openUrl: function (url) {
                 window.open(url);
             },
             contextmenu: function (item, e) {

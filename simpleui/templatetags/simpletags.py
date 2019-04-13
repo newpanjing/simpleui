@@ -70,42 +70,6 @@ def get_date_type(spec):
 
 
 @register.filter
-def date_wrap(spec):
-    html = ''
-
-    field = spec.field
-    if isinstance(field, models.DateTimeField):
-        html = '<el-date-picker v-model="{}" ' \
-               '@change="change" ' \
-               'type="datetimerange" ' \
-               'range-separator="至" ' \
-               'start-placeholder="{}开始" ' \
-               'end-placeholder="{}结束">' \
-               '</el-date-picker>'.format(field.name, spec.title, spec.title)
-
-    elif isinstance(field, models.DateField):
-        html = '<el-date-picker v-model="{}" ' \
-               '@change="change" ' \
-               'type="daterange" ' \
-               'range-separator="至" ' \
-               'start-placeholder="{}开始" ' \
-               'end-placeholder="{}结束">' \
-               '</el-date-picker>'.format(field.name, spec.title, spec.title)
-    elif isinstance(field, models.TimeField):
-        html = '<el-time-picker ' \
-               'is-range ' \
-               'v-model="{}" ' \
-               '@change="change" ' \
-               'range-separator="至" ' \
-               'start-placeholder="{}时间" ' \
-               'end-placeholder="{}时间" ' \
-               'placeholder="选择时间范围"> ' \
-               '</el-time-picker>'
-
-    return html
-
-
-@register.filter
 def test(obj):
     print(obj)
     # pass
