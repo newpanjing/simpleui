@@ -31,6 +31,28 @@
                 {
                     "text": "layui",
                     "file": "layui.css"
+                }, {
+                    "text": "Ant Design Pro",
+                    "file": "ant.design.css"
+                }, {
+                    "text": "Admin LTE",
+                    "file": "admin.lte.css"
+                }, {
+                    "text": "Highdmin",
+                    "file": "highdmin.css"
+                }, {
+                    "text": "Aircraft",
+                    "file": "aircraft.css"
+                }, {
+                    "text": "紫色",
+                    "file": "purple.css"
+                }, {
+                    "text": "灰色",
+                    "file": "gray.css"
+                },
+                {
+                    "text": "墨绿",
+                    "file": "dark.green.css"
                 },
                 {
                     "text": "橙色",
@@ -115,6 +137,7 @@
             }
         },
         created: function () {
+
             var self = this;
             window.onload = window.onresize = function () {
                 self.height = document.documentElement.clientHeight || document.body.clientHeight
@@ -128,6 +151,11 @@
             this.theme = getCookie('theme');
             this.themeName = getCookie('theme_name');
 
+            //接收子页面的事件注册
+            window.themeEvents = [];
+            window.addThemeEvent = function (handler) {
+                themeEvents.push(handler);
+            }
         },
         methods: {
             setTheme: function (url, item) {
@@ -136,8 +164,15 @@
                 } else {
                     this.theme = '';
                 }
+                this.themeName = item.text;
                 setCookie('theme', this.theme);
                 setCookie('theme_name', item.text);
+
+                var self = this;
+                //通知子页面
+                window.themeEvents.forEach(handler => {
+                    handler(self.theme)
+                });
             },
             openUrl: function (url) {
                 window.open(url);

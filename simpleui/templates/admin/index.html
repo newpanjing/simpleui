@@ -78,8 +78,9 @@
             <el-header class="navbar" style="font-size: 12px;padding: 10px;height: auto">
                 <div class="float-wrap">
                     <div class="left">
-                        <el-button circle :icon="fold?'fas fa-chevron-right':'fas fa-chevron-left'"
+                        <el-button circle icon="fas fa-bars"
                                    style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
+
                         <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
                             {% verbatim myclode %}
                                 <el-breadcrumb-item><i :class="menus[0].icon"
@@ -175,13 +176,18 @@
         <div>
             <table class="simpleui-table">
                 <tr>
+                    <td width="50">编号</td>
                     <td style="text-align:center">主题名</td>
                     <td width="50">操作</td>
                 </tr>
 
-                <tr v-for="item in themes" :key="item.text">
+                <tr v-for="(item,i) in themes" :key="item.text">
+                    <td v-text="i+1"></td>
                     <td style="text-align: center" v-text="item.text"></td>
-                    <td><el-button type="primary" @click="setTheme('{% static '/admin/simpleui-x/theme/' %}',item)">设置</el-button></td>
+                    <td>
+                        <span v-if="themeName==item.text">已设置</span>
+                        <el-button v-else type="primary" @click="setTheme('{% static '/admin/simpleui-x/theme/' %}',item)">设置</el-button>
+                    </td>
                 </tr>
             </table>
         </div>

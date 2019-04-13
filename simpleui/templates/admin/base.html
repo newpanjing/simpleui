@@ -17,11 +17,13 @@
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
         <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
-
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
         {% block extrastyle %}{% endblock %}
         {% if LANGUAGE_BIDI %}
             <link rel="stylesheet" type="text/css"
                   href="
+
+
                           {% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
         {% block extrahead %}{% endblock %}
         {% block responsive %}
@@ -39,7 +41,29 @@
 
     <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
           data-admin-utc-offset="{% now "Z" %}">
+    <div id="theme">
+        <link v-if="theme!=''" rel="stylesheet" :href="theme">
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#theme',
+            data: {
+                theme: '',
+            },
+            created: function () {
+                this.theme = getCookie('theme');
 
+                var self = this;
+                //向父组件注册事件
+                if (parent.addThemeEvent) {
+                    parent.addThemeEvent(function (theme) {
+                        self.theme = theme;
+                    });
+                }
+
+            }
+        })
+    </script>
     <!-- Container -->
     <div id="container">
 
