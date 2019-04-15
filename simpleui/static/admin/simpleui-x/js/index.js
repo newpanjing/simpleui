@@ -257,12 +257,12 @@
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
                 if (width > 800) {
                     this.pwdDialog = {
-                        url: '/admin/password_change/',
+                        url: window.urls.changePassword,
                         name: language.change_password,
                         show: true
                     };
                 } else {
-                    this.openTab({url: '/admin/password_change/', icon: 'far fa-edit', name: language.change_password})
+                    this.openTab({url: window.urls.changePassword, icon: 'far fa-edit', name: language.change_password})
                     app.breadcrumbs = [language.change_password];
                 }
             }
@@ -273,7 +273,7 @@
                     cancelButtonText: language.no,
                     type: 'warning'
                 }).then(function () {
-                    window.location.href = '/admin/logout';
+                    window.location.href = window.urls.logout;
                 }).catch(function () {
 
                 });
