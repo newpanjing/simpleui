@@ -37,9 +37,8 @@
                                     v-model="{{ spec.field.name }}"
                                     @change="change{{ spec|get_date_type|capfirst }}"
                                     type="{{ spec|get_date_type }}range"
-                                    range-separator="至"
-                                    start-placeholder="{{ spec.title }}开始"
-                                    end-placeholder="{{ spec.title }}结束">
+                                    start-placeholder="{{ spec.title }}"
+                                    end-placeholder="{{ spec.title }}">
                             </el-date-picker>
 
                             <input type="hidden" v-model="{{ spec.field_generic }}gte"
@@ -54,7 +53,7 @@
                                        placeholder="{{ spec.title }}">
                                 {% if spec|get_date_type == 'time' %}
                                     {% for option in spec.lookup_choices %}
-                                        <el-option label="{{ option }}" value="{{ option|to_str}}"></el-option>
+                                        <el-option label="{{ option }}" value="{{ option|to_str }}"></el-option>
                                     {% endfor %}
                                 {% elif spec.lookup_choices %}
                                     {% if spec.lookup_choices.query %}
@@ -98,7 +97,19 @@
             </div>
         </form>
     </div>
+
     <script type="text/javascript">
+        window.getLanuage = function (key) {
+            console.log(key)
+            if (!window.Lanuages) {
+                return "";
+            }
+            var val = Lanuages[key];
+            if (!val || val == "") {
+                val = key;
+            }
+            return val
+        }
         Date.prototype.format = function (fmt) {
             var o = {
                 "M+": this.getMonth() + 1,                 //月份
@@ -165,6 +176,7 @@
                 {% endif %}
             },
             methods: {
+
                 changeDate: function (d1, d2) {
                     console.log(arguments)
                 },

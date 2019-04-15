@@ -118,9 +118,8 @@ def __get_config(name):
 @register.simple_tag
 def get_server_info():
     dict = {
-        '网络名': platform.node(),
-        '操作系统': platform.platform(),
-        '处理器核心': os.cpu_count()
+        'Network': platform.node(),
+        'OS': platform.platform(),
     }
     try:
         dict['IP'] = socket.gethostbyname(socket.gethostname())
@@ -208,3 +207,8 @@ def context_to_json(context):
     json_str = '{}'
 
     return mark_safe(json_str)
+
+
+@register.simple_tag()
+def get_language():
+    return django.utils.translation.get_language()

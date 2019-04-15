@@ -1,4 +1,15 @@
 (function () {
+    window.getLanuage = function (key) {
+        console.log(key)
+        if (!window.Lanuages) {
+            return "";
+        }
+        var val = Lanuages[key];
+        if (!val || val == "") {
+            val = key;
+        }
+        return val
+    }
     new Vue({
         el: '#main',
         data: {
@@ -16,61 +27,7 @@
             pwdDialog: {},
             themeDialogVisible: false,
             small: false,
-            themes: [
-                {
-                    "text": "默认"
-                },
-                {
-                    "text": "Simpleui-x",
-                    "file": "simpleui.css"
-                },
-                {
-                    "text": "Element-UI",
-                    "file": "element.css"
-                },
-                {
-                    "text": "layui",
-                    "file": "layui.css"
-                }, {
-                    "text": "Ant Design Pro",
-                    "file": "ant.design.css"
-                }, {
-                    "text": "Admin LTE",
-                    "file": "admin.lte.css"
-                }, {
-                    "text": "Highdmin",
-                    "file": "highdmin.css"
-                }, {
-                    "text": "Aircraft",
-                    "file": "aircraft.css"
-                }, {
-                    "text": "紫色",
-                    "file": "purple.css"
-                }, {
-                    "text": "灰色",
-                    "file": "gray.css"
-                },
-                {
-                    "text": "墨绿",
-                    "file": "dark.green.css"
-                },
-                {
-                    "text": "橙色",
-                    "file": "orange.css"
-                },
-                {
-                    "text": "黑色",
-                    "file": "black.css"
-                },
-                {
-                    "text": "绿色",
-                    "file": "green.css"
-                },
-                {
-                    "text": "淡雅",
-                    "file": "light.css"
-                }
-            ],
+            themes: SimpleuiThemes,
             theme: "",
             themeName: "",
             popup: {
@@ -79,7 +36,7 @@
                 show: false,
                 tab: null,
                 menus: [{
-                    text: '刷新',
+                    text: getLanuage('Refresh'),
                     icon: 'el-icon-refresh',
                     handler: function (tab, item) {
                         try {
@@ -91,13 +48,13 @@
                         }
                     }
                 }, {
-                    text: '关闭当前',
+                    text: getLanuage('Close current'),
                     icon: 'el-icon-circle-close-outline',
                     handler: function (tab, item) {
                         app.handleTabsEdit(tab.id, 'remove');
                     }
                 }, {
-                    text: '关闭其他',
+                    text: getLanuage('Close other'),
                     icon: 'far fa-copy',
                     handler: function (tab) {
                         app.tabs.forEach(item => {
@@ -107,13 +64,13 @@
                         })
                     }
                 }, {
-                    text: '全部关闭',
+                    text: getLanuage('Close all'),
                     icon: 'el-icon-close',
                     handler: function (tab, item) {
 
-                        app.$confirm('您确定要关闭全部标签吗?', '提示', {
-                            confirmButtonText: '确定',
-                            cancelButtonText: '取消',
+                        app.$confirm(Lanuages["Are you sure you want them all closed"], Lanuages.Tips, {
+                            confirmButtonText: Lanuages.ConfirmYes,
+                            cancelButtonText: Lanuages.ConfirmNo,
                             type: 'warning'
                         }).then(function () {
                             app.tabs.forEach((tab, index) => {
@@ -128,7 +85,7 @@
 
                     }
                 }, {
-                    text: '新标签打开',
+                    text: getLanuage('Open in a new page'),
                     icon: 'el-icon-news',
                     handler: function (tab, item) {
                         window.open(tab.url);
@@ -268,7 +225,7 @@
             }
             ,
             logout: function () {
-                this.$confirm(language.confirm, '提示', {
+                this.$confirm(language.confirm, Lanuages.Tips, {
                     confirmButtonText: language.yes,
                     cancelButtonText: language.no,
                     type: 'warning'
@@ -283,6 +240,7 @@
                 window.open('/');
             }
             ,
+            getLanuage: getLanuage,
             goZoom: function () {
                 var el = window.document.body;
                 if (!this.zoom) {
@@ -311,4 +269,6 @@
             }
         }
     })
+
+
 })();

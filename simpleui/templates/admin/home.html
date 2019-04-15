@@ -10,7 +10,7 @@
                                type="text">{% trans 'Change password' %}</el-button>
                 </div>
                 <div>
-                    <el-button icon="fas fa-palette" @click="themeDialogVisible=true">切换主题</el-button>
+                    <el-button icon="fas fa-palette" @click="themeDialogVisible=true"><span v-text="getLanuage('Change theme')"></span></el-button>
                 </div>
             </el-card>
         </el-col>
@@ -18,7 +18,7 @@
         <el-col :span="6">
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                    <span><i class="fas fa-server"></i>服务器</span>
+                    <span><i class="fas fa-server"></i><span v-text="getLanuage('Servers')"></span></span>
                 </div>
                 <div>
                     {% get_server_info %}
@@ -29,7 +29,7 @@
         <el-col :span="6">
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                    <span><i class="fab fa-python"></i>应用信息</span>
+                    <span><i class="fab fa-python"></i><span v-text="getLanuage('Application information')"></span></span>
                 </div>
                 <div>
                     {% get_app_info %}
@@ -41,8 +41,8 @@
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
 
-                    <span><i class="fab fa-stripe-s"></i>simpleui主页</span>
-                    <el-button style="float: right; padding: 3px 0" type="text" @click="report()">报告问题</el-button>
+                    <span><i class="fab fa-stripe-s"></i>simpleui <span v-text="getLanuage('Home page')"></span></span>
+                    <el-button style="float: right; padding: 3px 0" type="text" @click="report()"><span v-text="getLanuage('Report issue')"></span></el-button>
                 </div>
                 <div>
                     <el-button icon="fas fa-code" @click="openUrl('https://gitee.com/tompeppa/simpleui')">Gitee</el-button>
@@ -55,7 +55,7 @@
 
     <el-card class="timeline">
         <div slot="header" class="clearfix">
-            <span>操作记录</span>
+            <span>{% trans 'Recent actions' %}</span>
             <el-button style="float: right; padding: 3px 0" type="text"
                        :icon="timeline?'el-icon-arrow-up':'el-icon-arrow-down'" @click="displayTimeline()"></el-button>
         </div>
