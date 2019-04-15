@@ -6,6 +6,8 @@ from django.utils.html import format_html
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
+from django.templatetags import static
+
 import os
 import json
 
@@ -212,3 +214,9 @@ def context_to_json(context):
 @register.simple_tag()
 def get_language():
     return django.utils.translation.get_language()
+
+
+@register.filter
+def get_language_code(val):
+    return django.utils.translation.get_language()
+

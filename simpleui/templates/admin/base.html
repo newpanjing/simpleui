@@ -16,20 +16,22 @@
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}">
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}"></script>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 
         <script src="//unpkg.com/element-ui@2.7.2/lib/index.js"></script>
-        <script src="//unpkg.com/element-ui/lib/umd/locale/en.js"></script>
-        <script type="text/javascript">
-          ELEMENT.locale(ELEMENT.lang.en)
-        </script>
+        {% if ""|get_language_code != 'zh-hans' %}
+            <script src="//unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+            <script type="text/javascript">
+                ELEMENT.locale(ELEMENT.lang.en)
+            </script>
 
+        {% endif %}
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
         {% block extrastyle %}{% endblock %}
         {% if LANGUAGE_BIDI %}
             <link rel="stylesheet" type="text/css"
                   href="
+
 
 
                           {% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}">
 </head>
 <body>
+
 {% autoescape off %}
     {% menus %}
 {% endautoescape %}
@@ -96,7 +97,7 @@
                                     <span v-text="getLanuage('Change theme')"></span><i class="el-icon-arrow-down el-icon--right"></i>
                                 </el-button>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item v-for="item in themes" @click.native="setTheme(item)">
+                                    <el-dropdown-item v-for="item in themes" @click.native="setTheme(item)" :key="item.text">
                                         <i v-if="themeName==item.text" class="el-icon-check"></i>
                                         <i v-else class="fa"></i>
                                         <span v-text="getLanuage(item.text)"></span>
@@ -232,11 +233,18 @@
         logout: "{% url 'admin:logout' %}"
     }
     var lanuageCode = '{% get_language %}';
+
+    function localeError(e) {
+        console.warn("Please add the {% get_language %}.js language file to the '/simpleui-x/theme' directory.")
+        console.log("See simpleui i18n:https://github.com/newpanjing/simpleui/blob/master/i18n.md")
+        console.log("或者加入QQ群:786576510 (Join QQ Group.)")
+
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js'%}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js" onerror="localeError()"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}"></script>

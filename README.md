@@ -83,6 +83,7 @@ python setup.py sdist install
     ```
 3. 其他问题请参考[django官方文档](https://docs.djangoproject.com/zh-hans/2.2/)。
 
+4. i18n 国际化 采用js国际化，默认为英文和中文两种语言，随系统切换。具体请看[国际化配置](/i18n.md)
 
 # 在线Demo
 > 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
