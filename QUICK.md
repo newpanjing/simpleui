@@ -88,15 +88,19 @@ django内置的认证与授权以及关联的用户、组，都已经默认配�
 simpleui内置了一个默认的首页，只是由简单的快捷导航与最近操作组成。
 
 在自己项目的settings.py中加入：
-```python
-# 首页配置
-SIMPLEUI_HOME_PAGE = 'https://www.baidu.com'
-# 首页标题
-SIMPLEUI_HOME_TITLE = '百度一下你就知道'
-# 首页图标
-SIMPLEUI_HOME_ICON = 'layui-icon-rate'
-```
-三项配置都是选填，不填都会有默认值。 [图标列表](./ICON.md)
+
++ 首页配置
+> SIMPLEUI_HOME_PAGE = 'https://www.baidu.com'
++ 首页标题
+> SIMPLEUI_HOME_TITLE = '百度一下你就知道'
++ 首页图标,支持element-ui和fontawesome的图标，参考https://fontawesome.com/icons图标
+> SIMPLEUI_HOME_ICON = 'fa fa-user'
++ 自定义SIMPLEUI的Logo
+> SIMPLEUI_LOGO = 'https://avatars2.githubusercontent.com/u/13655483?s=60&v=4'
++ False=不收集分析信息，True=收集,一天只上报一次分析数据
+> SIMPLEUI_ANALYSIS = False
+
+三项配置都是选填，不填都会有默认值。 [图标列表](https://fontawesome.com/icons)
 
 ## 修改模板
 在simpleui的基础上修改模板需要对django有一定了解

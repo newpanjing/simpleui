@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static simpletags%}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
@@ -18,7 +18,11 @@
 
 <div class="login-main">
     <div class="logo">
-        <img src="{% static '/admin/simpleui-x/img/logo.png' %}"/>
+        {% if "SIMPLEUI_LOGO"|get_config %}
+            <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
+        {% else %}
+            <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
+        {% endif %}
     </div>
     <div class="header">{{ site_header }}</div>
     {% if form.non_field_errors %}
@@ -32,9 +36,9 @@
     {% if form.errors and not form.non_field_errors %}
         <p class="errornote">
             {% if form.errors.items|length == 1 %}
-                <el-alert title="{% trans "Please correct the error below." %}" type="error"> </el-alert>
+                <el-alert title="{% trans "Please correct the error below." %}" type="error"></el-alert>
             {% else %}
-                <el-alert title="{% trans "Please correct the errors below." %}" type="error"> </el-alert>
+                <el-alert title="{% trans "Please correct the errors below." %}" type="error"></el-alert>
             {% endif %}
         </p>
     {% endif %}

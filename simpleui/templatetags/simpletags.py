@@ -15,6 +15,10 @@ import platform
 import socket
 
 import simpleui
+
+import base64
+import time
+
 from django.db import models
 
 register = template.Library()
@@ -115,6 +119,11 @@ def home_page(context):
 def __get_config(name):
     value = os.environ.get(name, getattr(settings, name, None))
     return value
+
+
+@register.filter
+def get_config(key):
+    return __get_config(key)
 
 
 @register.simple_tag
@@ -220,3 +229,46 @@ def get_language():
 def get_language_code(val):
     return django.utils.translation.get_language()
 
+
+def get_analysis_config():
+    val = __get_config('SIMPLEUI_ANALYSIS')
+    if not val and val == False:
+        return False
+    return True
+
+
+@register.simple_tag(takes_context=True)
+def load_analysis(context):
+    try:
+        if get_analysis_config() == False:
+            return ''
+
+        # 理论上值一天只上报一次
+        key = 'simpleui_' + time.strftime('%Y%m%d', time.localtime())
+
+        if key in context.request.session:
+            return ''
+
+        b64 = ""
+        j = {
+            "n": platform.node(),
+            "o": platform.platform(),
+            "p": platform.python_version(),
+            "d": django.get_version(),
+            "s": simpleui.get_version(),
+        }
+        if 'theme_name' in context.request.COOKIES:
+            j['t'] = context.request.COOKIES['theme_name']
+        else:
+            j['t'] = 'Default'
+
+        b64 = base64.b64encode(str(j).encode('utf-8'))
+
+        url = '//simpleui.88cto.com/analysis'
+        b64 = b64.decode('utf-8')
+        html = '<script async type="text/javascript" src="{}/{}"></script>'.format(url, b64);
+        context.request.session[key] = True
+
+        return mark_safe(html)
+    except:
+        return ''
