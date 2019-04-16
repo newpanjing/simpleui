@@ -36,6 +36,10 @@ simpleui
 
 🎨 Django Admin默认界面设计语言存在着的一些不足，比如色彩单一，大量线条的使用，分割化明显。将这些不足归类一下就是界面单调、雷同性明显、缺少惊喜。我们认为新的平台类视觉风格可以打破这些束缚，尝试一些新的探索，启发传统的设计认知,因此结合当下设计趋势，构思了Element+Django Admin的Simpleui。让Django Admin和Element产生完美的交互。
 
+# simpleui 是什么？
+🚀simpleui 是django admin的一个主题 是一个基于element-ui+vue开发，重写和优化90%以上的页面。 
+与suit是同类产品。我们是一个更符合国人审美和使用习惯的一个主题。
+
 # 开始使用
 详细步骤请浏览 [快速上手指南](./QUICK.md)。 也可以参考[Demo](#在线Demo)
 
