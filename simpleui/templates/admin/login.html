@@ -1,64 +1,68 @@
-{% load i18n static %}
+{% load i18n static simpletags%}
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>{{ site_title }}-登录</title>
-    <link rel="stylesheet" href="{% static '/admin/simpleui//layui/css/layui.css' %}">
-    <link rel="stylesheet" href="{% static '/admin/simpleui/static/css/style.css' %}">
-    <link rel="stylesheet" href="{% static '/admin/css/ui.css' %}">
-    <link rel="icon" href="{% static '/admin/simpleui/static/image/code.png' %}">
+    <title>{{ site_title }}-{% trans 'Log in' %}</title>
+    <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/login.css' %}">
 </head>
 <body>
 
 <div class="login-main">
-    <header class="layui-elip">{{ site_header }}</header>
+    <div class="logo">
+        {% if "SIMPLEUI_LOGO"|get_config %}
+            <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
+        {% else %}
+            <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
+        {% endif %}
+    </div>
+    <div class="header">{{ site_header }}</div>
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <el-alert
+                    title="{{ error }}"
+                    type="error">
+            </el-alert>
+        {% endfor %}
+    {% endif %}
+    {% if form.errors and not form.non_field_errors %}
+        <p class="errornote">
+            {% if form.errors.items|length == 1 %}
+                <el-alert title="{% trans "Please correct the error below." %}" type="error"></el-alert>
+            {% else %}
+                <el-alert title="{% trans "Please correct the errors below." %}" type="error"></el-alert>
+            {% endif %}
+        </p>
+    {% endif %}
     <form class="layui-form" action="{{ app_path }}" method="post" id="login-form">
         {% csrf_token %}
-        <div class="layui-input-inline">
-            <input type="text" name="username" required lay-verify="required" placeholder="邮箱" autocomplete="off"
-                   class="layui-input">
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-user" v-model="username" name="username"
+                      placeholder="{% trans 'username' %}"></el-input>
         </div>
-        <div class="layui-input-inline">
-            <input type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off"
-                   class="layui-input">
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-lock" type="password" v-model="password" name="password"
+                      placeholder="{% trans 'password' %}" show-password></el-input>
         </div>
-        <div class="layui-input-inline login-btn">
-            <button type="submit" class="layui-btn">登录</button>
+        <div class="simpleui-input-inline login-btn">
+            <el-button @click="login()" type="primary">{% trans 'Log in' %}</el-button>
         </div>
-        {% if form.errors and not form.non_field_errors %}
-        <p class="errornote">
-        {% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
-        </p>
-        {% endif %}
 
-        {% if form.non_field_errors %}
-        {% for error in form.non_field_errors %}
-        <p class="errornote">
-            {{ error }}
-        </p>
-        {% endfor %}
-        {% endif %}
-        <input type="hidden" name="next" value="{{ next }}" />
+        <input type="hidden" name="next" value="{{ next }}"/>
     </form>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}"></script>
 
-<script type="text/javascript" src="{% static '/admin/simpleui/layui/layui.js' %}"></script>
-<script type="text/javascript">
-    layui.use(['form'], function () {
-
-        // 操作对象
-        var form = layui.form
-                , $ = layui.jquery;
-
-        // you code ...
-
-
-    });
-</script>
 </body>
 </html>

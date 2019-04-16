@@ -1,71 +1,132 @@
-{% load i18n static %}<!DOCTYPE html>
-{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-<head>
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css"
-          href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}?_=20180905"/>
-    <link rel="stylesheet" href="{% static '/admin/simpleui//layui/css/layui.css' %}">
-    {% block extrastyle %}{% endblock %}
-    {% if LANGUAGE_BIDI %}
-        <link rel="stylesheet" type="text/css"
-              href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
-    {% block extrahead %}{% endblock %}
-    {% block responsive %}
-        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}?_=20180905"/>
-        {% if LANGUAGE_BIDI %}
-            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>{% endif %}
-    {% endblock %}
-    {% block blockbots %}
-        <meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
-    <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
-</head>
-{% load i18n %}
+{% load i18n static simpletags %}
+{% if request.GET.e == 'simpleui_json' %}
+    {% comment %}由于无法改写django代码，只能利用错误代码来判断，从而输出json{% endcomment %}
+    {% context_to_json %}
+{% else %}
 
-<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
-      data-admin-utc-offset="{% now "Z" %}">
+    <!DOCTYPE html>
+    {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+    <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
 
-<!-- Container -->
-<div id="container">
+        <link rel="stylesheet" href="//unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
-    {% block messages %}
-        {% if messages %}
-            <ul class="messagelist">{% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-            {% endfor %}</ul>
+        <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+        <script src="//unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+        {% if ""|get_language_code != 'zh-hans' %}
+            <script src="//unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+            <script type="text/javascript">
+                ELEMENT.locale(ELEMENT.lang.en)
+            </script>
+
         {% endif %}
-    {% endblock messages %}
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
+        {% block extrastyle %}{% endblock %}
+        {% if LANGUAGE_BIDI %}
+            <link rel="stylesheet" type="text/css"
+                  href="
 
-    <div class="menu-content">
-        {% for app in app_list %}
-            {{ app }}
-        {% endfor %}
-    </div>
-    <!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
-        {% block pretitle %}{% endblock %}
-        {% block content_title %}
-            {% if title %}
-                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                  <legend>{{ title }}</legend>
-                </fieldset>
+
+
+                          {% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
+        {% block extrahead %}{% endblock %}
+        {% block responsive %}
+            <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}?_=20180905"/>
+            {% if LANGUAGE_BIDI %}
+                <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>
             {% endif %}
         {% endblock %}
-        {% block content %}
-            {% block object-tools %}{% endblock %}
-            {{ content }}
-        {% endblock %}
-        {% block sidebar %}{% endblock %}
-        <br class="clear"/>
-    </div>
-    <!-- END Content -->
+        {% block blockbots %}
+            <meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
+        <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
+    </head>
+    {% load i18n %}
 
-    {% block footer %}
-        <div id="footer"></div>{% endblock %}
-</div>
-<!-- END Container -->
-<script type="text/javascript" src="{% static '/admin/simpleui/layui/layui.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui/static/js/vip_comm.js' %}?_=20190122"></script>
-</body>
-</html>
+    <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+          data-admin-utc-offset="{% now "Z" %}">
+    <div id="theme">
+        <link v-if="theme!=''" rel="stylesheet" :href="theme">
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#theme',
+            data: {
+                theme: '',
+            },
+            created: function () {
+                this.theme = getCookie('theme');
+
+                var self = this;
+                //向父组件注册事件
+                if (parent.addThemeEvent) {
+                    parent.addThemeEvent(function (theme) {
+                        self.theme = theme;
+                    });
+                }
+
+            }
+        })
+    </script>
+    <!-- Container -->
+    <div id="container">
+
+        {% block messages %}
+            {% autoescape off %}
+                {% load_message %}
+            {% endautoescape %}
+            <script type="text/javascript">
+                new Vue({
+                    created: function () {
+                        var self = this;
+
+                        messages.forEach(item => {
+                            self.$notify({
+                                title: '提示',
+                                message: item.msg,
+                                type: item.tag,
+                                dangerouslyUseHTMLString: true
+                            });
+                        });
+
+                    }
+                })
+            </script>
+
+        {% endblock messages %}
+
+        <div class="menu-content">
+            {% for app in app_list %}
+                {{ app }}
+            {% endfor %}
+        </div>
+        <!-- Content -->
+        <div id="content" class="{% block coltype %}colM{% endblock %}">
+            {% block pretitle %}{% endblock %}
+            {% block content_title %}
+                {% if title %}
+                    <div style="display: none">{{ title }}</div>
+                {% endif %}
+            {% endblock %}
+            {% block content %}
+                {% block object-tools %}{% endblock %}
+                {{ content }}
+            {% endblock %}
+            {% block sidebar %}{% endblock %}
+            <br class="clear"/>
+        </div>
+        <!-- END Content -->
+
+        {% block footer %}
+            <div id="footer"></div>{% endblock %}
+    </div>
+    <!-- END Container -->
+    </body>
+    </html>
+{% endif %}

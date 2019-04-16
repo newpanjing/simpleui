@@ -1,69 +1,81 @@
-{% load i18n static simpletags%}
+{% load i18n static simpletags %}
 
 <div id="home">
+    <el-row class="info-card">
+        <el-col :span="6">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <span><i class="fa fa-user"></i>{{ user }}</span>
+                    <el-button style="float: right; padding: 3px 0" @click="changePassword()"
+                               type="text">{% trans 'Change password' %}</el-button>
+                </div>
+                <div>
+                    <el-button icon="fas fa-palette" @click="themeDialogVisible=true"><span v-text="getLanuage('Change theme')"></span></el-button>
+                </div>
+            </el-card>
+        </el-col>
 
-    <div class="site-title">
-        <fieldset>
-            <legend><a name="table">{{ '应用'|get_icon }}快捷导航</a></legend>
-        </fieldset>
-    </div>
+        <el-col :span="6">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <span><i class="fas fa-server"></i><span v-text="getLanuage('Servers')"></span></span>
+                </div>
+                <div>
+                    {% get_server_info %}
+                </div>
+            </el-card>
+        </el-col>
 
-    <ul class="site-doc-icon">
-        {% if app_list %}
-            {% for app in app_list %}
-                {% for model in app.models %}
-                    <li class="open" url="{{ model.admin_url }}">
-                        {{ model.name|get_icon }}
-                        <div class="doc-icon-name">{{ model.name }}</div>
-                    </li>
-                {% endfor %}
-            {% endfor %}
+        <el-col :span="6">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <span><i class="fab fa-python"></i><span v-text="getLanuage('Application information')"></span></span>
+                </div>
+                <div>
+                    {% get_app_info %}
+                </div>
+            </el-card>
+        </el-col>
+
+        <el-col :span="6">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+
+                    <span><i class="fab fa-stripe-s"></i>simpleui <span v-text="getLanuage('Home page')"></span></span>
+                    <el-button style="float: right; padding: 3px 0" type="text" @click="report()"><span v-text="getLanuage('Report issue')"></span></el-button>
+                </div>
+                <div>
+                    <el-button icon="fas fa-code" @click="openUrl('https://gitee.com/tompeppa/simpleui')">Gitee</el-button>
+                    <el-button icon="fab fa-github" @click="openUrl('https://github.com/newpanjing/simpleui')">Github</el-button>
+                </div>
+            </el-card>
+        </el-col>
+
+    </el-row>
+
+    <el-card class="timeline">
+        <div slot="header" class="clearfix">
+            <span>{% trans 'Recent actions' %}</span>
+            <el-button style="float: right; padding: 3px 0" type="text"
+                       :icon="timeline?'el-icon-arrow-up':'el-icon-arrow-down'" @click="displayTimeline()"></el-button>
+        </div>
+        {% load log %}
+        {% get_admin_log 10 as admin_log for_user user %}
+        {% if admin_log %}
+            <transition name="el-zoom-in-top">
+                <div class="block" v-if="timeline">
+                    <el-timeline>
+                        {% for entry in admin_log %}
+                            <el-timeline-item timestamp="{{ entry.action_time }}" placement="top">
+                                <el-card>
+                                    <p>{{ entry.user }} {{ entry.action_time }}</p>
+                                    <h4>{{ entry.content_type }}: {{ entry }}</h4>
+                                </el-card>
+                            </el-timeline-item>
+                        {% endfor %}
+                    </el-timeline>
+                </div>
+            </transition>
         {% endif %}
-    </ul>
-    <div class="site-title">
-        <fieldset>
-            <legend><a name="table">{{ '最近操作'|get_icon }}最近操作</a></legend>
-        </fieldset>
-    </div>
-    {% load log %}
-    {% get_admin_log 10 as admin_log for_user user %}
-    {% if admin_log %}
-        <table class="layui-table">
-            <thead>
-            <tr>
-                <td>描述</td>
-                <td>模块</td>
-                <td>用户</td>
-                <td>时间</td>
-            </tr>
-            </thead>
-            <tbody>
-            {% for entry in admin_log %}
-                <tr>
-                    <td>{{ entry }}</td>
-                    <td>{{ entry.content_type|get_icon }}{{ entry.content_type }}</td>
-                    <td>{{ entry.user }}</td>
-                    <td>{{ entry.action_time }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
-
-<style type="text/css">
-    #copyright{
-        color: #ccc;
-    }
-    #copyright a{
-        color: #ccc;
-    }
-</style>
-
+    </el-card>
 </div>
-<script type="text/javascript">
-    $(function () {
-        $(".site-doc-icon li").click(function () {
-            addTab($(this),$(this).find(".doc-icon-name").text(),$(this).attr("url"))
-        });
-    });
-</script>

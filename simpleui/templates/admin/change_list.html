@@ -4,7 +4,7 @@
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}?_=20180905"/>
-    <link rel="stylesheet" type="text/css" href="{% static "admin/simpleui/layui/css/layui.css" %}"/>
+{#    <link rel="stylesheet" type="text/css" href="{% static "admin/simpleui/layui/css/layui.css" %}"/>#}
     {% if cl.formset %}
         <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}"/>
     {% endif %}
@@ -65,33 +65,12 @@
 
                 {% block result_list %}
 
-                    {% if action_form and actions_on_top and cl.show_admin_actions %}
+                    {% if action_form  %}
                         {% admin_actions %}
-                    {% elif actions_on_top %}
-                        {% if has_add_permission %}
-                            {% url cl.opts|admin_urlname:'add' as add_url %}
-                            <a style="color: white;text-decoration: none" href="{% add_preserved_filters add_url is_popup to_field %}"
-                                    class="layui-btn layui-btn-normal">
-                                <i class="layui-icon"></i>
-                                {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-                            </a>
-                        {% endif %}
                     {% endif %}
 
                     {% result_list cl %}
 
-                    {% if action_form and actions_on_bottom and cl.show_admin_actions %}
-                        {% admin_actions %}
-                    {% elif actions_on_bottom %}
-                        {% if has_add_permission %}
-                            {% url cl.opts|admin_urlname:'add' as add_url %}
-                            <a  style="color: white;text-decoration: none" href="{% add_preserved_filters add_url is_popup to_field %}"
-                                    class="layui-btn layui-btn-normal">
-                                <i class="layui-icon"></i>
-                                {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-                            </a>
-                        {% endif %}
-                    {% endif %}
                 {% endblock %}
                 {% block pagination %}{% pagination cl %}{% endblock %}
             </form>

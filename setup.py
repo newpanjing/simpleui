@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys
 from setuptools import setup
+import simpleui
 
 if sys.version_info < (3, 0):
 
@@ -14,7 +15,7 @@ else:
 
 setup(
     name='django-simpleui',
-    version='1.4.8',
+    version=simpleui.get_version(),
     packages=['simpleui'],
     zip_safe=False,
     include_package_data=True,
@@ -23,6 +24,6 @@ setup(
     author='panjing',
     long_description=long_description,
     author_email='newpanjing@icloud.com',
-    description='django admin 后台模板',
-    install_requires=['django', 'jieba'],
+    description='django admin theme 后台模板',
+    install_requires=['django', 'requests'],
 )
