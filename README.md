@@ -18,7 +18,7 @@ Django admin theme the simpleui
 ---
 
 <a href="https://www.88cto.com/admin/">
-  <img alt="demo" src="https://github.com/newpanjing/simpleui/raw/master/images/p1.png" width="420" align="right" style="max-width: 50%">
+  <img alt="demo" src="https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/main.png" width="420" align="right" style="max-width: 50%">
 </a>
 
 
@@ -119,3 +119,17 @@ python setup.py sdist install
 ## 赞助💰
 如果你觉得simpleui对你有帮助，你可以赞助我们一杯开发，鼓励我们继续开发维护下去。
 ![扫码赞助](https://github.com/newpanjing/simpleui/raw/master/images/pay.png)
+
+
+# 登录页
+![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p5.png)
+
+# 主页
+![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p1.png)
+
+# 列表页
+![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p2.png)
+![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p3.png)
+
+# 切换主题
+![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p4.png)
