@@ -10,12 +10,19 @@ simpleui 快速上手指南
   + [修改默认后台模板为simpleui](#修改默认后台模板为simpleui)
   + [克隆静态文件到根目录](#克隆静态文件到根目录)
   + [启动项目查看效果](#启动项目查看效果)
+  + [如何下载这个模版](#如何下载这个模版)
+  + [切换主题](#切换主题)
+  + [自定义主题](#自定义主题)
 # 进阶指南
   + [修改默认图标](#修改默认图标)
   + [修改默认首页](#修改默认首页)
+  + [修改LOGO](#修改LOGO)
+  + [关闭分析](#关闭分析)
+  + [自定义菜单](#自定义菜单)
   + [修改模板](#修改模板)
   + [开发调试](#开发调试)
   + [源码安装到本地](#源码安装到本地)
+  
 
 # 常见问题
   + [settings.py](#settingspy-找不到)
@@ -80,6 +87,81 @@ DEBUG = True
 浏览器中输入：http://127.0.0.1:8000/admin
 如果发现登录页和之前有所不同，那么就可以恭喜你，成功安装simpleui！接下来开始享受simpleui吧。
 
+## 如何下载这个模版
+目前暂时无法下载模板，不过我们计划推出simple-admin，纯html的模板，可以让更多语言使用。
+
+## 切换主题
+目前simpleui 内置15个流行样式风格的主题。
+|主题名|
+|---|
+|Default|
+|Simpleui-x|
+|Element-UI|
+|layui|
+|Ant Design Pro|
+|Admin LTE|
+|Highdmin|
+|Aircraft|
+|Purple|
+|Gray|
+|Dark green|
+|Orange|
+|Black|
+|Green|
+|Light|
+
+## 自定义主题
+在自定义主题之前，请先把simpleui的静态资源克隆到根目录。然后找到theme
+theme.js 就是用于配置主题列表
+
+按该文件中的格式配置即可
+
+```javascript
+var SimpleuiThemes = [
+    {
+        "text": "Default"
+    },
+    {
+        "text": "Simpleui-x",
+        "file": "simpleui.css"
+    },
+    .....
+]
+```
+
+在增加你的样式之前，请先了解less如何使用。
+
+这是admin.lte.less的例子
+```css
+@import "base";
+
+@primary: #2096c8 !important;
+@color: white;
+
+@menu-color: #8aa4af !important;
+@menu-background: #2b3539 !important;
+
+@menu-color-hover: #FFF;
+@menu-background-hover: #1f272b;
+
+@menu-title-color: #FFF;
+@menu-title-background-color: #212c32;
+
+@menu-title-color-hover: #FFF;
+@menu-title-background-color-hover: #1f272b;
+
+
+@navbar-color: #fff;
+@navbar-background: #3c8dbc;
+```
+他将会编译为admin.lte.css
+需要安装less
+```shell
+npm install less -g
+
+lessc admin.lte.less>admin.lte.css
+```
+
 ## 修改默认图标
 django内置的认证与授权以及关联的用户、组，都已经默认配置了一个图标。后续自定义的app将会是默认图标，需要自行在settings.py文件中进行配置
 1. 
@@ -95,12 +177,63 @@ simpleui内置了一个默认的首页，只是由简单的快捷导航与最近
 > SIMPLEUI_HOME_TITLE = '百度一下你就知道'
 + 首页图标,支持element-ui和fontawesome的图标，参考https://fontawesome.com/icons图标
 > SIMPLEUI_HOME_ICON = 'fa fa-user'
+
+三项配置都是选填，不填都会有默认值。 [图标列表](https://fontawesome.com/icons)
+
+## 修改LOGO
 + 自定义SIMPLEUI的Logo
 > SIMPLEUI_LOGO = 'https://avatars2.githubusercontent.com/u/13655483?s=60&v=4'
+
+## 关闭分析
 + False=不收集分析信息，True=收集,一天只上报一次分析数据
 > SIMPLEUI_ANALYSIS = False
 
-三项配置都是选填，不填都会有默认值。 [图标列表](https://fontawesome.com/icons)
+## 自定义菜单
+
+### menus说明
+
+|字段|说明|
+|---|---|
+|name|菜单名|
+|icon|图标，参考element-ui和fontawesome图标|
+|url|链接地址，绝对或者相对,如果存在models字段，将忽略url|
+|models|子菜单|
+
+### 例子
+```python
+SIMPLEUI_CONFIG = {
+    'menus': [{
+        'name': 'Simpleui',
+        'icon': 'fas fa-code',
+        'url': 'https://gitee.com/tompeppa/simpleui'
+    }, {
+        'app': 'auth',
+        'name': '权限认证',
+        'icon': 'fas fa-user-shield',
+        'models': [{
+            'name': '用户',
+            'icon': 'fa fa-user',
+            'url': 'auth/user/'
+        }]
+    }, {
+        'name': '测试',
+        'icon': 'fa fa-file',
+        'models': [{
+            'name': 'Baidu',
+            'url': 'http://baidu.com',
+            'icon': 'far fa-surprise'
+        }, {
+            'name': '内网穿透',
+            'url': 'https://www.wezoz.com',
+            'icon': 'fab fa-github'
+        }]
+    }]
+}
+```
+
+如果SIMPLEUI_CONFIG中存在menus字段，将会覆盖系统默认菜单。并且menus中输出的菜单不会受权限控制。
+
+
 
 ## 修改模板
 在simpleui的基础上修改模板需要对django有一定了解
@@ -148,3 +281,5 @@ python setup.py sdist install
 2.在注册表HKEY_CLASSES_ROOT中找到.css 点击.css文件夹  修改Content Type 为 text/css
 
 参考连接：[https://blog.csdn.net/sun754276603/article/details/46989965](https://blog.csdn.net/sun754276603/article/details/46989965)
+
+>其他更多问题，请提交[issues](https://github.com/newpanjing/simpleui/issues)给我们。

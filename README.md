@@ -10,7 +10,7 @@ Django admin theme the simpleui
 </p>
 <p align="center">
   <a href="https://github.com/996icu/996.ICU/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-Anti%20996-blue.svg"></a>
-  <a href="https://github.com/alibaba/ice"><img src="https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg"></a>
+  <a href="https://github.com/newpanjing/simpleui"><img src="https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg"></a>
   <a href="https://pypi.org/project/django-simpleui/#history"><img src="https://img.shields.io/pypi/v/django-simpleui.svg"></a>
 <a href="https://python.org"><img src="https://img.shields.io/badge/python->=3.7.x-green.svg"></a>
 </p>
@@ -18,12 +18,13 @@ Django admin theme the simpleui
 ---
 
 <a href="https://www.88cto.com/admin/">
-  <img alt="demo" src="https://github.com/newpanjing/simpleui/raw/master/images/图片1.png" width="420" align="right" style="max-width: 50%">
+  <img alt="demo" src="https://github.com/newpanjing/simpleui/raw/master/images/p1.png" width="420" align="right" style="max-width: 50%">
 </a>
 
 
 simpleui
 -----
+👍 内置15个流行的主题
 
 ✨ 官方与社区共同维护；持续更新，满足日常开发之所需。
 
@@ -69,6 +70,15 @@ python setup.py sdist install
         ...
     ]
   ```
+## 在线Demo
+> 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
+
++ 地址：[https://www.88cto.com/admin/](https://www.88cto.com/admin/)
++ 用户名：demo
++ 密码：demo123456
+
+## demo下载
+[DEMO](https://github.com/newpanjing/simpleui_demo)
 
 ## 常见问题:
 
@@ -85,15 +95,26 @@ python setup.py sdist install
 
 4. i18n 国际化 采用js国际化，默认为英文和中文两种语言，随系统切换。具体请看[国际化配置](/i18n.md)
 
-# 在线Demo
-> 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
+其他问题请查看[快速上手指南](./QUICK.md)
 
-+ 地址：[https://www.88cto.com/admin/](https://www.88cto.com/admin/)
-+ 用户名：demo
-+ 密码：demo123456
 
 ## QQ群
 + QQ群号:786576510
+
+## 浏览器兼容性
+
+![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![UC](https://raw.github.com/alrra/browser-logos/master/src/uc/uc_48x48.png)
+:---: | :---: | :---: | :---: | :---: | :---: | :---:
+ ✔ |  ✔ |  ✔ |  10+ ✔ |  ✔ |  ✔ | ✔
+
+## README 徽章
+
+如果你的项目正在使用飞冰，可以将飞冰徽章 [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui) 添加到你的 README 中：
+
+```
+[![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
+```
+
 
 ## 赞助💰
 如果你觉得simpleui对你有帮助，你可以赞助我们一杯开发，鼓励我们继续开发维护下去。
