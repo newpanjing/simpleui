@@ -125,6 +125,7 @@ html, body {
 .el-main {
     padding: 0px;
     overflow: hidden;
+    height: 100%;
 }
 
 .el-main .el-tab-pane {
