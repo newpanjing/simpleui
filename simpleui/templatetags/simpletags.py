@@ -132,11 +132,6 @@ def get_server_info():
         'Network': platform.node(),
         'OS': platform.platform(),
     }
-    try:
-        dict['IP'] = socket.gethostbyname(socket.gethostname())
-    except:
-        dict['IP'] = '无法获取'
-
     return format_table(dict)
 
 
