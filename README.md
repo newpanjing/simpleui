@@ -36,6 +36,17 @@ simpleui
 
 🎨 Django Admin默认界面设计语言存在着的一些不足，比如色彩单一，大量线条的使用，分割化明显。将这些不足归类一下就是界面单调、雷同性明显、缺少惊喜。我们认为新的平台类视觉风格可以打破这些束缚，尝试一些新的探索，启发传统的设计认知,因此结合当下设计趋势，构思了Element+Django Admin的Simpleui。让Django Admin和Element产生完美的交互。
 
+## 本地Demo下载
+如果你没有任何python django基础，可以下载一个可以直接运行的demo进行体验。
+[😝DEMO源码](https://github.com/newpanjing/simpleui_demo)
+
+## 在线Demo
+> 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
+
++ 地址：[https://www.88cto.com/admin/](https://www.88cto.com/admin/)
++ 用户名：demo
++ 密码：demo123456
+
 # simpleui 是什么？
 🚀simpleui 是django admin的一个主题 是一个基于element-ui+vue开发，重写和优化90%以上的页面。 
 与suit是同类产品。我们是一个更符合国人审美和使用习惯的一个主题。
@@ -47,17 +58,8 @@ simpleui
 ```python
 pip install django-simpleui
 ```
-+ 升级
-```python
-pip install django-simpleui --upgrade
-```
-+ 克隆源码本地安装
-```shell
-git clone https://github.com/newpanjing/simpleui
-cd simpleui
-python setup.py sdist install
-```
-用pip或者源码方式安装simpleui后，在自己项目的settings.py文件中INSTALLED_APPS的第一行加入`simpleui`
+
+用pip或者[源码方式](#克隆源码本地安装)安装simpleui后，在自己项目的settings.py文件中INSTALLED_APPS的第一行加入`simpleui`
 
  举个例子🌰：
   ```python
@@ -74,15 +76,20 @@ python setup.py sdist install
         ...
     ]
   ```
-## 在线Demo
-> 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
 
-+ 地址：[https://www.88cto.com/admin/](https://www.88cto.com/admin/)
-+ 用户名：demo
-+ 密码：demo123456
+如果不知道怎么配置或者如何使用，请下载[本地demo](#本地Demo下载)进行学习。或者加入QQ群：786576510 咨询。
 
-## demo下载
-[DEMO](https://github.com/newpanjing/simpleui_demo)
+# 升级simpleui
+```python
+pip install django-simpleui --upgrade
+```
+
+# 克隆源码本地安装
+```shell
+git clone https://github.com/newpanjing/simpleui
+cd simpleui
+python setup.py sdist install
+```
 
 ## 常见问题:
 
