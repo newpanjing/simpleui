@@ -77,11 +77,13 @@ tbody tr:hover td, tbody tr:hover th {
 .form-row {
     border-bottom: none !important;
 }
-.submit-row input[type='submit']{
+
+.submit-row input[type='submit'] {
     height: auto;
 }
+
 .submit-row input[type='submit'] {
-    padding: 12px 20px!important;
+    padding: 12px 20px !important;
 }
 
 @media (max-width: 767px) {

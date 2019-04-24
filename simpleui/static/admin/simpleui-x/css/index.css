@@ -208,6 +208,17 @@ html, body {
     margin-left: 10px;
 }
 
+.quick-card {
+    width: auto;
+    display: inline-block !important;
+    float: left;
+    margin: 10px;
+}
+.quick-card a{
+    text-decoration: none;
+    line-height: 35px;
+}
+
 @media screen and (max-width: 1000px) {
     #home .el-col-6 {
         width: 50%;

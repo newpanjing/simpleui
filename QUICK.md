@@ -17,6 +17,10 @@ simpleui 快速上手指南
   + [修改默认图标](#修改默认图标)
   + [修改默认首页](#修改默认首页)
   + [修改LOGO](#修改LOGO)
+  + [配置首页模块](#配置首页模块)
+    + [服务器信息](#服务器信息)
+    + [快速操作](#快速操作)
+    + [最近动作](#最近动作)
   + [关闭分析](#关闭分析)
   + [自定义菜单](#自定义菜单)
   + [修改模板](#修改模板)
@@ -183,6 +187,31 @@ simpleui内置了一个默认的首页，只是由简单的快捷导航与最近
 ## 修改LOGO
 + 自定义SIMPLEUI的Logo
 > SIMPLEUI_LOGO = 'https://avatars2.githubusercontent.com/u/13655483?s=60&v=4'
+
+## 配置首页模块
+首页默认展示3个模块，服务器信息、快速操作、最近动作，大家可以根据需要来显示或者隐藏某些模块。
+### 服务器信息
+隐藏：
+> SIMPLEUI_HOME_INFO = False
+
+显示：
+> SIMPLEUI_HOME_INFO = True
+
+### 快速操作
+
+隐藏：
+> SIMPLEUI_HOME_QUICK = False
+
+显示：
+> SIMPLEUI_HOME_QUICK = True
+
+### 最近动作
+
+隐藏：
+> SIMPLEUI_HOME_ACTION = False
+
+显示：
+> SIMPLEUI_HOME_ACTION = True
 
 ## 关闭分析
 + False=不收集分析信息，True=收集,一天只上报一次分析数据

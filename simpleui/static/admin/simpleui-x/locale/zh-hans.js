@@ -32,5 +32,6 @@ var Lanuages = {
     "Tips": "提示",
     "Are you sure you want them all closed": "你确定要全部关闭吗？",
 
-    "to": "至"
+    "to": "至",
+    "Quick navigation": "快捷操作"
 }
