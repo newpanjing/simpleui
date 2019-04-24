@@ -15,6 +15,9 @@
   background-color: rgba(2, 192, 206, 0.2) !important;
   color: #02c0ce !important;
 }
+.el-select-dropdown__item.selected {
+  color: #02c0ce !important;
+}
 input[type=text]:focus,
 input[type=password]:focus,
 input[type=email]:focus,
