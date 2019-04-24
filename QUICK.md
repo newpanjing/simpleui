@@ -219,6 +219,10 @@ simpleui内置了一个默认的首页，只是由简单的快捷导航与最近
 
 ## 自定义菜单
 
+### system_keep 保留系统菜单
+该字段用于告诉simpleui，是否需要保留系统默认的菜单，默认为False，不保留。
+如果改为True，自定义和系统菜单将会并存
+
 ### menus说明
 
 |字段|说明|
@@ -231,6 +235,7 @@ simpleui内置了一个默认的首页，只是由简单的快捷导航与最近
 ### 例子
 ```python
 SIMPLEUI_CONFIG = {
+    'system_keep':False,
     'menus': [{
         'name': 'Simpleui',
         'icon': 'fas fa-code',
