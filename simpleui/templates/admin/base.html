@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.0.4">
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
-        <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
 
         <script src="//unpkg.com/element-ui@2.7.2/lib/index.js"></script>
         {% if ""|get_language_code != 'zh-hans' %}
