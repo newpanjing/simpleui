@@ -150,4 +150,7 @@ a:visited {
   color: #666 !important;
   background-color: hsla(0, 0%, 100%, 0.5) !important;
 }
+.quick-card a:hover {
+  color: rgba(64, 158, 255, 0.8) !important;
+}
 /*# sourceMappingURL=light.css.map */

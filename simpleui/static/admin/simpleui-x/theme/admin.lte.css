@@ -150,6 +150,9 @@ a:visited {
   color: #FFF !important;
   background-color: #1f272b !important;
 }
+.quick-card a:hover {
+  color: rgba(32, 150, 200, 0.8) !important;
+}
 .logo-wrap {
   color: #fff !important;
   background-color: #3c8dbc !important;

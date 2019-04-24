@@ -150,6 +150,9 @@ a:visited {
   color: #fff !important;
   background-color: #35353e !important;
 }
+.quick-card a:hover {
+  color: rgba(64, 158, 255, 0.8) !important;
+}
 /*主题色*/
 /*菜单文本*/
 /*菜单背景*/

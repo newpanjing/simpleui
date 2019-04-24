@@ -214,9 +214,10 @@ html, body {
     float: left;
     margin: 10px;
 }
-.quick-card a{
+.quick-card a {
     text-decoration: none;
     line-height: 35px;
+    color: rgb(64, 158, 255);
 }
 
 @media screen and (max-width: 1000px) {

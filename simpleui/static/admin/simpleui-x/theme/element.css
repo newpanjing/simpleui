@@ -150,6 +150,9 @@ a:visited {
   color: #666 !important;
   background-color: #f2f3f7 !important;
 }
+.quick-card a:hover {
+  color: rgba(64, 158, 255, 0.8) !important;
+}
 .menu .el-menu .is-active {
   color: #409eff !important;
   background-color: #f2f3f7 !important;
