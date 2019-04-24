@@ -49,7 +49,7 @@
                       placeholder="{% trans 'username' %}"></el-input>
         </div>
         <div class="simpleui-input-inline">
-            <el-input prefix-icon="fas fa-lock" type="password" v-model="password" name="password"
+            <el-input prefix-icon="fas fa-lock" type="password" v-model="password" name="password" @keyup.enter.native="login()"
                       placeholder="{% trans 'password' %}" show-password></el-input>
         </div>
         <div class="simpleui-input-inline login-btn">
@@ -60,7 +60,7 @@
     </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
 <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}"></script>
 

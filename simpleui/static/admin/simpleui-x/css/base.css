@@ -53,60 +53,80 @@ a:link, a:visited {
     text-decoration: none;
 }
 
-.object-tools{
+.object-tools {
     margin-top: 0px;
 }
 
-.vTextField{
+.vTextField {
     outline: none;
 }
+
 td, th {
     vertical-align: inherit;
     border-bottom: none;
 }
+
 .row2 {
     background: #fafafa;
 }
-tbody tr:hover td,tbody tr:hover th{
+
+tbody tr:hover td, tbody tr:hover th {
     background-color: #ebf5ff;
 }
-.form-row{
-    border-bottom: none!important;
+
+.form-row {
+    border-bottom: none !important;
 }
+
+.submit-row input[type='submit'] {
+    height: auto;
+}
+
+.submit-row input[type='submit'] {
+    padding: 12px 20px !important;
+}
+
 @media (max-width: 767px) {
     .submit-row > * {
         margin-left: 0px !important;
         margin-bottom: 10px;
     }
-    .form-main{
+
+    .form-main {
         padding: 0px;
     }
-    #content{
-        padding:0px 3px!important;
+
+    #content {
+        padding: 0px 3px !important;
     }
 
-    .simpleui-form .el-input{
+    .simpleui-form .el-input {
         width: 100px;
-        padding-left: 0px!important;
-        padding-right: 0px!important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
         margin: 0px;
         margin-right: 10px;
     }
-    .object-tools{
+
+    .object-tools {
         margin-top: 10px;
     }
-    .el-pagination{
+
+    .el-pagination {
         white-space: inherit;
     }
 }
+
 @media (max-width: 1024px) {
-    .change-list .filtered .results, .change-list .filtered .paginator, .filtered #toolbar, .filtered .actions, .filtered div.xfull{
-        margin-right: 0px!important;
+    .change-list .filtered .results, .change-list .filtered .paginator, .filtered #toolbar, .filtered .actions, .filtered div.xfull {
+        margin-right: 0px !important;
     }
-    #changelist-search > div{
-        max-width: 100%!important;
+
+    #changelist-search > div {
+        max-width: 100% !important;
     }
-    #content{
-        padding: 0px!important;
+
+    #content {
+        padding: 0px !important;
     }
 }

@@ -132,11 +132,6 @@ def get_server_info():
         'Network': platform.node(),
         'OS': platform.platform(),
     }
-    try:
-        dict['IP'] = socket.gethostbyname(socket.gethostname())
-    except:
-        dict['IP'] = '无法获取'
-
     return format_table(dict)
 
 
@@ -166,30 +161,35 @@ def menus(context):
     # return request.user.has_perm("%s.%s" % (opts.app_label, codename))
 
     config = get_config('SIMPLEUI_CONFIG')
+
+    app_list = context.get('app_list')
+    for app in app_list:
+        models = []
+        if app.get('models'):
+            for m in app.get('models'):
+                models.append({
+                    'name': str(m.get('name')),
+                    'icon': get_icon(m.get('object_name')),
+                    'url': m.get('admin_url'),
+                    'addUrl': m.get('add_url'),
+                    'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
+                })
+
+        module = {
+            'name': str(app.get('name')),
+            'icon': get_icon(app.get('app_label')),
+            'models': models
+        }
+        data.append(module)
+
     # 如果有menu 就读取，没有就调用系统的
     if config and 'menus' in config:
-        data=config.get('menus')
-        pass
-    else:
-        app_list = context.get('app_list')
-        for app in app_list:
-            models = []
-            if app.get('models'):
-                for m in app.get('models'):
-                    models.append({
-                        'name': str(m.get('name')),
-                        'icon': get_icon(m.get('object_name')),
-                        'url': m.get('admin_url'),
-                        'addUrl': m.get('add_url'),
-                        'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
-                    })
-
-            module = {
-                'name': str(app.get('name')),
-                'icon': get_icon(app.get('app_label')),
-                'models': models
-            }
-            data.append(module)
+        if 'system_keep' in config:
+            temp = config.get('menus')
+            for i in temp:
+                data.append(i)
+        else:
+            data = config.get('menus')
 
     return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data))
 

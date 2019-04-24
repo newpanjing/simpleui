@@ -1,81 +1,117 @@
 {% load i18n static simpletags %}
 
 <div id="home">
-    <el-row class="info-card">
-        <el-col :span="6">
-            <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                    <span><i class="fa fa-user"></i>{{ user }}</span>
-                    <el-button style="float: right; padding: 3px 0" @click="changePassword()"
-                               type="text">{% trans 'Change password' %}</el-button>
-                </div>
-                <div>
-                    <el-button icon="fas fa-palette" @click="themeDialogVisible=true"><span v-text="getLanuage('Change theme')"></span></el-button>
-                </div>
-            </el-card>
-        </el-col>
+    {% if "SIMPLEUI_HOME_INFO"|get_config != False %}
+        <el-row class="info-card">
+            <el-col :span="6">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span><i class="fa fa-user"></i>{{ user }}</span>
+                        <el-button style="float: right; padding: 3px 0" @click="changePassword()"
+                                   type="text">{% trans 'Change password' %}</el-button>
+                    </div>
+                    <div>
+                        <el-button icon="fas fa-palette" @click="themeDialogVisible=true"><span
+                                v-text="getLanuage('Change theme')"></span></el-button>
+                    </div>
+                </el-card>
+            </el-col>
 
-        <el-col :span="6">
-            <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                    <span><i class="fas fa-server"></i><span v-text="getLanuage('Servers')"></span></span>
-                </div>
-                <div>
-                    {% get_server_info %}
-                </div>
-            </el-card>
-        </el-col>
+            <el-col :span="6">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span><i class="fas fa-server"></i><span v-text="getLanuage('Servers')"></span></span>
+                    </div>
+                    <div>
+                        {% get_server_info %}
+                    </div>
+                </el-card>
+            </el-col>
 
-        <el-col :span="6">
-            <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                    <span><i class="fab fa-python"></i><span v-text="getLanuage('Application information')"></span></span>
-                </div>
-                <div>
-                    {% get_app_info %}
-                </div>
-            </el-card>
-        </el-col>
+            <el-col :span="6">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                    <span><i class="fab fa-python"></i><span
+                            v-text="getLanuage('Application information')"></span></span>
+                    </div>
+                    <div>
+                        {% get_app_info %}
+                    </div>
+                </el-card>
+            </el-col>
 
-        <el-col :span="6">
-            <el-card class="box-card">
-                <div slot="header" class="clearfix">
+            <el-col :span="6">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
 
-                    <span><i class="fab fa-stripe-s"></i>simpleui <span v-text="getLanuage('Home page')"></span></span>
-                    <el-button style="float: right; padding: 3px 0" type="text" @click="report()"><span v-text="getLanuage('Report issue')"></span></el-button>
-                </div>
-                <div>
-                    <el-button icon="fas fa-code" @click="openUrl('https://gitee.com/tompeppa/simpleui')">Gitee</el-button>
-                    <el-button icon="fab fa-github" @click="openUrl('https://github.com/newpanjing/simpleui')">Github</el-button>
-                </div>
-            </el-card>
-        </el-col>
+                        <span><i class="fab fa-stripe-s"></i>simpleui <span
+                                v-text="getLanuage('Home page')"></span></span>
+                        <el-button style="float: right; padding: 3px 0" type="text" @click="report()"><span
+                                v-text="getLanuage('Report issue')"></span></el-button>
+                    </div>
+                    <div>
+                        <el-button icon="fas fa-code" @click="openUrl('https://gitee.com/tompeppa/simpleui')">Gitee
+                        </el-button>
+                        <el-button icon="fab fa-github" @click="openUrl('https://github.com/newpanjing/simpleui')">
+                            Github
+                        </el-button>
+                    </div>
+                </el-card>
+            </el-col>
 
-    </el-row>
+        </el-row>
+    {% endif %}
 
-    <el-card class="timeline">
-        <div slot="header" class="clearfix">
-            <span>{% trans 'Recent actions' %}</span>
-            <el-button style="float: right; padding: 3px 0" type="text"
-                       :icon="timeline?'el-icon-arrow-up':'el-icon-arrow-down'" @click="displayTimeline()"></el-button>
-        </div>
-        {% load log %}
-        {% get_admin_log 10 as admin_log for_user user %}
-        {% if admin_log %}
-            <transition name="el-zoom-in-top">
-                <div class="block" v-if="timeline">
-                    <el-timeline>
-                        {% for entry in admin_log %}
-                            <el-timeline-item timestamp="{{ entry.action_time }}" placement="top">
-                                <el-card>
-                                    <p>{{ entry.user }} {{ entry.action_time }}</p>
-                                    <h4>{{ entry.content_type }}: {{ entry }}</h4>
-                                </el-card>
-                            </el-timeline-item>
-                        {% endfor %}
-                    </el-timeline>
-                </div>
-            </transition>
-        {% endif %}
-    </el-card>
+    {% if "SIMPLEUI_HOME_QUICK"|get_config != False %}
+        <el-card class="timeline">
+            <div slot="header" class="clearfix">
+                <span v-text="getLanuage('Quick navigation')"></span>
+            </div>
+            <div class="clearfix">
+                <el-card class="box-card quick-card clearfix" v-for="(item,i) in menus"
+                         :key="item.name" v-if="i!=0">
+                    <div slot="header" class="clearfix">
+                        <span :class="item.icon"></span>
+                        <span v-text="item.name">卡片名称</span>
+                    </div>
+                    <div v-for="(c,j) in item.models" :key="c.name">
+                        <a href="javascript:;" @click="openTab(c,(j+1)+'')">
+                            <span :class="c.icon"></span>
+                            <span v-text="c.name"></span>
+                        </a>
+                    </div>
+                </el-card>
+
+            </div>
+        </el-card>
+    {% endif %}
+
+    {% if "SIMPLEUI_HOME_ACTION"|get_config != False %}
+        <el-card class="timeline">
+            <div slot="header" class="clearfix">
+                <span>{% trans 'Recent actions' %}</span>
+                <el-button style="float: right; padding: 3px 0" type="text"
+                           :icon="timeline?'el-icon-arrow-up':'el-icon-arrow-down'"
+                           @click="displayTimeline()"></el-button>
+            </div>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if admin_log %}
+                <transition name="el-zoom-in-top">
+                    <div class="block" v-if="timeline">
+                        <el-timeline>
+                            {% for entry in admin_log %}
+                                <el-timeline-item timestamp="{{ entry.action_time }}" placement="top">
+                                    <el-card>
+                                        <p>{{ entry.user }} {{ entry.action_time }}</p>
+                                        <h4>{{ entry.content_type }}: {{ entry }}</h4>
+                                    </el-card>
+                                </el-timeline-item>
+                            {% endfor %}
+                        </el-timeline>
+                    </div>
+                </transition>
+            {% endif %}
+        </el-card>
+    {% endif %}
 </div>

@@ -15,6 +15,9 @@
   background-color: rgba(84, 88, 179, 0.2) !important;
   color: #5458b3 !important;
 }
+.el-select-dropdown__item.selected {
+  color: #5458b3 !important;
+}
 input[type=text]:focus,
 input[type=password]:focus,
 input[type=email]:focus,
@@ -146,6 +149,9 @@ a:visited {
 .menu .is-opened .el-submenu__title {
   color: #FFF !important;
   background-color: rgba(62, 66, 149, 0.8) !important;
+}
+.quick-card a:hover {
+  color: rgba(84, 88, 179, 0.8) !important;
 }
 .logo-wrap {
   color: #000 !important;

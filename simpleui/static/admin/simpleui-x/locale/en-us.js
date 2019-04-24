@@ -32,5 +32,6 @@ var Lanuages = {
     "Tips": "",
     "Are you sure you want them all closed": "Are you sure you want them all closed?",
 
-    "to":""
+    "to": "",
+    "Quick navigation": ""
 }

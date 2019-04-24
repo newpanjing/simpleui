@@ -100,6 +100,13 @@
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
                 self.fold = width < 800;
                 self.small = width < 800;
+
+                //判断全屏状态
+                try {
+                    self.zoom = document.webkitIsFullScreen;
+                } catch (e) {
+                    //不是非webkit内核下，无能为力
+                }
             }
             window.app = this;
             this.menus = window.menus
