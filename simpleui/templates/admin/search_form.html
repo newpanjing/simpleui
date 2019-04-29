@@ -146,11 +146,29 @@
             },
             created: function () {
                 var self = this;
+                var date_field = [];
+                {% if cl.has_filters %}
+                    {% for spec in cl.filter_specs %}
+                        {% if spec.links %}
+                            date_field.push('{{ spec.field_path }}')
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 $('.form-params').each(function () {
                     var key = $(this).attr('data-name');
                     var value = $(this).val();
                     self[key] = value;
-                })
+                });
+                try {
+                    date_field.forEach(key => {
+                        var start = self[key + "__gte"];
+                        var end = self[key + "__lt"];
+                        self[key] = [start, end];
+                    });
+                } catch (e) {
+                    console.warn('日期值回显失败，也许是django版本问题，请至github报告此问题：https://github.com/newpanjing/simpleui/issues');
+                }
+
             },
             watch: {
                 {% if cl.has_filters %}
@@ -158,15 +176,29 @@
                         {% if spec.links %}
                             '{{ spec.field_path }}': function (newValue, oldValue) {
                                 var type = '{{ spec | get_date_type }}'
-                                if (newValue) {
+                                try {
+                                    if (newValue) {
+                                        if (newValue[0] != "" && newValue[1] != "") {
 
-                                    if (type == 'date') {
-                                        this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd');
-                                        this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd')
-                                    } else if (type == 'datetime') {
-                                        this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd hh:mm:ss+08:00');
-                                        this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd hh:mm:ss+08:00')
+                                            if (type == 'date') {
+                                                this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd');
+                                                this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd');
+                                            } else if (type == 'datetime') {
+                                                this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd hh:mm:ss+08:00');
+                                                this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd hh:mm:ss+08:00');
+                                            }
+                                        }
+                                    } else {
+                                        if (type == 'date') {
+                                            this['{{ spec.field_generic }}gte'] = '';
+                                            this['{{ spec.field_generic }}lt'] = '';
+                                        } else if (type == 'datetime') {
+                                            this['{{ spec.field_generic }}gte'] = '';
+                                            this['{{ spec.field_generic }}lt'] = '';
+                                        }
                                     }
+                                } catch (e) {
+                                    //
                                 }
                                 {#console.log(newValue)#}
                                 {#console.log(oldValue)#}
@@ -191,4 +223,8 @@
         })
 
     </script>
+{% else %}
+    <form id="changelist-search" method="get">
+        <input type="hidden" name="p" value=""/>
+    </form>
 {% endif %}

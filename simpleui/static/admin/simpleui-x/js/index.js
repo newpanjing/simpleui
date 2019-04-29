@@ -87,7 +87,7 @@
                     text: getLanuage('Open in a new page'),
                     icon: 'el-icon-news',
                     handler: function (tab, item) {
-                        window.open(tab.url);
+                        window.open(tab.newUrl);
                     }
                 }]
             }
@@ -121,6 +121,10 @@
             }
         },
         methods: {
+            iframeLoad: function (tab, e) {
+                url = e.target.contentWindow.location.href
+                tab.newUrl = url;
+            },
             setTheme: function (item) {
                 var url = window.themeUrl;
                 if (item.file && item.file != '') {
