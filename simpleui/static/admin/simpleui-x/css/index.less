@@ -74,8 +74,10 @@ html, body {
   margin-bottom: -10px;
 }
 
-#home .el-col-6 {
-  padding: 10px;
+#home {
+  .el-col-6, .el-col-18 {
+    padding: 10px;
+  }
 }
 
 #home .icon .fa, #home .icon .fas, #home .icon .fa, #home .icon .fab {
@@ -97,9 +99,6 @@ html, body {
   font-size: 14px;
 }
 
-#home .info-card .el-card {
-  height: 235px;
-}
 
 .simpleui-table {
   font-size: 12px;
@@ -223,7 +222,7 @@ html, body {
 
 .change-theme {
   .theme-item:hover, .active {
-    border-color: #2096c8!important;
+    border-color: #2096c8 !important;
   }
 
   .theme-item {
@@ -290,5 +289,48 @@ html, body {
 
   .navbar .el-button {
     padding: 5px 2px;
+  }
+}
+
+.quick-parent-wrap {
+  float: left;
+
+
+  .quick-wrap {
+    float: left;
+    width: 108px;
+    //height: 95px;
+    text-align: center;
+    margin: 10px;
+    border: #FFF 1px solid;
+
+    .icon {
+      display: block;
+      text-align: center;
+      vertical-align: middle;
+      background-color: #F8F8F8;
+      color: #333;
+      height: 60px;
+      line-height: 60px;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    &:hover {
+      border-color: rgb(64, 158, 255);
+    }
+  }
+}
+
+#home {
+  .info-card {
+    .el-card {
+      min-height: 250px;
+    }
   }
 }

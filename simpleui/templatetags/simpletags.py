@@ -127,20 +127,9 @@ def get_config(key):
 
 
 @register.simple_tag
-def get_server_info():
-    dict = {
-        'Network': platform.node(),
-        'OS': platform.platform(),
-    }
-    return format_table(dict)
-
-
-@register.simple_tag
 def get_app_info():
     dict = {
-        'Python': platform.python_version(),
-        'Django': django.get_version(),
-        'Simpleui': simpleui.get_version()
+        'version': simpleui.get_version()
     }
 
     return format_table(dict)

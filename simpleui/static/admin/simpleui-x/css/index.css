@@ -62,7 +62,8 @@ body {
   max-width: 30px;
   margin-bottom: -10px;
 }
-#home .el-col-6 {
+#home .el-col-6,
+#home .el-col-18 {
   padding: 10px;
 }
 #home .icon .fa,
@@ -89,9 +90,6 @@ body {
   margin-right: 5px;
   text-align: center;
   font-size: 14px;
-}
-#home .info-card .el-card {
-  height: 235px;
 }
 .simpleui-table {
   font-size: 12px;
@@ -255,5 +253,36 @@ body {
   .navbar .el-button {
     padding: 5px 2px;
   }
+}
+.quick-parent-wrap {
+  float: left;
+}
+.quick-parent-wrap .quick-wrap {
+  float: left;
+  width: 108px;
+  text-align: center;
+  margin: 10px;
+  border: #FFF 1px solid;
+}
+.quick-parent-wrap .quick-wrap .icon {
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #F8F8F8;
+  color: #333;
+  height: 60px;
+  line-height: 60px;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.quick-parent-wrap .quick-wrap a {
+  color: #666;
+  text-decoration: none;
+}
+.quick-parent-wrap .quick-wrap:hover {
+  border-color: #409eff;
+}
+#home .info-card .el-card {
+  min-height: 250px;
 }
 /*# sourceMappingURL=index.css.map */
