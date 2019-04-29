@@ -17,7 +17,9 @@
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
-
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
         <script src="//unpkg.com/element-ui@2.7.2/lib/index.js"></script>
         {% if ""|get_language_code != 'zh-hans' %}
             <script src="//unpkg.com/element-ui/lib/umd/locale/en.js"></script>
@@ -31,6 +33,7 @@
         {% if LANGUAGE_BIDI %}
             <link rel="stylesheet" type="text/css"
                   href="
+
 
 
 

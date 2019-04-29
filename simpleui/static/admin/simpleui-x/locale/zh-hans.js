@@ -33,5 +33,6 @@ var Lanuages = {
     "Are you sure you want them all closed": "你确定要全部关闭吗？",
 
     "to": "至",
-    "Quick navigation": "快捷操作"
+    "Quick navigation": "快捷操作",
+    "Go back": '返回'
 }
