@@ -162,7 +162,7 @@
                                 {% include './home.html' %}
                             {% endif %}
                         </div>
-                        <iframe v-else :src="item.url" :id="item.id"></iframe>
+                        <iframe v-else :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
                     </el-tab-pane>
 
                 </el-tabs>
@@ -177,7 +177,6 @@
                 v-text="item.text"></span>
         </li>
     </ul>
-
     <el-dialog title="{% trans 'Change password' %}" :visible.sync="pwdDialog.show">
         <iframe frameborder="0" :src="pwdDialog.url" width="100%" height="500"></iframe>
     </el-dialog>
@@ -248,14 +247,15 @@
 
     }
 </script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+{#<script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>#}
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"
         onerror="localeError()"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.0.5"></script>
 {% load_analysis %}
 </body>
 </html>
