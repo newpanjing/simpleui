@@ -4,7 +4,7 @@
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}?_=20180905"/>
-{#    <link rel="stylesheet" type="text/css" href="{% static "admin/simpleui/layui/css/layui.css" %}"/>#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static "admin/simpleui/layui/css/layui.css" %}"/>#}
     {% if cl.formset %}
         <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}"/>
     {% endif %}
@@ -44,6 +44,29 @@
 
 {% endblock %}
 {% block content %}
+    <style>
+        .object-tools {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            height: 50px;
+            z-index: 2;
+        }
+        .object-tools .import_link,.object-tools .export_link{
+            color: white!important;
+        }
+
+    </style>
+    {% block object-tools %}
+        <ul class="object-tools">
+            {% block object-tools-items %}
+                {% if has_add_permission %}
+                    {{ block.super }}
+                {% endif %}
+            {% endblock %}
+        </ul>
+    {% endblock %}
+
     <div id="content-main">
 
         {% if cl.formset.errors %}
@@ -65,7 +88,7 @@
 
                 {% block result_list %}
 
-                    {% if action_form  %}
+                    {% if action_form %}
                         {% admin_actions %}
                     {% endif %}
 
