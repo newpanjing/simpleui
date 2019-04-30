@@ -1,5 +1,6 @@
 .el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
   color: #19a97b !important;
+  border-bottom: #19a97b 2px solid !important;
 }
 .el-button--text {
   color: #19a97b !important;

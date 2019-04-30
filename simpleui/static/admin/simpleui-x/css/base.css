@@ -19,6 +19,8 @@
 }
 .change-list #content {
   padding: 0px;
+  margin: 20px;
+  background-color: white;
 }
 #content #changelist-form {
   padding: 0px 20px;
@@ -27,7 +29,6 @@
   margin-bottom: 0px !important;
 }
 .form-main {
-  padding: 20px;
   float: none !important;
   width: auto !important;
 }
@@ -93,6 +94,10 @@ tbody tr:hover th {
   .el-pagination {
     white-space: inherit;
   }
+}
+body,
+#container {
+  background-color: #f1f1f1;
 }
 @media (max-width: 1024px) {
   .change-list .filtered .results,
