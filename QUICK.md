@@ -214,6 +214,7 @@ simpleui内置了一个默认的首页，只是由简单的快捷导航与最近
 > SIMPLEUI_HOME_ACTION = True
 
 ## 关闭分析
+`默认开启，统计分析信息只是为了更好的帮助simpleui改进，并不会读取敏感信息。并且分析数据不会分享至任何第三方。`
 + False=不收集分析信息，True=收集,一天只上报一次分析数据
 > SIMPLEUI_ANALYSIS = False
 
