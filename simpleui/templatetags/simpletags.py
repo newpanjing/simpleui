@@ -24,14 +24,6 @@ from django.db import models
 register = template.Library()
 
 
-@register.filter
-def get_icon(name):
-    # 默认为文件图标
-    cls = ""
-
-    return format_html('<i class="icon {}"></i>', cls)
-
-
 @register.simple_tag(takes_context=True)
 def context_test(context):
     print(context)
@@ -158,7 +150,7 @@ def menus(context):
             for m in app.get('models'):
                 models.append({
                     'name': str(m.get('name')),
-                    'icon': get_icon(m.get('object_name')),
+                    'icon': get_icon(m.get('object_name'), str(m.get('name'))),
                     'url': m.get('admin_url'),
                     'addUrl': m.get('add_url'),
                     'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
@@ -166,7 +158,7 @@ def menus(context):
 
         module = {
             'name': str(app.get('name')),
-            'icon': get_icon(app.get('app_label')),
+            'icon': get_icon(app.get('app_label'), str(app.get('name'))),
             'models': models
         }
         data.append(module)
@@ -183,7 +175,11 @@ def menus(context):
     return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data))
 
 
-def get_icon(obj):
+def get_icon(obj, name):
+    temp = get_config_icon(name)
+    if temp != '':
+        return temp
+
     dict = {
         'auth': 'fas fa-shield-alt',
         'User': 'far fa-user',
@@ -192,8 +188,24 @@ def get_icon(obj):
     }
     temp = dict.get(obj)
     if not temp:
-        return 'far fa-file'
+        _default = __get_config('SIMPLEUI_DEFAULT_ICON')
+        if _default is None or _default:
+            return 'far fa-file'
+        else:
+            return ''
     return temp
+
+
+# 从配置中读取图标
+def get_config_icon(name):
+    _config_icon = __get_config('SIMPLEUI_ICON')
+    if _config_icon is None:
+        return ''
+
+    if name in _config_icon:
+        return _config_icon.get(name)
+    else:
+        return ''
 
 
 @register.simple_tag(takes_context=True)
