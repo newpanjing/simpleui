@@ -45,15 +45,20 @@
 {% endblock %}
 {% block content %}
     <style>
+        #content {
+            position: relative;
+        }
+
         .object-tools {
-            position: fixed;
-            top: 37px;
-            right: 37px;
+            position: absolute;
+            top: 16px;
+            right: 20px;
             height: 50px;
             z-index: 2;
         }
-        .object-tools .import_link,.object-tools .export_link{
-            color: white!important;
+
+        .object-tools .import_link, .object-tools .export_link {
+            color: white !important;
         }
 
     </style>

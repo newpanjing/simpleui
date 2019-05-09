@@ -99,6 +99,49 @@ body,
 #container {
   background-color: #f1f1f1;
 }
+@media (max-width: 767px) {
+  .change-list #content {
+    margin: 0px;
+  }
+  #content #changelist-form {
+    padding: 0px 5px;
+  }
+  #content {
+    box-shadow: none;
+  }
+  body,
+  #container {
+    background-color: white;
+  }
+  #changelist .actions {
+    padding: 5px !important;
+  }
+  .el-button {
+    padding: 8px 10px;
+  }
+  .object-tools {
+    top: 6px!important;
+    margin: 0px;
+  }
+  .el-pagination__total {
+    display: block!important;
+  }
+  .el-pagination__jump {
+    display: block!important;
+    margin: 0px;
+    margin-top: 10px;
+  }
+  .el-pager {
+    margin: 0px;
+    padding: 0px;
+  }
+  .el-dialog {
+    width: 90%;
+  }
+  .el-dialog__body{
+    padding: 0px;
+  }
+}
 @media (max-width: 1024px) {
   .change-list .filtered .results,
   .change-list .filtered .paginator,

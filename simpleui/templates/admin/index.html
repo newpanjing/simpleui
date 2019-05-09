@@ -7,19 +7,23 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
     <title>{{ site_title }}</title>
 
     {#    <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">#}
 
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.0.2">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.1.0.1">
 </head>
 <body>
 <style type="text/css">
     .el-tabs__nav .el-tabs__item:nth-child(1) .el-icon-close {
         display: none;
+    }
+
+    * {
+        -webkit-overflow-scrolling: touch;
     }
 </style>
 {% autoescape off %}
@@ -49,7 +53,7 @@
 
 
             <el-menu default-active="1" class="el-menu-vertical-demo" :default-active="menuActive" :collapse="fold">
-                <div v-for="(item,i) in menus">
+                <div v-for="(item,i) in menus" :key="item">
 
                     <el-menu-item v-if="!item.models" :index="(i+1)+''" @click="openTab(item,(i+1)+'')">
                         <i :class="item.icon"></i>
@@ -157,7 +161,9 @@
                                 {% include './home.html' %}
                             {% endif %}
                         </div>
-                        <iframe v-else :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
+                        <div v-else class="iframe-wrap">
+                            <iframe :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
+                        </div>
                     </el-tab-pane>
 
                 </el-tabs>
