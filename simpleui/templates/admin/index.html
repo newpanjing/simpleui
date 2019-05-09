@@ -17,7 +17,11 @@
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.0.2">
 </head>
 <body>
-
+<style type="text/css">
+    .el-tabs__nav .el-tabs__item:nth-child(1) .el-icon-close {
+        display: none;
+    }
+</style>
 {% autoescape off %}
     {% menus %}
 {% endautoescape %}
@@ -179,7 +183,8 @@
             :width="small?'90%':'50%'">
 
         <div class="change-theme clearfix">
-            <div :class="{'theme-item':true,active:themeName==item.text}" v-for="(item,i) in themes" :key="item.text" :title="getLanuage(item.text)" @click="setTheme(item)">
+            <div :class="{'theme-item':true,active:themeName==item.text}" v-for="(item,i) in themes" :key="item.text"
+                 :title="getLanuage(item.text)" @click="setTheme(item)">
                 <div class="theme-menu" :style="{background:item.menu}">
                     <div class="theme-logo" :style="{background: item.logo}"></div>
                 </div>
