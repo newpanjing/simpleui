@@ -146,8 +146,9 @@
                 window.open(url);
             },
             contextmenu: function (item, e) {
+
                 //home没有popup menu
-                if (item.index == '1') {
+                if (item.id == '0') {
                     return;
                 }
                 this.popup.tab = item;
@@ -188,7 +189,6 @@
             }
             ,
             openTab: function (data, index) {
-
                 this.breadcrumbs = data.breadcrumbs;
                 var exists = null;
                 //判断是否存在，存在就直接打开
@@ -212,7 +212,6 @@
             }
             ,
             foldClick: function () {
-                console.log('11')
                 if (this.fold) {
                     this.fold = false;
                 } else {
