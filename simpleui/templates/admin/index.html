@@ -251,5 +251,9 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.0.5"></script>
 {% load_analysis %}
+
+{% block script %}
+{#    预留脚本block 可以实现基础该页面，添加自定义脚本#}
+{% endblock %}
 </body>
 </html>
