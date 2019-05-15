@@ -109,6 +109,16 @@
                 }
             }
             window.app = this;
+
+            window.menus.forEach(item => {
+                item.icon = getIcon(item.name, item.icon);
+                if(item.models){
+                    item.models.forEach(mItem => {
+                        mItem.icon = getIcon(mItem.name, mItem.icon);
+                    });
+                }
+            });
+
             this.menus = window.menus
 
             this.theme = getCookie('theme');
@@ -250,6 +260,7 @@
             }
             ,
             getLanuage: getLanuage,
+            getIcon: getIcon,
             goZoom: function () {
                 var el = window.document.body;
                 if (!this.zoom) {
