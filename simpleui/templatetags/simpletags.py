@@ -145,21 +145,21 @@ def menus(context):
 
     app_list = context.get('app_list')
     for app in app_list:
-        models = []
-        if app.get('models'):
-            for m in app.get('models'):
-                models.append({
-                    'name': str(m.get('name')),
-                    'icon': get_icon(m.get('object_name'), str(m.get('name'))),
-                    'url': m.get('admin_url'),
-                    'addUrl': m.get('add_url'),
-                    'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
-                })
+        _models = [
+            {
+                'name': str(m.get('name')),
+                'icon': get_icon(m.get('object_name')),
+                'url': m.get('admin_url'),
+                'addUrl': m.get('add_url'),
+                'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
+            }
+            for m in app.get('models')
+        ] if app.get('models') else []
 
         module = {
             'name': str(app.get('name')),
             'icon': get_icon(app.get('app_label'), str(app.get('name'))),
-            'models': models
+            'models': _models
         }
         data.append(module)
 
@@ -180,13 +180,12 @@ def get_icon(obj, name):
     if temp != '':
         return temp
 
-    dict = {
+    _dict = {
         'auth': 'fas fa-shield-alt',
         'User': 'far fa-user',
         'Group': 'fas fa-users-cog'
-
     }
-    temp = dict.get(obj)
+    temp = _dict.get(obj)
     if not temp:
         _default = __get_config('SIMPLEUI_DEFAULT_ICON')
         if _default is None or _default:
@@ -211,13 +210,7 @@ def get_config_icon(name):
 @register.simple_tag(takes_context=True)
 def load_message(context):
     messages = context.get('messages')
-    array = []
-    if messages:
-        for msg in messages:
-            array.append({
-                'msg': msg.message,
-                'tag': msg.tags
-            })
+    array = [dict(msg=msg.message, tag=msg.tags) for msg in messages] if messages else []
 
     return '<script type="text/javascript"> var messages={}</script>'.format(array)
 
@@ -231,12 +224,12 @@ def context_to_json(context):
 
 @register.simple_tag()
 def get_language():
-    return django.utils.translation.get_language()
+    return settings.LANGUAGE_CODE.lower()
 
 
 @register.filter
 def get_language_code(val):
-    return django.utils.translation.get_language()
+    return settings.LANGUAGE_CODE.lower()
 
 
 def get_analysis_config():
