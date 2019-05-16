@@ -230,12 +230,12 @@ def context_to_json(context):
 
 @register.simple_tag()
 def get_language():
-    return django.utils.translation.get_language()
+    return settings.LANGUAGE_CODE.lower()
 
 
 @register.filter
 def get_language_code(val):
-    return django.utils.translation.get_language()
+    return settings.LANGUAGE_CODE.lower()
 
 
 def get_analysis_config():
