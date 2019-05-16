@@ -4,6 +4,8 @@
  词库持续完善中，https://github.com/newpanjing/simpleui/issues/35
  */
 
+// 给部分词设置权重，比如用户信息、用户留言、用户收藏，降低用户权重，使之选第二个词配图标
+
 var dicts = {
     //系统
     'fab fa-microsoft': ['系统', '微软'],
@@ -38,7 +40,7 @@ var dicts = {
     //产品
     'fas fa-shopping-cart': ['产品', '货物', '商品', '购物车'],
     //分类
-    'fas fa-list': ['类别', '类目', '分类', '列表', '集合'],
+    'fas fa-list': ['类别', '类目', '分类', '列表', '集合', '排行'],
     //职位
     'fas fa-chalkboard-teacher': ['职位', '职能', '职称'],
     //车
@@ -60,7 +62,7 @@ var dicts = {
     //文章
     'fas fa-book-open': ['文章', '博文', '日记'],
     //字典
-    'fas fa-book': ['字典', '词典'],
+    'fas fa-book': ['字典', '词典', '书籍', '书本'],
     //编辑
     'far fa-edit': ['编辑', '修改', '编写', '改变'],
     //钱相关
@@ -70,7 +72,7 @@ var dicts = {
     //货物
     'fas fa-truck': ['发货', '收货', '货物', '物品', '贸易'],
     //地图
-    'fas fa-map-marker-alt': ['地图', '导航', '路线', '路程'],
+    'fas fa-map-marker-alt': ['地图', '导航', '路线', '路程', '地址', '住址'],
     //音乐
     'fas fa-music': ['音乐', '歌曲', '歌词', '歌手', '歌唱家', '演唱会', 'MV'],
     //电影
@@ -85,5 +87,20 @@ var dicts = {
     'fas fa-home': ['主页', '首页', 'index', 'Index'],
     //银行
     'fas fa-credit-card': ['银行卡', '银行', '信用卡', '储蓄卡'],
-
+    //ad
+    'fas fa-ad': ['宣传', '广告', 'banner', 'Banner', 'ad', 'Ad'],
+    //hot
+    'fab fa-hotjar': ['热搜', '热度', '火焰'],
+    //info
+    'fas fa-info': ['信息', 'info'],
+    //支付宝
+    'fab fa-alipay': ['支付宝', '余额宝', '余利宝', '蚂蚁花呗'],
+    //微信
+    'fab fa-weixin': ['微信', 'WeChart'],
+    //交易
+    'fab fa-paypal': ['交易', '支付', '贝付', 'paypal'],
+    //收藏
+    'far fa-star': ['收藏', '星星', '五角星', '中国'],
+    //短信
+    'far fa-comment-dots': ['短信', '消息', '提示']
 }
