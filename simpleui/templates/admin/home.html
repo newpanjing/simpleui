@@ -53,7 +53,7 @@
         <el-card class="timeline">
             <div slot="header" class="clearfix">
                 <span>{% trans 'Recent actions' %}</span>
-                <el-button style="float: right; padding: 3px 0" type="text"
+                <el-button v-waves style="float: right; padding: 3px 0" type="text"
                            :icon="timeline?'el-icon-arrow-up':'el-icon-arrow-down'"
                            @click="displayTimeline()"></el-button>
             </div>

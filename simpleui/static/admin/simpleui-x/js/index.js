@@ -1,4 +1,19 @@
 (function () {
+
+    // Waves.init();
+
+    //为元素注册水波纹效果
+    Vue.directive('waves', {
+        // 当被绑定的元素插入到 DOM 中时……
+        inserted: function (el) {
+            // 聚焦元素
+            Waves.attach(el);
+            Waves.init();
+            console.log(el);
+        }
+    });
+
+
     window.getLanuage = function (key) {
         if (!window.Lanuages) {
             return "";
