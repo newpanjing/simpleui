@@ -9,7 +9,6 @@
             // 聚焦元素
             Waves.attach(el);
             Waves.init();
-            console.log(el);
         }
     });
 
