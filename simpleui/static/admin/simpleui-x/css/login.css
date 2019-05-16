@@ -15,7 +15,8 @@ html, body {
     text-align: center;
 }
 .logo img{
-    max-width: 200px;
+    max-width: 300px;
+    max-height: 100px;
 }
 .header{
     font-size: 26px;
