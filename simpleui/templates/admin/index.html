@@ -1,13 +1,19 @@
 {% load i18n static %}
 {% load simpletags %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!--
+   The project adopted: django-simpleui
+   source code：
+   https://github.com/newpanjing/simpleui
+-->
+
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <title>{{ site_title }}</title>
 
     {#    <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">#}
@@ -245,8 +251,8 @@
 {#<script src="https://cdn.jsdelivr.net/npm/vue"></script>#}
 <script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
 
-<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js'%}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js'%}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
 
 <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"
@@ -257,7 +263,7 @@
 {% load_analysis %}
 
 {% block script %}
-{#    预留脚本block 可以实现基础该页面，添加自定义脚本#}
+    {#    预留脚本block 可以实现基础该页面，添加自定义脚本#}
 {% endblock %}
 </body>
 </html>
