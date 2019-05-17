@@ -106,14 +106,26 @@
                 }]
             }
         },
+        watch: {
+            fold: function (newValue, oldValue) {
+                // console.log(newValue)
+            }
+        },
         created: function () {
+
+            var val = getCookie('fold') == 'true';
+            this.small = this.fold = val;
+
 
             var self = this;
             window.onload = window.onresize = function () {
+
                 self.height = document.documentElement.clientHeight || document.body.clientHeight
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
-                self.fold = width < 800;
-                self.small = width < 800;
+
+                if (!self.small) {
+                    self.fold = width < 800;
+                }
 
                 //判断全屏状态
                 try {
@@ -126,7 +138,7 @@
 
             window.menus.forEach(item => {
                 item.icon = getIcon(item.name, item.icon);
-                if(item.models){
+                if (item.models) {
                     item.models.forEach(mItem => {
                         mItem.icon = getIcon(mItem.name, mItem.icon);
                     });
@@ -241,6 +253,11 @@
                 } else {
                     this.fold = true;
                 }
+
+                this.small = this.fold;
+
+                //设置进cookie
+                setCookie('fold', this.fold);
             }
             ,
             changePassword: function () {
