@@ -1,5 +1,21 @@
 (function () {
 
+    var fontConfig = new Vue({
+        el: '#dynamicCss',
+        data: {
+            fontSize: 14
+        },
+        created: function () {
+            var val = getCookie('fontSize');
+            if (val) {
+                this.fontSize = parseInt(val);
+            } else {
+                this.fontSize = 0;
+            }
+        },
+        methods: {}
+    });
+
     // Waves.init();
 
     //为元素注册水波纹效果
@@ -106,7 +122,9 @@
                 }]
             },
             //菜单里面的模块
-            models: []
+            models: [],
+            fontDialogVisible: false,
+            fontSlider: 12,
         },
         watch: {
             fold: function (newValue, oldValue) {
@@ -116,15 +134,15 @@
                 var self = this;
 
                 newValue.forEach(item => {
-                    if(item.id=='0'){
+                    if (item.id == '0') {
                         return;
                     }
 
-                    if(item.models){
+                    if (item.models) {
                         item.models.forEach(child => {
                             self.models.push(child);
                         });
-                    }else{
+                    } else {
                         self.models.push(item);
                     }
                 });
@@ -172,11 +190,41 @@
 
             //接收子页面的事件注册
             window.themeEvents = [];
-            window.addThemeEvent = function (handler) {
-                themeEvents.push(handler);
+            window.fontEvents = [];
+            window.addEvent = function (name, handler) {
+                if (name == 'theme') {
+                    themeEvents.push(handler);
+                } else if (name == 'font') {
+                    fontEvents.push(handler);
+                }
             }
+
         },
         methods: {
+            reset: function () {
+                this.fontSlider = 14;
+                fontConfig.fontSize = 0;
+
+                setCookie('fontSize', 0);
+
+                this.fontDialogVisible = false;
+                fontEvents.forEach(handler => {
+                    handler(0);
+                });
+            },
+            fontClick: function () {
+                this.fontSlider = fontConfig.fontSize;
+                this.fontDialogVisible = !this.fontDialogVisible;
+            },
+            fontSlideChange: function (value) {
+                fontConfig.fontSize = value;
+                //写入cookie
+                setCookie('fontSize', value);
+                fontEvents.forEach(handler => {
+                    handler(value);
+                });
+
+            },
             iframeLoad: function (tab, e) {
                 url = e.target.contentWindow.location.href
                 tab.newUrl = url;

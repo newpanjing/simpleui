@@ -37,6 +37,7 @@
 
 
 
+
                           {% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
         {% block extrahead %}{% endblock %}
         {% block responsive %}
@@ -54,10 +55,37 @@
 
     <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
           data-admin-utc-offset="{% now "Z" %}">
+
+    {% verbatim dynamicCss %}
+    <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
+        *{
+            font-size: {{ fontSize }}px;
+        }
+    </style>
+    {% endverbatim dynamicCss %}
+
     <div id="theme">
         <link v-if="theme!=''" rel="stylesheet" :href="theme">
     </div>
     <script type="text/javascript">
+
+         var fontConfig = new Vue({
+            el: '#dynamicCss',
+            data: {
+                fontSize: 14
+            },
+            created: function () {
+                var val = getCookie('fontSize');
+                if (val) {
+                    this.fontSize = parseInt(val);
+                } else {
+                    this.fontSize = 0;
+                }
+            },
+            methods: {}
+        });
+
+
         new Vue({
             el: '#theme',
             data: {
@@ -68,9 +96,13 @@
 
                 var self = this;
                 //向父组件注册事件
-                if (parent.addThemeEvent) {
-                    parent.addThemeEvent(function (theme) {
+                if (parent.addEvent) {
+                    parent.addEvent('theme', function (theme) {
                         self.theme = theme;
+                    });
+
+                    parent.addEvent('font', function (font) {
+                        fontConfig.fontSize = font;
                     });
                 }
 

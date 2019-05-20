@@ -33,6 +33,14 @@
         -webkit-overflow-scrolling: touch;
     }
 </style>
+
+{% verbatim dynamicCss %}
+<style type="text/css" id="dynamicCss" v-if="fontSize!=0">
+    *{
+        font-size: {{ fontSize }}px;
+    }
+</style>
+{% endverbatim dynamicCss %}
 {% autoescape off %}
     {% menus %}
 {% endautoescape %}
@@ -105,6 +113,8 @@
                     </div>
 
                     <div class="right">
+                        <el-button icon="fas fa-font" circle v-waves @click="fontClick()"></el-button>
+
                         <el-button v-if="!small"
                                    :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
                                    @click="goZoom()" circle></el-button>
@@ -208,6 +218,16 @@
         </div>
     </el-dialog>
 
+
+     <el-dialog
+                :title="getLanuage('Set font size')"
+                :visible.sync="fontDialogVisible"
+                :width="small?'90%':'50%'">
+         <el-slider v-model="fontSlider" :min="12" :max="100" show-input @change="fontSlideChange"> </el-slider>
+         <div style="text-align: right;padding-top: 20px">
+               <el-button type="primary" @click="reset()" v-text="getLanuage('Reset')"></el-button>
+         </div>
+    </el-dialog>
 </div>
 <script type="text/javascript">
     {% if home %}

@@ -34,5 +34,8 @@ var Lanuages = {
 
     "to": "至",
     "Quick navigation": "快捷操作",
-    "Go back": '返回'
+    "Go back": '返回',
+
+    'Set font size': '设置字体大小',
+    'Reset': '重置'
 }

@@ -34,5 +34,8 @@ var Lanuages = {
 
     "to": "",
     "Quick navigation": "",
-    "Go back": ''
+    "Go back": '',
+
+    'Set font size': '',
+    'Reset': ''
 }
