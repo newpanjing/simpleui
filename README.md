@@ -24,7 +24,7 @@ Django admin theme the simpleui
 
 simpleui
 -----
-👍 内置15个流行的主题
+👍 内置28款流行的主题
 
 ✨ 官方与社区共同维护；持续更新，满足日常开发之所需。
 
