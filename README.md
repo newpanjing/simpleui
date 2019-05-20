@@ -128,7 +128,7 @@ python setup.py sdist install
 
 ## README 徽章
 
-如果你的项目正在使用飞冰，可以将飞冰徽章 [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui) 添加到你的 README 中：
+如果你的项目正在使用Simpleui，可以将Simpleui徽章 [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui) 添加到你的 README 中：
 
 ```
 [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
