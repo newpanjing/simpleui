@@ -1,23 +1,47 @@
 {% load i18n static %}
 {% load simpletags %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!--
+   The project adopted: django-simpleui
+   source code：
+   https://github.com/newpanjing/simpleui
+-->
+
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <title>{{ site_title }}</title>
 
-    {#    <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">#}
-
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.0.2">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.1">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/waves/waves.min.css' %}?_=2.1">
+    {% block head %}
+
+    {% endblock %}
 </head>
 <body>
+<style type="text/css">
+    .el-tabs__nav .el-tabs__item:nth-child(1) .el-icon-close {
+        display: none;
+    }
 
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
+
+{% verbatim dynamicCss %}
+<style type="text/css" id="dynamicCss" v-if="fontSize!=0">
+    *{
+        font-size: {{ fontSize }}px;
+    }
+</style>
+{% endverbatim dynamicCss %}
 {% autoescape off %}
     {% menus %}
 {% endautoescape %}
@@ -45,7 +69,7 @@
 
 
             <el-menu default-active="1" class="el-menu-vertical-demo" :default-active="menuActive" :collapse="fold">
-                <div v-for="(item,i) in menus">
+                <div v-for="(item,i) in menus" :key="item">
 
                     <el-menu-item v-if="!item.models" :index="(i+1)+''" @click="openTab(item,(i+1)+'')">
                         <i :class="item.icon"></i>
@@ -75,7 +99,7 @@
             <el-header class="navbar" style="font-size: 12px;padding: 10px;height: auto">
                 <div class="float-wrap">
                     <div class="left">
-                        <el-button circle icon="fas fa-bars"
+                        <el-button v-waves circle icon="fas fa-bars"
                                    style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
 
                         <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
@@ -90,40 +114,33 @@
                     </div>
 
                     <div class="right">
+                        <el-button icon="fas fa-font" circle v-waves @click="fontClick()"></el-button>
+
                         <el-button v-if="!small"
                                    :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
                                    @click="goZoom()" circle></el-button>
-                        <el-button icon="fas fa-home" @click="goIndex()" circle></el-button>
+                        <el-button icon="fas fa-home" @click="goIndex()" circle v-waves></el-button>
                         {% verbatim mycode %}
-                            <el-dropdown>
-                                <el-button>
-                                    <i class="fas fa-palette"></i>
-                                    <span v-text="getLanuage('Change theme')"></span><i
-                                        class="el-icon-arrow-down el-icon--right"></i>
-                                </el-button>
-                                <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item v-for="item in themes" @click.native="setTheme(item)"
-                                                      :key="item.text">
-                                        <i v-if="themeName==item.text" class="el-icon-check"></i>
-                                        <i v-else class="fa"></i>
-                                        <span v-text="getLanuage(item.text)"></span>
-                                    </el-dropdown-item>
-                                </el-dropdown-menu>
-                            </el-dropdown>
+                            <el-button @click="themeDialogVisible=true" v-waves>
+                                <i class="fas fa-palette"></i>
+                                <span v-text="getLanuage('Change theme')"></span><i
+                                    class="el-icon-arrow-down el-icon--right"></i>
+                            </el-button>
+
                         {% endverbatim mycode %}
                         <el-dropdown>
-                            <el-button>
+                            <el-button v-waves>
                                 <i class="fas fa-user"></i>
                                 {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
                             </el-button>
                             {% verbatim mycode %}
 
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item icon="far fa-edit"
+                                    <el-dropdown-item v-waves icon="far fa-edit"
                                                       @click.native="changePassword()">{{ language.change_password }}
                                     </el-dropdown-item>
                                     </el-dropdown-item>
-                                    <el-dropdown-item icon="el-icon-close"
+                                    <el-dropdown-item  icon="el-icon-close"
                                                       @click.native="logout()"
                                                       divided>{{ language.logout }}</el-dropdown-item>
                                 </el-dropdown-menu>
@@ -162,7 +179,9 @@
                                 {% include './home.html' %}
                             {% endif %}
                         </div>
-                        <iframe v-else :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
+                        <div v-else class="iframe-wrap">
+                            <iframe :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
+                        </div>
                     </el-tab-pane>
 
                 </el-tabs>
@@ -185,28 +204,31 @@
     <el-dialog
             :title="getLanuage('Change theme')"
             :visible.sync="themeDialogVisible"
-            :width="small?'90%':'30%'">
-        <div>
-            <table class="simpleui-table">
-                <tr>
-                    <td width="50" v-text="getLanuage('Number')"></td>
-                    <td style="text-align:center" v-text="getLanuage('Theme name')"></td>
-                    <td width="50" v-text="getLanuage('Action')"></td>
-                </tr>
+            :width="small?'90%':'50%'">
 
-                <tr v-for="(item,i) in themes" :key="item.text">
-                    <td v-text="i+1"></td>
-                    <td style="text-align: center" v-text="getLanuage(item.text)"></td>
-                    <td>
-                        <span v-if="themeName==item.text" v-text="getLanuage('Selected')"></span>
-                        <el-button v-else type="primary" @click="setTheme(item)"
-                                   v-text="getLanuage('Select')"></el-button>
-                    </td>
-                </tr>
-            </table>
+        <div class="change-theme clearfix">
+            <div v-waves :class="{'theme-item':true,active:themeName==item.text}" v-for="(item,i) in themes" :key="item.text"
+                 :title="getLanuage(item.text)" @click="setTheme(item)">
+                <div class="theme-menu" :style="{background:item.menu}">
+                    <div class="theme-logo" :style="{background: item.logo}"></div>
+                </div>
+                <div class="theme-top" :style="{background: item.top}"></div>
+            </div>
+
+
         </div>
     </el-dialog>
 
+
+     <el-dialog
+                :title="getLanuage('Set font size')"
+                :visible.sync="fontDialogVisible"
+                :width="small?'90%':'50%'">
+         <el-slider v-model="fontSlider" :min="12" :max="100" show-input @change="fontSlideChange"> </el-slider>
+         <div style="text-align: right;padding-top: 20px">
+               <el-button type="primary" @click="reset()" v-text="getLanuage('Reset')"></el-button>
+         </div>
+    </el-dialog>
 </div>
 <script type="text/javascript">
     {% if home %}
@@ -247,15 +269,24 @@
 
     }
 </script>
-{#<script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>#}
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script src="https://unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+
+<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
+
 <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"
         onerror="localeError()"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.0.5"></script>
 {% load_analysis %}
+
+{% block script %}
+    {#    预留脚本block 可以实现基础该页面，添加自定义脚本#}
+{% endblock %}
 </body>
 </html>

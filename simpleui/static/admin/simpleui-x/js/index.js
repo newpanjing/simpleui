@@ -1,4 +1,34 @@
 (function () {
+
+    var fontConfig = new Vue({
+        el: '#dynamicCss',
+        data: {
+            fontSize: 14
+        },
+        created: function () {
+            var val = getCookie('fontSize');
+            if (val) {
+                this.fontSize = parseInt(val);
+            } else {
+                this.fontSize = 0;
+            }
+        },
+        methods: {}
+    });
+
+    // Waves.init();
+
+    //为元素注册水波纹效果
+    Vue.directive('waves', {
+        // 当被绑定的元素插入到 DOM 中时……
+        inserted: function (el) {
+            // 聚焦元素
+            Waves.attach(el);
+            Waves.init();
+        }
+    });
+
+
     window.getLanuage = function (key) {
         if (!window.Lanuages) {
             return "";
@@ -90,16 +120,50 @@
                         window.open(tab.newUrl);
                     }
                 }]
+            },
+            //菜单里面的模块
+            models: [],
+            fontDialogVisible: false,
+            fontSlider: 12,
+        },
+        watch: {
+            fold: function (newValue, oldValue) {
+                // console.log(newValue)
+            },
+            menus: function (newValue, oldValue) {
+                var self = this;
+
+                newValue.forEach(item => {
+                    if (item.id == '0') {
+                        return;
+                    }
+
+                    if (item.models) {
+                        item.models.forEach(child => {
+                            self.models.push(child);
+                        });
+                    } else {
+                        self.models.push(item);
+                    }
+                });
             }
         },
         created: function () {
 
+
+            var val = getCookie('fold') == 'true';
+            this.small = this.fold = val;
+
+
             var self = this;
             window.onload = window.onresize = function () {
+
                 self.height = document.documentElement.clientHeight || document.body.clientHeight
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
-                self.fold = width < 800;
-                self.small = width < 800;
+
+                if (!self.small) {
+                    self.fold = width < 800;
+                }
 
                 //判断全屏状态
                 try {
@@ -109,6 +173,16 @@
                 }
             }
             window.app = this;
+
+            window.menus.forEach(item => {
+                item.icon = getIcon(item.name, item.icon);
+                if (item.models) {
+                    item.models.forEach(mItem => {
+                        mItem.icon = getIcon(mItem.name, mItem.icon);
+                    });
+                }
+            });
+
             this.menus = window.menus
 
             this.theme = getCookie('theme');
@@ -116,11 +190,41 @@
 
             //接收子页面的事件注册
             window.themeEvents = [];
-            window.addThemeEvent = function (handler) {
-                themeEvents.push(handler);
+            window.fontEvents = [];
+            window.addEvent = function (name, handler) {
+                if (name == 'theme') {
+                    themeEvents.push(handler);
+                } else if (name == 'font') {
+                    fontEvents.push(handler);
+                }
             }
+
         },
         methods: {
+            reset: function () {
+                this.fontSlider = 14;
+                fontConfig.fontSize = 0;
+
+                setCookie('fontSize', 0);
+
+                this.fontDialogVisible = false;
+                fontEvents.forEach(handler => {
+                    handler(0);
+                });
+            },
+            fontClick: function () {
+                this.fontSlider = fontConfig.fontSize;
+                this.fontDialogVisible = !this.fontDialogVisible;
+            },
+            fontSlideChange: function (value) {
+                fontConfig.fontSize = value;
+                //写入cookie
+                setCookie('fontSize', value);
+                fontEvents.forEach(handler => {
+                    handler(value);
+                });
+
+            },
             iframeLoad: function (tab, e) {
                 url = e.target.contentWindow.location.href
                 tab.newUrl = url;
@@ -146,8 +250,9 @@
                 window.open(url);
             },
             contextmenu: function (item, e) {
+
                 //home没有popup menu
-                if (item.index == '1') {
+                if (item.id == '0') {
                     return;
                 }
                 this.popup.tab = item;
@@ -188,7 +293,6 @@
             }
             ,
             openTab: function (data, index) {
-
                 this.breadcrumbs = data.breadcrumbs;
                 var exists = null;
                 //判断是否存在，存在就直接打开
@@ -212,12 +316,16 @@
             }
             ,
             foldClick: function () {
-                console.log('11')
                 if (this.fold) {
                     this.fold = false;
                 } else {
                     this.fold = true;
                 }
+
+                this.small = this.fold;
+
+                //设置进cookie
+                setCookie('fold', this.fold);
             }
             ,
             changePassword: function () {
@@ -251,6 +359,7 @@
             }
             ,
             getLanuage: getLanuage,
+            getIcon: getIcon,
             goZoom: function () {
                 var el = window.document.body;
                 if (!this.zoom) {

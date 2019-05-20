@@ -24,7 +24,7 @@ Django admin theme the simpleui
 
 simpleui
 -----
-👍 内置15个流行的主题
+👍 内置28款流行的主题
 
 ✨ 官方与社区共同维护；持续更新，满足日常开发之所需。
 
@@ -35,6 +35,14 @@ simpleui
 ☕️ Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库。
 
 🎨 Django Admin默认界面设计语言存在着的一些不足，比如色彩单一，大量线条的使用，分割化明显。将这些不足归类一下就是界面单调、雷同性明显、缺少惊喜。我们认为新的平台类视觉风格可以打破这些束缚，尝试一些新的探索，启发传统的设计认知,因此结合当下设计趋势，构思了Element+Django Admin的Simpleui。让Django Admin和Element产生完美的交互。
+## 文档
+文档详细的描述了安装使用方法，以及各种配置项的说明，请点击以下链接查阅。
+ 
+ 重要的事情说3遍：
+
+# [simpleui使用文档](./QUICK.md) 
+# [simpleui教程](./QUICK.md)
+# [simpleui说明](./QUICK.md)
 
 ## 本地Demo下载
 如果你没有任何python django基础，可以下载一个可以直接运行的demo进行体验。
@@ -52,7 +60,7 @@ simpleui
 与suit是同类产品。我们是一个更符合国人审美和使用习惯的一个主题。
 
 # 开始使用
-详细步骤请浏览 [快速上手指南](./QUICK.md)。 也可以参考[Demo](#在线Demo)
+详细步骤请浏览 [使用文档](./QUICK.md)。 也可以参考[Demo](#在线Demo)
 
 + 安装
 ```python
@@ -116,11 +124,11 @@ python setup.py sdist install
 
 ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![UC](https://raw.github.com/alrra/browser-logos/master/src/uc/uc_48x48.png)
 :---: | :---: | :---: | :---: | :---: | :---: | :---:
- ✔ |  ✔ |  ✔ |  10+ ✔ |  ✔ |  ✔ | ✔
+ ✔ |  ✔ |  ✔ |  11+ ✔ |  ✔ |  ✔ | ✔
 
 ## README 徽章
 
-如果你的项目正在使用飞冰，可以将飞冰徽章 [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui) 添加到你的 README 中：
+如果你的项目正在使用Simpleui，可以将Simpleui徽章 [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui) 添加到你的 README 中：
 
 ```
 [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)

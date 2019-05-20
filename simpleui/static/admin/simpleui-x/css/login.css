@@ -1,32 +1,38 @@
 html, body {
-    background-color: #2d3a4b;
+    /*background-color: #2d3a4b;*/
 }
 
 
-
-.login-main{
+.login-main {
     padding-top: 160px;
     padding-bottom: 50px;
     max-width: 350px;
     margin-left: auto;
     margin-right: auto;
 }
-.logo{
+
+.logo {
     text-align: center;
 }
-.logo img{
-    max-width: 200px;
+
+.logo img {
+    max-width: 300px;
+    max-height: 100px;
 }
-.header{
+
+.header {
     font-size: 26px;
-    color: #eee;
+    color: #666;
     margin: 0 auto 40px auto;
     text-align: center;
     font-weight: 700;
 }
-.simpleui-input-inline{
+
+.simpleui-input-inline {
     margin: 10px 0px;
 }
-.login-btn button{
+
+.login-btn button {
     width: 100%;
 }
+
