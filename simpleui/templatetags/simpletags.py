@@ -175,7 +175,7 @@ def menus(context):
     return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data))
 
 
-def get_icon(obj, name):
+def get_icon(obj, name=None):
     temp = get_config_icon(name)
     if temp != '':
         return temp
