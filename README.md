@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://newpanjing.github.io/simpleui/">
-    <img alt="Simpleui" src="https://github.com/newpanjing/simpleui/raw/2.0/images/simpleui-logo.png" width="140">
+    <img alt="Simpleui" src="https://github.com/newpanjing/simpleui/raw/master/images/logo.png" width="140">
   </a>
 </p>
 <p align="center">让Django Admin简单而友好</p>
@@ -18,23 +18,30 @@ Django admin theme the simpleui
 ---
 
 <a href="https://www.88cto.com/admin/">
-  <img alt="demo" src="https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/main.png" width="420" align="right" style="max-width: 50%">
+  <img alt="demo" src="https://github.com/newpanjing/simpleui/raw/master/images/%E4%B8%BB%E9%A1%B5.png" width="420" align="right" style="max-width: 50%">
 </a>
 
 
-simpleui
+simpleui 特点
 -----
 👍 内置28款流行的主题
 
-✨ 官方与社区共同维护；持续更新，满足日常开发之所需。
+✨ pip闪电安装100%兼容原生admin无需修改代码
 
 ⚡️ 多标签页面，各个模块更加清晰明了。配以最流行的后台设计风格，让Django Admin更加强大。
 
 🎯 配置简单，极速上手，在settings.py中加入simpleui后启动立即生效，效率提升 100%！让后端开发得心应手。
 
-☕️ Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库。
+☕️ Element-UI + Vue 加持，让古老的django admin 焕然一新。
 
 🎨 Django Admin默认界面设计语言存在着的一些不足，比如色彩单一，大量线条的使用，分割化明显。将这些不足归类一下就是界面单调、雷同性明显、缺少惊喜。我们认为新的平台类视觉风格可以打破这些束缚，尝试一些新的探索，启发传统的设计认知,因此结合当下设计趋势，构思了Element+Django Admin的Simpleui。让Django Admin和Element产生完美的交互。
+
+## QQ群
++ QQ群号:786576510
+
+<img src='https://github.com/newpanjing/simpleui/raw/master/images/QQ%E7%BE%A4.jpg' width='200'>
+
+
 ## 文档
 文档详细的描述了安装使用方法，以及各种配置项的说明，请点击以下链接查阅。
  
@@ -117,8 +124,6 @@ python setup.py sdist install
 其他问题请查看[快速上手指南](./QUICK.md)
 
 
-## QQ群
-+ QQ群号:786576510
 
 ## 浏览器兼容性
 
@@ -141,14 +146,23 @@ python setup.py sdist install
 
 
 # 登录页
-![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p5.png)
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E6%95%B0%E6%8D%AE%E9%A1%B5.png)
 
 # 主页
-![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p1.png)
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E4%B8%BB%E9%A1%B5.png)
 
 # 列表页
-![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p2.png)
-![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p3.png)
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E5%88%97%E8%A1%A8%E9%A1%B5.png)
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E6%95%B0%E6%8D%AE%E9%A1%B5.png)
 
 # 切换主题
-![](https://raw.githubusercontent.com/newpanjing/simpleui/2.0/images/p4.png)
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E5%88%87%E6%8D%A2%E4%B8%BB%E9%A2%98.png)
+
+# 密码修改
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9.png)
+
+# 编辑页
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E7%BC%96%E8%BE%91%E9%A1%B5.png)
+
+# 设置字体大小
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F.png)
