@@ -28,13 +28,14 @@ simpleui 特点
 
 ⚡️ pip闪电安装100%兼容原生admin无需修改代码
 
-✨ 多标签页面，各个模块更加清晰明了。配以最流行的后台设计风格，让Django Admin更加强大。
+✨ 多标签页面，各个模块更加清晰明了
 
 🎯 配置简单，极速上手，在settings.py中加入simpleui后启动立即生效，效率提升 100%！让后端开发得心应手。
 
 ☕️ Element-UI + Vue 加持，让古老的django admin 焕然一新。
 
-🎨 Django Admin默认界面设计语言存在着的一些不足，比如色彩单一，大量线条的使用，分割化明显。将这些不足归类一下就是界面单调、雷同性明显、缺少惊喜。我们认为新的平台类视觉风格可以打破这些束缚，尝试一些新的探索，启发传统的设计认知,因此结合当下设计趋势，构思了Element+Django Admin的Simpleui。让Django Admin和Element产生完美的交互。
+# 开发初衷
+Django Admin默认界面设计语言存在着的一些不足，比如色彩单一，大量线条的使用，分割化明显。将这些不足归类一下就是界面单调、雷同性明显、缺少惊喜。我们认为新的平台类视觉风格可以打破这些束缚，尝试一些新的探索，启发传统的设计认知,因此结合当下设计趋势，构思了Element+Django Admin的Simpleui。让Django Admin和Element产生完美的交互。配以最流行的后台设计风格，让Django Admin更加强大。
 
 ## QQ群
 + QQ群号:786576510
@@ -45,11 +46,19 @@ simpleui 特点
 ## 文档
 文档详细的描述了安装使用方法，以及各种配置项的说明，请点击以下链接查阅。
  
- 重要的事情说3遍：
+ ### 重要的事情说3遍：
 
-# [simpleui使用文档](./QUICK.md) 
-# [simpleui教程](./QUICK.md)
-# [simpleui说明](./QUICK.md)
+👇👇👇👇👇👇👇👇👇👇👇👇
+
+👉 1.[simpleui文档教程使用说明](./QUICK.md) 👈
+
+👉 2.[simpleui文档教程使用说明](./QUICK.md)👈
+
+👉  3.[simpleui文档教程使用说明](./QUICK.md)👈
+
+👆👆👆👆👆👆👆👆👆👆👆👆
+
+如果您还没找到文档，对不起我的错😭。
 
 ## 本地Demo下载
 如果你没有任何python django基础，可以下载一个可以直接运行的demo进行体验。
