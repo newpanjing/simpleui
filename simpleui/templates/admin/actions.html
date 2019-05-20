@@ -21,14 +21,13 @@
                 <input type="hidden" name="select_across" v-model="select_across" value="0" class="select-across">
                 <input type="hidden" name="file_format" v-model="file_format">
                 {% if field.0 == 'export_admin_action' %}
-                    <el-select v-model="file_format">
+                    <el-select v-model="file_format" style="width: 80px;">
                         <el-option
                                 v-for="item in options"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value">
                         </el-option>
-
                     </el-select>
                     <el-button icon="fas fa-download" data-name="{{ field.0 }}">{{ field.1 }}</el-button>
                 {% else %}
