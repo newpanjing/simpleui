@@ -38,7 +38,11 @@ simpleui
 ## 文档
 文档详细的描述了安装使用方法，以及各种配置项的说明，请点击以下链接查阅。
  
-[simpleui使用文档](./QUICK.md)
+ 重要的事情说3遍：
+
+# [simpleui使用文档](./QUICK.md) 
+# [simpleui教程](./QUICK.md)
+# [simpleui说明](./QUICK.md)
 
 ## 本地Demo下载
 如果你没有任何python django基础，可以下载一个可以直接运行的demo进行体验。
