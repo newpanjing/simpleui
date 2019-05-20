@@ -110,6 +110,7 @@ def home_page(context):
 
 def __get_config(name):
     value = os.environ.get(name, getattr(settings, name, None))
+
     return value
 
 
@@ -164,8 +165,9 @@ def menus(context):
         data.append(module)
 
     # 如果有menu 就读取，没有就调用系统的
+    key = 'system_keep'
     if config and 'menus' in config:
-        if 'system_keep' in config:
+        if key in config and config.get(key) != False:
             temp = config.get('menus')
             for i in temp:
                 data.append(i)

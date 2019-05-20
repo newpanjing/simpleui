@@ -3,7 +3,15 @@
 <div id="home">
 
     <el-row class="info-card">
-        <el-col :span="18">
+
+        {% if "SIMPLEUI_HOME_QUICK"|get_config != False%}
+
+            {% if "SIMPLEUI_HOME_INFO"|get_config != False %}
+            <el-col :span="18">
+            {% else %}
+            <el-col :span="24">
+            {% endif %}
+
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
                     <i class="fas fa-link"></i>
@@ -12,18 +20,19 @@
                 <div class="clearfix">
                     {% if "SIMPLEUI_HOME_QUICK"|get_config != False %}
 
-                        <div v-for="(item,i) in menus" v-if="i!=0" class="quick-parent-wrap">
-                            <div v-for="(c,j) in item.models" :key="c.name" class="quick-wrap">
-                                <a href="javascript:;" @click="openTab(c,(j+1)+'')">
-                                    <span class="icon" :class="c.icon"></span>
-                                    <span v-text="c.name"></span>
-                                </a>
-                            </div>
+
+                        <div v-for="(c,j) in models" :key="c.name" class="quick-wrap">
+                            <a href="javascript:;" @click="openTab(c,(j+1)+'')">
+                                <span class="icon" :class="c.icon"></span>
+                                <span v-text="c.name"></span>
+                            </a>
                         </div>
+
                     {% endif %}
                 </div>
             </el-card>
         </el-col>
+        {% endif %}
 
         {% if "SIMPLEUI_HOME_INFO"|get_config != False %}
             <el-col :span="6">
@@ -39,8 +48,11 @@
                         <div style="text-align: center">
                             {% get_app_info %}
                         </div>
-                        <el-button icon="fas fa-code" @click="openUrl('https://gitee.com/tompeppa/simpleui')">Gitee</el-button>
-                        <el-button icon="fab fa-github" @click="openUrl('https://github.com/newpanjing/simpleui')">Github</el-button>
+                        <el-button icon="fas fa-code" @click="openUrl('https://gitee.com/tompeppa/simpleui')">Gitee
+                        </el-button>
+                        <el-button icon="fab fa-github" @click="openUrl('https://github.com/newpanjing/simpleui')">
+                            Github
+                        </el-button>
                     </div>
                 </el-card>
             </el-col>

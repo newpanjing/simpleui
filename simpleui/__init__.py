@@ -1,2 +1,2 @@
 def get_version():
-    return '2.1.b5'
+    return '2.1.b6'

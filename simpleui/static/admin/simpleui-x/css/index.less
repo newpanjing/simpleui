@@ -75,9 +75,11 @@ html, body {
 }
 
 #home {
-  .el-col-6, .el-col-18 {
+
+  [class*=el-col-] {
     padding: 10px;
   }
+
 }
 
 #home .icon .fa, #home .icon .fas, #home .icon .fa, #home .icon .fab {
@@ -297,47 +299,45 @@ html, body {
   }
 
   html, body {
-    overflow: hidden!important;
-    position: fixed!important;
+    overflow: hidden !important;
+    position: fixed !important;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
   }
 }
+.iframe-wrap{
+  height: 100%;
+}
 
-.quick-parent-wrap {
+.quick-wrap {
   float: left;
+  width: 108px;
+  //height: 95px;
+  text-align: center;
+  margin: 10px;
+  border: #FFF 1px solid;
 
-
-  .quick-wrap {
-    float: left;
-    width: 108px;
-    //height: 95px;
+  .icon {
+    display: block;
     text-align: center;
-    margin: 10px;
-    border: #FFF 1px solid;
+    vertical-align: middle;
+    background-color: #F8F8F8;
+    color: #333;
+    height: 60px;
+    line-height: 60px;
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
 
-    .icon {
-      display: block;
-      text-align: center;
-      vertical-align: middle;
-      background-color: #F8F8F8;
-      color: #333;
-      height: 60px;
-      line-height: 60px;
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
+  a {
+    color: #666;
+    text-decoration: none;
+  }
 
-    a {
-      color: #666;
-      text-decoration: none;
-    }
-
-    &:hover {
-      border-color: rgb(64, 158, 255);
-    }
+  &:hover {
+    border-color: rgb(64, 158, 255);
   }
 }
 

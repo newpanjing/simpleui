@@ -104,14 +104,34 @@
                         window.open(tab.newUrl);
                     }
                 }]
-            }
+            },
+            //菜单里面的模块
+            models: []
         },
         watch: {
             fold: function (newValue, oldValue) {
                 // console.log(newValue)
+            },
+            menus: function (newValue, oldValue) {
+                var self = this;
+
+                newValue.forEach(item => {
+                    if(item.id=='0'){
+                        return;
+                    }
+
+                    if(item.models){
+                        item.models.forEach(child => {
+                            self.models.push(child);
+                        });
+                    }else{
+                        self.models.push(item);
+                    }
+                });
             }
         },
         created: function () {
+
 
             var val = getCookie('fold') == 'true';
             this.small = this.fold = val;
