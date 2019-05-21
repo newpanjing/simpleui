@@ -1,5 +1,10 @@
-{% load i18n static simpletags%}
+{% load i18n static simpletags %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!--
+   The project adopted: django-simpleui
+   source code：
+   https://github.com/newpanjing/simpleui
+-->
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
@@ -12,9 +17,21 @@
 
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/login.css' %}">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/login.css' %}?_=2.1">
+    <style type="text/css">
+        .bg {
+            background: #f0f2f5;
+            background-image: url('{% static '/admin/simpleui-x/img/bg.svg' %}');
+            min-height: 100%;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-size: 100%;
+            padding: 20px 0;
+            position: relative;
+        }
+    </style>
 </head>
-<body>
+<body class="bg">
 
 <div class="login-main">
     <div class="logo">
@@ -49,7 +66,8 @@
                       placeholder="{% trans 'username' %}"></el-input>
         </div>
         <div class="simpleui-input-inline">
-            <el-input prefix-icon="fas fa-lock" type="password" v-model="password" name="password" @keyup.enter.native="login()"
+            <el-input prefix-icon="fas fa-lock" type="password" v-model="password" name="password"
+                      @keyup.enter.native="login()"
                       placeholder="{% trans 'password' %}" show-password></el-input>
         </div>
         <div class="simpleui-input-inline login-btn">

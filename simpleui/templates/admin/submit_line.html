@@ -1,7 +1,8 @@
 {% load i18n admin_urls %}
 <div class="submit-row">
     <el-button type="button" icon="el-icon-arrow-left" @click="prev()"
-               style="float: left;margin-right: 10px;margin-bottom: 10px;">返回
+               style="float: left;margin-right: 10px;margin-bottom: 10px;">
+        <span v-text="getLanuage('Go back')"></span>
     </el-button>
     {% if show_delete_link %}
         {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}

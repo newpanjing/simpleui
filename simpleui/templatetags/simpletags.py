@@ -24,14 +24,6 @@ from django.db import models
 register = template.Library()
 
 
-@register.filter
-def get_icon(name):
-    # 默认为文件图标
-    cls = ""
-
-    return format_html('<i class="icon {}"></i>', cls)
-
-
 @register.simple_tag(takes_context=True)
 def context_test(context):
     print(context)
@@ -118,6 +110,7 @@ def home_page(context):
 
 def __get_config(name):
     value = os.environ.get(name, getattr(settings, name, None))
+
     return value
 
 
@@ -127,20 +120,9 @@ def get_config(key):
 
 
 @register.simple_tag
-def get_server_info():
-    dict = {
-        'Network': platform.node(),
-        'OS': platform.platform(),
-    }
-    return format_table(dict)
-
-
-@register.simple_tag
 def get_app_info():
     dict = {
-        'Python': platform.python_version(),
-        'Django': django.get_version(),
-        'Simpleui': simpleui.get_version()
+        'version': simpleui.get_version()
     }
 
     return format_table(dict)
@@ -164,27 +146,28 @@ def menus(context):
 
     app_list = context.get('app_list')
     for app in app_list:
-        models = []
-        if app.get('models'):
-            for m in app.get('models'):
-                models.append({
-                    'name': str(m.get('name')),
-                    'icon': get_icon(m.get('object_name')),
-                    'url': m.get('admin_url'),
-                    'addUrl': m.get('add_url'),
-                    'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
-                })
+        _models = [
+            {
+                'name': str(m.get('name')),
+                'icon': get_icon(m.get('object_name')),
+                'url': m.get('admin_url'),
+                'addUrl': m.get('add_url'),
+                'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
+            }
+            for m in app.get('models')
+        ] if app.get('models') else []
 
         module = {
             'name': str(app.get('name')),
-            'icon': get_icon(app.get('app_label')),
-            'models': models
+            'icon': get_icon(app.get('app_label'), str(app.get('name'))),
+            'models': _models
         }
         data.append(module)
 
     # 如果有menu 就读取，没有就调用系统的
+    key = 'system_keep'
     if config and 'menus' in config:
-        if 'system_keep' in config:
+        if key in config and config.get(key) != False:
             temp = config.get('menus')
             for i in temp:
                 data.append(i)
@@ -194,29 +177,42 @@ def menus(context):
     return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data))
 
 
-def get_icon(obj):
-    dict = {
+def get_icon(obj, name=None):
+    temp = get_config_icon(name)
+    if temp != '':
+        return temp
+
+    _dict = {
         'auth': 'fas fa-shield-alt',
         'User': 'far fa-user',
         'Group': 'fas fa-users-cog'
-
     }
-    temp = dict.get(obj)
+    temp = _dict.get(obj)
     if not temp:
-        return 'far fa-file'
+        _default = __get_config('SIMPLEUI_DEFAULT_ICON')
+        if _default is None or _default:
+            return 'far fa-file'
+        else:
+            return ''
     return temp
+
+
+# 从配置中读取图标
+def get_config_icon(name):
+    _config_icon = __get_config('SIMPLEUI_ICON')
+    if _config_icon is None:
+        return ''
+
+    if name in _config_icon:
+        return _config_icon.get(name)
+    else:
+        return ''
 
 
 @register.simple_tag(takes_context=True)
 def load_message(context):
     messages = context.get('messages')
-    array = []
-    if messages:
-        for msg in messages:
-            array.append({
-                'msg': msg.message,
-                'tag': msg.tags
-            })
+    array = [dict(msg=msg.message, tag=msg.tags) for msg in messages] if messages else []
 
     return '<script type="text/javascript"> var messages={}</script>'.format(array)
 
@@ -230,12 +226,12 @@ def context_to_json(context):
 
 @register.simple_tag()
 def get_language():
-    return django.utils.translation.get_language()
+    return settings.LANGUAGE_CODE.lower()
 
 
 @register.filter
 def get_language_code(val):
-    return django.utils.translation.get_language()
+    return settings.LANGUAGE_CODE.lower()
 
 
 def get_analysis_config():

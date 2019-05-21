@@ -24,7 +24,9 @@
                                        icon="fas fa-history">{% trans "History" %}</el-button>
                         </li>
                         {% if has_absolute_url %}
-                            <li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>
+                            <li>
+                                <el-button @click="window.open('{{ absolute_url }}')" class="viewsitelink" icon="fas fa-globe-asia">{% trans "View on site" %}</el-button>
+                            </li>
                         {% endif %}
                     {% endblock %}
                 </ul>

@@ -10,17 +10,21 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
 
-        <link rel="stylesheet" href="//unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
+
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.1.0">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.1">
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
-
-        <script src="//unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
         {% if ""|get_language_code != 'zh-hans' %}
-            <script src="//unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+
+            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}"></script>
             <script type="text/javascript">
                 ELEMENT.locale(ELEMENT.lang.en)
             </script>
@@ -31,6 +35,8 @@
         {% if LANGUAGE_BIDI %}
             <link rel="stylesheet" type="text/css"
                   href="
+
+
 
 
 
@@ -51,10 +57,37 @@
 
     <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
           data-admin-utc-offset="{% now "Z" %}">
+
+    {% verbatim dynamicCss %}
+    <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
+        *{
+            font-size: {{ fontSize }}px;
+        }
+    </style>
+    {% endverbatim dynamicCss %}
+
     <div id="theme">
         <link v-if="theme!=''" rel="stylesheet" :href="theme">
     </div>
     <script type="text/javascript">
+
+         var fontConfig = new Vue({
+            el: '#dynamicCss',
+            data: {
+                fontSize: 14
+            },
+            created: function () {
+                var val = getCookie('fontSize');
+                if (val) {
+                    this.fontSize = parseInt(val);
+                } else {
+                    this.fontSize = 0;
+                }
+            },
+            methods: {}
+        });
+
+
         new Vue({
             el: '#theme',
             data: {
@@ -65,9 +98,13 @@
 
                 var self = this;
                 //向父组件注册事件
-                if (parent.addThemeEvent) {
-                    parent.addThemeEvent(function (theme) {
+                if (parent.addEvent) {
+                    parent.addEvent('theme', function (theme) {
                         self.theme = theme;
+                    });
+
+                    parent.addEvent('font', function (font) {
+                        fontConfig.fontSize = font;
                     });
                 }
 
