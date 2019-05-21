@@ -58,7 +58,7 @@ Django Admin默认界面设计语言存在着的一些不足，比如色彩单�
 
 👆👆👆👆👆👆👆👆👆👆👆
 
-如果您还没找到文档，对不起我的错😭。
+
 
 ## 本地Demo下载
 如果你没有任何python django基础，可以下载一个可以直接运行的demo进行体验。
@@ -145,12 +145,12 @@ python setup.py sdist install
 如果你的项目正在使用Simpleui，可以将Simpleui徽章 [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui) 添加到你的 README 中：
 
 ```
-[![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
+[![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
 ```
 
 
 ## 赞助💰
-如果你觉得simpleui对你有帮助，你可以赞助我们一杯开发，鼓励我们继续开发维护下去。
+如果你觉得simpleui对你有帮助，你可以赞助我们一杯咖啡，鼓励我们继续开发维护下去。
 ![扫码赞助](https://github.com/newpanjing/simpleui/raw/master/images/pay.png)
 
 
