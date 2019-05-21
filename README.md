@@ -132,6 +132,8 @@ python setup.py sdist install
 
 其他问题请查看[快速上手指南](./QUICK.md)
 
+## 支持django和python版本
+[查看支持的版本列表](/VERSION.md)
 
 
 ## 浏览器兼容性
