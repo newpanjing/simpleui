@@ -116,7 +116,7 @@
                     <div class="right">
                         <el-button icon="fas fa-font" circle v-waves @click="fontClick()"></el-button>
 
-                        <el-button v-if="!small"
+                        <el-button
                                    :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
                                    @click="goZoom()" circle></el-button>
                         <el-button icon="fas fa-home" @click="goIndex()" circle v-waves></el-button>
