@@ -37,6 +37,10 @@ def load_dates(context):
     cl = context.get('cl')
     if cl.has_filters:
         for spec in cl.filter_specs:
+            # 自定义的filter，没有field
+            if not hasattr(spec, 'field'):
+                continue
+
             field = spec.field
             field_type = None
             if isinstance(field, models.DateTimeField):
@@ -51,6 +55,11 @@ def load_dates(context):
     context['date_field'] = data
 
     return '<script type="text/javascript">var searchDates={}</script>'.format(json.dumps(data))
+
+
+@register.filter
+def has_filter(spec):
+    return hasattr(spec, 'parameter_name')
 
 
 @register.filter
