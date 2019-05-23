@@ -78,7 +78,7 @@
                     }
                 }, {
                     text: getLanuage('Close current'),
-                    icon: 'el-icon-circle-close-outline',
+                    icon: 'el-icon-circle-close',
                     handler: function (tab, item) {
                         app.handleTabsEdit(tab.id, 'remove');
                     }
