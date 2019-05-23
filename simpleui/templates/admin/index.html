@@ -119,7 +119,7 @@
                         <el-button
                                    :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
                                    @click="goZoom()" circle></el-button>
-                        <el-button icon="fas fa-home" @click="goIndex()" circle v-waves></el-button>
+                        <el-button icon="fas fa-home" @click="goIndex('{{ 'SIMPLEUI_INDEX'|get_config }}')" circle v-waves></el-button>
                         {% verbatim mycode %}
                             <el-button @click="themeDialogVisible=true" v-waves>
                                 <i class="fas fa-palette"></i>

@@ -354,8 +354,11 @@
                 });
             }
             ,
-            goIndex: function () {
-                window.open('/');
+            goIndex: function (url) {
+                if (!url || url == 'None') {
+                    url = '/';
+                }
+                window.open(url);
             }
             ,
             getLanuage: getLanuage,
