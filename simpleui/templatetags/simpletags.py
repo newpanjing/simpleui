@@ -9,6 +9,7 @@ from django.utils.safestring import mark_safe
 from django.templatetags import static
 
 import os
+import sys
 import json
 
 import platform
@@ -22,6 +23,14 @@ import time
 from django.db import models
 
 register = template.Library()
+
+PY_VER = sys.version[0]        # 2 or 3
+
+
+def unicode_to_str(u):
+    if PY_VER != '2':
+        return u
+    return u.encode()
 
 
 @register.simple_tag(takes_context=True)
@@ -158,7 +167,7 @@ def menus(context):
         _models = [
             {
                 'name': str(m.get('name')),
-                'icon': get_icon(m.get('object_name')),
+                'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name'))),
                 'url': m.get('admin_url'),
                 'addUrl': m.get('add_url'),
                 'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
