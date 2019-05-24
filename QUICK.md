@@ -346,7 +346,7 @@ python setup.py sdist install
     {% extends 'admin/index.html' %}
     {% load static %}
 
-    {% block head %}
+    {%block head}
         {{ block.super }}
         ..此处写你的代码
     {% endblock %}
@@ -374,7 +374,7 @@ python setup.py sdist install
     {% extends 'admin/index.html' %}
     {% load static %}
 
-    {% block head %}
+    {%block head}
         {{ block.super }}
         ..此处写你的代码
     {% endblock %}
