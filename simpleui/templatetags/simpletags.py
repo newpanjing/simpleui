@@ -192,6 +192,17 @@ def menus(context):
         else:
             data = config.get('menus')
 
+    # 获取侧边栏排序, 如果设置了就按照设置的内容排序, 留空则表示默认排序以及全部显示
+    if config.get('menu_display') is not None:
+        display_data = list()
+        for _app in data:
+            if _app['name'] not in config.get('menu_display'):
+                continue
+            _app['_weight'] = config.get('menu_display').index(_app['name'])
+            display_data.append(_app)
+        display_data.sort(key=lambda x: x['_weight'])
+        data = display_data
+
     return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data))
 
 

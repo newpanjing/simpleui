@@ -236,6 +236,11 @@ SIMPLEUI_INDEX = 'https://www.88cto.com'
 该字段用于告诉simpleui，是否需要保留系统默认的菜单，默认为False，不保留。
 如果改为True，自定义和系统菜单将会并存
 
+#### menu_display 过滤显示菜单和排序功能
+该字段用于告诉simpleui，是否需要开启过滤显示菜单和排序功能。<br>
+默认可以不用填写，缺省配置为默认排序，不对菜单进行过滤和排序。<br>
+开启认为传一个列表，如果列表为空，则什么也不显示。列表中的每个元素要对应到menus里面的name字段
+
 #### menus说明
 
 |字段|说明|
@@ -249,6 +254,7 @@ SIMPLEUI_INDEX = 'https://www.88cto.com'
 ```python
 SIMPLEUI_CONFIG = {
     'system_keep':False,
+    'menu_display': ['Simpleui', '测试', '权限认证'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
     'menus': [{
         'name': 'Simpleui',
         'icon': 'fas fa-code',
