@@ -45,6 +45,13 @@
                                    name="{{ spec.field_generic }}gte"/>
                             <input type="hidden" v-model="{{ spec.field_generic }}lt"
                                    name="{{ spec.field_generic }}lt"/>
+                        {% elif spec|has_filter %}
+                            <input type="hidden" v-model="{{ spec.parameter_name }}" name="{{ spec.parameter_name }}"/>
+                            <el-select v-model="{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}">
+                                {% for option in spec.lookup_choices %}
+                                    <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
+                                {% endfor %}
+                            </el-select>
 
                         {% else %}
 
@@ -139,6 +146,8 @@
                             '{{ spec.field_path }}': '',
                             '{{ spec.field_generic }}gte': '',
                             '{{ spec.field_generic }}lt': '',
+                        {% elif spec|has_filter %}
+                            '{{ spec.parameter_name }}':'',
                         {% else %}
                             '{{ spec.lookup_kwarg }}': '',
                         {% endif %}

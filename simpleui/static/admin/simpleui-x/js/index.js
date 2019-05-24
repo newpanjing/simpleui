@@ -78,7 +78,7 @@
                     }
                 }, {
                     text: getLanuage('Close current'),
-                    icon: 'el-icon-circle-close-outline',
+                    icon: 'el-icon-circle-close',
                     handler: function (tab, item) {
                         app.handleTabsEdit(tab.id, 'remove');
                     }
@@ -354,8 +354,11 @@
                 });
             }
             ,
-            goIndex: function () {
-                window.open('/');
+            goIndex: function (url) {
+                if (!url || url == 'None') {
+                    url = '/';
+                }
+                window.open(url);
             }
             ,
             getLanuage: getLanuage,

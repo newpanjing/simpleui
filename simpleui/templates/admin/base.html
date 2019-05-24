@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.1">
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
+{#    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>#}
+
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
@@ -61,7 +63,7 @@
     {% verbatim dynamicCss %}
     <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
         *{
-            font-size: {{ fontSize }}px;
+            font-size: {{ fontSize }}px!important;
         }
     </style>
     {% endverbatim dynamicCss %}
