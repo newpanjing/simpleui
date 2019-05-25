@@ -1,31 +1,31 @@
 simpleui Quick Start Guide
 -----
-Many people will misunderstand simpleui. They think after downloading and installing simpleui, they can be used directly after startup. But simpleui is majorization on the basis of the Django. Do, please [create a Django project](#Create a Django Project) using the Command Line or IDE, Then [modify the default template to simpleui](#Modify default template to simpleui).
+Many people will misunderstand simpleui. They think after downloading and installing simpleui, they can be used directly after startup. But simpleui is majorization on the basis of the Django. Do, please [Create a Django project](#Create%2da%2dDjango%2dProject) using the Command Line or IDE, Then [Modify the default template for simpleui](#Modify%2ddefault%2dtemplate%2dfor%2dsimpleui).
 
 Before starting，please take a minte to understand settings.py, because it's especially important in the next process.
 
 # Start Guide
-  + [Create a Django project](#Create a Django Project)
-  + [Modify default template to simpleui](#Modify default template to simpleui)
-  + [Clone static file to the root](#Clone static file to the root)
-  + [Startup Project](#Startup Project)
-  + [How to download simpleui's template](#如何下载这个模版)
-  + [Switch Theme](#切换主题)
-  + [About Icons](#图标说明)
+  + [Create a Django project](#Create%2da%2dDjango%2dProject)
+  + [Modify default template for simpleui](#Modify%2ddefault%2dtemplate%2dfor%2dsimpleui)
+  + [Clone static file to the root](#Clone%2dstatic%2dfile%2dto%2dthe%2droot)
+  + [Startup Project](#Startup%2dProject)
+  + [How to download simpleui's template](#How%2dto%2ddownload%2dsimpleui's%2dtemplate)
+  + [Switch Theme](#Switch%2dTheme)
+  + [About Icons](#About%2dIcons)
 # Advance Guide
-  + [Customize Theme](#自定义主题)
-  + [Modify Home Icon](#修改默认图标)
-  + [Modify Default Home](#修改默认首页)
-  + [Modify Home Jump Address](#修复首页跳转地址)
-  + [Modify LOGO](#修改LOGO)
-  + [Config Home Module](#配置首页模块)
-    + [Server Infomation](#服务器信息)
-    + [Quick Operation](#快速操作)
-    + [Recent Action](#最近动作)
-  + [Use Analysis](#使用分析)
-  + [Menu](#菜单)
-    + [Customize Munu](#自定义菜单)
-    + [Default Icon](#默认图标)
+  + [Customize Theme](#Customize%2dTheme)
+  + [Modify Default Icon](#Modify%2dDefault%2dIcon)
+  + [Modify Default Home](#Modify%2dDefault%2dHome)
+  + [Modify Home Jump Address](#Modify%2dHome%2dJump%2dAddress)
+  + [Modify LOGO](#Modify%2dLOGO)
+  + [Config Home Module](#Config%2dHome%2dModule)
+    + [Server Information](#Server%2dInformation)
+    + [Quick Operation](#Quick%2dOperation)
+    + [Recent Action](#Recent%2dAction)
+  + [Use Analysis](#Use%2dAnalysis)
+  + [Menu](#Menu)
+    + [Customize Munu](#Customize%2dMunu)
+    + [Default Icon](#Default%2dIcon)
     + [Customize Icon](#自定义图标)
 
   + [Modify Templates](#修改模板)
@@ -47,7 +47,7 @@ Before starting，please take a minte to understand settings.py, because it's es
 
 Django Documentation[https://docs.djangoproject.com/en/2.2/intro/tutorial01/](https://docs.djangoproject.com/en/2.2/intro/tutorial01/)
 
-## Modify default template to simpleui  
+## Modify default template for simpleui  
 
   We only need to add a line of simpleui in the settings.py of the project.
 
@@ -85,34 +85,33 @@ If DEBUG = Fasle, there are two ways to solve the situation that static resource
 ```shell
     python3 manage.py collectstatic
 ```
-If the clone error message indicates that the static directory could't be found，please in the settings.py assiging a static directory
+If the clone error message indicates that the static directory could't be found，please open the settings.py and assign a static directory
 ```python
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
 ```
 
 ## Startup Project
-在settings.py中成功加入simpleui后，运行命令：
+After successfully adding simpleui in settings.py，Run command：
 ```shell
     python manage.py runserver 8000
 ```
-浏览器中输入：http://127.0.0.1:8000/admin
-如果发现登录页和之前有所不同，那么就可以恭喜你，成功安装simpleui！接下来开始享受simpleui吧。
+Open browser, input：http://127.0.0.1:8000/admin
+if you find that the login page if different from before，Congratulations! You have successfully installed simpleui！Let's start enjoying simpleui!
 
-## 如何下载这个模版
-目前暂时无法下载模板，不过我们计划推出simple-admin，纯html的模板，可以让更多语言使用。
+## How to download simpleui's template
+Currently unable to download templates，but we plan to launch simple-admin's html templates，can make more languages available.
 
-## 切换主题
-目前simpleui 内置28个流行样式风格的主题。后续随着版本的更新，会加入更多的主题。
+## Switch Theme
+Currently simpleui has 28 popular style themes. We will update more topics as the version is updated.
 
-## 图标说明
-simpleui中显示的图标 可以参考[fontawesome](https://fontawesome.com/icons?d=gallery)的图标，只需要将完整的class名填入即可。
+## About Icons
+The icon displayed in simpleui can refer to the [fontawesome](https://fontawesome.com/icons?d=gallery) icon，just fill in the full class name.
 
 
-## 自定义主题
-在自定义主题之前，请先把simpleui的静态资源克隆到根目录。然后找到theme
-theme.js 就是用于配置主题列表
+## Customize Theme
+Before customizing the theme, please clone the static resources of simpleui to the root directory. Then you need to find theme.js, it's used to configure the list of topics.
 
-按该文件中的格式配置即可
+Please configure in this format.
 
 ```javascript
 var SimpleuiThemes = [
@@ -127,9 +126,9 @@ var SimpleuiThemes = [
 ]
 ```
 
-在增加你的样式之前，请先了解less如何使用。
+Before adding your style, please understand how less to used.
 
-这是admin.lte.less的例子
+Example for admin.lte.less
 ```css
 @import "base";
 
@@ -152,84 +151,83 @@ var SimpleuiThemes = [
 @navbar-color: #fff;
 @navbar-background: #3c8dbc;
 ```
-他将会编译为admin.lte.css
-需要安装less
+it will compile to admin.lte.css.
+you need to install less
 ```shell
 npm install less -g
 
 lessc admin.lte.less>admin.lte.css
 ```
 
-## 修改默认图标
-django内置的认证与授权以及关联的用户、组，都已经默认配置了一个图标。后续自定义的app将会是默认图标，需要自行在settings.py文件中进行配置
-1. 
+## Modify Default Icon
+Django's built-in authentication and authorization and associated users and groups have been configured with an icon by default. Custom app will be the default icons and need to be configured in the settings.py file.
 
-## 修改默认首页
-simpleui内置了一个默认的首页，只是由简单的快捷导航与最近操作组成。
+## Modify Default Home
+simpleui has a default home page, which consists of quick navigation and recent operations.
 
-在自己项目的settings.py中加入：
+You can modify the default home page and add it to your project's settings.py：
 
-+ 首页配置
++ Home configuration
 > SIMPLEUI_HOME_PAGE = 'https://www.baidu.com'
-+ 首页标题
++ Home title
 > SIMPLEUI_HOME_TITLE = '百度一下你就知道'
-+ 首页图标,支持element-ui和fontawesome的图标，参考https://fontawesome.com/icons图标
++ Home Icon,support element-ui's and fontawesome's icon，reference https://fontawesome.com/icons
 > SIMPLEUI_HOME_ICON = 'fa fa-user'
 
-三项配置都是选填，不填都会有默认值。 [图标列表](https://fontawesome.com/icons)
+The above three configurations are optional. If you don't fill, there will be default values. [icon list](https://fontawesome.com/icons)
 
-## 修复首页跳转地址
-首页顶部首页图标默认跳转地址为/，即根目录。如果需要自定义，请在项目的settings.py中加入设置：
+## Modify Home Jump Address
+The top of the home page has a default jump address of /, this is root directory. If you need to customize, add some settings in your project's settings.py.
 
 ```python
-# 设置simpleui 点击首页图标跳转的地址
+# Configure simpleui Click the address of the home icon to jump.
 SIMPLEUI_INDEX = 'https://www.88cto.com'
 ```
 
-可以设置相对与绝对路径。该地址并无特殊之处，将会调用window.open直接打开该地址。
+Relative and absolute paths can be set. There is nothing special about this address, it will call window.open to open the address directly.
 
 
-## 修改LOGO
-+ 自定义SIMPLEUI的Logo
+## Modify LOGO
++ Customize SIMPLEUI's Logo
 > SIMPLEUI_LOGO = 'https://avatars2.githubusercontent.com/u/13655483?s=60&v=4'
 
-## 配置首页模块
-首页默认展示3个模块，服务器信息、快速操作、最近动作，大家可以根据需要来显示或者隐藏某些模块。
-### 服务器信息
-隐藏：
+## Config Home Module
+The home page displays three modules by default, server information,quick operation and recent actions. You can show or hide some modules as needed.
+### Server Information
+Hide：
 > SIMPLEUI_HOME_INFO = False
 
-显示：
+Display：
 > SIMPLEUI_HOME_INFO = True
 
-### 快速操作
+### Quick Operation
 
-隐藏：
+Hide：
 > SIMPLEUI_HOME_QUICK = False
 
-显示：
+Display：
 > SIMPLEUI_HOME_QUICK = True
 
-### 最近动作
+### Recent Action
 
-隐藏：
+Hide：
 > SIMPLEUI_HOME_ACTION = False
 
-显示：
+Display：
 > SIMPLEUI_HOME_ACTION = True
 
-## 使用分析
-`默认开启，统计分析信息只是为了更好的帮助simpleui改进，并不会读取敏感信息。并且分析数据不会分享至任何第三方。`
+## Use Analysis
+`Default is True, statistical analysis information is only used to better help simpleui improvements, and doesn't read sensitive information. And the analysis data will not be shared with any third party.`
 > SIMPLEUI_ANALYSIS = False
 
-|值|说明|
+|Value|Description|
 |--|--|
-|True|收集分析，一天只上报一次分析数据。默认为True|
-|False|不收集分析信息|
+|True|Collect and analyze,report only one analysis data a day。Default is True|
+|False|Don't collect and analyze|
 
-## 菜单
+## Menu
 
-### 自定义菜单
+### Customize Munu
 
 #### system_keep 保留系统菜单
 该字段用于告诉simpleui，是否需要保留系统默认的菜单，默认为False，不保留。
