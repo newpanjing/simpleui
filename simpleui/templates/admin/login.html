@@ -82,5 +82,26 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}"></script>
 
+{% if 'SIMPLEUI_LOGIN_PARTICLES'|get_config != False %}
+    <!--
+        Close login page particles see link:
+        关闭登录页粒子动画请查看：
+        https://github.com/newpanjing/simpleui/blob/master/QUICK.md#%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BD%E8%BF%99%E4%B8%AA%E6%A8%A1%E7%89%88
+    -->
+<style type="text/css">
+    #particles-js{
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: -1;
+    }
+</style>
+<!-- particles.js container -->
+<div id="particles-js"></div>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/particles/particles.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/particles/app.js' %}"></script>
+{% endif %}
 </body>
 </html>

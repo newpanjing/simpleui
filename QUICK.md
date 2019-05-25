@@ -13,6 +13,7 @@ simpleui 快速上手指南
   + [如何下载这个模版](#如何下载这个模版)
   + [切换主题](#切换主题)
   + [图标说明](#图标说明)
+  + [关闭登录页粒子动画](#关闭登录页粒子动画)
 # 进阶指南
   + [自定义主题](#自定义主题)
   + [修改首页图标](#修改默认图标)
@@ -108,6 +109,12 @@ DEBUG = True
 ## 图标说明
 simpleui中显示的图标 可以参考[fontawesome](https://fontawesome.com/icons?d=gallery)的图标，只需要将完整的class名填入即可。
 
+## 关闭登录页粒子动画
+在项目的settings.py中加入
+```python
+SIMPLEUI_LOGIN_PARTICLES = False
+```
+粒子动画默认开启
 
 ## 自定义主题
 在自定义主题之前，请先把simpleui的静态资源克隆到根目录。然后找到theme
