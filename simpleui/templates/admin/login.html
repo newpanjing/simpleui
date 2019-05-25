@@ -30,10 +30,14 @@
             position: relative;
         }
     </style>
+    {% block head %}
+        {# You can add code here. #}
+    {% endblock %}
 </head>
 <body class="bg">
 
 <div class="login-main">
+    {% block logo %}
     <div class="logo">
         {% if "SIMPLEUI_LOGO"|get_config %}
             <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
@@ -41,7 +45,13 @@
             <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
         {% endif %}
     </div>
+    {% endblock %}
+
+    {% block header %}
     <div class="header">{{ site_header }}</div>
+    {% endblock %}
+
+    {% block errors %}
     {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
             <el-alert
@@ -59,7 +69,9 @@
             {% endif %}
         </p>
     {% endif %}
-    <form class="layui-form" action="{{ app_path }}" method="post" id="login-form">
+    {% endblock %}
+    {% block form %}
+    <form class="simpleui-form" action="{{ app_path }}" method="post" id="login-form">
         {% csrf_token %}
         <div class="simpleui-input-inline">
             <el-input prefix-icon="fas fa-user" v-model="username" name="username"
@@ -76,6 +88,7 @@
 
         <input type="hidden" name="next" value="{{ next }}"/>
     </form>
+    {% endblock %}
 </div>
 
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
