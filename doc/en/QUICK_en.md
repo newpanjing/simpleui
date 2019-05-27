@@ -1,8 +1,8 @@
 simpleui Quick Start Guide
 -----
-Many people will misunderstand simpleui. They think after downloading and installing simpleui, they can be used directly after startup. But simpleui is majorization on the basis of the Django. Do, please [Create a Django project](#Create%2da%2dDjango%2dProject) using the Command Line or IDE, Then [Modify the default template for simpleui](#Modify%2ddefault%2dtemplate%2dfor%2dsimpleui).
+Many people will misunderstand **simpleui**. They think after downloading and installing **simpleui**, they can be used directly after startup. But **simpleui** is majorization on the basis of the **Django**. So, please [Create a Django project](#Create%2da%2dDjango%2dProject) using the command line or IDE, then [Modify the default template for simpleui](#Modify%2ddefault%2dtemplate%2dfor%2dsimpleui).
 
-Before starting，please take a minte to understand settings.py, because it's especially important in the next process.
+Before starting，please take a minte to understand **settings.py**, because it's especially important in the next process.
 
 # Start Guide
   + [Create a Django project](#Create%2da%2dDjango%2dProject)
@@ -18,7 +18,7 @@ Before starting，please take a minte to understand settings.py, because it's es
   + [Modify Default Home](#Modify%2dDefault%2dHome)
   + [Modify Home Jump Address](#Modify%2dHome%2dJump%2dAddress)
   + [Modify LOGO](#Modify%2dLOGO)
-  + [Config Home Module](#Config%2dHome%2dModule)
+  + [Configure Home Module](#Configure%2dHome%2dModule)
     + [Server Information](#Server%2dInformation)
     + [Quick Operation](#Quick%2dOperation)
     + [Recent Action](#Recent%2dAction)
@@ -45,11 +45,11 @@ Before starting，please take a minte to understand settings.py, because it's es
 
 ## Create a Django Project
 
-Django Documentation[https://docs.djangoproject.com/en/2.2/intro/tutorial01/](https://docs.djangoproject.com/en/2.2/intro/tutorial01/)
+Django Documentation：[https://docs.djangoproject.com/en/2.2/intro/tutorial01/](https://docs.djangoproject.com/en/2.2/intro/tutorial01/)
 
 ## Modify default template for simpleui  
 
-  We only need to add a line of simpleui in the settings.py of the project.
+  We only need to add a line of **simpleui** in the **settings.py** of the project.
 
   For example 🌰：
   ```python
@@ -66,50 +66,50 @@ Django Documentation[https://docs.djangoproject.com/en/2.2/intro/tutorial01/](ht
         ...
     ]
   ```
-  If Debug=False,static resources will be inaccessible，please go to[Clone static file to the root](#Clone static file to the root)
+  If **DEBUG = False**, static resources will be inaccessible，please go to [Clone static file to the root](#Clone%2dstatic%2dfile%2dto%2dthe%2droot)
 
 ## Clone static file to the root
-Django have a mode is DEBUG, it's in settings.py. Default DEBUG = True.
+Django have a mode is **DEBUG**, it's in **settings.py**. Default **DEBUG = True**.
 ```python
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ```
-If DEBUG = Fasle, there are two ways to solve the situation that static resources can't be accessed.
-1. Modify settings.py , add following content:
+If **DEBUG = Fasle**, there are two ways to solve the situation that static resources can't be accessed.
+1. Modify **settings.py** , add following content:
 ```python
  STATICFILES_DIRS = [
      os.path.join(BASE_DIR, "static"),
  ]
 ```
-2. Clone static resources to the static directory of the project，Then processed by nginx.
+2. Clone static resources to the static directory of the project，then processed by **nginx**.
 ```shell
     python3 manage.py collectstatic
 ```
-If the clone error message indicates that the static directory could't be found，please open the settings.py and assign a static directory
+If the clone error message indicates that the static directory could't be found，please open the **settings.py** and assign a static directory
 ```python
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
 ```
 
 ## Startup Project
-After successfully adding simpleui in settings.py，Run command：
+After successfully adding **simpleui** in **settings.py**，Run command：
 ```shell
     python manage.py runserver 8000
 ```
 Open browser, input：http://127.0.0.1:8000/admin
-if you find that the login page if different from before，Congratulations! You have successfully installed simpleui！Let's start enjoying simpleui!
+if you find that the login page is different from before，Congratulations! You have successfully installed **simpleui**！Let's start enjoying **simpleui**!
 
 ## How to download simpleui's template
-Currently unable to download templates，but we plan to launch simple-admin's html templates，can make more languages available.
+Currently unable to download templates，but we plan to launch **simple-admin's** html templates，can make more languages available.
 
 ## Switch Theme
-Currently simpleui has 28 popular style themes. We will update more topics as the version is updated.
+Currently **simpleui** has 28 popular style themes. We will update more topics as the version is updated.
 
 ## About Icons
-The icon displayed in simpleui can refer to the [fontawesome](https://fontawesome.com/icons?d=gallery) icon，just fill in the full class name.
+The icon displayed in **simpleui** can refer to the [fontawesome](https://fontawesome.com/icons?d=gallery) icon，just fill in the full class name.
 
 
 ## Customize Theme
-Before customizing the theme, please clone the static resources of simpleui to the root directory. Then you need to find theme.js, it's used to configure the list of topics.
+Before customizing the theme, please clone the static resources of **simpleui** to the root directory. Then you need to find **theme.js**, it's used to configure the list of topics.
 
 Please configure in this format.
 
@@ -126,9 +126,9 @@ var SimpleuiThemes = [
 ]
 ```
 
-Before adding your style, please understand how less to used.
+Before adding your style, please understand how **less** to used.
 
-Example for admin.lte.less
+Example for **admin.lte.less**
 ```css
 @import "base";
 
@@ -151,8 +151,8 @@ Example for admin.lte.less
 @navbar-color: #fff;
 @navbar-background: #3c8dbc;
 ```
-it will compile to admin.lte.css.
-you need to install less
+It will compile to **admin.lte.css**. 
+You need to install **less**.
 ```shell
 npm install less -g
 
@@ -160,31 +160,31 @@ lessc admin.lte.less>admin.lte.css
 ```
 
 ## Modify Default Icon
-Django's built-in authentication and authorization and associated users and groups have been configured with an icon by default. Custom app will be the default icons and need to be configured in the settings.py file.
+Django's built-in authentication and authorization and associated users and groups have been configured with an icon by default. Custom app will be the default icons and need to be configured in the **settings.py** file.
 
 ## Modify Default Home
-simpleui has a default home page, which consists of quick navigation and recent operations.
+**simpleui** has a default home page, which consists of quick navigation and recent operations.
 
-You can modify the default home page and add it to your project's settings.py：
+You can modify the default home page and add it to your project's **settings.py**：
 
 + Home configuration
 > SIMPLEUI_HOME_PAGE = 'https://www.baidu.com'
 + Home title
-> SIMPLEUI_HOME_TITLE = '百度一下你就知道'
-+ Home Icon,support element-ui's and fontawesome's icon，reference https://fontawesome.com/icons
+> SIMPLEUI_HOME_TITLE = 'My Home Title'
++ Home Icon,support `element-ui's` and `fontawesome's` icon，reference https://fontawesome.com/icons
 > SIMPLEUI_HOME_ICON = 'fa fa-user'
 
-The above three configurations are optional. If you don't fill, there will be default values. [icon list](https://fontawesome.com/icons)
+The above three configurations are optional. If you don't fill, there will be default values. [Icon List](https://fontawesome.com/icons)
 
 ## Modify Home Jump Address
-The top of the home page has a default jump address of /, this is root directory. If you need to customize, add some settings in your project's settings.py.
+The top of the home page has a default jump address of /, this is root directory. If you need to customize, add some settings in your project's **settings.py**.
 
 ```python
 # Configure simpleui Click the address of the home icon to jump.
 SIMPLEUI_INDEX = 'https://www.88cto.com'
 ```
 
-Relative and absolute paths can be set. There is nothing special about this address, it will call window.open to open the address directly.
+Relative and absolute paths can be set. There is nothing special about this address, it will call **window.open** to open the address directly.
 
 
 ## Modify LOGO
@@ -192,7 +192,7 @@ Relative and absolute paths can be set. There is nothing special about this addr
 > SIMPLEUI_LOGO = 'https://avatars2.githubusercontent.com/u/13655483?s=60&v=4'
 
 ## Config Home Module
-The home page displays three modules by default, server information,quick operation and recent actions. You can show or hide some modules as needed.
+The home page displays three modules by default, server information, quick operation and recent actions. You can show or hide some modules as needed.
 ### Server Information
 Hide：
 > SIMPLEUI_HOME_INFO = False
@@ -230,8 +230,8 @@ Display：
 ### Customize Munu
 
 #### Keep system menu
-system_keep field is used to tell simpleui，whether you need to keep the system default menu, the default is False,don't keep.
-If changed to True，Custom and system menus will coexist.
+system_keep field is used to tell **simpleui**，whether you need to keep the system default menu, the default is False, don't keep.
+If changed to True，custom and system menus will coexist.
 
 #### Menus Description
 
@@ -278,7 +278,7 @@ SIMPLEUI_CONFIG = {
 If there is a **menus** field in **SIMPLEUI_CONFIG**，will override the system default menu。And the **menus** output in menus are not controlled by permissions。
 
 ### Default Icon
-simpleui provides a default file icon for all menus for uniform style. Maybe you don't like it, you can choose to turn off the default icon.
+**simpleui** provides a default file icon for all menus for uniform style. Maybe you don't like it, you can choose to turn off the default icon.
 
 >SIMPLEUI_DEFAULT_ICON = False
 
@@ -288,16 +288,16 @@ simpleui provides a default file icon for all menus for uniform style. Maybe you
 |False|Turn off the default icon|
 
 ### Customize Icon
-simpleui only provides icons for the system default module. If you want to specify icons for other modules, you can customize the configuration. Icon reference please refer to：[About Icons](#About%2dIcons)
+**simpleui** only provides icons for the system default module. If you want to specify icons for other modules, you can customize the configuration. Icon reference please refer to：[About Icons](#About%2dIcons)
 
 Priority：
 Custom Icon->System Icon->Default Icon
 
->Note：simpleui doesn't involve code in principle, so use the setting method. In the future, may be consider extending the Model's Meta class for configuration icons.
+>Note：**simpleui** doesn't involve code in principle, so use the **setting** method. In the future, may be consider extending the **Model**'s **Meta class** for configuration icons.
 
 |Values|Description|
 |---|---|
-|name|Module name, please note it's not the name of the model, it's the text displayd on the menu, because the model can be repeated, it will lead to indistinguishable|
+|name|Module name, please note it's not the name of the **model**, it's the text displayd on the menu, because the **model** can be repeated, it will lead to indistinguishable|
 |icon|Icon name|
 For example：
 ```
@@ -309,22 +309,22 @@ SIMPLEUI_ICON = {
 ```
 
 ## Modify Templates
-Modify the template based on simpleui need to require some understanding of django
-1. Clone simpleui into a static directory，refer to [Clone static file to the root](#Clone%2dstatic%2dfile%2dto%2dthe%2droot)
-2. Find the admin directory in the static directory,inner is the template of simpleui, directly modify the relevant html page to take effect.
+Modify the template based on **simpleui** need to require some understanding of django
+1. Clone **simpleui** into a static directory，refer to [Clone static file to the root](#Clone%2dstatic%2dfile%2dto%2dthe%2droot)
+2. Find the admin directory in the static directory,inner is the template of **simpleui**, directly modify the relevant html page to take effect.
 
 ## Develop and Debug
-If you want to make some modifications based on simpleui, you can refer to the following steps:
-1. Install simpleui into the project
-2. Find the directory of simpleui and delete
-3. Clone simpleui source to local
-4. In the Linux、Unix、macOS environments，use the flexible connection method to assign the simpleui directory in the project dependency package to the simpleui directory of the source code.
+If you want to make some modifications based on **simpleui**, you can refer to the following steps:
+1. Install **simpleui** into the project
+2. Find the directory of **simpleui** and delete
+3. Clone **simpleui** source to local
+4. In the Linux、Unix、macOS environments，use the flexible connection method to assign the **simpleui** directory in the project dependency package to the **simpleui** directory of the source code.
     ```shell
     ln -s sourceFile TargetFile
     ```
 5. Right clicl on the windows environment to create a shortcut.
 
-Then you can modify and publish simpleui. If you have any questions, please join the QQ group：786576510
+Then you can modify and publish **simpleui**. If you have any questions, please join the QQ group：786576510
 ## Source Code install to local
 + Clone source code local installation
 ```shell
@@ -336,7 +336,7 @@ Next steps please refer to [Modify default template for simpleui](#Modify%2ddefa
 
 ## ReWrite Page
 
-For example, rewrite the home page, create a new admin folder in the templates directory, and then add a index.html
+For example, rewrite the home page, create a new **admin** folder in the **templates** directory, and then add a index.html
 If you choose **extends**, you can only use **block**  
 for example：
 ```html
@@ -396,14 +396,14 @@ If you want to rewrite all：
     + this project is recommended to use python3.x, python2.x may not be compatible.
     + If you make a mistake when using source installation, please specify the python version, python3 and pip3
   ### Unable to Start
-  May be unable to start due to some unknown problem, please don't give up simpleui, you can commit [issue](https://github.com/newpanjing/simpleui/issues)，or Join QQ group directly：786576510，we will assist in solving.
+  May be unable to start due to some unknown problem, please don't give up **simpleui**, you can commit [issue](https://github.com/newpanjing/simpleui/issues)，or join QQ group directly：786576510，we will assist in solving.
   
   ### Style Normal Loading But Display Abnormal
-  in the Windows8 system, you may encounter that css and other files are all loaded normally, but the display is not normal.this is because the response header is application/x-css, not text/css, causing the browser to not parse properly.
+  in the **Windows8** system, you may encounter that **css** and other files are all loaded normally, but the display is not normal.this is because the response header is **application/x-css**, not **text/css**, causing the browser to not parse properly.
   #### Solution：
-1.Run cmd： Input regedit and click Enter
+1.Run cmd： Input **regedit** and click Enter
     
-2.Find the .css in the registry HKEY_CLASSES_ROOT click on the .css floder Modify the Content Type to text/css.
+2.Find the **.css** in the registry **HKEY_CLASSES_ROOT** click on the **.css** floder Modify the **Content Type** to **text/css**.
 
 Reference：[https://blog.csdn.net/sun754276603/article/details/46989965](https://blog.csdn.net/sun754276603/article/details/46989965)
 
