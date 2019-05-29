@@ -76,7 +76,7 @@ If you don't have any `python django` basics, you can download a `demo` that can
 It is the same product as the suit. We are a theme that is more in line with the aesthetic and usage habits of Chinese people.
 
 # Start
-Detailed steps [Document](./QUICK_en.md). Also refer to[Demo](#Online%2dDemo)
+Detailed steps [Document](./QUICK_en.md). Also refer to [Demo](#Online%2dDemo)
 
 + Installation
 ```python
