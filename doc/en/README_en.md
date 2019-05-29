@@ -26,18 +26,18 @@ simpleui Characteristics
 -----
 👍 Built in 28 popular themes
 
-⚡️ pip lightning installation 100% compatible with native `admin` without modifying the code
+⚡️ pip lightning installation, 100% compatible with native, `admin` without modifying the code
 
 ✨ Multi-label pages, each module is more clear
 
 🎯 Simple configuration, get started quickly, add `simpleui` in `settings.py` and start it immediately, the efficiency is increased by `100%!` Make back-end development handy.
 
-☕️ `Element-UI` and `Vue` ，Let the `django admin be better.
+☕️ `Element-UI` and `Vue` ，Let the `django admin` be better.
 
 # Original intention of development
 `Django Admin` default interface design language has some shortcomings, such as single color, the use of a large number of lines, and obvious segmentation. To classify these shortcomings is that the interface is monotonous, obvious similarity, and lack of surprises. We believe that the new platform-like visual style can break these constraints, try some new explorations, and inspire traditional design cognition, so combined with the current design trend, I have conceived `Element+Django Admin's` Simpleui. Let `Django Admin` and `Element` make the perfect interaction. With the most popular back-end design style, let `Django Admin` is even more powerful.
 
-## QQ group
+## QQ Group
 + QQ group : 786576510
 
 <img src='https://github.com/newpanjing/simpleui/raw/master/images/QQ%E7%BE%A4.jpg' width='200'>
@@ -46,7 +46,7 @@ simpleui Characteristics
 ## Document
 The document describes in detail how to use the installation, as well as a description of the various configuration items, please click on the link below.
  
- ### 重要的事情说3遍：
+ ### Important Things To Say Three Times：
 
 👇👇👇👇👇👇👇👇👇👇👇
 
@@ -76,14 +76,14 @@ If you don't have any `python django` basics, you can download a `demo` that can
 It is the same product as the suit. We are a theme that is more in line with the aesthetic and usage habits of Chinese people.
 
 # Start
-Detailed steps [Document](./QUICK_en.md)。 Also refer to[Demo](#Online%2dDemo)
+Detailed steps [Document](./QUICK_en.md). Also refer to[Demo](#Online%2dDemo)
 
 + Installation
 ```python
 pip install django-simpleui
 ```
 
-Use pip or [Clone Source](#Clone%2dsource%2dlocal%2dinstallation)After installing simpleui, and`simpleui` to the first line of `INSTALLED_APPS` in your project's `settings.py` file.
+Use pip or [Clone Source](#Clone%2dsource%2dlocal%2dinstallation) after installing simpleui, and`simpleui` to the first line of `INSTALLED_APPS` in your project's `settings.py` file.
 
  For example🌰：
   ```python
@@ -101,7 +101,7 @@ Use pip or [Clone Source](#Clone%2dsource%2dlocal%2dinstallation)After installin
     ]
   ```
 
-If you don't know how to configure or how to use it，please download [local demo](#Local%2dDemo%2ddownload) to learning. or join the QQ group: `786576510` consulting.
+If you don't know how to configure or how to use it，please download [local demo](#Local%2dDemo%2ddownload) to learning. Or join the QQ group :  `786576510` consulting.
 
 # Upgrade simpleui
 ```python
@@ -126,23 +126,23 @@ Please add in the `settings.py` file：
     ```shell
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
     ```
-3. Please refer to other questions[django Documentation](https://docs.djangoproject.com/en/2.2/intro/tutorial01/)。
+3. Please refer to other questions [django Documentation](https://docs.djangoproject.com/en/2.2/intro/tutorial01/).
 
-4. i18n internationalization Adopt js internationalization, the default is English and Chinese, switch with the system. Please see [International configuration](/i18n.md)
+4. i18n internationalization adopt js internationalization, the default is English and Chinese, switch with the system. Please see [International configuration](/i18n.md)
 
-other questions[Quick start guide](./QUICK_en.md)
+other questions [Quick start guide](./QUICK_en.md)
 
 ## Support for django and python versions
-[list of supported versions](/VERSION.md)
+[List of Supported Versions](/VERSION.md)
 
 
-## Browser compatibility
+## Browser Compatibility
 
 ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![UC](https://raw.github.com/alrra/browser-logos/master/src/uc/uc_48x48.png)
 :---: | :---: | :---: | :---: | :---: | :---: | :---:
  ✔ |  ✔ |  ✔ |  11+ ✔ |  ✔ |  ✔ | ✔
 
-## README badge
+## **README** Badge
 
 If your project is using Simpleui，you can put the Simpleui badge [![ice](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui) add to your README：
 
@@ -151,7 +151,7 @@ If your project is using Simpleui，you can put the Simpleui badge [![ice](https
 ```
 
 
-## sponsor💰
+## Sponsor💰
 If you think that `simpleui` is helpful to you, you can sponsor us a cup of coffee and encourage us to continue to develop and maintain.
 ![sponsor us](https://github.com/newpanjing/simpleui/raw/master/images/pay.png)
 
