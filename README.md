@@ -188,7 +188,7 @@ python setup.py sdist install
 simpleui的发展离不开以下优秀贡献者的支持。如果您想为simpleui贡献代码，请fork到自己仓库，然后发起合并请求，合并至dev分支。
 
 |Github|贡献范围|
-|---|---|----|
+|------|------|
 |@zhangzhibo1014|英文文档翻译|
 |@liaogx|bug修复|
 |@shouyong|bug修复|

@@ -188,7 +188,7 @@ If you think that `simpleui` is helpful to you, you can sponsor us a cup of coff
 The development of simpleui is supported by the following excellent contributors. If you want to contribute code to simpleui, fork to your repository and then make a merge request to the dev branch.
 
 |Github|Scope|
-|---|---|----|
+|------|------|
 |@zhangzhibo1014|Translate English documents|
 |@liaogx|Bug fix|
 |@shouyong|Bug fix|
