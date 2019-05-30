@@ -189,8 +189,8 @@ simpleui的发展离不开以下优秀贡献者的支持。如果您想为simple
 
 |Github|贡献范围|
 |------|------|
-|@zhangzhibo1014|英文文档翻译|
-|@liaogx|bug修复|
-|@shouyong|bug修复|
-|@Roddy1219|bug修复|
-|@WalkerWang731|优质代码贡献|
+|[@zhangzhibo1014](https://github.com/zhangzhibo1014)|英文文档翻译|
+|[@liaogx](https://github.com/liaogx)|bug修复|
+|[@shouyong](https://github.com/shouyong)|bug修复|
+|[@Roddy1219](https://github.com/Roddy1219)|bug修复|
+|[@WalkerWang731](https://github.com/WalkerWang731)|优质代码贡献|

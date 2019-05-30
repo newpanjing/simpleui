@@ -189,8 +189,8 @@ The development of simpleui is supported by the following excellent contributors
 
 |Github|Scope|
 |------|------|
-|@zhangzhibo1014|Translate English documents|
-|@liaogx|Bug fix|
-|@shouyong|Bug fix|
-|@Roddy1219|Bug fix|
-|@WalkerWang731|Code contributions|
+|[@zhangzhibo1014](https://github.com/zhangzhibo1014)|Translate English document|
+|[@liaogx](https://github.com/liaogx)|Bug fix|
+|[@shouyong](https://github.com/shouyong)|Bug fix|
+|[@Roddy1219](https://github.com/Roddy1219)|Bug fix|
+|[@WalkerWang731](https://github.com/WalkerWang731)|Code contributions|
