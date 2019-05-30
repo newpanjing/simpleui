@@ -16,9 +16,9 @@ Django admin theme the simpleui
 </p>
 
 ---
-<center>
+<p align="center">
 中文 | <a href="./doc/en/README_en.md">English</a>
-</center>
+</p>
 
 ---
 
