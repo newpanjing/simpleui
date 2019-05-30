@@ -9,11 +9,16 @@ Simple and friendly.
 Django admin theme the simpleui
 </p>
 <p align="center">
-  <a href="https://github.com/996icu/996.ICU/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-Anti%20996-blue.svg"></a>
+   <a href="https://github.com/newpanjing/simpleui/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <a href="https://github.com/newpanjing/simpleui"><img src="https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg"></a>
   <a href="https://pypi.org/project/django-simpleui/#history"><img src="https://img.shields.io/pypi/v/django-simpleui.svg"></a>
 <a href="https://python.org"><img src="https://img.shields.io/badge/python->=3.7.x-green.svg"></a>
 </p>
+
+---
+<center>
+<a href="../../README.md">中文</a> | English
+</center>
 
 ---
 
@@ -177,3 +182,15 @@ If you think that `simpleui` is helpful to you, you can sponsor us a cup of coff
 
 # Set Font Size
 ![](https://github.com/newpanjing/simpleui/raw/master/images/%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F.png)
+
+## Great developer
+
+The development of simpleui is supported by the following excellent contributors. If you want to contribute code to simpleui, fork to your repository and then make a merge request to the dev branch.
+
+|Github|Scope|
+|---|---|----|
+|@zhangzhibo1014|Translate English documents|
+|@liaogx|Bug fix|
+|@shouyong|Bug fix|
+|@Roddy1219|Bug fix|
+|@WalkerWang731|Code contributions|

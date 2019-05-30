@@ -9,11 +9,16 @@ Simple and friendly.
 Django admin theme the simpleui
 </p>
 <p align="center">
-  <a href="https://github.com/996icu/996.ICU/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-Anti%20996-blue.svg"></a>
+  <a href="https://github.com/newpanjing/simpleui/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <a href="https://github.com/newpanjing/simpleui"><img src="https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg"></a>
   <a href="https://pypi.org/project/django-simpleui/#history"><img src="https://img.shields.io/pypi/v/django-simpleui.svg"></a>
 <a href="https://python.org"><img src="https://img.shields.io/badge/python->=3.7.x-green.svg"></a>
 </p>
+
+---
+<center>
+中文 | <a href="./doc/en/README_en.md">English</a>
+</center>
 
 ---
 
@@ -177,3 +182,15 @@ python setup.py sdist install
 
 # 设置字体大小
 ![](https://github.com/newpanjing/simpleui/raw/master/images/%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F.png)
+
+## 优质贡献者
+
+simpleui的发展离不开以下优秀贡献者的支持。如果您想为simpleui贡献代码，请fork到自己仓库，然后发起合并请求，合并至dev分支。
+
+|Github|贡献范围|
+|---|---|----|
+|@zhangzhibo1014|英文文档翻译|
+|@liaogx|bug修复|
+|@shouyong|bug修复|
+|@Roddy1219|bug修复|
+|@WalkerWang731|优质代码贡献|
