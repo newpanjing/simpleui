@@ -316,7 +316,10 @@
                 if (exists) {
                     this.tabModel = exists.id;
                 } else {
-                    data.loading=true;
+                    //其他的网址loading会一直转
+                    if(data.url.indexOf('http')!=0){
+                        data.loading=true;
+                    }
                     data.id = new Date().getTime() + "" + Math.random();
                     data.index = index;
                     this.tabs.push(data);
