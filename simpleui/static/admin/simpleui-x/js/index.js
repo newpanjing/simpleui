@@ -227,7 +227,15 @@
             },
             iframeLoad: function (tab, e) {
                 url = e.target.contentWindow.location.href
+
                 tab.newUrl = url;
+                tab.loading=false;
+                this.$forceUpdate();
+                var self=this;
+                e.target.contentWindow.beforeLoad=function(){
+                    tab.loading=true;
+                    self.$forceUpdate();
+                }
             },
             setTheme: function (item) {
                 var url = window.themeUrl;
@@ -293,6 +301,7 @@
             }
             ,
             openTab: function (data, index) {
+
                 this.breadcrumbs = data.breadcrumbs;
                 var exists = null;
                 //判断是否存在，存在就直接打开
@@ -307,6 +316,7 @@
                 if (exists) {
                     this.tabModel = exists.id;
                 } else {
+                    data.loading=true;
                     data.id = new Date().getTime() + "" + Math.random();
                     data.index = index;
                     this.tabs.push(data);

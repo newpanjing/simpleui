@@ -112,6 +112,12 @@
 
             }
         })
+        window.addEventListener('beforeunload', () => {
+            if(window.beforeLoad){
+                window.beforeLoad();
+            }
+        });
+
     </script>
     <!-- Container -->
     <div id="container">

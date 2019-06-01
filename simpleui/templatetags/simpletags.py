@@ -315,6 +315,8 @@ def custom_button(context):
         actions = admin.actions
         # 输出自定义按钮的属性
         for name in actions:
+            if type(name) != str:
+                continue
             values = {}
             fun = getattr(admin, name)
             for key, v in fun.__dict__.items():
@@ -333,7 +335,7 @@ def search_placeholder(context):
         mappers[f.name] = f
 
     verboses = []
-    
+
     for field in cl.search_fields:
         f = mappers.get(field)
         if hasattr(f, 'verbose_name'):

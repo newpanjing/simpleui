@@ -155,10 +155,6 @@
                 <el-tabs v-model="tabModel" type="border-card" editable style="height: 100%" @edit="handleTabsEdit"
                          @tab-click="tabClick">
 
-                    {#                   <el-tab-pane :name="222">#}
-                    {#                        <span slot="label"><i class="el-icon-date"></i> <el-button>测试</el-button></span>#}
-                    {#                    </el-tab-pane>#}
-
                     <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id"
                                  :key="item.id">
 
@@ -174,7 +170,7 @@
                             <span slot="label" @contextmenu.prevent="contextmenu(item,$event)">
                         {% endif %}
 
-                        <i :class="item.icon"></i><span
+                        <i :class="item.loading?'el-icon-loading':item.icon"></i><span
                             v-text="item.name"></span>
                         </span>
 
