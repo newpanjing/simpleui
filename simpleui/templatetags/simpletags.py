@@ -24,7 +24,7 @@ from django.db import models
 
 register = template.Library()
 
-PY_VER = sys.version[0]        # 2 or 3
+PY_VER = sys.version[0]  # 2 or 3
 
 
 def unicode_to_str(u):
@@ -305,3 +305,20 @@ def load_analysis(context):
         return mark_safe(html)
     except:
         return ''
+
+
+@register.simple_tag(takes_context=True)
+def custom_button(context):
+    admin = context.get('cl').model_admin
+    data = {}
+    if hasattr(admin, 'actions'):
+        actions = admin.actions
+        # 输出自定义按钮的属性
+        for name in actions:
+            values = {}
+            fun = getattr(admin, name)
+            for key, v in fun.__dict__.items():
+                if key != '__len__':
+                    values[key] = v
+            data[name] = values
+    return json.dumps(data)

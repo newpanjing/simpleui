@@ -34,7 +34,7 @@ Before starting，please take a minte to understand **settings.py**, because it'
   + [ReWrite Page](#ReWrite%2dPage)
   + [Custom code to Header](#Custom%2dcode%2dto%2dHeader)
   + [Custom code to Footer](#Custom%2dcode%2dto%2dFooter)
-
+  + [Custom Action](#Custom%2dAction)
 # Common Problems
   + [settings.py](#Not%2dfound%2dsettings.py)
   + [python version problem](#python%2dversion%2dproblem)
@@ -386,6 +386,49 @@ If you want to rewrite all：
         ..your code..
     {% endblock %}
 ```
+
+## Custom Action
+> Must be version 2.1.2 or above
+
+Django admin provides support for custom buttons by default, but styles and ICONS are not customizable. Simpleui adds custom styles, ICONS and button types to django admin custom action.
+
+Code：
+```python
+@admin.register(Employe)
+class EmployeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'gender', 'idCard', 'phone', 'birthday', 'department', 'enable', 'create_time')
+   
+    # add action
+    actions = ['make_copy', 'custom_button']
+
+    def custom_button(self, request, queryset):
+        pass
+
+    # display text，Consistent with django admin
+    custom_button.short_description = 'Test Button'
+    # icon，reference：element-ui icon and https://fontawesome.com
+    custom_button.icon = 'fas fa-audio-description'
+
+    # Specify button type：https://element.eleme.cn/#/zh-CN/component/button
+    custom_button.type = 'danger'
+
+    # Custom style
+    custom_button.style = 'color:black;'
+
+    def make_copy(self, request, queryset):
+        pass
+    make_copy.short_description = 'Copy employe'
+```
+
+Configuration compatible with native admin
+### Field:
+
+|Field|Description|
+|------|------|
+|icon|Button icon，Reference：https://element.eleme.cn/#/zh-CN/component/icon and https://fontawesome.com，copy class|
+|type|Button type，Reference：https://element.eleme.cn/#/zh-CN/component/button|
+|style|Customize CSS styles|
+
 ## Common Problems
   ### Not found settings.py
 

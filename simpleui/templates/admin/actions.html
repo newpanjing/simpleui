@@ -11,6 +11,7 @@
             {% trans 'Add' %}
         </el-button>
     {% endif %}
+
     {% for field in action_form.fields.action.choices %}
         {% if field.0 %}
 
@@ -31,7 +32,7 @@
                     </el-select>
                     <el-button icon="fas fa-download" data-name="{{ field.0 }}">{{ field.1 }}</el-button>
                 {% else %}
-                    <el-button data-name="{{ field.0 }}">{{ field.1 }}</el-button>
+                    <el-button :icon="customButton.{{ field.0 }}.icon" :style="customButton.{{ field.0 }}.style" :type="customButton.{{ field.0 }}.type" data-name="{{ field.0 }}">{{ field.1 }}111</el-button>
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -61,6 +62,7 @@
 
 </div>
 <script type="text/javascript">
+
     var _action = new Vue({
         el: '.actions',
         data: {
@@ -90,7 +92,8 @@
             }, {
                 value: 7,
                 label: 'html'
-            }]
+            }],
+            customButton:{% autoescape off %}{% custom_button %}{% endautoescape %}
         },
         methods: {
             formSubmit: function () {

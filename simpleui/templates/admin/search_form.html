@@ -28,6 +28,7 @@
                               v-model="searchInput" @keyup.enter.native="formSubmit()">
                     </el-input>
                 {% endif %}
+
                 {% if cl.has_filters %}
 
                     {% for spec in cl.filter_specs %}

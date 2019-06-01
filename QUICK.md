@@ -36,7 +36,7 @@ simpleui 快速上手指南
   + [重写页面](#重写页面)
   + [头部添加自定义代码](#头部添加自定义代码)
   + [底部添加自定义代码](#底部添加自定义代码)
-
+  + [自定义按钮](#自定义按钮)
 # 常见问题
   + [settings.py](#settingspy-找不到)
   + [python版本问题](#python版本问题)
@@ -402,6 +402,48 @@ python setup.py sdist install
         ..此处写你的代码
     {% endblock %}
 ```
+
+## 自定义按钮
+> 需要在2.1.2以上版本生效
+
+django admin 默认提供了自定义按钮的支持，但是样式、图标均不可自定义，simpleui在django admin 自定义action的基础上增加了样式、图标、按钮类型自定义。
+
+代码：
+```python
+    @admin.register(Employe)
+class EmployeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'gender', 'idCard', 'phone', 'birthday', 'department', 'enable', 'create_time')
+   
+    # 增加自定义按钮
+    actions = ['make_copy', 'custom_button']
+
+    def custom_button(self, request, queryset):
+        pass
+
+    # 显示的文本，与django admin一致
+    custom_button.short_description = '测试按钮'
+    # icon，参考element-ui icon与https://fontawesome.com
+    custom_button.icon = 'fas fa-audio-description'
+
+    # 指定element-ui的按钮类型，参考https://element.eleme.cn/#/zh-CN/component/button
+    custom_button.type = 'danger'
+
+    # 给按钮追加自定义的颜色
+    custom_button.style = 'color:black;'
+
+    def make_copy(self, request, queryset):
+        pass
+    make_copy.short_description = '复制员工'
+```
+该配置与原生admin兼容。
+### 字段：
+
+|字段|说明|
+|------|------|
+|icon|按钮图标，参考https://element.eleme.cn/#/zh-CN/component/icon与https://fontawesome.com，把class 复制进来即可|
+|type|按钮类型，参考：https://element.eleme.cn/#/zh-CN/component/button|
+|style|自定义css样式|
+
 ## 常见问题
   ### settings.py 找不到
 
