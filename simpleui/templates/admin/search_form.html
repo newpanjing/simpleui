@@ -139,7 +139,7 @@
         var searchApp = new Vue({
             el: '#toolbar',
             data: {
-                placeholder: '{% trans 'Search' %}',
+                placeholder: '{% trans 'Search' %}{% autoescape off %}{% search_placeholder %}'{% endautoescape %},
                 searchInput: '{{ cl.query }}',
                 {% if cl.has_filters %}
                     {% for spec in cl.filter_specs %}

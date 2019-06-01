@@ -322,3 +322,22 @@ def custom_button(context):
                     values[key] = v
             data[name] = values
     return json.dumps(data)
+
+
+@register.simple_tag(takes_context=True)
+def search_placeholder(context):
+    cl = context.get('cl')
+    fields = cl.model._meta.fields
+    mappers = {}
+    for f in fields:
+        mappers[f.name] = f
+
+    verboses = []
+    print(cl.search_fields)
+    for field in cl.search_fields:
+        f = mappers.get(field)
+        if hasattr(f, 'verbose_name'):
+            verboses.append(f.verbose_name)
+        else:
+            verboses.append(field)
+    return ",".join(verboses)
