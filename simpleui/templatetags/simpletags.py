@@ -243,7 +243,7 @@ def load_message(context):
     messages = context.get('messages')
     array = [dict(msg=msg.message, tag=msg.tags) for msg in messages] if messages else []
 
-    return '<script type="text/javascript"> var messages={}</script>'.format(array)
+    return '<script id="out_message" type="text/javascript">var messages={}</script>'.format(json.dumps(array))
 
 
 @register.simple_tag(takes_context=True)

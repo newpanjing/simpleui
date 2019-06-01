@@ -121,13 +121,14 @@
                 {% load_message %}
             {% endautoescape %}
             <script type="text/javascript">
+
                 new Vue({
                     created: function () {
                         var self = this;
 
                         messages.forEach(item => {
                             self.$notify({
-                                title: '提示',
+                                title: getLanuage('Tips'),
                                 message: item.msg,
                                 type: item.tag,
                                 dangerouslyUseHTMLString: true
