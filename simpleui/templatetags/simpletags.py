@@ -161,6 +161,8 @@ def menus(context):
     # return request.user.has_perm("%s.%s" % (opts.app_label, codename))
 
     config = get_config('SIMPLEUI_CONFIG')
+    if not config:
+        config = {}
 
     app_list = context.get('app_list')
     for app in app_list:
