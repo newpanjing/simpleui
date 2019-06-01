@@ -9,6 +9,12 @@
 {% block extrastyle %}{{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}"/>{% endblock %}
 {% block content %}
+    <style type="text/css">
+        .inline-group .tabular td.original p{
+            margin-top: -33px;
+        }
+
+    </style>
     <div id="content-main" class="form-main">
         {% block object-tools %}
             {% if change %}{% if not is_popup %}
