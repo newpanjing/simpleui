@@ -140,7 +140,9 @@
                             success: function (result) {
                                 var msgs = $(result).find('#out_message').html().replace('var messages=', '');
                                 showMessage.call(self,JSON.parse(msgs));
-                                window.location.reload();
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 1000);
                             },
                             error: function () {
                                  this.$notify({
@@ -151,7 +153,9 @@
                                 });
                             }
                         });
-                  });
+                  }).catch(_ =>{
+
+                });
             }
         }
     });

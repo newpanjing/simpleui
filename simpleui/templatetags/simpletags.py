@@ -333,11 +333,11 @@ def search_placeholder(context):
         mappers[f.name] = f
 
     verboses = []
-    print(cl.search_fields)
+    
     for field in cl.search_fields:
         f = mappers.get(field)
         if hasattr(f, 'verbose_name'):
-            verboses.append(f.verbose_name)
+            verboses.append(str(f.verbose_name))
         else:
-            verboses.append(field)
+            verboses.append(str(field))
     return ",".join(verboses)
