@@ -355,6 +355,8 @@ python setup.py sdist install
 例如重写首页，在templates目录中新建admin文件夹，然后添加index.html
 如果选择继承方式，就只能采用block
 代码如下：
+
+{% raw %}
 ```html
     {% extends 'admin/index.html' %}
     {% load static %}
@@ -369,6 +371,7 @@ python setup.py sdist install
         ..此处写你的代码
     {% endblock %}
 ```
+{% endraw %}
 
 如果是想全部重写：
 
