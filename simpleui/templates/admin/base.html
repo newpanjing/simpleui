@@ -20,13 +20,13 @@
 {#    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>#}
 
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}"></script>
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}?_=2.1.2"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
         {% if ""|get_language_code != 'zh-hans' %}
 
-            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}"></script>
+            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}?_=2.1.2"></script>
             <script type="text/javascript">
                 ELEMENT.locale(ELEMENT.lang.en)
             </script>

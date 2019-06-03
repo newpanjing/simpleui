@@ -138,9 +138,6 @@ body,
   .el-dialog {
     width: 90%;
   }
-  .el-dialog__body{
-    padding: 0px;
-  }
 }
 @media (max-width: 1024px) {
   .change-list .filtered .results,
