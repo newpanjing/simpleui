@@ -37,5 +37,6 @@ var Lanuages = {
     "Go back": '',
 
     'Set font size': '',
-    'Reset': ''
+    'Reset': '',
+    'Are you sure you want to delete the selected?':''
 }

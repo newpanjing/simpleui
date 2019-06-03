@@ -43,7 +43,7 @@ var dicts = {
     //异常
     'fas fa-exclamation-triangle': ['异常', '错误', '警告', '警报', '报警'],
     //产品
-    'fas fa-shopping-cart': ['产品', '货物', '商品', '购物车'],
+    'fas fa-shopping-cart': ['产品', '货物', '商品', '购物车', '销售', '售卖'],
     //分类
     'fas fa-list': ['类别', '类目', '分类', '列表', '集合', '排行'],
     //职位
@@ -107,5 +107,35 @@ var dicts = {
     //收藏
     'far fa-star': ['收藏', '星星', '五角星', '中国'],
     //短信
-    'far fa-comment-dots': ['短信', '消息', '提示']
+    'far fa-comment-dots': ['短信', '消息', '提示'],
+    //审核
+    'far fa-eye': ['审核', '审计', '审查', 'audit', 'review', 'eyes'],
+    //任务
+    'fas fa-tasks': ['任务', 'job', 'task'],
+    //快照
+    'fas fa-camera-retro': ['快照', '照片', '照相', '图形', '图像', '图片'],
+    //应用
+    'fab fa-app-store-ios': ['程序', '软件', '应用', 'APP'],
+    //发布
+    'fas fa-retweet': ['发布', '部署', '更新', '投递', 'post', '上架'],
+    //版本
+    'fas fa-code-branch': ['版本', '历史', '分支'],
+    //问题
+    'fas fa-question': ['提问', '问题', '询问', '疑问', '解答', '帮助', 'question', 'ask'],
+    //tag
+    'fas fa-tags': ['tag', '标签'],
+    //开发
+    'fas fa-laptop-code': ['开发', '程序员', '电脑', '笔记本', '计算机'],
+    //二维码
+    'fas fa-qrcode': ['扫码', '二维码', '收款码', '付款码'],
+    //课本
+    'fas fa-book': ['课程', '课本', '课时', '读书', '看书', '阅读'],
+    //在线
+    'fas fa-signal': ['在线', '信号', '无线'],
+    //苹果
+    'fab fa-apple': ['苹果', 'apple', 'iOS'],
+    //桌面
+    'fas fa-desktop': ['通用', '屏幕', '显示器', '综合'],
+    //职务
+    'fas fa-user-secret': ['职务', '职业', '职称', '职务']
 }

@@ -9,6 +9,7 @@ from django.utils.safestring import mark_safe
 from django.templatetags import static
 
 import os
+import sys
 import json
 
 import platform
@@ -22,6 +23,14 @@ import time
 from django.db import models
 
 register = template.Library()
+
+PY_VER = sys.version[0]  # 2 or 3
+
+
+def unicode_to_str(u):
+    if PY_VER != '2':
+        return u
+    return u.encode()
 
 
 @register.simple_tag(takes_context=True)
@@ -152,17 +161,26 @@ def menus(context):
     # return request.user.has_perm("%s.%s" % (opts.app_label, codename))
 
     config = get_config('SIMPLEUI_CONFIG')
+    if not config:
+        config = {}
 
     app_list = context.get('app_list')
     for app in app_list:
         _models = [
             {
                 'name': str(m.get('name')),
-                'icon': get_icon(m.get('object_name')),
+                'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name'))),
                 'url': m.get('admin_url'),
                 'addUrl': m.get('add_url'),
-                'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
+                'breadcrumbs': [{
+                    'name': str(app.get('name')),
+                    'icon': get_icon(app.get('app_label'), str(app.get('name')))
+                }, {
+                    'name': str(m.get('name')),
+                    'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name')))
+                }]
             }
+
             for m in app.get('models')
         ] if app.get('models') else []
 
@@ -182,6 +200,17 @@ def menus(context):
                 data.append(i)
         else:
             data = config.get('menus')
+
+    # 获取侧边栏排序, 如果设置了就按照设置的内容排序, 留空则表示默认排序以及全部显示
+    if config.get('menu_display') is not None:
+        display_data = list()
+        for _app in data:
+            if _app['name'] not in config.get('menu_display'):
+                continue
+            _app['_weight'] = config.get('menu_display').index(_app['name'])
+            display_data.append(_app)
+        display_data.sort(key=lambda x: x['_weight'])
+        data = display_data
 
     return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data))
 
@@ -223,7 +252,7 @@ def load_message(context):
     messages = context.get('messages')
     array = [dict(msg=msg.message, tag=msg.tags) for msg in messages] if messages else []
 
-    return '<script type="text/javascript"> var messages={}</script>'.format(array)
+    return '<script id="out_message" type="text/javascript">var messages={}</script>'.format(json.dumps(array))
 
 
 @register.simple_tag(takes_context=True)
@@ -285,3 +314,41 @@ def load_analysis(context):
         return mark_safe(html)
     except:
         return ''
+
+
+@register.simple_tag(takes_context=True)
+def custom_button(context):
+    admin = context.get('cl').model_admin
+    data = {}
+    if hasattr(admin, 'actions'):
+        actions = admin.actions
+        # 输出自定义按钮的属性
+        for name in actions:
+            if type(name) != str:
+                continue
+            values = {}
+            fun = getattr(admin, name)
+            for key, v in fun.__dict__.items():
+                if key != '__len__':
+                    values[key] = v
+            data[name] = values
+    return json.dumps(data)
+
+
+@register.simple_tag(takes_context=True)
+def search_placeholder(context):
+    cl = context.get('cl')
+    fields = cl.model._meta.fields
+    mappers = {}
+    for f in fields:
+        mappers[f.name] = f
+
+    verboses = []
+
+    for field in cl.search_fields:
+        f = mappers.get(field)
+        if hasattr(f, 'verbose_name'):
+            verboses.append(str(f.verbose_name))
+        else:
+            verboses.append(str(field))
+    return ",".join(verboses)

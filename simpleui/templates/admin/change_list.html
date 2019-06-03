@@ -104,4 +104,13 @@
             </form>
         </div>
     </div>
+    <script type="text/javascript">
+        $(".object-tools").hide().find('li a').each(function () {
+            _action.exts.push({
+                name:$(this).text(),
+                url:$(this).attr('href')
+            })
+        })
+
+    </script>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% load i18n static simpletags %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!--
-   The project adopted: django-simpleui
+   The project use: django-simpleui
    source code：
    https://github.com/newpanjing/simpleui
 -->
@@ -15,7 +15,7 @@
     <title>{{ site_title }}-{% trans 'Log in' %}</title>
     <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">
 
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/login.css' %}?_=2.1">
     <style type="text/css">
@@ -30,10 +30,14 @@
             position: relative;
         }
     </style>
+    {% block head %}
+        {# You can add code here. #}
+    {% endblock %}
 </head>
 <body class="bg">
 
 <div class="login-main">
+    {% block logo %}
     <div class="logo">
         {% if "SIMPLEUI_LOGO"|get_config %}
             <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
@@ -41,7 +45,13 @@
             <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
         {% endif %}
     </div>
+    {% endblock %}
+
+    {% block header %}
     <div class="header">{{ site_header }}</div>
+    {% endblock %}
+
+    {% block errors %}
     {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
             <el-alert
@@ -59,7 +69,9 @@
             {% endif %}
         </p>
     {% endif %}
-    <form class="layui-form" action="{{ app_path }}" method="post" id="login-form">
+    {% endblock %}
+    {% block form %}
+    <form class="simpleui-form" action="{{ app_path }}" method="post" id="login-form">
         {% csrf_token %}
         <div class="simpleui-input-inline">
             <el-input prefix-icon="fas fa-user" v-model="username" name="username"
@@ -76,11 +88,33 @@
 
         <input type="hidden" name="next" value="{{ next }}"/>
     </form>
+    {% endblock %}
 </div>
 
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}"></script>
 
+{% if 'SIMPLEUI_LOGIN_PARTICLES'|get_config != False %}
+    <!--
+        Close login page particles see link:
+        关闭登录页粒子动画请查看：
+        https://github.com/newpanjing/simpleui/blob/master/QUICK.md#关闭登录页粒子动画
+    -->
+<style type="text/css">
+    #particles-js{
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: -1;
+    }
+</style>
+<!-- particles.js container -->
+<div id="particles-js"></div>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/particles/particles.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/particles/app.js' %}"></script>
+{% endif %}
 </body>
 </html>

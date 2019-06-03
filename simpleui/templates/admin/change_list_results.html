@@ -48,39 +48,3 @@
     </table>
 </div>
 {#{% endif %}#}
-
-<script type="text/javascript">
-    if(window.searchApp) {
-        $(function () {
-            try {
-                dict = {}
-                $("#result_list thead th").each(function () {
-
-                    var key = $(this).attr("class").split("-")[1]
-                    var value = $(this).text().replace(/ |\r|\n|\t/g, "")
-                    if (value != "") {
-                        dict[key] = value;
-                    }
-                })
-                var buffer = []
-                var fields = ['{{ cl.search_fields|join:"','" }}']
-                if (fields) {
-                    for (var i in fields) {
-                        var f = fields[i];
-                        var name = dict[f]
-                        if (!name) {
-                            name = f;
-                        }
-                        buffer.push(name)
-                    }
-                }
-
-                var placeholder = "{% trans 'Search' %}" + buffer.join(",")
-                searchApp.placeholder = placeholder;
-            } catch (e) {
-                console.warn('error!please report to github:https://github.com/newpanjing/simpleui/issues');
-                console.error(e);
-            }
-        });
-    }
-</script>

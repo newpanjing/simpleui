@@ -13,6 +13,7 @@ simpleui 快速上手指南
   + [如何下载这个模版](#如何下载这个模版)
   + [切换主题](#切换主题)
   + [图标说明](#图标说明)
+  + [关闭登录页粒子动画](#关闭登录页粒子动画)
 # 进阶指南
   + [自定义主题](#自定义主题)
   + [修改首页图标](#修改默认图标)
@@ -35,7 +36,7 @@ simpleui 快速上手指南
   + [重写页面](#重写页面)
   + [头部添加自定义代码](#头部添加自定义代码)
   + [底部添加自定义代码](#底部添加自定义代码)
-
+  + [自定义按钮](#自定义按钮)
 # 常见问题
   + [settings.py](#settingspy-找不到)
   + [python版本问题](#python版本问题)
@@ -108,6 +109,12 @@ DEBUG = True
 ## 图标说明
 simpleui中显示的图标 可以参考[fontawesome](https://fontawesome.com/icons?d=gallery)的图标，只需要将完整的class名填入即可。
 
+## 关闭登录页粒子动画
+在项目的settings.py中加入
+```python
+SIMPLEUI_LOGIN_PARTICLES = False
+```
+粒子动画默认开启
 
 ## 自定义主题
 在自定义主题之前，请先把simpleui的静态资源克隆到根目录。然后找到theme
@@ -236,6 +243,11 @@ SIMPLEUI_INDEX = 'https://www.88cto.com'
 该字段用于告诉simpleui，是否需要保留系统默认的菜单，默认为False，不保留。
 如果改为True，自定义和系统菜单将会并存
 
+#### menu_display 过滤显示菜单和排序功能
+该字段用于告诉simpleui，是否需要开启过滤显示菜单和排序功能。<br>
+默认可以不用填写，缺省配置为默认排序，不对菜单进行过滤和排序。<br>
+开启认为传一个列表，如果列表为空，则什么也不显示。列表中的每个元素要对应到menus里面的name字段
+
 #### menus说明
 
 |字段|说明|
@@ -249,6 +261,7 @@ SIMPLEUI_INDEX = 'https://www.88cto.com'
 ```python
 SIMPLEUI_CONFIG = {
     'system_keep':False,
+    'menu_display': ['Simpleui', '测试', '权限认证'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
     'menus': [{
         'name': 'Simpleui',
         'icon': 'fas fa-code',
@@ -346,7 +359,7 @@ python setup.py sdist install
     {% extends 'admin/index.html' %}
     {% load static %}
 
-    {%block head}
+    {% block head %}
         {{ block.super }}
         ..此处写你的代码
     {% endblock %}
@@ -374,7 +387,7 @@ python setup.py sdist install
     {% extends 'admin/index.html' %}
     {% load static %}
 
-    {%block head}
+    {% block head %}
         {{ block.super }}
         ..此处写你的代码
     {% endblock %}
@@ -389,6 +402,48 @@ python setup.py sdist install
         ..此处写你的代码
     {% endblock %}
 ```
+
+## 自定义按钮
+> 需要在2.1.2以上版本生效
+
+django admin 默认提供了自定义按钮的支持，但是样式、图标均不可自定义，simpleui在django admin 自定义action的基础上增加了样式、图标、按钮类型自定义。
+
+代码：
+```python
+    @admin.register(Employe)
+class EmployeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'gender', 'idCard', 'phone', 'birthday', 'department', 'enable', 'create_time')
+   
+    # 增加自定义按钮
+    actions = ['make_copy', 'custom_button']
+
+    def custom_button(self, request, queryset):
+        pass
+
+    # 显示的文本，与django admin一致
+    custom_button.short_description = '测试按钮'
+    # icon，参考element-ui icon与https://fontawesome.com
+    custom_button.icon = 'fas fa-audio-description'
+
+    # 指定element-ui的按钮类型，参考https://element.eleme.cn/#/zh-CN/component/button
+    custom_button.type = 'danger'
+
+    # 给按钮追加自定义的颜色
+    custom_button.style = 'color:black;'
+
+    def make_copy(self, request, queryset):
+        pass
+    make_copy.short_description = '复制员工'
+```
+该配置与原生admin兼容。
+### 字段：
+
+|字段|说明|
+|------|------|
+|icon|按钮图标，参考https://element.eleme.cn/#/zh-CN/component/icon与https://fontawesome.com，把class 复制进来即可|
+|type|按钮类型，参考：https://element.eleme.cn/#/zh-CN/component/button|
+|style|自定义css样式|
+
 ## 常见问题
   ### settings.py 找不到
 

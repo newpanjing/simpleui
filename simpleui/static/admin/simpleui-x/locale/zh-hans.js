@@ -37,5 +37,6 @@ var Lanuages = {
     "Go back": '返回',
 
     'Set font size': '设置字体大小',
-    'Reset': '重置'
+    'Reset': '重置',
+    'Are you sure you want to delete the selected?':'你确定要删除选中的吗？'
 }

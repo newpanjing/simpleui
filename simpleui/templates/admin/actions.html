@@ -11,12 +11,13 @@
             {% trans 'Add' %}
         </el-button>
     {% endif %}
+
     {% for field in action_form.fields.action.choices %}
         {% if field.0 %}
 
             {% if field.0 == 'delete_selected' %}
                 <el-button type="danger" data-name="{{ field.0 }}"
-                           icon="el-icon-delete">{% trans 'Delete' %}</el-button>
+                           icon="el-icon-delete" @click="delSelected('{{ field.0 }}')">{% trans 'Delete' %}</el-button>
             {% else %}
                 <input type="hidden" name="select_across" v-model="select_across" value="0" class="select-across">
                 <input type="hidden" name="file_format" v-model="file_format">
@@ -31,7 +32,9 @@
                     </el-select>
                     <el-button icon="fas fa-download" data-name="{{ field.0 }}">{{ field.1 }}</el-button>
                 {% else %}
-                    <el-button data-name="{{ field.0 }}">{{ field.1 }}</el-button>
+                    <el-button :icon="customButton.{{ field.0 }}.icon" :style="customButton.{{ field.0 }}.style"
+                               :type="customButton.{{ field.0 }}.type" data-name="{{ field.0 }}">{{ field.1 }}111
+                    </el-button>
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -42,6 +45,11 @@
         <el-button icon="el-icon-circle-check-outline" type="success"
                    @click="formSubmit()">{% trans 'Save' %}</el-button>
     {% endif %}
+
+    <el-button data-name="delete_selected" v-for="item in exts" :key="item.name" @click="extClick(item)">
+        <span :class="getIcon(item.name)"></span>
+        <span v-text="item.name"></span>
+    </el-button>
 
     {% block actions-counter %}
         {% if actions_selection_counter %}
@@ -59,8 +67,12 @@
         {% endif %}
     {% endblock %}
 
+
 </div>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
 <script type="text/javascript">
+
     var _action = new Vue({
         el: '.actions',
         data: {
@@ -90,11 +102,72 @@
             }, {
                 value: 7,
                 label: 'html'
-            }]
+            }],
+            customButton:{% autoescape off %}{% custom_button %}{% endautoescape %},
+            exts:[]
         },
         methods: {
+            getIcon:getIcon,
+            extClick:function(item){
+              window.location.href=item.url;
+            },
             formSubmit: function () {
                 $("#changelist-form").submit();
+            },
+            delSelected: function (name) {
+
+                $("#changelist-form input[name='action']").val(name);
+
+                $("#changelist-form [name='_save']").removeAttr('name');
+
+                $("#changelist-form [name!='']").each(function () {
+                    var obj = $(this);
+                    if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
+                        obj.removeAttr('name');
+                    }
+                });
+
+
+                var self=this;
+                function showMessage(msgs){
+                    msgs.forEach(item => {
+                        this.$notify({
+                            title: getLanuage('Tips'),
+                            message: item.msg,
+                            type: item.tag,
+                            dangerouslyUseHTMLString: true
+                        });
+                    });
+                }
+
+
+                //#67 #66 修复删除问题，改为弹出确认
+
+                this.$confirm(getLanuage('Are you sure you want to delete the selected?'))
+                  .then(_ =>{
+                        $.ajax({
+                            type: "POST",//方法类型
+                            url: "",//url
+                            data: $("#changelist-form").serialize()+'&post=yes',
+                            success: function (result) {
+                                var msgs = $(result).find('#out_message').html().replace('var messages=', '');
+                                showMessage.call(self,JSON.parse(msgs));
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 1000);
+                            },
+                            error: function () {
+                                 this.$notify({
+                                    title: getLanuage('Tips'),
+                                    message: 'Network error',
+                                    type: 'error',
+                                    dangerouslyUseHTMLString: true
+                                });
+                            }
+                        });
+                  }).catch(_ =>{
+
+                });
             }
         }
     });
@@ -109,7 +182,7 @@
 
 
     $(function () {
-        $(".actions button").click(function () {
+        $(".actions button[data-name!='delete_selected']").click(function () {
             var url = $(this).attr("url");
             if (url) {
                 window.location.href = url;
