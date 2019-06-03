@@ -182,6 +182,10 @@ body {
 .float-wrap span {
   margin-left: 10px;
 }
+.float-wrap .el-breadcrumb__item,
+.float-wrap .el-breadcrumb__item span {
+  margin-left: 0px;
+}
 .quick-card {
   width: auto;
   display: inline-block !important;

@@ -172,8 +172,15 @@ def menus(context):
                 'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name'))),
                 'url': m.get('admin_url'),
                 'addUrl': m.get('add_url'),
-                'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
+                'breadcrumbs': [{
+                    'name': str(app.get('name')),
+                    'icon': get_icon(app.get('app_label'), str(app.get('name')))
+                }, {
+                    'name': str(m.get('name')),
+                    'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name')))
+                }]
             }
+
             for m in app.get('models')
         ] if app.get('models') else []
 
