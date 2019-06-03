@@ -39,6 +39,9 @@ function Segment() {
 var segment = new Segment();
 
 function getIcon(name, icon) {
+    if(!name){
+        return;
+    }
     var value = 'far fa-file';
     if (icon) {
         //有默认图标的
