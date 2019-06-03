@@ -110,7 +110,7 @@
                                 </el-breadcrumb-item>
                                 <el-breadcrumb-item v-for="item in breadcrumbs"
                                                     :key="item">
-                                <span :class="item.icon"></span>
+                                <span :class="getIcon(item.name,item.icon)"></span>
                                 <span v-text="item.name"></span>
                                 </el-breadcrumb-item>
                             {% endverbatim myclode %}
@@ -289,8 +289,8 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}?_=2.1"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
 
-<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"
+<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js?_=2.1.2"
         onerror="localeError()"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>

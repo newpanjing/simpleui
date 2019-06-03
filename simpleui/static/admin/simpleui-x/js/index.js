@@ -348,12 +348,20 @@
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
                 if (width > 800) {
                     this.pwdDialog = {
-                        url: window.urls.changePassword,
+                        url: window.urls.changePassword+'?dialog=1',
                         name: language.change_password,
                         show: true
                     };
                 } else {
-                    this.openTab({url: window.urls.changePassword, icon: 'far fa-edit', name: language.change_password})
+                    this.openTab({
+                        url: window.urls.changePassword,
+                        icon: 'far fa-edit',
+                        name: language.change_password,
+                        breadcrumbs:[{
+                            name: language.change_password,
+                            icon: 'far fa-edit'
+                        }]
+                    })
                     app.breadcrumbs = [language.change_password];
                 }
             }

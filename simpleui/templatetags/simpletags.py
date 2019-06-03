@@ -197,6 +197,21 @@ def menus(context):
         if key in config and config.get(key) != False:
             temp = config.get('menus')
             for i in temp:
+                # 处理面包屑
+                if 'models' in i:
+                    for k in i.get('models'):
+                        k['breadcrumbs'] = [{
+                            'name': str(i.get('name')),
+                            'icon': i.get('icon')
+                        }, {
+                            'name': str(k.get('name')),
+                            'icon': k.get('icon')
+                        }]
+                else:
+                    i['breadcrumbs'] = [{
+                        'name': str(i.get('name')),
+                        'icon': i.get('icon')
+                    }]
                 data.append(i)
         else:
             data = config.get('menus')
