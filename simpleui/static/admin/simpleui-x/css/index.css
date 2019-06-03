@@ -186,6 +186,9 @@ body {
 .float-wrap .el-breadcrumb__item span {
   margin-left: 0px;
 }
+.float-wrap .el-breadcrumb__separator {
+  margin-left: 5px!important;
+}
 .quick-card {
   width: auto;
   display: inline-block !important;
