@@ -2,7 +2,7 @@
 <h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
 <ul>
 {% for choice in choices %}
-    <li{% if choice.selected %} class="selected"{% endif %}>
+    <li {% if choice.selected %} class="selected"{% endif %}>
     <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a></li>
 {% endfor %}
 </ul>
