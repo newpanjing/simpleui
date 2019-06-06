@@ -33,25 +33,26 @@
 </div>
 
 <script type="text/javascript">
-    new Vue({
-        el: '.submit-row',
-        data: {},
-        methods: {
-            del: function (url) {
-                window.location.href = url;
-            },
-            formSubmit: function (name, v, e) {
-                $("#actionName").attr('name', name).val(v);
-                $("form").submit();
-            },
-            prev: function () {
-                var referrer = document.referrer;
-                if (referrer && document.URL != referrer) {
-                    window.location.href = referrer;
-                } else {
-                    window.history.go(-1);
-                }
-            }
+  new Vue({
+    el: '.submit-row',
+    data: {
+    },
+    methods: {
+      del: function (url) {
+        window.location.href = url;
+      },
+      formSubmit: function (name, v, e) {
+        $("#actionName").attr('name', name).val(v);
+        $("form").submit();
+      },
+      prev: function () {
+        const referrer = document.referrer;
+        if (referrer && document.URL !== referrer) {
+            window.location.href = referrer;
+        } else {
+            window.history.go(-1);
         }
-    })
+      }
+    }
+  })
 </script>
