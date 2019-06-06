@@ -87,6 +87,15 @@
           {% block after_field_sets %}{% endblock %}
 
           {% block inline_field_sets %}
+            <style>
+              td.original p {
+                visibility: hidden
+              }
+
+              .inline-group .tabular tr.has_original td {
+                padding-top: 5px;
+              }
+            </style>
             {% for inline_admin_formset in inline_admin_formsets %}
               {% include inline_admin_formset.opts.template %}
             {% endfor %}
