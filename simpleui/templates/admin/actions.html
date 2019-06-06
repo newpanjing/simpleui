@@ -79,137 +79,125 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
 <script type="text/javascript">
-
-    const _action = new Vue({
-        el: '.actions',
-        data: {
-            select_across: 0,
-            file_format: 1,
-            options: [{
-                value: 0,
-                label: 'csv'
-            }, {
-                value: 1,
-                label: 'xls'
-            }, {
-                value: 2,
-                label: 'xlsx'
-            }, {
-                value: 3,
-                label: 'tsv'
-            }, {
-                value: 4,
-                label: 'ods'
-            }, {
-                value: 5,
-                label: 'json'
-            }, {
-                value: 6,
-                label: 'yaml'
-            }, {
-                value: 7,
-                label: 'html'
-            }],
-            customButton:{% autoescape off %}{% custom_button %}{% endautoescape %},
-    exts:[]
+  const _action = new Vue({
+    el: '.actions',
+    data: {
+      select_across: 0,
+      file_format: 1,
+      options: [{
+          value: 0,
+          label: 'csv'
+      }, {
+          value: 1,
+          label: 'xls'
+      }, {
+          value: 2,
+          label: 'xlsx'
+      }, {
+          value: 3,
+          label: 'tsv'
+      }, {
+          value: 4,
+          label: 'ods'
+      }, {
+          value: 5,
+          label: 'json'
+      }, {
+          value: 6,
+          label: 'yaml'
+      }, {
+          value: 7,
+          label: 'html'
+      }],
+      customButton:{% autoescape off %} {% custom_button %} {% endautoescape %},
+      exts:[]
     },
     methods: {
-        getIcon:getIcon,
-            extClick:function(item){
-            window.location.href=item.url;
-        },
-        formSubmit: function () {
-            $("#changelist-form").submit();
-        },
-        delSelected: function (name) {
-
-            $("#changelist-form input[name='action']").val(name);
-
-            $("#changelist-form [name='_save']").removeAttr('name');
-
-            $("#changelist-form [name!='']").each(function () {
-                var obj = $(this);
-                if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
-                    obj.removeAttr('name');
-                }
-            });
-
-
-            var self=this;
-            function showMessage(msgs){
-                msgs.forEach(item => {
-                    this.$notify({
-                        title: getLanuage('Tips'),
-                        message: item.msg,
-                        type: item.tag,
-                        dangerouslyUseHTMLString: true
-                    });
-                });
-            }
-
-
-            //#67 #66 修复删除问题，改为弹出确认
-
-            this.$confirm(getLanuage('Are you sure you want to delete the selected?'))
-                .then(_ =>{
-                    $.ajax({
-                        type: "POST",//方法类型
-                        url: "",//url
-                        data: $("#changelist-form").serialize()+'&post=yes',
-                        success: function (result) {
-                            var msgs = $(result).find('#out_message').html().replace('var messages=', '');
-                            showMessage.call(self,JSON.parse(msgs));
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 1000);
-                        },
-                        error: function () {
-                            this.$notify({
-                                title: getLanuage('Tips'),
-                                message: 'Network error',
-                                type: 'error',
-                                dangerouslyUseHTMLString: true
-                            });
-                        }
-                    });
-                }).catch(_ =>{
-
-            });
-        }
-    }
-    });
-
-    function selectAll() {
-        _action.select_across = 1;
-    }
-
-    function unSelect() {
-        _action.select_across = 0;
-    }
-
-
-    $(function () {
-        $(".actions button[data-name!='delete_selected']").click(function () {
-            var url = $(this).attr("url");
-            if (url) {
-                window.location.href = url;
-                return;
-            } else if ($(this).attr('data-name')) {
-                var name = $(this).attr("data-name");
-                $("#changelist-form input[name='action']").val(name);
-
-                $("#changelist-form [name='_save']").removeAttr('name');
-
-                $("#changelist-form [name!='']").each(function () {
-                    var obj = $(this);
-                    if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
-                        obj.removeAttr('name');
-                    }
-                });
-                $("#changelist-form").submit();
-            } else {
-                $("#changelist-form").submit();
-            }
+      getIcon:getIcon,
+      extClick:function(item){
+        window.location.href=item.url;
+      },
+      formSubmit: function () {
+        $("#changelist-form").submit();
+      },
+      delSelected: function (name) {
+        $("#changelist-form input[name='action']").val(name);
+        $("#changelist-form [name='_save']").removeAttr('name');
+        $("#changelist-form [name!='']").each(function () {
+          const obj = $(this);
+          if (obj.attr('name') && obj.attr('name').indexOf('form-') === 0) {
+            obj.removeAttr('name');
+          }
         });
+        const self=this;
+        function showMessage(msgs){
+          msgs.forEach(item => {
+            this.$notify({
+              title: getLanuage('Tips'),
+              message: item.msg,
+              type: item.tag,
+              dangerouslyUseHTMLString: true
+            });
+          });
+        }
+
+        //#67 #66 修复删除问题，改为弹出确认
+        this.$confirm(getLanuage('Are you sure you want to delete the selected?'))
+          .then(_ =>{
+            $.ajax({
+              type: "POST",//方法类型
+              url: "",//url
+              data: $("#changelist-form").serialize()+'&post=yes',
+              success: function (result) {
+                const msgs = $(result).find('#out_message').html().replace('var messages=', '');
+                showMessage.call(self,JSON.parse(msgs));
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+              },
+              error: function () {
+                this.$notify({
+                  title: getLanuage('Tips'),
+                  message: 'Network error',
+                  type: 'error',
+                  dangerouslyUseHTMLString: true
+                });
+              }
+            });
+          }).catch(_ =>{
+
+        });
+      }
+    }
+  });
+
+  function selectAll() {
+    _action.select_across = 1;
+  }
+
+  function unSelect() {
+    _action.select_across = 0;
+  }
+
+  $(function () {
+    $(".actions button[data-name!='delete_selected']").click(function () {
+      const url = $(this).attr("url");
+      if (url) {
+        window.location.href = url;
+      } else if ($(this).attr('data-name')) {
+        const name = $(this).attr("data-name");
+        $("#changelist-form input[name='action']").val(name);
+        $("#changelist-form [name='_save']").removeAttr('name');
+        $("#changelist-form [name!='']").each(function () {
+          const obj = $(this);
+          if (obj.attr('name') && obj.attr('name').indexOf('form-') === 0) {
+            obj.removeAttr('name');
+          }
+        });
+        $("#changelist-form").submit();
+      } else {
+        $("#changelist-form").submit();
+      }
     });
+  });
 </script>

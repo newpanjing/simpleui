@@ -2,19 +2,19 @@
 {% load i18n %}
 
 {% block bodyclass %}
-    {{ block.super }} app-{{ app_label }}
+  {{ block.super }} app-{{ app_label }}
 {% endblock %}
 
 {% if not is_popup %}
-    {% block breadcrumbs %}
-        <div class="breadcrumbs">
-            <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-            &rsaquo;
-            {% for app in app_list %}
-                {{ app.name }}
-            {% endfor %}
-        </div>
-    {% endblock %}
+  {% block breadcrumbs %}
+    <div class="breadcrumbs">
+      <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+      &rsaquo;
+      {% for app in app_list %}
+        {{ app.name }}
+      {% endfor %}
+    </div>
+  {% endblock %}
 {% endif %}
 
 {% block sidebar %}
