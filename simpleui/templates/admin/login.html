@@ -1,7 +1,7 @@
 {% load i18n static simpletags %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 
-<html lang="{{ LANGUAGE_CODE|default: 'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
   <meta charset="UTF-8">
   <meta name="renderer" content="webkit">
@@ -15,11 +15,8 @@
   <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/login.css' %}?_=2.1">
   <style type="text/css">
     .bg {
-      background: #f0f2f5;
-      background-image: url("{% static '/admin/simpleui-x/img/bg.svg' %}");
       min-height: 100%;
-      background-repeat: no-repeat;
-      background-position: 50%;
+      background: #f0f2f5 url("{% static '/admin/simpleui-x/img/bg.svg' %}") no-repeat 50%;
       background-size: 100%;
       padding: 20px 0;
       position: relative;
