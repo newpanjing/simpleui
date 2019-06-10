@@ -35,6 +35,8 @@ Before starting，please take a minte to understand **settings.py**, because it'
   + [Custom code to Header](#Custom%2dcode%2dto%2dHeader)
   + [Custom code to Footer](#Custom%2dcode%2dto%2dFooter)
   + [Custom Action](#Custom%2dAction)
+  + [Offline](#Offline)
+
 # Common Problems
   + [settings.py](#Not%2dfound%2dsettings.py)
   + [python version problem](#python%2dversion%2dproblem)
@@ -428,6 +430,18 @@ Configuration compatible with native admin
 |icon|Button icon，Reference：https://element.eleme.cn/#/zh-CN/component/icon and https://fontawesome.com，copy class|
 |type|Button type，Reference：https://element.eleme.cn/#/zh-CN/component/button|
 |style|Customize CSS styles|
+
+## Offline
+
+> Requires version 2.1.3 or above
+
+settings.py:
+```python
+SIMPLEUI_STATIC_OFFLINE = True
+```
+Specifies whether simpleui loads static resources in offline mode. When true, all resources will be read locally by default, even if there is no networking. Suitable for intranet projects
+
+If you do not fill in the item or are false, the default is obtained from the third-party CDN.
 
 ## Common Problems
   ### Not found settings.py
