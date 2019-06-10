@@ -125,6 +125,7 @@
             models: [],
             fontDialogVisible: false,
             fontSlider: 12,
+            loading:false
         },
         watch: {
             fold: function (newValue, oldValue) {
@@ -236,6 +237,7 @@
                     tab.loading=true;
                     self.$forceUpdate();
                 }
+                this.loading = false;
             },
             setTheme: function (item) {
                 var url = window.themeUrl;
@@ -319,6 +321,7 @@
                     //其他的网址loading会一直转
                     if(data.url.indexOf('http')!=0){
                         data.loading=true;
+                        this.loading = true;
                     }
                     data.id = new Date().getTime() + "" + Math.random();
                     data.index = index;
@@ -345,12 +348,20 @@
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
                 if (width > 800) {
                     this.pwdDialog = {
-                        url: window.urls.changePassword,
+                        url: window.urls.changePassword+'?dialog=1',
                         name: language.change_password,
                         show: true
                     };
                 } else {
-                    this.openTab({url: window.urls.changePassword, icon: 'far fa-edit', name: language.change_password})
+                    this.openTab({
+                        url: window.urls.changePassword,
+                        icon: 'far fa-edit',
+                        name: language.change_password,
+                        breadcrumbs:[{
+                            name: language.change_password,
+                            icon: 'far fa-edit'
+                        }]
+                    })
                     app.breadcrumbs = [language.change_password];
                 }
             }

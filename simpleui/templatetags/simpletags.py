@@ -172,8 +172,15 @@ def menus(context):
                 'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name'))),
                 'url': m.get('admin_url'),
                 'addUrl': m.get('add_url'),
-                'breadcrumbs': [str(app.get('name')), str(m.get('name'))]
+                'breadcrumbs': [{
+                    'name': str(app.get('name')),
+                    'icon': get_icon(app.get('app_label'), str(app.get('name')))
+                }, {
+                    'name': str(m.get('name')),
+                    'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name')))
+                }]
             }
+
             for m in app.get('models')
         ] if app.get('models') else []
 
@@ -190,6 +197,21 @@ def menus(context):
         if key in config and config.get(key) != False:
             temp = config.get('menus')
             for i in temp:
+                # 处理面包屑
+                if 'models' in i:
+                    for k in i.get('models'):
+                        k['breadcrumbs'] = [{
+                            'name': str(i.get('name')),
+                            'icon': i.get('icon')
+                        }, {
+                            'name': str(k.get('name')),
+                            'icon': k.get('icon')
+                        }]
+                else:
+                    i['breadcrumbs'] = [{
+                        'name': str(i.get('name')),
+                        'icon': i.get('icon')
+                    }]
                 data.append(i)
         else:
             data = config.get('menus')

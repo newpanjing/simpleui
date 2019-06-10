@@ -8,25 +8,33 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
 
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
+        {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+            <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
+            <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
+        {% else %}
+            <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+            <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
+        {% endif %}
 
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
         <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=3">
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+        {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+            <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+        {% else %}
+            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+            <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        {% endif %}
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
         {% if ""|get_language_code != 'zh-hans' %}
-
             <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}"></script>
             <script type="text/javascript">
                 ELEMENT.locale(ELEMENT.lang.en)
             </script>
-
         {% endif %}
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
         {% block extrastyle %}{% endblock %}

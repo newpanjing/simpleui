@@ -10,9 +10,11 @@ Django admin theme the simpleui
 </p>
 <p align="center">
    <a href="https://github.com/newpanjing/simpleui/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
-  <a href="https://github.com/newpanjing/simpleui"><img src="https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg"></a>
   <a href="https://pypi.org/project/django-simpleui/#history"><img src="https://img.shields.io/pypi/v/django-simpleui.svg"></a>
 <a href="https://python.org"><img src="https://img.shields.io/badge/python->=3.7.x-green.svg"></a>
+<a href="https://pypi.org/project/django-simpleui/">
+<img src="https://img.shields.io/pypi/dm/django-simpleui.svg">
+</a>
 </p>
 
 ---
