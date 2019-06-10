@@ -37,6 +37,8 @@ simpleui 快速上手指南
   + [头部添加自定义代码](#头部添加自定义代码)
   + [底部添加自定义代码](#底部添加自定义代码)
   + [自定义按钮](#自定义按钮)
+  + [离线模式](#离线模式)
+
 # 常见问题
   + [settings.py](#settingspy-找不到)
   + [python版本问题](#python版本问题)
@@ -444,6 +446,16 @@ class EmployeAdmin(admin.ModelAdmin):
 |icon|按钮图标，参考https://element.eleme.cn/#/zh-CN/component/icon与https://fontawesome.com，把class 复制进来即可|
 |type|按钮类型，参考：https://element.eleme.cn/#/zh-CN/component/button|
 |style|自定义css样式|
+
+## 离线模式
+> 在2.1.3或以上的版本中生效
+在settings.py中加入
+```python
+SIMPLEUI_STATIC_OFFLINE = True
+```
+指定simpleui 是否以脱机模式加载静态资源，为True的时候将默认从本地读取所有资源，即使没有联网一样可以。适合内网项目
+
+ 不填该项或者为False的时候，默认从第三方的cdn获取
 
 ## 常见问题
   ### settings.py 找不到
