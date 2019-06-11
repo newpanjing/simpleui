@@ -32,7 +32,7 @@
 
                 {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
 
-                <el-button @click="go_url('{% add_preserved_filters history_url %}')" class="historylink" icon="fas fa-history">{% trans "History" %}</el-button>
+                <el-button @click="go_url('{% add_preserved_filters history_url %}')" class="historylink" icon="fas fa-history" size="small">{% trans "History" %}</el-button>
               </li>
               {% if has_absolute_url %}
                 <li>
