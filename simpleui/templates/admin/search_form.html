@@ -43,14 +43,14 @@
             <input type="hidden" v-model="{{ spec.field_generic }}lt" name="{{ spec.field_generic }}lt"/>
 			    {% elif spec|has_filter %}
 			      <input type="hidden" v-model="{{ spec.parameter_name }}" name="{{ spec.parameter_name }}"/>
-            <el-select v-model="{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}" size="small">
+            <el-select v-model="{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}" size="small" style="width: 120px;">
               {% for option in spec.lookup_choices %}
                 <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
               {% endfor %}
             </el-select>
 			    {% else %}
 			      <input type="hidden" v-model="{{ spec.lookup_kwarg }}" name="{{ spec.lookup_kwarg }}"/>
-			      <el-select v-model="{{ spec.lookup_kwarg }}" clearable placeholder="{{ spec.title }}" size="small">
+			      <el-select v-model="{{ spec.lookup_kwarg }}" clearable placeholder="{{ spec.title }}" size="small" style="width: 120px;">
               {% if spec|get_date_type == 'time' %}
                 {% for option in spec.lookup_choices %}
                   <el-option label="{{ option }}" value="{{ option|to_str }}"></el-option>
