@@ -18,15 +18,15 @@
   {% endif %}
 
   {% if show_save_and_add_another %}
-    <input type="submit" class="el-button el-button--primary" value="{% trans 'Save and add another' %}" name="_addanother">
+    <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save and add another' %}" name="_addanother">
   {% endif %}
 
   {% if show_save_and_continue %}
-    <input type="submit" class="el-button el-button--primary" value="{% trans 'Save and continue editing' %}" name="_continue">
+    <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save and continue editing' %}" name="_continue">
   {% endif %}
 
   {% if show_save %}
-    <input type="submit" class="el-button el-button--primary" value="{% trans 'Save' %}" name="_save">
+    <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save' %}" name="_save">
   {% endif %}
 
   <input type="hidden" name="actionName" value="actionValue" id="actionName">
