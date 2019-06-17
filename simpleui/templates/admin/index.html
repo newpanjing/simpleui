@@ -75,7 +75,7 @@
                 </div>
             {% endblock %}
 
-            <el-menu default-active="1" class="el-menu-vertical-demo" :default-active="menuActive" :collapse="fold">
+            <el-menu unique-opened="true" default-active="1" class="el-menu-vertical-demo" :default-active="menuActive" :collapse="fold">
                 <div v-for="(item,i) in menus" :key="item">
 
                     <el-menu-item v-if="!item.models" :index="(i+1)+''" @click="openTab(item,(i+1)+'')">
