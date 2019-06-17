@@ -345,8 +345,8 @@ def custom_button(context):
             fun = getattr(admin, name)
             for key, v in fun.__dict__.items():
                 if key != '__len__':
-                    values[key] = v
-            data[name] = values
+                    values[str(key)] = str(v)
+            data[str(name)] = values
     return json.dumps(data)
 
 
