@@ -42,6 +42,7 @@
     new Vue({
         el: '#main',
         data: {
+            searchInput:'',
             height: 1000,
             fold: false,
             zoom: false,
@@ -50,7 +51,7 @@
             tabModel: 0,
             tabIndex: 0,
             menus: [],
-            menuActive: '1',
+            menuActive: '0',
             breadcrumbs: [],
             language: window.language,
             pwdDialog: {},
@@ -125,7 +126,8 @@
             models: [],
             fontDialogVisible: false,
             fontSlider: 12,
-            loading:false
+            loading: false,
+            menuTextShow: true
         },
         watch: {
             fold: function (newValue, oldValue) {
@@ -154,16 +156,20 @@
 
             var val = getCookie('fold') == 'true';
             this.small = this.fold = val;
-
+            this.menuTextShow = !this.fold;
 
             var self = this;
-            window.onload = window.onresize = function () {
+            window.onresize = function () {
 
                 self.height = document.documentElement.clientHeight || document.body.clientHeight
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
 
                 if (!self.small) {
-                    self.fold = width < 800;
+
+                    self.menuTextShow = !(width < 800);
+                    self.$nextTick(()=>{
+                        self.fold= width < 800;
+                    })
                 }
 
                 //判断全屏状态
@@ -230,11 +236,11 @@
                 url = e.target.contentWindow.location.href
 
                 tab.newUrl = url;
-                tab.loading=false;
+                tab.loading = false;
                 this.$forceUpdate();
-                var self=this;
-                e.target.contentWindow.beforeLoad=function(){
-                    tab.loading=true;
+                var self = this;
+                e.target.contentWindow.beforeLoad = function () {
+                    tab.loading = true;
                     self.$forceUpdate();
                 }
                 this.loading = false;
@@ -319,8 +325,8 @@
                     this.tabModel = exists.id;
                 } else {
                     //其他的网址loading会一直转
-                    if(data.url.indexOf('http')!=0){
-                        data.loading=true;
+                    if (data.url.indexOf('http') != 0) {
+                        data.loading = true;
                         this.loading = true;
                     }
                     data.id = new Date().getTime() + "" + Math.random();
@@ -332,23 +338,24 @@
             }
             ,
             foldClick: function () {
-                if (this.fold) {
-                    this.fold = false;
-                } else {
-                    this.fold = true;
-                }
 
-                this.small = this.fold;
+                this.menuTextShow = !this.menuTextShow;
+                this.$nextTick(() => {
+                    this.fold = !this.fold;
 
-                //设置进cookie
-                setCookie('fold', this.fold);
+                    this.small = this.fold;
+                    //设置进cookie
+                    setCookie('fold', this.fold);
+                });
+
+
             }
             ,
             changePassword: function () {
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
                 if (width > 800) {
                     this.pwdDialog = {
-                        url: window.urls.changePassword+'?dialog=1',
+                        url: window.urls.changePassword + '?dialog=1',
                         name: language.change_password,
                         show: true
                     };
@@ -357,7 +364,7 @@
                         url: window.urls.changePassword,
                         icon: 'far fa-edit',
                         name: language.change_password,
-                        breadcrumbs:[{
+                        breadcrumbs: [{
                             name: language.change_password,
                             icon: 'far fa-edit'
                         }]

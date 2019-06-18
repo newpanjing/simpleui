@@ -250,6 +250,12 @@ SIMPLEUI_INDEX = 'https://www.88cto.com'
 默认可以不用填写，缺省配置为默认排序，不对菜单进行过滤和排序。<br>
 开启认为传一个列表，如果列表为空，则什么也不显示。列表中的每个元素要对应到menus里面的name字段
 
+#### dynamic 开启动态菜单功能
+该字段用于告诉simpleui，是否需要开启动态菜单功能。<br>
+默认可以不用填写，缺省配置为False，不开启动态菜单功能。<br>
+开启为True，开启后，每次用户登陆都会刷新左侧菜单配置。<br>
+需要注意的是：开启后每次访问admin都会重读配置文件，所以会带来额外的消耗。
+
 #### menus说明
 
 |字段|说明|
@@ -261,9 +267,11 @@ SIMPLEUI_INDEX = 'https://www.88cto.com'
 
 #### 例子
 ```python
+import time
 SIMPLEUI_CONFIG = {
-    'system_keep':False,
-    'menu_display': ['Simpleui', '测试', '权限认证'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'system_keep': False,
+    'menu_display': ['Simpleui', '测试', '权限认证', '动态菜单测试'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'dynamic': True,    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
     'menus': [{
         'name': 'Simpleui',
         'icon': 'fas fa-code',
@@ -288,6 +296,14 @@ SIMPLEUI_CONFIG = {
             'name': '内网穿透',
             'url': 'https://www.wezoz.com',
             'icon': 'fab fa-github'
+        }]
+    }, {
+        'name': '动态菜单测试' ,
+        'icon': 'fa fa-desktop',
+        'models': [{
+            'name': time.time(),
+            'url': 'http://baidu.com',
+            'icon': 'far fa-surprise'
         }]
     }]
 }

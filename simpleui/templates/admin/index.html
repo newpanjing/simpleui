@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
     {% endif %}
 
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.1.2">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.1.4">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/waves/waves.min.css' %}?_=2.1">
     {% block head %}
 
@@ -75,25 +75,25 @@
                 </div>
             {% endblock %}
 
-            <el-menu default-active="1" class="el-menu-vertical-demo" :default-active="menuActive" :collapse="fold">
+            <el-menu unique-opened="true" default-active="1" :default-active="menuActive" :collapse="fold">
                 <div v-for="(item,i) in menus" :key="item">
 
                     <el-menu-item v-if="!item.models" :index="(i+1)+''" @click="openTab(item,(i+1)+'')">
                         <i :class="item.icon"></i>
-                        <span slot="title" v-text="item.name"></span>
+                        <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
                     </el-menu-item>
 
 
                     <el-submenu v-else :index="(i+1)+''">
                         <template slot="title">
                             <i :class="item.icon"></i>
-                            <span v-if="!fold" slot="title" v-text="item.name"></span>
+                            <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
                         </template>
 
                         <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
                             <el-menu-item :index="(i+1)+'-'+j" @click="openTab(sub,(i+1)+'-'+j)">
                                 <i :class="sub.icon"></i>
-                                <span slot="title" v-text="sub.name"></span>
+                                <span  v-if="menuTextShow" slot="title" v-text="sub.name"></span>
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
@@ -124,6 +124,7 @@
                     </div>
 
                     <div class="right">
+                        <el-button icon="fas fa-search" circle v-waves @click="fontClick()"></el-button>
                         <el-button icon="fas fa-font" circle v-waves @click="fontClick()"></el-button>
 
                         <el-button
@@ -304,7 +305,7 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.1.2"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.1.4"></script>
 
 {% load_analysis %}
 {% block script %}
