@@ -96,7 +96,7 @@
 
                 {% for pair in cl.params.items %}
                     {% if pair.0 != search_var %}
-                        {% if pair.0.0 == '_' %}
+                        {% if pair.0.0 == '_' or pair.0 == 'o'%}
                             <input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>
                         {% else %}
                             <input type="hidden" class="form-params" data-name="{{ pair.0 }}" value="{{ pair.1 }}"/>
