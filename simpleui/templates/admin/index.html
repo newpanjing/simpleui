@@ -6,288 +6,273 @@
    source code：
    https://github.com/newpanjing/simpleui
 -->
-
 <html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-<head>
-  <meta charset="UTF-8">
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
-  <title>{{ site_title }}</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <title>{{ site_title }}</title>
 
     {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
+      <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
+      <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
     {% else %}
-        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+      <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
     {% endif %}
 
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/waves/waves.min.css' %}?_=2.1">
+
     {% block head %}
-
+      {# 预留样式 block 可以实现基础该页面，添加自定义样式 #}
     {% endblock %}
-</head>
-<body>
-<style type="text/css">
-  .el-tabs__nav .el-tabs__item:nth-child(1) .el-icon-close {
-    display: none;
-  }
+  </head>
+  <body>
+    <style type="text/css">
+      .el-tabs__nav .el-tabs__item:nth-child(1) .el-icon-close {
+        display: none;
+      }
 
-  * {
-    -webkit-overflow-scrolling: touch;
-  }
-</style>
+      * {
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
 
-{% verbatim dynamicCss %}
-<style type="text/css" id="dynamicCss" v-if="fontSize!=0">
-  * {
-    font-size: {{ fontSize }} px;
-  }
-</style>
-{% endverbatim dynamicCss %}
+    {% verbatim dynamicCss %}
+    <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
+      * {
+        font-size: {{ fontSize }} px;
+      }
+    </style>
+    {% endverbatim dynamicCss %}
 
-{% autoescape off %}
-  {% menus %}
-{% endautoescape %}
+    {% autoescape off %}
+      {% menus %}
+    {% endautoescape %}
 
-<div id="main" @click="mainClick($event)">
-  <link v-if="theme!=''" rel="stylesheet" :href="theme">
-  <el-container :style="{height: height+'px'}">
-    <el-aside width="auto" class="menu">
-      {% block logo %}
-        <div class="logo-wrap" v-if="!fold">
-          <div class="float-wrap">
-            <div class="left">
-              {% if "SIMPLEUI_LOGO"|get_config %}
-                <img src="{{ 'SIMPLEUI_LOGO'|get_config |safe }}">
-              {% else %}
-                <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
-              {% endif %}
-            </div>
-            <div class="left">
-              <span>{{ site_header }}</span>
-            </div>
-          </div>
-        </div>
-      {% endblock %}
+    <div id="main" @click="mainClick($event)">
+      <link v-if="theme!=''" rel="stylesheet" :href="theme">
+        <el-container :style="{height: height+'px'}">
+          <el-aside width="auto" class="menu">
 
-      <el-menu default-active="1" class="el-menu-vertical-demo" :default-active="menuActive" :collapse="fold">
-        <div v-for="(item,i) in menus" :key="item">
-          <el-menu-item v-if="!item.models" :index="(i+1)+''" @click="openTab(item,(i+1)+'')">
-            <i :class="item.icon"></i>
-            <span slot="title" v-text="item.name"></span>
-          </el-menu-item>
+            {% block logo %}
+              <div class="logo-wrap" v-if="!fold">
+                <div class="float-wrap">
+                  <div class="left">
+                    {% if "SIMPLEUI_LOGO"|get_config %}
+                      <img src="{{ 'SIMPLEUI_LOGO'|get_config |safe }}">
+                    {% else %}
+                      <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
+                    {% endif %}
+                  </div>
+                  <div class="left">
+                    <span>{{ site_header }}</span>
+                  </div>
+                </div>
+              </div>
+            {% endblock %}
 
-          <el-submenu v-else :index="(i+1)+''">
-            <template slot="title">
-              <i :class="item.icon"></i>
-              <span v-if="!fold" slot="title" v-text="item.name"></span>
-            </template>
+            <el-menu default-active="1" class="el-menu-vertical-demo" :default-active="menuActive" :collapse="fold">
+              <div v-for="(item,i) in menus" :key="item">
+                <el-menu-item v-if="!item.models" :index="(i+1)+''" @click="openTab(item,(i+1)+'')">
+                  <i :class="item.icon"></i>
+                  <span slot="title" v-text="item.name"></span>
+                </el-menu-item>
 
-            <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
-              <el-menu-item :index="(i+1)+'-'+j" @click="openTab(sub,(i+1)+'-'+j)">
-                <i :class="sub.icon"></i>
-                <span slot="title" v-text="sub.name"></span>
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-        </div>
-      </el-menu>
-    </el-aside>
+                <el-submenu v-else :index="(i+1)+''">
+                  <template slot="title">
+                    <i :class="item.icon"></i>
+                    <span v-if="!fold" slot="title" v-text="item.name"></span>
+                  </template>
 
-    <el-container>
-      <el-header class="navbar" style="font-size: 12px;height: 58px;padding: 10px;">
-        <div class="float-wrap">
-          <div class="left">
-            <el-button v-waves circle icon="fas fa-bars" style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
-              <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
-                  {% verbatim myclode %}
-                      <el-breadcrumb-item><i :class="menus[0].icon"
-                                             :key="menus[0].name"></i>{{ menus[0].name }}
-                      </el-breadcrumb-item>
-                      <el-breadcrumb-item v-for="item in breadcrumbs"
-                                          :key="item">
-                      <span :class="getIcon(item.name,item.icon)"></span>
-                      <span v-text="item.name"></span>
-                      </el-breadcrumb-item>
-                  {% endverbatim myclode %}
-              </el-breadcrumb>
-          </div>
+                  <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
+                    <el-menu-item :index="(i+1)+'-'+j" @click="openTab(sub,(i+1)+'-'+j)">
+                      <i :class="sub.icon"></i>
+                      <span slot="title" v-text="sub.name"></span>
+                    </el-menu-item>
+                  </el-menu-item-group>
+                </el-submenu>
+              </div>
+            </el-menu>
+          </el-aside>
 
-          <div class="right">
-            <el-button icon="fas fa-font" circle v-waves @click="fontClick()"></el-button>
+          <el-container>
+            <el-header class="navbar" style="font-size: 12px;height: 58px;padding: 10px;">
+              <div class="float-wrap">
+                <div class="left">
+                  <el-button v-waves circle icon="fas fa-bars" style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
+                  <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
+                      {% verbatim myclode %}
+                          <el-breadcrumb-item><i :class="menus[0].icon"
+                                                 :key="menus[0].name"></i>{{ menus[0].name }}
+                          </el-breadcrumb-item>
+                          <el-breadcrumb-item v-for="item in breadcrumbs"
+                                              :key="item">
+                          <span :class="getIcon(item.name,item.icon)"></span>
+                          <span v-text="item.name"></span>
+                          </el-breadcrumb-item>
+                      {% endverbatim myclode %}
+                  </el-breadcrumb>
+                </div>
 
-            <el-button
-                :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
-                @click="goZoom()" circle></el-button>
-            <el-button icon="fas fa-home" @click="goIndex('{{ 'SIMPLEUI_INDEX'|get_config }}')" circle
-                       v-waves></el-button>
-            {% verbatim mycode %}
-            <el-button @click="themeDialogVisible=true" v-waves>
-              <i class="fas fa-palette"></i>
-              <span v-text="getLanuage('Change theme')"></span><i
-                class="el-icon-arrow-down el-icon--right"></i>
-            </el-button>
+                <div class="right">
+                  <el-button :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'" @click="goZoom()" circle></el-button>
+                  <el-button icon="fas fa-home" @click="goIndex('{{ 'SIMPLEUI_INDEX'|get_config }}')" circle v-waves></el-button>
+                  {% verbatim mycode %}
+                  <el-button @click="themeDialogVisible=true" v-waves>
+                    <i class="fas fa-palette"></i>
+                    <span v-text="getLanuage('Change theme')"></span>
+                    <i class="el-icon-arrow-down el-icon--right"></i>
+                  </el-button>
+                  {% endverbatim mycode %}
+                  <el-dropdown>
+                    <el-button v-waves>
+                      <i class="fas fa-user"></i>{{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
+                    </el-button>
 
-            {% endverbatim mycode %}
-            <el-dropdown>
-              <el-button v-waves>
-                <i class="fas fa-user"></i>
-                {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              {% verbatim mycode %}
+                    {% verbatim mycode %}
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item v-waves icon="far fa-edit" @click.native="changePassword()">
+                        {{ language.change_password }}
+                      </el-dropdown-item>
+                      <el-dropdown-item icon="el-icon-close" @click.native="logout()" divided>
+                        {{ language.logout }}
+                      </el-dropdown-item>
+                    </el-dropdown-menu>
+                    {% endverbatim mycode %}
 
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-waves icon="far fa-edit"
-                                  @click.native="changePassword()">{{ language.change_password }}
-                </el-dropdown-item>
-                </el-dropdown-item>
-                <el-dropdown-item icon="el-icon-close"
-                                  @click.native="logout()"
-                                  divided>{{ language.logout }}</el-dropdown-item>
-              </el-dropdown-menu>
-              {% endverbatim mycode %}
-            </el-dropdown>
-          </div>
-        </div>
-      </el-header>
-      <el-main>
-        <el-tabs v-model="tabModel" type="border-card" editable style="height: 100%" @edit="handleTabsEdit" @tab-click="tabClick">
-          <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id" :key="item.id">
+                  </el-dropdown>
+                </div>
+              </div>
+            </el-header>
+            <el-main>
+              <el-tabs v-model="tabModel" type="border-card" editable style="height: 100%" @edit="handleTabsEdit" @tab-click="tabClick">
+                <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id" :key="item.id">
 
-            {% home_page %}
+                  {% home_page %}
 
-            {% if home %}
-              <span v-if="index==0" slot="label"><i class="{{ icon }}"></i><span>{{ title }}</span></span>
-              <span v-else slot="label" @contextmenu.prevent="contextmenu(item,$event)">
-            {% else %}
-              <span slot="label" @contextmenu.prevent="contextmenu(item,$event)">
-            {% endif %}
-              <i :class="item.loading?'el-icon-loading':item.icon"></i><span v-text="item.name"></span>
-            </span>
+                  {% if home %}
+                    <span v-if="index==0" slot="label"><i class="{{ icon }}"></i><span>{{ title }}</span></span>
+                    <span v-else slot="label" @contextmenu.prevent="contextmenu(item,$event)">
+                  {% else %}
+                    <span slot="label" @contextmenu.prevent="contextmenu(item,$event)">
+                  {% endif %}
+                      <i :class="item.loading?'el-icon-loading':item.icon"></i><span v-text="item.name"></span>
+                    </span>
 
-            <div v-if="index==0" style="height:100%">
-              {% if home %}
-                <iframe :src="'{{ home }}'"></iframe>
-              {% else %}
-                {% include './home.html' %}
-              {% endif %}
-            </div>
-            <div v-else class="iframe-wrap">
-                <iframe :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
-                <div v-if="loading" class="loading" @dblclick="loading=false">
-                    <div class="center">
+                  <div v-if="index==0" style="height:100%">
+                    {% if home %}
+                      <iframe :src="'{{ home }}'"></iframe>
+                    {% else %}
+                      {% include './home.html' %}
+                    {% endif %}
+                  </div>
+
+                  <div v-else class="iframe-wrap">
+
+                    <iframe :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
+
+                    <div v-if="loading" class="loading" @dblclick="loading=false">
+                      <div class="center">
                         <span class="el-icon-loading"></span>
                         <span>loading...</span>
+                      </div>
                     </div>
-                </div>
+
+                  </div>
+
+                </el-tab-pane>
+              </el-tabs>
+            </el-main>
+          </el-container>
+        </el-container>
+
+        <ul v-if="popup.show" class="el-dropdown-menu el-popper" :style="{position: 'absolute',top: popup.top+'px',left: popup.left+'px'}" x-placement="top-end">
+          <li v-for="(item,index) in popup.menus" tabindex="-1" class="el-dropdown-menu__item" @click="item.handler(popup.tab,item)">
+            <i :class="item.icon"></i><span v-text="item.text"></span>
+          </li>
+        </ul>
+
+        <el-dialog title="{% trans 'Change password' %}" :visible.sync="pwdDialog.show">
+          <iframe frameborder="0" :src="pwdDialog.url" width="100%" height="500"></iframe>
+        </el-dialog>
+
+        <el-dialog :title="getLanuage('Change theme')" :visible.sync="themeDialogVisible" :width="small?'90%':'50%'">
+          <div class="change-theme clearfix">
+            <div v-waves :class="{'theme-item':true,active:themeName==item.text}" v-for="(item,i) in themes" :key="item.text" :title="getLanuage(item.text)" @click="setTheme(item)">
+              <div class="theme-menu" :style="{background:item.menu}">
+                <div class="theme-logo" :style="{background: item.logo}"></div>
+              </div>
+              <div class="theme-top" :style="{background: item.top}"></div>
             </div>
-          </el-tab-pane>
-        </el-tabs>
-      </el-main>
-    </el-container>
-  </el-container>
-
-  <ul v-if="popup.show" class="el-dropdown-menu el-popper"
-      :style="{position: 'absolute',top: popup.top+'px',left: popup.left+'px'}" x-placement="top-end">
-    <li v-for="(item,index) in popup.menus" tabindex="-1" class="el-dropdown-menu__item"
-        @click="item.handler(popup.tab,item)">
-      <i :class="item.icon"></i><span v-text="item.text"></span>
-    </li>
-  </ul>
-
-  <el-dialog title="{% trans 'Change password' %}" :visible.sync="pwdDialog.show">
-    <iframe frameborder="0" :src="pwdDialog.url" width="100%" height="500"></iframe>
-  </el-dialog>
-
-  <el-dialog
-      :title="getLanuage('Change theme')"
-      :visible.sync="themeDialogVisible"
-      :width="small?'90%':'50%'">
-    <div class="change-theme clearfix">
-      <div v-waves :class="{'theme-item':true,active:themeName==item.text}" v-for="(item,i) in themes"
-           :key="item.text"
-           :title="getLanuage(item.text)" @click="setTheme(item)">
-        <div class="theme-menu" :style="{background:item.menu}">
-          <div class="theme-logo" :style="{background: item.logo}"></div>
-        </div>
-        <div class="theme-top" :style="{background: item.top}"></div>
-      </div>
+          </div>
+        </el-dialog>
     </div>
-  </el-dialog>
 
-  <el-dialog
-      :title="getLanuage('Set font size')"
-      :visible.sync="fontDialogVisible"
-      :width="small?'90%':'50%'">
-    <el-slider v-model="fontSlider" :min="12" :max="100" show-input @change="fontSlideChange"></el-slider>
-    <div style="text-align: right;padding-top: 20px">
-      <el-button type="primary" @click="reset()" v-text="getLanuage('Reset')"></el-button>
-    </div>
-  </el-dialog>
-</div>
+    <script type="text/javascript">
+      {% if home %}
+        const home = {
+          id: '0',
+          index: '1',
+          name: '{{ title }}',
+          icon: '{{ icon }}',
+          active: true
+        };
+      {% else %}
+        const home = {
+          id: '0',
+          index: '1',
+          name: "{% trans 'Home' %}",
+          icon: 'fas fa-home'
+        };
+      {% endif %}
 
-<script type="text/javascript">
-  {% if home %}
-    const home = {
-      id: '0',
-      index: '1',
-      name: '{{ title }}',
-      icon: '{{ icon }}',
-      active: true
-    };
-  {% else %}
-    const home = {
-      id: '0',
-      index: '1',
-      name: "{% trans 'Home' %}",
-      icon: 'fas fa-home'
-    };
-  {% endif %}
-  menus.unshift(home);
+      menus.unshift(home);
 
-  window.language = {
-    change_password: "{% trans 'Change password' %}",
-    logout: "{% trans 'Log out' %}",
-    yes: "{% trans 'Yes' %}",
-    no: "{% trans 'No' %}",
-    confirm: "{% trans 'Are you sure?' %}"
-  };
-  window.themeUrl = "{% static '/admin/simpleui-x/theme/' %}";
-  window.urls = {
-    changePassword: "{% url 'admin:password_change' %}",
-    logout: "{% url 'admin:logout' %}"
-  };
+      window.language = {
+        change_password: "{% trans 'Change password' %}",
+        logout: "{% trans 'Log out' %}",
+        yes: "{% trans 'Yes' %}",
+        no: "{% trans 'No' %}",
+        confirm: "{% trans 'Are you sure?' %}"
+      };
+      window.themeUrl = "{% static '/admin/simpleui-x/theme/' %}";
+      window.urls = {
+        changePassword: "{% url 'admin:password_change' %}",
+        logout: "{% url 'admin:logout' %}"
+      };
 
-  const lanuageCode = '{% get_language %}';
+      const lanuageCode = '{% get_language %}';
 
-  function localeError() {
-    console.warn("Please add the {% get_language %}.js language file to the '/simpleui-x/theme' directory.");
-    console.log("See simpleui i18n:https://github.com/newpanjing/simpleui/blob/master/i18n.md");
-  }
-</script>
-{% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/axios.min.js' %}"></script>
-{% else %}
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-{% endif %}
+      function localeError() {
+        console.warn("Please add the {% get_language %}.js language file to the '/simpleui-x/theme' directory.");
+        console.log("See simpleui i18n:https://github.com/newpanjing/simpleui/blob/master/i18n.md");
+      }
+    </script>
 
-<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js?_=2.1.2" onerror="localeError()"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.1.4"></script>
-{% block script %}
-  {# 预留脚本block 可以实现基础该页面，添加自定义脚本 #}
-{% endblock %}
-</body>
+    {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/axios.min.js' %}"></script>
+    {% else %}
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    {% endif %}
+
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js?_=2.1.2" onerror="localeError()"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.1.4"></script>
+
+    {% block script %}
+      {# 预留脚本 block 可以实现基础该页面，添加自定义脚本 #}
+    {% endblock %}
+  </body>
 </html>
