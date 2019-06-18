@@ -151,6 +151,14 @@
         </div>
         <!-- Content -->
         <div id="content" class="{% block coltype %}colM{% endblock %}">
+<!--            <div id="iframe-page-header">-->
+<!--                <el-page-header @back="javascript:window.history.go(-1);"></el-page-header>-->
+<!--            </div>-->
+<!--            <script type="text/javascript">-->
+<!--                new Vue({-->
+<!--                    el: '#iframe-page-header'-->
+<!--                })-->
+<!--            </script>-->
             {% block pretitle %}{% endblock %}
             {% block content_title %}
                 {% if title %}
@@ -167,7 +175,8 @@
         <!-- END Content -->
 
         {% block footer %}
-            <div id="footer"></div>{% endblock %}
+            <div id="footer"></div>
+        {% endblock %}
     </div>
     <!-- END Container -->
     </body>
