@@ -331,6 +331,9 @@ body {
 .menu {
   /*滚动条样式*/
 }
+.menu .el-icon-arrow-right {
+  display: none;
+}
 .menu::-webkit-scrollbar {
   width: 4px;
 }
