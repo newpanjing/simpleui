@@ -26,6 +26,8 @@ register = template.Library()
 
 PY_VER = sys.version[0]  # 2 or 3
 
+if PY_VER != '2':
+    from importlib import reload
 
 def unicode_to_str(u):
     if PY_VER != '2':
@@ -163,6 +165,9 @@ def menus(context):
     config = get_config('SIMPLEUI_CONFIG')
     if not config:
         config = {}
+		
+    if config.get('dynamic', False) is True:
+        config = _import_reload(get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
 
     app_list = context.get('app_list')
     for app in app_list:
@@ -367,3 +372,9 @@ def search_placeholder(context):
         else:
             verboses.append(str(field))
     return ",".join(verboses)
+	
+
+def _import_reload(_modules):
+    _obj = __import__(_modules, fromlist=_modules.split('.'))
+    reload(_obj)
+    return _obj
