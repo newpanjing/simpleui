@@ -353,8 +353,10 @@ def custom_button(context):
         actions = admin.actions
         # 输出自定义按钮的属性
         for name in actions:
+            # __name__
             if type(name) != str:
-                continue
+                if type(name).__name__ == 'function':
+                    name = name.__name__
             values = {}
             fun = getattr(admin, name)
             for key, v in fun.__dict__.items():
