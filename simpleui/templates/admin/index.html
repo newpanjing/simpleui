@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
     {% endif %}
 
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.1.4">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/waves/waves.min.css' %}?_=2.1">
     {% block head %}
 
@@ -98,24 +98,22 @@
     </el-aside>
 
     <el-container>
-      <el-header class="navbar" style="font-size: 12px;padding: 10px;height: auto">
+      <el-header class="navbar" style="font-size: 12px;height: 58px;padding: 10px;">
         <div class="float-wrap">
           <div class="left">
-            <el-button v-waves circle icon="fas fa-bars"
-                                   style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
-
-                        <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
-                            {% verbatim myclode %}
-                                <el-breadcrumb-item><i :class="menus[0].icon"
-                                                       :key="menus[0].name"></i>{{ menus[0].name }}
-                                </el-breadcrumb-item>
-                                <el-breadcrumb-item v-for="item in breadcrumbs"
-                                                    :key="item">
-                                <span :class="getIcon(item.name,item.icon)"></span>
-                                <span v-text="item.name"></span>
-                                </el-breadcrumb-item>
-                            {% endverbatim myclode %}
-                        </el-breadcrumb>
+            <el-button v-waves circle icon="fas fa-bars" style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
+              <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
+                  {% verbatim myclode %}
+                      <el-breadcrumb-item><i :class="menus[0].icon"
+                                             :key="menus[0].name"></i>{{ menus[0].name }}
+                      </el-breadcrumb-item>
+                      <el-breadcrumb-item v-for="item in breadcrumbs"
+                                          :key="item">
+                      <span :class="getIcon(item.name,item.icon)"></span>
+                      <span v-text="item.name"></span>
+                      </el-breadcrumb-item>
+                  {% endverbatim myclode %}
+              </el-breadcrumb>
           </div>
 
           <div class="right">
