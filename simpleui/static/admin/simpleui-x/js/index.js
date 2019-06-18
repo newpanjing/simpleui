@@ -42,6 +42,7 @@
     new Vue({
         el: '#main',
         data: {
+            searchInput:'',
             height: 1000,
             fold: false,
             zoom: false,
@@ -50,7 +51,7 @@
             tabModel: 0,
             tabIndex: 0,
             menus: [],
-            menuActive: '1',
+            menuActive: '0',
             breadcrumbs: [],
             language: window.language,
             pwdDialog: {},
