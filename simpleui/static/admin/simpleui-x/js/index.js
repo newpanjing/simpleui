@@ -155,10 +155,10 @@
 
             var val = getCookie('fold') == 'true';
             this.small = this.fold = val;
-
+            this.menuTextShow = !this.fold;
 
             var self = this;
-            window.onload = window.onresize = function () {
+            window.onresize = function () {
 
                 self.height = document.documentElement.clientHeight || document.body.clientHeight
                 var width = document.documentElement.clientWidth || document.body.clientWidth;
@@ -341,12 +341,13 @@
                 this.menuTextShow = !this.menuTextShow;
                 this.$nextTick(() => {
                     this.fold = !this.fold;
+
+                    this.small = this.fold;
+                    //设置进cookie
+                    setCookie('fold', this.fold);
                 });
 
-                this.small = this.fold;
 
-                //设置进cookie
-                setCookie('fold', this.fold);
             }
             ,
             changePassword: function () {

@@ -329,6 +329,7 @@ body {
   min-height: 250px;
 }
 .menu {
+  overflow-x: hidden ;
   /*滚动条样式*/
 }
 .menu .el-icon-arrow-right {
