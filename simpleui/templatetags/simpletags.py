@@ -1,26 +1,22 @@
 # -*- coding: utf-8 -*-
 
-import django
-from django import template
-from django.utils.html import format_html
-from django.conf import settings
-from django.utils.safestring import mark_safe
-
-from django.templatetags import static
-
-import os
-import sys
-import json
-
-import platform
-import socket
-
-import simpleui
-
 import base64
+import json
+import os
+import platform
+import sys
 import time
 
+import django
+import simpleui
+from django import template
+from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
+from django.utils.encoding import force_text
+from django.utils.functional import Promise
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -29,10 +25,22 @@ PY_VER = sys.version[0]  # 2 or 3
 if PY_VER != '2':
     from importlib import reload
 
+
 def unicode_to_str(u):
     if PY_VER != '2':
         return u
     return u.encode()
+
+
+class LazyEncoder(DjangoJSONEncoder):
+    """
+        解决json __proxy__ 问题
+    """
+
+    def default(self, obj):
+        if isinstance(obj, Promise):
+            return force_text(obj)
+        return super(LazyEncoder, self).default(obj)
 
 
 @register.simple_tag(takes_context=True)
@@ -65,7 +73,7 @@ def load_dates(context):
                 data[field.name] = field_type
     context['date_field'] = data
 
-    return '<script type="text/javascript">var searchDates={}</script>'.format(json.dumps(data))
+    return '<script type="text/javascript">var searchDates={}</script>'.format(json.dumps(data, cls=LazyEncoder))
 
 
 @register.filter
@@ -101,7 +109,7 @@ def to_str(obj):
 
 @register.filter
 def date_to_json(obj):
-    return json.dumps(obj.date_params)
+    return json.dumps(obj.date_params, cls=LazyEncoder)
 
 
 @register.simple_tag(takes_context=True)
@@ -165,7 +173,7 @@ def menus(context):
     config = get_config('SIMPLEUI_CONFIG')
     if not config:
         config = {}
-		
+
     if config.get('dynamic', False) is True:
         config = _import_reload(get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
 
@@ -173,15 +181,15 @@ def menus(context):
     for app in app_list:
         _models = [
             {
-                'name': str(m.get('name')),
+                'name': m.get('name'),
                 'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name'))),
                 'url': m.get('admin_url'),
                 'addUrl': m.get('add_url'),
                 'breadcrumbs': [{
-                    'name': str(app.get('name')),
-                    'icon': get_icon(app.get('app_label'), str(app.get('name')))
+                    'name': app.get('name'),
+                    'icon': get_icon(app.get('app_label'), app.get('name'))
                 }, {
-                    'name': str(m.get('name')),
+                    'name': m.get('name'),
                     'icon': get_icon(m.get('object_name'), unicode_to_str(m.get('name')))
                 }]
             }
@@ -190,8 +198,8 @@ def menus(context):
         ] if app.get('models') else []
 
         module = {
-            'name': str(app.get('name')),
-            'icon': get_icon(app.get('app_label'), str(app.get('name'))),
+            'name': app.get('name'),
+            'icon': get_icon(app.get('app_label'), app.get('name')),
             'models': _models
         }
         data.append(module)
@@ -206,15 +214,15 @@ def menus(context):
                 if 'models' in i:
                     for k in i.get('models'):
                         k['breadcrumbs'] = [{
-                            'name': str(i.get('name')),
+                            'name': i.get('name'),
                             'icon': i.get('icon')
                         }, {
-                            'name': str(k.get('name')),
+                            'name': k.get('name'),
                             'icon': k.get('icon')
                         }]
                 else:
                     i['breadcrumbs'] = [{
-                        'name': str(i.get('name')),
+                        'name': i.get('name'),
                         'icon': i.get('icon')
                     }]
                 data.append(i)
@@ -232,7 +240,7 @@ def menus(context):
         display_data.sort(key=lambda x: x['_weight'])
         data = display_data
 
-    return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data))
+    return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data, cls=LazyEncoder))
 
 
 def get_icon(obj, name=None):
@@ -272,7 +280,8 @@ def load_message(context):
     messages = context.get('messages')
     array = [dict(msg=msg.message, tag=msg.tags) for msg in messages] if messages else []
 
-    return '<script id="out_message" type="text/javascript">var messages={}</script>'.format(json.dumps(array))
+    return '<script id="out_message" type="text/javascript">var messages={}</script>'.format(
+        json.dumps(array, cls=LazyEncoder))
 
 
 @register.simple_tag(takes_context=True)
@@ -350,9 +359,9 @@ def custom_button(context):
             fun = getattr(admin, name)
             for key, v in fun.__dict__.items():
                 if key != '__len__':
-                    values[str(key)] = str(v)
-            data[str(name)] = values
-    return json.dumps(data)
+                    values[key] = v
+            data[name] = values
+    return json.dumps(data, cls=LazyEncoder)
 
 
 @register.simple_tag(takes_context=True)
@@ -372,7 +381,7 @@ def search_placeholder(context):
         else:
             verboses.append(str(field))
     return ",".join(verboses)
-	
+
 
 def _import_reload(_modules):
     _obj = __import__(_modules, fromlist=_modules.split('.'))
