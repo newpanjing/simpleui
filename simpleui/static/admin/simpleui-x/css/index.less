@@ -209,12 +209,14 @@ html, body {
 .float-wrap span {
   margin-left: 10px;
 }
-.float-wrap{
-  .el-breadcrumb__item,.el-breadcrumb__item span{
+
+.float-wrap {
+  .el-breadcrumb__item, .el-breadcrumb__item span {
     margin-left: 0px;
   }
-  .el-breadcrumb__separator{
-    margin-left: 5px!important;
+
+  .el-breadcrumb__separator {
+    margin-left: 5px !important;
   }
 }
 
@@ -319,6 +321,7 @@ html, body {
 .iframe-wrap {
   height: 100%;
   position: relative;
+
   .loading {
     z-index: 10;
     position: absolute;
@@ -326,8 +329,9 @@ html, body {
     left: 1px;
     right: 1px;
     bottom: 1px;
-    background-color: rgba(#000,0.3);
-    .center{
+    background-color: rgba(#000, 0.3);
+
+    .center {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -382,3 +386,22 @@ html, body {
   }
 }
 
+.menu {
+  /*滚动条样式*/
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(123, 123, 123, 0.2);
+    background: #7d7d7d;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+  }
+}

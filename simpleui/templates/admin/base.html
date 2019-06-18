@@ -46,14 +46,7 @@
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
         {% block extrastyle %}{% endblock %}
         {% if LANGUAGE_BIDI %}
-            <link rel="stylesheet" type="text/css"
-                  href="
-
-
-
-
-
-                          {% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
+            <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
         {% block extrahead %}{% endblock %}
         {% block responsive %}
             <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
