@@ -187,7 +187,7 @@ body {
   margin-left: 0px;
 }
 .float-wrap .el-breadcrumb__separator {
-  margin-left: 5px!important;
+  margin-left: 5px !important;
 }
 .quick-card {
   width: auto;
@@ -327,5 +327,25 @@ body {
 }
 #home .info-card .el-card {
   min-height: 250px;
+}
+.menu {
+  overflow-x: hidden ;
+  /*滚动条样式*/
+}
+.menu .el-icon-arrow-right {
+  display: none;
+}
+.menu::-webkit-scrollbar {
+  width: 4px;
+}
+.menu::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 5px rgba(123, 123, 123, 0.2);
+  background: #7d7d7d;
+}
+.menu::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
 }
 /*# sourceMappingURL=index.css.map */

@@ -1,6 +1,11 @@
 {% load i18n static %}
 {% load simpletags %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!--
+   The project use: django-simpleui
+   source code：
+   https://github.com/newpanjing/simpleui
+-->
 
 <html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
@@ -18,7 +23,7 @@
         <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
     {% endif %}
 
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.1">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=2.1.4">
     <link rel="stylesheet" href="{% static '/admin/simpleui-x/waves/waves.min.css' %}?_=2.1">
     {% block head %}
 
@@ -282,7 +287,7 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.1.2"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.1.4"></script>
 {% block script %}
   {# 预留脚本block 可以实现基础该页面，添加自定义脚本 #}
 {% endblock %}
