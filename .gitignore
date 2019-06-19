@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+*.pyc
+__pycache__/
+build/
+simpleui/__pycache__/
+simpleui/templatetags/__pycache__/

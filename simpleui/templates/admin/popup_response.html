@@ -1,10 +1,12 @@
-{% load i18n static %}<!DOCTYPE html>
+{% load i18n static %}
 <html>
-  <head><title>{% trans 'Popup closing...' %}</title></head>
+  <head>
+    <title>{% trans 'Popup closing...' %}</title>
+  </head>
   <body>
     <script type="text/javascript"
             id="django-admin-popup-response-constants"
-            src="{% static "admin/js/popup_response.js" %}"
+            src="{% static 'admin/js/popup_response.js' %}"
             data-popup-response="{{ popup_response_data }}">
     </script>
   </body>
