@@ -9,4 +9,4 @@ new Vue({
             document.getElementById('login-form').submit();
         }
     }
-});
+})

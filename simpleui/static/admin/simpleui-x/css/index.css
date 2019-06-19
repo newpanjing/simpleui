@@ -16,7 +16,7 @@ body {
   background-color: inherit;
 }
 .menu .el-menu {
-  border-right: 0;
+  border-right: 0px;
 }
 .menu .el-menu .is-active {
   color: #409eff !important;
@@ -55,13 +55,12 @@ body {
   font-size: 14px;
   font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
   vertical-align: middle;
-  padding: 0 5px;
+  padding: 0px 5px;
   min-width: 200px;
 }
 .logo-wrap img {
   max-width: 30px;
-  max-height: 30px;
-  padding: 13px 10px;
+  margin-bottom: -10px;
 }
 #home [class*=el-col-] {
   padding: 10px;
@@ -81,7 +80,6 @@ body {
   width: 24px;
   text-align: center;
   font-size: 18px;
-  line-height: inherit;
   vertical-align: middle;
 }
 .el-tabs .fa,
@@ -350,3 +348,4 @@ body {
   border-radius: 0;
   background: rgba(0, 0, 0, 0.1);
 }
+/*# sourceMappingURL=index.css.map */

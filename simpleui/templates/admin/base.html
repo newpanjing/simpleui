@@ -3,12 +3,14 @@
     {% comment %}由于无法改写django代码，只能利用错误代码来判断，从而输出json{% endcomment %}
     {% context_to_json %}
 {% else %}
+
+    <!DOCTYPE html>
     {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-    <html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+    <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
     <head>
         <title>{% block title %}{% endblock %}</title>
 
-        {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+         {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
             <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
             <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
         {% else %}
@@ -16,54 +18,57 @@
             <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
         {% endif %}
 
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=3">
+        <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.1">
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
-        {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
-            <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
-            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
-            <script type="text/javascript" src="{% static '/admin/simpleui-x/js/axios.min.js' %}"></script>
-        {% else %}
-            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-            <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-        {% endif %}
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}"></script>
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}"></script>
+
+    {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+    {% else %}
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    {% endif %}
+
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}?_=2.1.2"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
+
         {% if ""|get_language_code != 'zh-hans' %}
-            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}"></script>
+
+            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}?_=2.1.2"></script>
             <script type="text/javascript">
                 ELEMENT.locale(ELEMENT.lang.en)
             </script>
+
         {% endif %}
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
         {% block extrastyle %}{% endblock %}
         {% if LANGUAGE_BIDI %}
-            <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static 'admin/css/rtl.css' %}{% endblock %}?_=20180905"/>
-        {% endif %}
+            <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
         {% block extrahead %}{% endblock %}
         {% block responsive %}
             <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-            <link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive.css' %}?_=20180905"/>
+            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}?_=20180905"/>
             {% if LANGUAGE_BIDI %}
-                <link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive_rtl.css' %}?_=20180905"/>
+                <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>
             {% endif %}
         {% endblock %}
         {% block blockbots %}
-            <meta name="robots" content="NONE,NOARCHIVE"/>
-        {% endblock %}
+            <meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
         <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
     </head>
     {% load i18n %}
 
     <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
-          data-admin-utc-offset="{% now 'Z' %}">
+          data-admin-utc-offset="{% now "Z" %}">
 
     {% verbatim dynamicCss %}
     <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
-        *{ font-size: {{ fontSize }} px !important; }
+        *{
+            font-size: {{ fontSize }}px!important;
+        }
     </style>
     {% endverbatim dynamicCss %}
 
@@ -110,7 +115,7 @@
                 }
 
             }
-        });
+        })
         window.addEventListener('beforeunload', () => {
             if(window.beforeLoad){
                 window.beforeLoad();
@@ -120,6 +125,7 @@
     </script>
     <!-- Container -->
     <div id="container">
+
         {% block messages %}
             {% autoescape off %}
                 {% load_message %}
@@ -142,6 +148,7 @@
                     }
                 })
             </script>
+
         {% endblock messages %}
 
         <div class="menu-content">
@@ -151,14 +158,6 @@
         </div>
         <!-- Content -->
         <div id="content" class="{% block coltype %}colM{% endblock %}">
-<!--            <div id="iframe-page-header">-->
-<!--                <el-page-header @back="javascript:window.history.go(-1);"></el-page-header>-->
-<!--            </div>-->
-<!--            <script type="text/javascript">-->
-<!--                new Vue({-->
-<!--                    el: '#iframe-page-header'-->
-<!--                })-->
-<!--            </script>-->
             {% block pretitle %}{% endblock %}
             {% block content_title %}
                 {% if title %}
@@ -175,8 +174,7 @@
         <!-- END Content -->
 
         {% block footer %}
-            <div id="footer"></div>
-        {% endblock %}
+            <div id="footer"></div>{% endblock %}
     </div>
     <!-- END Container -->
     </body>

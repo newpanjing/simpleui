@@ -44,7 +44,7 @@ a:visited {
   text-decoration: none;
 }
 .object-tools {
-  margin-top: 0;
+  margin-top: 0px;
 }
 .vTextField {
   outline: none;
@@ -68,7 +68,7 @@ tbody tr:hover th {
   height: auto;
 }
 .submit-row input[type='submit'] {
-  padding: 9px 15px !important;
+  padding: 12px 20px !important;
 }
 @media (max-width: 767px) {
   .submit-row > * {
@@ -154,3 +154,4 @@ body,
     padding: 0px !important;
   }
 }
+/*# sourceMappingURL=base.css.map */

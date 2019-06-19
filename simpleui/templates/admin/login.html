@@ -1,14 +1,19 @@
 {% load i18n static simpletags %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-
-<html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<!--
+   The project use: django-simpleui
+   source code：
+   https://github.com/newpanjing/simpleui
+-->
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-  <meta charset="UTF-8">
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>{{ site_title }}-{% trans 'Log in' %}</title>
-  <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{ site_title }}-{% trans 'Log in' %}</title>
+    <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">
 
     {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
@@ -17,73 +22,80 @@
         <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
         <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
     {% endif %}
-  <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/login.css' %}?_=2.1">
-  <style type="text/css">
-    .bg {
-      min-height: 100%;
-      background: #f0f2f5 url("{% static '/admin/simpleui-x/img/bg.svg' %}") no-repeat 50%;
-      background-size: 100%;
-      padding: 20px 0;
-      position: relative;
-    }
-  </style>
-  {% block head %}
-    {# You can add code here. #}
-  {% endblock %}
+
+
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/login.css' %}?_=2.1">
+    <style type="text/css">
+        .bg {
+            background: #f0f2f5;
+            background-image: url('{% static '/admin/simpleui-x/img/bg.svg' %}');
+            min-height: 100%;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-size: 100%;
+            padding: 20px 0;
+            position: relative;
+        }
+    </style>
+    {% block head %}
+        {# You can add code here. #}
+    {% endblock %}
 </head>
 <body class="bg">
 
 <div class="login-main">
-  {% block logo %}
-  <div class="logo">
-    {% if "SIMPLEUI_LOGO"|get_config %}
-      <img src="{{ 'SIMPLEUI_LOGO'|get_config |safe }}">
-    {% else %}
-      <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
-    {% endif %}
-  </div>
-  {% endblock %}
+    {% block logo %}
+    <div class="logo">
+        {% if "SIMPLEUI_LOGO"|get_config %}
+            <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
+        {% else %}
+            <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
+        {% endif %}
+    </div>
+    {% endblock %}
 
-  {% block header %}
+    {% block header %}
     <div class="header">{{ site_header }}</div>
-  {% endblock %}
+    {% endblock %}
 
-  {% block errors %}
+    {% block errors %}
     {% if form.non_field_errors %}
-      {% for error in form.non_field_errors %}
-        <el-alert title="{{ error }}" type="error"></el-alert>
-      {% endfor %}
+        {% for error in form.non_field_errors %}
+            <el-alert
+                    title="{{ error }}"
+                    type="error">
+            </el-alert>
+        {% endfor %}
     {% endif %}
     {% if form.errors and not form.non_field_errors %}
-      <p class="errornote">
-        {% if form.errors.items|length == 1 %}
-          <el-alert title="{% trans 'Please correct the error below.' %}" type="error"></el-alert>
-        {% else %}
-          <el-alert title="{% trans 'Please correct the errors below.' %}" type="error"></el-alert>
-        {% endif %}
-      </p>
+        <p class="errornote">
+            {% if form.errors.items|length == 1 %}
+                <el-alert title="{% trans "Please correct the error below." %}" type="error"></el-alert>
+            {% else %}
+                <el-alert title="{% trans "Please correct the errors below." %}" type="error"></el-alert>
+            {% endif %}
+        </p>
     {% endif %}
-  {% endblock %}
-
-  {% block form %}
+    {% endblock %}
+    {% block form %}
     <form class="simpleui-form" action="{{ app_path }}" method="post" id="login-form">
-      {% csrf_token %}
-      <div class="simpleui-input-inline">
-        <el-input prefix-icon="fas fa-user" v-model="username" name="username"
-                  placeholder="{% trans 'username' %}"></el-input>
-      </div>
-      <div class="simpleui-input-inline">
-        <el-input prefix-icon="fas fa-lock" type="password" v-model="password" name="password"
-                  @keyup.enter.native="login()"
-                  placeholder="{% trans 'password' %}" show-password></el-input>
-      </div>
-      <div class="simpleui-input-inline login-btn">
-        <el-button @click="login()" type="primary">{% trans 'Log in' %}</el-button>
-      </div>
+        {% csrf_token %}
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-user" v-model="username" name="username"
+                      placeholder="{% trans 'username' %}"></el-input>
+        </div>
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-lock" type="password" v-model="password" name="password"
+                      @keyup.enter.native="login()"
+                      placeholder="{% trans 'password' %}" show-password></el-input>
+        </div>
+        <div class="simpleui-input-inline login-btn">
+            <el-button @click="login()" type="primary">{% trans 'Log in' %}</el-button>
+        </div>
 
-      <input type="hidden" name="next" value="{{ next }}"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
     </form>
-  {% endblock %}
+    {% endblock %}
 </div>
 
 
@@ -98,20 +110,25 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}"></script>
 
 {% if 'SIMPLEUI_LOGIN_PARTICLES'|get_config != False %}
-  <style type="text/css">
+    <!--
+        Close login page particles see link:
+        关闭登录页粒子动画请查看：
+        https://github.com/newpanjing/simpleui/blob/master/QUICK.md#关闭登录页粒子动画
+    -->
+<style type="text/css">
     #particles-js{
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: -1;
     }
-  </style>
-  <!-- particles.js container -->
-  <div id="particles-js"></div>
-  <script type="text/javascript" src="{% static '/admin/simpleui-x/particles/particles.js' %}"></script>
-  <script type="text/javascript" src="{% static '/admin/simpleui-x/particles/app.js' %}"></script>
+</style>
+<!-- particles.js container -->
+<div id="particles-js"></div>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/particles/particles.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/particles/app.js' %}"></script>
 {% endif %}
 </body>
 </html>
