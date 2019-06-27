@@ -192,12 +192,15 @@
                         </div>
                         <div v-else class="iframe-wrap">
                             <iframe :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
-                            <div v-if="loading" class="loading" @dblclick="loading=false">
-                                <div class="center">
-                                    <span class="el-icon-loading"></span>
-                                    <span>loading...</span>
+                            {% if "SIMPLEUI_LOADING"|get_config != False %}
+                                <div v-if="loading" class="loading" @dblclick="loading=false">
+                                    <div class="center">
+                                        <span class="el-icon-loading"></span>
+                                        <span>loading...</span>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
+
                         </div>
                     </el-tab-pane>
 

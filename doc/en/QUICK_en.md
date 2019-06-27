@@ -36,7 +36,7 @@ Before starting，please take a minte to understand **settings.py**, because it'
   + [Custom code to Footer](#Custom%2dcode%2dto%2dFooter)
   + [Custom Action](#Custom%2dAction)
   + [Offline](#Offline)
-
+  + [Close Loading](#Close%2dLoading)
 # Common Problems
   + [settings.py](#Not%2dfound%2dsettings.py)
   + [python version problem](#python%2dversion%2dproblem)
@@ -442,6 +442,15 @@ SIMPLEUI_STATIC_OFFLINE = True
 Specifies whether simpleui loads static resources in offline mode. When true, all resources will be read locally by default, even if there is no networking. Suitable for intranet projects
 
 If you do not fill in the item or are false, the default is obtained from the third-party CDN.
+
+## Close Loading
+
+> Requires version 2.1.5 or above
+
+settings.py:
+```python
+SIMPLEUI_LOADING = False
+```
 
 ## Common Problems
   ### Not found settings.py

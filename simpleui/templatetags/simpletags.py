@@ -349,20 +349,17 @@ def load_analysis(context):
 def custom_button(context):
     admin = context.get('cl').model_admin
     data = {}
-    if hasattr(admin, 'actions'):
-        actions = admin.actions
-        # 输出自定义按钮的属性
-        for name in actions:
-            # __name__
-            if type(name) != str:
-                if type(name).__name__ == 'function':
-                    name = name.__name__
-            values = {}
-            fun = getattr(admin, name)
-            for key, v in fun.__dict__.items():
-                if key != '__len__':
-                    values[key] = v
-            data[name] = values
+    actions = admin.get_actions(context.request)
+    # if hasattr(admin, 'actions'):
+    # actions = admin.actions
+    # 输出自定义按钮的属性
+    for name in actions:
+        values = {}
+        fun = actions.get(name)[0]
+        for key, v in fun.__dict__.items():
+            if key != '__len__':
+                values[key] = v
+        data[name] = values
     return json.dumps(data, cls=LazyEncoder)
 
 
