@@ -42,7 +42,7 @@
 
     {% if cl.formset and cl.result_count %}
         <input type="hidden" name="_save" value="{% trans 'Save' %}"/>
-        <el-button icon="el-icon-circle-check-outline" type="success"
+        <el-button icon="el-icon-circle-check" type="success"
                    @click="formSubmit()">{% trans 'Save' %}</el-button>
     {% endif %}
 
