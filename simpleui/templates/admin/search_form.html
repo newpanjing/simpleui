@@ -48,7 +48,7 @@
                                    name="{{ spec.field_generic }}lt"/>
                         {% elif spec|has_filter %}
                             <input type="hidden" v-model="{{ spec.parameter_name }}" name="{{ spec.parameter_name }}"/>
-                            <el-select v-model="{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}">
+                            <el-select filterable v-model="{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}">
                                 {% for option in spec.lookup_choices %}
                                     <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
                                 {% endfor %}
@@ -57,7 +57,7 @@
                         {% else %}
 
                             <input type="hidden" v-model="{{ spec.lookup_kwarg }}" name="{{ spec.lookup_kwarg }}"/>
-                            <el-select v-model="{{ spec.lookup_kwarg }}" clearable
+                            <el-select filterable v-model="{{ spec.lookup_kwarg }}" clearable
                                        placeholder="{{ spec.title }}">
                                 {% if spec|get_date_type == 'time' %}
                                     {% for option in spec.lookup_choices %}
