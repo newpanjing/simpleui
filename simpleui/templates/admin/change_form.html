@@ -13,9 +13,15 @@
         .inline-group .tabular td.original p{
             margin-top: -33px;
         }
+        .page-header{
+            padding: 10px;
+        }
 
     </style>
     <div id="content-main" class="form-main">
+        <div class="page-header">
+            <el-page-header @back="goBack" content="{{title}}"/>
+        </div>
         {% block object-tools %}
             {% if change %}{% if not is_popup %}
                 <ul class="object-tools">
@@ -94,6 +100,19 @@
 
     </div>
     <script type="text/javascript">
+        new Vue({
+            el:'.page-header',
+            methods:{
+                goBack:function () {
+                    var referrer = document.referrer;
+                    if (referrer && document.URL != referrer) {
+                        window.location.href = referrer;
+                    } else {
+                        window.history.go(-1);
+                    }
+                }
+            }
+        })
         if ($(".object-tools").length!=0) {
             new Vue({
                 el: '.object-tools',
