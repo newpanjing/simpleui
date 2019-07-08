@@ -39,7 +39,11 @@
     * {
         -webkit-overflow-scrolling: touch;
     }
+    [v-block]{
+        display: none;
+    }
 </style>
+
 
 {% verbatim dynamicCss %}
     <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
@@ -51,7 +55,7 @@
 {% autoescape off %}
     {% menus %}
 {% endautoescape %}
-<div id="main" @click="mainClick($event)">
+<div id="main" @click="mainClick($event)" v-block>
 
     <link v-if="theme!=''" rel="stylesheet" :href="theme">
 
