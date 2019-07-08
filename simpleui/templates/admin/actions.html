@@ -67,17 +67,26 @@
         {% endif %}
     {% endblock %}
 
+    <el-button-group class="btn-group">
+        <a href="javascript:;" @click="searchDisplay()" class="el-button el-button--default"><span class="el-icon-search"></span></a>
+        <a href="javascript:;" @click="reload()" class="el-button el-button--default"><span class="el-icon-refresh"></span></a>
+        <a href="javascript:;" @click="openNewPage()" class="el-button el-button--default"><span class="el-icon-news"></span></a>
+
+    </el-button-group>
 
 </div>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
 <script type="text/javascript">
 
+
+
     var _action = new Vue({
         el: '.actions',
         data: {
             select_across: 0,
             file_format: 1,
+            show:true,
             options: [{
                 value: 0,
                 label: 'csv'
@@ -106,7 +115,39 @@
             customButton:{% autoescape off %}{% custom_button %}{% endautoescape %},
             exts:[]
         },
+        created(){
+            if (localStorage && typeof (localStorage.searchStatus) != 'undefined') {
+                this.show = localStorage.searchStatus=='true';
+            }
+        },
+        watch:{
+            'show':function(newValue){
+                if(!newValue){
+                    //隐藏
+                    document.getElementById('toolbar').style.display = 'none';
+                    document.querySelector('.xfull').style.display = 'none';
+                }else{
+                    //显示
+                    document.getElementById('toolbar').style.display = 'inherit';
+                    document.querySelector('.xfull').style.display = 'inherit';
+                }
+                if(localStorage){
+                    localStorage['searchStatus']=newValue;
+                }
+            }
+        },
         methods: {
+            searchDisplay:function(){
+
+                this.show = !this.show;
+
+            },
+            reload:function(){
+              window.location.reload()
+            },
+            openNewPage:function(){
+                window.open(window.location.href)
+            },
             getIcon:getIcon,
             extClick:function(item){
               window.location.href=item.url;
