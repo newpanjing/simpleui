@@ -42,7 +42,8 @@
     new Vue({
         el: '#main',
         data: {
-            searchInput:'',
+            isResize: false,
+            searchInput: '',
             height: 1000,
             fold: false,
             zoom: false,
@@ -167,10 +168,11 @@
                 if (!self.small) {
 
                     self.menuTextShow = !(width < 800);
-                    self.$nextTick(()=>{
-                        self.fold= width < 800;
+                    self.$nextTick(() => {
+                        self.fold = width < 800;
                     })
                 }
+                self.isResize = true
 
                 //判断全屏状态
                 try {

@@ -9,6 +9,7 @@ Simple and friendly.
 Django admin theme the simpleui
 </p>
 <p align="center">
+  <a href="https://github.com/newpanjing/simpleui/blob/master/LICENSE"><a href="https://opencollective.com/simpleui" alt="Financial Contributors on Open Collective"><img src="https://opencollective.com/simpleui/all/badge.svg?label=financial+contributors" /></a>
   <a href="https://github.com/newpanjing/simpleui/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <a href="https://pypi.org/project/django-simpleui/#history"><img src="https://img.shields.io/pypi/v/django-simpleui.svg"></a>
 <a href="https://python.org"><img src="https://img.shields.io/badge/python->=3.7.x-green.svg"></a>
