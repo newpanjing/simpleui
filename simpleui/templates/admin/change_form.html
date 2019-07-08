@@ -1,10 +1,10 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_urls static admin_modify simpletags%}
+{% load i18n admin_urls static admin_modify %}
 
 {% block extrahead %}{{ block.super }}
     <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
     {{ media }}
-{% context_test %}
+
 {% endblock %}
 {% block extrastyle %}{{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}"/>{% endblock %}
