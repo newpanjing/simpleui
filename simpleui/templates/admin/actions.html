@@ -122,14 +122,19 @@
         },
         watch:{
             'show':function(newValue){
+                obj=document.querySelector('.xfull')
                 if(!newValue){
                     //隐藏
                     document.getElementById('toolbar').style.display = 'none';
-                    document.querySelector('.xfull').style.display = 'none';
+                    if(obj) {
+                        obj.style.display = 'none';
+                    }
                 }else{
                     //显示
                     document.getElementById('toolbar').style.display = 'inherit';
-                    document.querySelector('.xfull').style.display = 'inherit';
+                    if(obj){
+                        obj.style.display = 'inherit';
+                    }
                 }
                 if(localStorage){
                     localStorage['searchStatus']=newValue;

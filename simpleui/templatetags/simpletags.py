@@ -363,22 +363,41 @@ def custom_button(context):
     return json.dumps(data, cls=LazyEncoder)
 
 
+from django.db.models.fields.related import ForeignKey
+
+
+def get_model_fields(model, base=None):
+    list = []
+    fields = model._meta.fields
+    for f in fields:
+        label = f.name
+        if hasattr(f, 'verbose_name'):
+            label = getattr(f, 'verbose_name')
+
+        if base:
+            list.append(('{}__{}'.format(base, f.name), label))
+        else:
+            list.append((f.name, label))
+        if isinstance(f, ForeignKey):
+            list.extend(get_model_fields(f.related_model, f.name))
+
+    return list
+
+
 @register.simple_tag(takes_context=True)
 def search_placeholder(context):
     cl = context.get('cl')
-    fields = cl.model._meta.fields
-    mappers = {}
-    for f in fields:
-        mappers[f.name] = f
+
+    fields = get_model_fields(cl.model)
 
     verboses = []
 
-    for field in cl.search_fields:
-        f = mappers.get(field)
-        if hasattr(f, 'verbose_name'):
-            verboses.append(str(f.verbose_name))
-        else:
-            verboses.append(str(field))
+    for s in cl.search_fields:
+        for f in fields:
+            if f[0] == s:
+                verboses.append(f[1])
+                break
+
     return ",".join(verboses)
 
 
