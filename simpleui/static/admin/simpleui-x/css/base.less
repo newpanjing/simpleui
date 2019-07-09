@@ -1,6 +1,7 @@
 .simpleui-form-item {
   display: inline-block;
   width: auto;
+  margin-right: 10px;
 }
 
 #changelist #toolbar form input {
@@ -57,6 +58,9 @@ a:link, a:visited {
 
 .object-tools {
   margin-top: 0px;
+  position: absolute;
+  top: 10px;
+  right: 30px;
 }
 
 .vTextField {
@@ -158,22 +162,26 @@ body,
   }
 
   .object-tools {
-    top: 6px!important;
+    top: 6px !important;
     margin: 0px;
   }
-  .el-pagination__total{
-    display: block!important;
+
+  .el-pagination__total {
+    display: block !important;
   }
-  .el-pagination__jump{
-    display: block!important;
+
+  .el-pagination__jump {
+    display: block !important;
     margin: 0px;
     margin-top: 10px;
   }
-  .el-pager{
+
+  .el-pager {
     margin: 0px;
     padding: 0px;
   }
-  .el-dialog{
+
+  .el-dialog {
     width: 90%;
   }
 
@@ -190,5 +198,15 @@ body,
 
   #content {
     padding: 0px !important;
+  }
+}
+
+#changelist .actions {
+  margin-right: auto;
+  position: relative;
+
+  .btn-group {
+    position: absolute;
+    right: 0px;
   }
 }

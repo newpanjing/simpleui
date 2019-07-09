@@ -9,7 +9,8 @@ Simple and friendly.
 Django admin theme the simpleui
 </p>
 <p align="center">
-  <a href="https://github.com/newpanjing/simpleui/blob/master/LICENSE"><a href="https://opencollective.com/simpleui" alt="Financial Contributors on Open Collective"><img src="https://opencollective.com/simpleui/all/badge.svg?label=financial+contributors" /></a> <img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+  <a href="https://github.com/newpanjing/simpleui/blob/master/LICENSE"><a href="https://opencollective.com/simpleui" alt="Financial Contributors on Open Collective"><img src="https://opencollective.com/simpleui/all/badge.svg?label=financial+contributors" /></a>
+  <a href="https://github.com/newpanjing/simpleui/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <a href="https://pypi.org/project/django-simpleui/#history"><img src="https://img.shields.io/pypi/v/django-simpleui.svg"></a>
 <a href="https://python.org"><img src="https://img.shields.io/badge/python->=3.7.x-green.svg"></a>
 <a href="https://pypi.org/project/django-simpleui/">
@@ -197,33 +198,3 @@ simpleui的发展离不开以下优秀贡献者的支持。如果您想为simple
 |[@shouyong](https://github.com/shouyong)|bug修复|
 |[@Roddy1219](https://github.com/Roddy1219)|bug修复|
 |[@WalkerWang731](https://github.com/WalkerWang731)|优质代码贡献|
-
-## Contributors
-
-### Code Contributors
-
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/newpanjing/simpleui/graphs/contributors"><img src="https://opencollective.com/simpleui/contributors.svg?width=890&button=false" /></a>
-
-### Financial Contributors
-
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/simpleui/contribute)]
-
-#### Individuals
-
-<a href="https://opencollective.com/simpleui"><img src="https://opencollective.com/simpleui/individuals.svg?width=890"></a>
-
-#### Organizations
-
-Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/simpleui/contribute)]
-
-<a href="https://opencollective.com/simpleui/organization/0/website"><img src="https://opencollective.com/simpleui/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/1/website"><img src="https://opencollective.com/simpleui/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/2/website"><img src="https://opencollective.com/simpleui/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/3/website"><img src="https://opencollective.com/simpleui/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/4/website"><img src="https://opencollective.com/simpleui/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/5/website"><img src="https://opencollective.com/simpleui/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/6/website"><img src="https://opencollective.com/simpleui/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/7/website"><img src="https://opencollective.com/simpleui/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/8/website"><img src="https://opencollective.com/simpleui/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/simpleui/organization/9/website"><img src="https://opencollective.com/simpleui/organization/9/avatar.svg"></a>

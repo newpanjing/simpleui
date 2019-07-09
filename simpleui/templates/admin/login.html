@@ -90,7 +90,7 @@
                       placeholder="{% trans 'password' %}" show-password></el-input>
         </div>
         <div class="simpleui-input-inline login-btn">
-            <el-button @click="login()" type="primary">{% trans 'Log in' %}</el-button>
+            <el-button :icon="loading?'el-icon-loading':''" @click="login()" type="primary">{% trans 'Log in' %}</el-button>
         </div>
 
         <input type="hidden" name="next" value="{{ next }}"/>
@@ -107,7 +107,7 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 {% endif %}
 
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}?_=2.3"></script>
 
 {% if 'SIMPLEUI_LOGIN_PARTICLES'|get_config != False %}
     <!--

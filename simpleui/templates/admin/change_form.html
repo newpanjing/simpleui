@@ -4,8 +4,8 @@
 {% block extrahead %}{{ block.super }}
     <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
     {{ media }}
-{% endblock %}
 
+{% endblock %}
 {% block extrastyle %}{{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}"/>{% endblock %}
 {% block content %}
@@ -13,9 +13,15 @@
         .inline-group .tabular td.original p{
             margin-top: -33px;
         }
+        .page-header{
+            padding: 10px;
+        }
 
     </style>
     <div id="content-main" class="form-main">
+        <div class="page-header">
+            <el-page-header @back="goBack" content="{{title}}"/>
+        </div>
         {% block object-tools %}
             {% if change %}{% if not is_popup %}
                 <ul class="object-tools">
@@ -94,6 +100,25 @@
 
     </div>
     <script type="text/javascript">
+        new Vue({
+            el:'.page-header',
+            methods:{
+                goBack:function () {
+                    //找到上级
+                    var array = location.pathname.split('/')
+                    if (array.length == 5||array.length==6) {
+                        window.location.href = '/' + array[1] + '/' + array[2];
+                    } else {
+                        var referrer = document.referrer;
+                        if (referrer && document.URL != referrer) {
+                            window.location.href = referrer;
+                        } else {
+                            window.history.go(-1);
+                        }
+                    }
+                }
+            }
+        })
         if ($(".object-tools").length!=0) {
             new Vue({
                 el: '.object-tools',

@@ -40,11 +40,16 @@
                 $("form").submit();
             },
             prev: function () {
-                var referrer = document.referrer;
-                if (referrer && document.URL != referrer) {
-                    window.location.href = referrer;
+                var array = location.pathname.split('/')
+                if (array.length == 5 || array.length == 6) {
+                    window.location.href = '/' + array[1] + '/' + array[2];
                 } else {
-                    window.history.go(-1);
+                    var referrer = document.referrer;
+                    if (referrer && document.URL != referrer) {
+                        window.location.href = referrer;
+                    } else {
+                        window.history.go(-1);
+                    }
                 }
             }
         }

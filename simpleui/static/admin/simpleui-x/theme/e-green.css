@@ -154,6 +154,13 @@ a:visited {
 .quick-card a:hover {
   color: rgba(39, 173, 96, 0.8) !important;
 }
+.module h2,
+.module caption,
+.inline-group h2,
+.selector-chosen h2 {
+  background: #FFF !important;
+  color: #666 !important;
+}
 .menu .el-menu-item {
   color: #484848 !important;
 }

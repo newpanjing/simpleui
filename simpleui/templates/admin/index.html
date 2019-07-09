@@ -6,7 +6,6 @@
    source code：
    https://github.com/newpanjing/simpleui
 -->
-
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
@@ -39,7 +38,11 @@
     * {
         -webkit-overflow-scrolling: touch;
     }
+    [v-block]{
+        display: none;
+    }
 </style>
+
 
 {% verbatim dynamicCss %}
     <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
@@ -51,7 +54,7 @@
 {% autoescape off %}
     {% menus %}
 {% endautoescape %}
-<div id="main" @click="mainClick($event)">
+<div id="main" @click="mainClick($event)" v-block>
 
     <link v-if="theme!=''" rel="stylesheet" :href="theme">
 
@@ -93,7 +96,7 @@
                         <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
                             <el-menu-item :index="(i+1)+'-'+j" @click="openTab(sub,(i+1)+'-'+j)">
                                 <i :class="sub.icon"></i>
-                                <span  v-if="menuTextShow" slot="title" v-text="sub.name"></span>
+                                <span slot="title" v-text="sub.name"></span>
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
@@ -161,7 +164,7 @@
                 </div>
             </el-header>
             <el-main>
-                <el-tabs v-model="tabModel" type="border-card" editable style="height: 100%" @edit="handleTabsEdit"
+                <el-tabs v-model="tabModel" type="border-card" editable :style="isResize?'height:100%':'height: calc(100% - 97px)'" @edit="handleTabsEdit"
                          @tab-click="tabClick">
 
                     <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id"
@@ -307,7 +310,7 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.1.4"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.3"></script>
 
 {% load_analysis %}
 {% block script %}
