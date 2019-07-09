@@ -374,6 +374,9 @@ def get_model_fields(model, base=None):
         if hasattr(f, 'verbose_name'):
             label = getattr(f, 'verbose_name')
 
+        if isinstance(label, Promise):
+            label = str(label)
+
         if base:
             list.append(('{}__{}'.format(base, f.name), label))
         else:

@@ -154,4 +154,11 @@ a:visited {
 .quick-card a:hover {
   color: rgba(64, 158, 255, 0.8) !important;
 }
+.module h2,
+.module caption,
+.inline-group h2,
+.selector-chosen h2 {
+  background: #606266 !important;
+  color: #666 !important;
+}
 /*# sourceMappingURL=light.css.map */

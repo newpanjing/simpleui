@@ -154,6 +154,13 @@ a:visited {
 .quick-card a:hover {
   color: rgba(30, 159, 255, 0.8) !important;
 }
+.module h2,
+.module caption,
+.inline-group h2,
+.selector-chosen h2 {
+  background: #303133 !important;
+  color: #FFF !important;
+}
 .logo-wrap {
   background-color: #1E9FFF !important;
   color: #FFF;
