@@ -6,7 +6,6 @@
    source code：
    https://github.com/newpanjing/simpleui
 -->
-
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
@@ -97,7 +96,7 @@
                         <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
                             <el-menu-item :index="(i+1)+'-'+j" @click="openTab(sub,(i+1)+'-'+j)">
                                 <i :class="sub.icon"></i>
-                                <span  v-if="menuTextShow" slot="title" v-text="sub.name"></span>
+                                <span slot="title" v-text="sub.name"></span>
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
