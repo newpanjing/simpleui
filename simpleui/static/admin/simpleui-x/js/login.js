@@ -1,3 +1,7 @@
+if (parent.callback) {
+    //如果是在子框架内就把首页刷新
+    parent.callback();
+}
 new Vue({
     el: '.login-main',
     data: {

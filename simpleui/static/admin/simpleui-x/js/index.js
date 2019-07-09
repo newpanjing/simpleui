@@ -1,5 +1,13 @@
 (function () {
 
+    if (window.frameElement) {
+        window.frameElement.contentWindow.parent.callback()
+    }
+
+    window.callback = function () {
+        window.location.reload()
+    }
+
     var fontConfig = new Vue({
         el: '#dynamicCss',
         data: {
