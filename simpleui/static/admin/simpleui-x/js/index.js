@@ -1,7 +1,31 @@
 (function () {
-
     if (window.frameElement) {
         window.frameElement.contentWindow.parent.callback()
+    }
+
+    window.addEventListener('hashchange', function (e) {
+        // console.log(e)
+        // console.log('hash')
+        if (e.newURL != e.oldURL) {
+            openByHash()
+        }
+    });
+
+    function openByHash() {
+        var hash = location.hash;
+        hash = hash.substring(1)
+
+        for (var i = 0; i < app.menuData.length; i++) {
+            var item = app.menuData[i]
+            if ((item.url || '/') == hash) {
+                app.openTab(item, item.index)
+                break;
+            }
+        }
+    }
+
+    function changeUrl(data) {
+        location.href = '#' + (data.url || '/')
     }
 
     window.callback = function () {
@@ -136,7 +160,8 @@
             fontDialogVisible: false,
             fontSlider: 12,
             loading: false,
-            menuTextShow: true
+            menuTextShow: true,
+            menuData: []
         },
         watch: {
             fold: function (newValue, oldValue) {
@@ -191,12 +216,17 @@
             }
             window.app = this;
 
+
             window.menus.forEach(item => {
                 item.icon = getIcon(item.name, item.icon);
+
                 if (item.models) {
                     item.models.forEach(mItem => {
                         mItem.icon = getIcon(mItem.name, mItem.icon);
+                        self.menuData.push(mItem)
                     });
+                } else {
+                    self.menuData.push(item)
                 }
             });
 
@@ -216,6 +246,9 @@
                 }
             }
 
+            if(location.hash!=''){
+                openByHash();
+            }
         },
         methods: {
             reset: function () {
@@ -294,6 +327,7 @@
                 var index = item.index;
                 this.menuActive = index;
                 this.breadcrumbs = item.breadcrumbs;
+                changeUrl(item);
             },
             handleTabsEdit: function (targetName, action) {
 
@@ -307,6 +341,7 @@
                                 next = temp.id;
                                 self.menuActive = temp.index;
                                 self.breadcrumbs = temp.breadcrumbs;
+                                changeUrl(temp)
                             }
                         }
                     });
@@ -344,6 +379,7 @@
                     this.tabs.push(data);
                     this.tabModel = data.id;
                 }
+                changeUrl(data)
 
             }
             ,
