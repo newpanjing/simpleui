@@ -357,7 +357,7 @@ def custom_button(context):
         values = {}
         fun = actions.get(name)[0]
         for key, v in fun.__dict__.items():
-            if key != '__len__':
+            if key != '__len__' and key != '__wrapped__':
                 values[key] = v
         data[name] = values
     return json.dumps(data, cls=LazyEncoder)
