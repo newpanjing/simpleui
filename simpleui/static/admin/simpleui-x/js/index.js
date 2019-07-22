@@ -260,6 +260,11 @@
             if (location.hash != '') {
                 openByHash();
             }
+
+            //elementui布局问题，导致页面不能正常撑开，调用resize使其重新计算
+            if(window.onresize){
+                window.onresize();
+            }
         },
         methods: {
             syncTabs: function () {
