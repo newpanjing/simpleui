@@ -168,7 +168,7 @@
                          @tab-click="tabClick">
 
                     <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id"
-                                 :key="item.id">
+                                 :key="item.id" lazy="true">
 
                         {% home_page %}
 
@@ -310,7 +310,7 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.3"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.6"></script>
 
 {% load_analysis %}
 {% block script %}

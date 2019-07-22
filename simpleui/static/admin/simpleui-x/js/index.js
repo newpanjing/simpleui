@@ -184,6 +184,12 @@
                     }
                 });
             }
+            /*,
+            tabs: function (newValue, oldValue) {
+
+                //改变tab时把状态储存到sessionStorage
+                console.log(newValue)
+            }*/
         },
         created: function () {
 
@@ -245,12 +251,27 @@
                     fontEvents.push(handler);
                 }
             }
+            var temp_tabs = sessionStorage['tabs'];
 
-            if(location.hash!=''){
+            if (temp_tabs && temp_tabs != '') {
+                this.tabs = JSON.parse(temp_tabs);
+                console.log(this.tabs)
+            }
+            if (location.hash != '') {
                 openByHash();
+            }
+
+            //elementui布局问题，导致页面不能正常撑开，调用resize使其重新计算
+            if(window.onresize){
+                window.onresize();
             }
         },
         methods: {
+            syncTabs: function () {
+                if (window.sessionStorage) {
+                    sessionStorage['tabs'] = JSON.stringify(this.tabs);
+                }
+            },
             reset: function () {
                 this.fontSlider = 14;
                 fontConfig.fontSize = 0;
@@ -350,6 +371,7 @@
                     if (targetName != 0) {
                         this.tabs = this.tabs.filter(tab => tab.id !== targetName);
                     }
+                    this.syncTabs();
                 }
             }
             ,
@@ -380,7 +402,7 @@
                     this.tabModel = data.id;
                 }
                 changeUrl(data)
-
+                this.syncTabs();
             }
             ,
             foldClick: function () {

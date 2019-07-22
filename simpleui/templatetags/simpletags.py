@@ -357,7 +357,7 @@ def custom_button(context):
         values = {}
         fun = actions.get(name)[0]
         for key, v in fun.__dict__.items():
-            if key != '__len__':
+            if key != '__len__' and key != '__wrapped__':
                 values[key] = v
         data[name] = values
     return json.dumps(data, cls=LazyEncoder)
@@ -381,8 +381,6 @@ def get_model_fields(model, base=None):
             list.append(('{}__{}'.format(base, f.name), label))
         else:
             list.append((f.name, label))
-        if isinstance(f, ForeignKey):
-            list.extend(get_model_fields(f.related_model, f.name))
 
     return list
 
@@ -391,7 +389,12 @@ def get_model_fields(model, base=None):
 def search_placeholder(context):
     cl = context.get('cl')
 
+    # 取消递归，只获取2级
     fields = get_model_fields(cl.model)
+
+    for f in cl.model._meta.fields:
+        if isinstance(f, ForeignKey):
+            fields.extend(get_model_fields(f.related_model, f.name))
 
     verboses = []
 
