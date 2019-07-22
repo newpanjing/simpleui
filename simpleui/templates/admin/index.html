@@ -168,7 +168,7 @@
                          @tab-click="tabClick">
 
                     <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id"
-                                 :key="item.id">
+                                 :key="item.id" lazy="true">
 
                         {% home_page %}
 
