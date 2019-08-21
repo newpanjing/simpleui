@@ -1,7 +1,21 @@
 # -*- coding: utf-8 -*-
 import sys
+
+import requests
 from setuptools import setup
 import simpleui
+
+
+def md_to_rst(from_file, to_file):
+    r = requests.post(url='http://c.docverter.com/convert',
+                      data={'to': 'rst', 'from': 'markdown'},
+                      files={'input_files[]': open(from_file, 'rb')})
+    if r.ok:
+        with open(to_file, "wb") as f:
+            f.write(r.content)
+
+
+md_to_rst("README.md", "README.rst")
 
 if sys.version_info < (3, 0):
 
