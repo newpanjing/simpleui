@@ -161,6 +161,9 @@ a:visited {
   background: #333 !important;
   color: #fff !important;
 }
+#changelist .actions {
+  min-height: 38px;
+}
 /*主题色*/
 /*菜单文本*/
 /*菜单背景*/

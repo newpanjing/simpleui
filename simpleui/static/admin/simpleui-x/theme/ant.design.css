@@ -161,6 +161,9 @@ a:visited {
   background: rgba(0, 0, 0, 0.65) !important;
   color: #fff !important;
 }
+#changelist .actions {
+  min-height: 38px;
+}
 /*主题色*/
 .logo-wrap {
   background-color: #002140;
