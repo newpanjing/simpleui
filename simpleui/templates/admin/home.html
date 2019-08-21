@@ -24,7 +24,7 @@
                         <div v-for="(c,j) in models" :key="c.name" class="quick-wrap">
                             <a href="javascript:;" @click="openTab(c,(j+1)+'')">
                                 <span class="icon" :class="c.icon"></span>
-                                <span v-text="c.name"></span>
+                                <span class="card-name" v-text="c.name"></span>
                             </a>
                         </div>
 

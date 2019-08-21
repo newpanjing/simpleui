@@ -308,6 +308,13 @@ body {
   margin: 10px;
   border: #FFF 1px solid;
 }
+.quick-wrap .card-name {
+  height: 25px;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .quick-wrap .icon {
   display: block;
   text-align: center;
@@ -330,7 +337,7 @@ body {
   min-height: 250px;
 }
 .menu {
-  overflow-x: hidden ;
+  overflow-x: hidden;
   /*滚动条样式*/
 }
 .menu .el-icon-arrow-right {
