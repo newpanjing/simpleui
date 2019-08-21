@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'データなし',
       loading: 'ロード中',
-      placeholder: '選択してください'
+      placeholder: '選択してください',
+      noData: 'データなし'
     },
     pagination: {
       goto: '',
@@ -110,6 +111,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

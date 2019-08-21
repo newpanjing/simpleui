@@ -423,3 +423,8 @@ def get_tz_suffix():
         return '+08:00'
     else:
         return ''
+
+
+@register.simple_tag
+def simple_version():
+    return simpleui.get_version()

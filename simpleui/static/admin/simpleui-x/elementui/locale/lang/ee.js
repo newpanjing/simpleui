@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'Sobivad andmed puuduvad',
       loading: 'Laadimine',
-      placeholder: 'Vali'
+      placeholder: 'Vali',
+      noData: 'Andmed puuduvad'
     },
     pagination: {
       goto: 'Mine lehele',
@@ -110,6 +111,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

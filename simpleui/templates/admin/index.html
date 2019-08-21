@@ -302,7 +302,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 {% endif %}
-
+<script type="text/javascript">
+    __simpleui_version='{% simple_version %}';
+</script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}?_=2.1"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
@@ -311,6 +313,7 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=2.7"></script>
+<script type="text/javascript" async src="https://api.github.com/repos/newpanjing/simpleui/releases/latest?callback=simple_call"></script>
 
 {% load_analysis %}
 {% block script %}

@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'Li hembere ve agahî tune',
       loading: 'Bardibe',
-      placeholder: 'Bibijêre'
+      placeholder: 'Bibijêre',
+      noData: 'Agahî tune'
     },
     pagination: {
       goto: 'Biçe',
@@ -110,6 +111,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

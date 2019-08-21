@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'Ei vastaavia tietoja',
         loading: 'Lataa',
-        placeholder: 'Valitse'
+        placeholder: 'Valitse',
+        noData: 'Ei tietoja'
       },
       pagination: {
         goto: 'Mene',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

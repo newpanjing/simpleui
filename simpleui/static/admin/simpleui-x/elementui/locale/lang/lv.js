@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'Nav atbilstošu datu',
       loading: 'Ielādē',
-      placeholder: 'Izvēlēties'
+      placeholder: 'Izvēlēties',
+      noData: 'Nav datu'
     },
     pagination: {
       goto: 'Iet uz',
@@ -110,6 +111,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'No hay datos que coincidan',
       loading: 'Cargando',
-      placeholder: 'Seleccionar'
+      placeholder: 'Seleccionar',
+      noData: 'Sin datos'
     },
     pagination: {
       goto: 'Ir a',
@@ -109,6 +110,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };
