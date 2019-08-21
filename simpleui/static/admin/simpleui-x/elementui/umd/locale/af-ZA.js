@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'Geen toepaslike data',
         loading: 'Laai',
-        placeholder: 'Kies'
+        placeholder: 'Kies',
+        noData: 'Geen data'
       },
       pagination: {
         goto: 'Gaan na',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };
