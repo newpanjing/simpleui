@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'Sem resultados',
       loading: 'Carregando',
-      placeholder: 'Selecione'
+      placeholder: 'Selecione',
+      noData: 'Sem dados'
     },
     pagination: {
       goto: 'Ir para',
@@ -109,7 +110,10 @@ exports.default = {
       hasCheckedFormat: '{checked}/{total} selecionados'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Erro ao carregar imagem'
+    },
+    pageHeader: {
+      title: 'Voltar'
     }
   }
 };

@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 78);
+/******/ 	return __webpack_require__(__webpack_require__.s = 82);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,10 +189,10 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 19:
+/***/ 11:
 /***/ (function(module, exports) {
 
-module.exports = require("element-ui/lib/mixins/focus");
+module.exports = require("element-ui/lib/input");
 
 /***/ }),
 
@@ -203,7 +203,14 @@ module.exports = require("element-ui/lib/utils/dom");
 
 /***/ }),
 
-/***/ 25:
+/***/ 21:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/focus");
+
+/***/ }),
+
+/***/ 30:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -238,13 +245,13 @@ module.exports = require("element-ui/lib/utils/dom");
 
 /***/ }),
 
-/***/ 78:
+/***/ 82:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./packages/input-number/src/input-number.vue?vue&type=template&id=42f8cf66&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/input-number/src/input-number.vue?vue&type=template&id=42f8cf66&
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -392,17 +399,17 @@ render._withStripped = true
 // CONCATENATED MODULE: ./packages/input-number/src/input-number.vue?vue&type=template&id=42f8cf66&
 
 // EXTERNAL MODULE: external "element-ui/lib/input"
-var input_ = __webpack_require__(9);
+var input_ = __webpack_require__(11);
 var input_default = /*#__PURE__*/__webpack_require__.n(input_);
 
 // EXTERNAL MODULE: external "element-ui/lib/mixins/focus"
-var focus_ = __webpack_require__(19);
+var focus_ = __webpack_require__(21);
 var focus_default = /*#__PURE__*/__webpack_require__.n(focus_);
 
 // EXTERNAL MODULE: ./src/directives/repeat-click.js
-var repeat_click = __webpack_require__(25);
+var repeat_click = __webpack_require__(30);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/input-number/src/input-number.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/input-number/src/input-number.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -605,7 +612,7 @@ var repeat_click = __webpack_require__(25);
   methods: {
     toPrecision: function toPrecision(num, precision) {
       if (precision === undefined) precision = this.numPrecision;
-      return parseFloat(Number(num).toFixed(precision));
+      return parseFloat(Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision));
     },
     getPrecision: function getPrecision(value) {
       if (value === undefined) return 0;
@@ -692,7 +699,7 @@ var repeat_click = __webpack_require__(25);
 });
 // CONCATENATED MODULE: ./packages/input-number/src/input-number.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_input_numbervue_type_script_lang_js_ = (input_numbervue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./packages/input-number/src/input-number.vue
@@ -727,13 +734,6 @@ input_number.install = function (Vue) {
 };
 
 /* harmony default export */ var packages_input_number = __webpack_exports__["default"] = (input_number);
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/input");
 
 /***/ })
 

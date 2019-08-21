@@ -15,3 +15,16 @@ function isObject(obj) {
 function isHtmlElement(node) {
   return node && node.nodeType === Node.ELEMENT_NODE;
 }
+
+var isFunction = exports.isFunction = function isFunction(functionToCheck) {
+  var getType = {};
+  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+};
+
+var isUndefined = exports.isUndefined = function isUndefined(val) {
+  return val === void 0;
+};
+
+var isDefined = exports.isDefined = function isDefined(val) {
+  return val !== undefined && val !== null;
+};

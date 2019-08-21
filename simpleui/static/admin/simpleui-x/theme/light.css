@@ -161,4 +161,10 @@ a:visited {
   background: #606266 !important;
   color: #666 !important;
 }
+#changelist .actions {
+  min-height: 38px;
+}
+.colM {
+  overflow: auto;
+}
 /*# sourceMappingURL=light.css.map */

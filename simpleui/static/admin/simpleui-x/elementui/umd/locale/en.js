@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'No matching data',
         loading: 'Loading',
-        placeholder: 'Select'
+        placeholder: 'Select',
+        noData: 'No data'
       },
       pagination: {
         goto: 'Go to',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED'
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

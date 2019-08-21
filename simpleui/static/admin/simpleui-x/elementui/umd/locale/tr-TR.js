@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'Eşleşen veri bulunamadı',
         loading: 'Yükleniyor',
-        placeholder: 'Seç'
+        placeholder: 'Seç',
+        noData: 'Veri yok'
       },
       pagination: {
         goto: 'Git',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

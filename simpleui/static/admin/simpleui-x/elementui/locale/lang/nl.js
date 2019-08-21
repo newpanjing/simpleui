@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'Geen overeenkomende resultaten',
       loading: 'Laden',
-      placeholder: 'Selecteer'
+      placeholder: 'Selecteer',
+      noData: 'Geen data'
     },
     pagination: {
       goto: 'Ga naar',
@@ -110,6 +111,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

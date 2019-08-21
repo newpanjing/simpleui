@@ -353,13 +353,14 @@ def custom_button(context):
     # if hasattr(admin, 'actions'):
     # actions = admin.actions
     # 输出自定义按钮的属性
-    for name in actions:
-        values = {}
-        fun = actions.get(name)[0]
-        for key, v in fun.__dict__.items():
-            if key != '__len__' and key != '__wrapped__':
-                values[key] = v
-        data[name] = values
+    if actions:
+        for name in actions:
+            values = {}
+            fun = actions.get(name)[0]
+            for key, v in fun.__dict__.items():
+                if key != '__len__' and key != '__wrapped__':
+                    values[key] = v
+            data[name] = values
     return json.dumps(data, cls=LazyEncoder)
 
 
@@ -411,3 +412,19 @@ def _import_reload(_modules):
     _obj = __import__(_modules, fromlist=_modules.split('.'))
     reload(_obj)
     return _obj
+
+
+@register.simple_tag
+def get_tz_suffix():
+    # 判断settings.py中的TZ是否为false
+    tz = __get_config('USE_TZ')
+    # 必须明确指定为True的时候，才返回+8 的后缀
+    if tz:
+        return '+08:00'
+    else:
+        return ''
+
+
+@register.simple_tag
+def simple_version():
+    return simpleui.get_version()

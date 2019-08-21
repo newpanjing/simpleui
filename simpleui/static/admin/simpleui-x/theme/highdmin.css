@@ -161,6 +161,12 @@ a:visited {
   background: #FFF !important;
   color: #586b7d !important;
 }
+#changelist .actions {
+  min-height: 38px;
+}
+.colM {
+  overflow: auto;
+}
 .logo-wrap {
   color: #FFF !important;
   background-color: #02c0ce;

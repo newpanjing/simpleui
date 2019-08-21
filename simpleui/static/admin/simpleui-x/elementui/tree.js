@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 52);
+/******/ 	return __webpack_require__(__webpack_require__.s = 57);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,17 +189,10 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 16:
+/***/ 17:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/checkbox");
-
-/***/ }),
-
-/***/ 18:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/locale");
 
 /***/ }),
 
@@ -210,7 +203,14 @@ module.exports = require("element-ui/lib/utils/dom");
 
 /***/ }),
 
-/***/ 23:
+/***/ 20:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/locale");
+
+/***/ }),
+
+/***/ 28:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/transitions/collapse-transition");
@@ -220,17 +220,24 @@ module.exports = require("element-ui/lib/transitions/collapse-transition");
 /***/ 3:
 /***/ (function(module, exports) {
 
+module.exports = require("element-ui/lib/utils/util");
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
 module.exports = require("element-ui/lib/mixins/emitter");
 
 /***/ }),
 
-/***/ 52:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./packages/tree/src/tree.vue?vue&type=template&id=547575a6&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/tree/src/tree.vue?vue&type=template&id=547575a6&
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -291,7 +298,7 @@ render._withStripped = true
 // CONCATENATED MODULE: ./packages/tree/src/tree.vue?vue&type=template&id=547575a6&
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/merge"
-var merge_ = __webpack_require__(8);
+var merge_ = __webpack_require__(9);
 var merge_default = /*#__PURE__*/__webpack_require__.n(merge_);
 
 // CONCATENATED MODULE: ./packages/tree/src/model/util.js
@@ -322,10 +329,14 @@ var findNearestComponent = function findNearestComponent(element, componentName)
   }
   return null;
 };
+// EXTERNAL MODULE: external "element-ui/lib/utils/util"
+var util_ = __webpack_require__(3);
+
 // CONCATENATED MODULE: ./packages/tree/src/model/node.js
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -756,8 +767,12 @@ var node_Node = function () {
     var newNodes = [];
 
     newData.forEach(function (item, index) {
-      if (item[NODE_KEY]) {
-        newDataMap[item[NODE_KEY]] = { index: index, data: item };
+      var key = item[NODE_KEY];
+      var isNodeExists = !!key && Object(util_["arrayFindIndex"])(oldData, function (data) {
+        return data[NODE_KEY] === key;
+      }) >= 0;
+      if (isNodeExists) {
+        newDataMap[key] = { index: index, data: item };
       } else {
         newNodes.push({ index: index, data: item });
       }
@@ -910,9 +925,8 @@ var tree_store_TreeStore = function () {
 
       if (!node.visible && childNodes.length) {
         var allHidden = true;
-
-        childNodes.forEach(function (child) {
-          if (child.visible) allHidden = false;
+        allHidden = !childNodes.some(function (child) {
+          return child.visible;
         });
 
         if (node.root) {
@@ -1228,7 +1242,8 @@ var tree_store_TreeStore = function () {
   };
 
   TreeStore.prototype.setCurrentNodeKey = function setCurrentNodeKey(key) {
-    if (key === null) {
+    if (key === null || key === undefined) {
+      this.currentNode && (this.currentNode.isCurrent = false);
       this.currentNode = null;
       return;
     }
@@ -1243,7 +1258,7 @@ var tree_store_TreeStore = function () {
 
 /* harmony default export */ var tree_store = (tree_store_TreeStore);
 ;
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./packages/tree/src/tree-node.vue?vue&type=template&id=3ba3ef0e&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/tree/src/tree-node.vue?vue&type=template&id=3ba3ef0e&
 var tree_nodevue_type_template_id_3ba3ef0e_render = function() {
   var this$1 = this
   var _vm = this
@@ -1402,18 +1417,18 @@ tree_nodevue_type_template_id_3ba3ef0e_render._withStripped = true
 // CONCATENATED MODULE: ./packages/tree/src/tree-node.vue?vue&type=template&id=3ba3ef0e&
 
 // EXTERNAL MODULE: external "element-ui/lib/transitions/collapse-transition"
-var collapse_transition_ = __webpack_require__(23);
+var collapse_transition_ = __webpack_require__(28);
 var collapse_transition_default = /*#__PURE__*/__webpack_require__.n(collapse_transition_);
 
 // EXTERNAL MODULE: external "element-ui/lib/checkbox"
-var checkbox_ = __webpack_require__(16);
+var checkbox_ = __webpack_require__(17);
 var checkbox_default = /*#__PURE__*/__webpack_require__.n(checkbox_);
 
 // EXTERNAL MODULE: external "element-ui/lib/mixins/emitter"
-var emitter_ = __webpack_require__(3);
+var emitter_ = __webpack_require__(4);
 var emitter_default = /*#__PURE__*/__webpack_require__.n(emitter_);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/tree/src/tree-node.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/tree/src/tree-node.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -1691,7 +1706,7 @@ var emitter_default = /*#__PURE__*/__webpack_require__.n(emitter_);
 });
 // CONCATENATED MODULE: ./packages/tree/src/tree-node.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_tree_nodevue_type_script_lang_js_ = (tree_nodevue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./packages/tree/src/tree-node.vue
@@ -1718,12 +1733,12 @@ if (false) { var api; }
 component.options.__file = "packages/tree/src/tree-node.vue"
 /* harmony default export */ var tree_node = (component.exports);
 // EXTERNAL MODULE: external "element-ui/lib/locale"
-var locale_ = __webpack_require__(18);
+var locale_ = __webpack_require__(20);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/dom"
 var dom_ = __webpack_require__(2);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/tree/src/tree.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/tree/src/tree.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -2241,7 +2256,7 @@ tree.install = function (Vue) {
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/utils/merge");

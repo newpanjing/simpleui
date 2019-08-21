@@ -203,6 +203,13 @@ html, body {
   width: 100%;
 }
 
+#home {
+  .upgrade {
+    color: #1db393;
+    font-size: 16px;
+  }
+}
+
 .el-breadcrumb__item .fas {
   margin-right: 5px;
 }
@@ -357,6 +364,14 @@ html, body {
   margin: 10px;
   border: #FFF 1px solid;
 
+  .card-name {
+    height: 25px;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .icon {
     display: block;
     text-align: center;
@@ -388,11 +403,13 @@ html, body {
 }
 
 .menu {
-  overflow-x:hidden ;
+  overflow-x: hidden;
   /*滚动条样式*/
-  .el-icon-arrow-right{
+
+  .el-icon-arrow-right {
     display: none;
   }
+
   &::-webkit-scrollbar {
     width: 4px;
   }

@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'ئۇچۇر تېپىلمىدى',
         loading: 'يۈكلىنىۋاتىدۇ',
-        placeholder: 'تاللاڭ'
+        placeholder: 'تاللاڭ',
+        noData: 'ئۇچۇر يوق'
       },
       pagination: {
         goto: 'كىيىنكى بەت',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

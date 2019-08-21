@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 63);
+/******/ 	return __webpack_require__(__webpack_require__.s = 69);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,34 +189,48 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 4:
+/***/ 11:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/input");
+
+/***/ }),
+
+/***/ 3:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/utils/util");
 
 /***/ }),
 
-/***/ 40:
+/***/ 43:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/select");
 
 /***/ }),
 
-/***/ 41:
+/***/ 44:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/option");
 
 /***/ }),
 
-/***/ 63:
+/***/ 6:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/locale");
+
+/***/ }),
+
+/***/ 69:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./packages/pagination/src/pager.vue?vue&type=template&id=7274f267&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/pagination/src/pager.vue?vue&type=template&id=7274f267&
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -297,7 +311,7 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./packages/pagination/src/pager.vue?vue&type=template&id=7274f267&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/pagination/src/pager.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/pagination/src/pager.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -460,7 +474,7 @@ render._withStripped = true
 });
 // CONCATENATED MODULE: ./packages/pagination/src/pager.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_pagervue_type_script_lang_js_ = (pagervue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./packages/pagination/src/pager.vue
@@ -487,23 +501,23 @@ if (false) { var api; }
 component.options.__file = "packages/pagination/src/pager.vue"
 /* harmony default export */ var pager = (component.exports);
 // EXTERNAL MODULE: external "element-ui/lib/select"
-var select_ = __webpack_require__(40);
+var select_ = __webpack_require__(43);
 var select_default = /*#__PURE__*/__webpack_require__.n(select_);
 
 // EXTERNAL MODULE: external "element-ui/lib/option"
-var option_ = __webpack_require__(41);
+var option_ = __webpack_require__(44);
 var option_default = /*#__PURE__*/__webpack_require__.n(option_);
 
 // EXTERNAL MODULE: external "element-ui/lib/input"
-var input_ = __webpack_require__(9);
+var input_ = __webpack_require__(11);
 var input_default = /*#__PURE__*/__webpack_require__.n(input_);
 
 // EXTERNAL MODULE: external "element-ui/lib/mixins/locale"
-var locale_ = __webpack_require__(7);
+var locale_ = __webpack_require__(6);
 var locale_default = /*#__PURE__*/__webpack_require__.n(locale_);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/util"
-var util_ = __webpack_require__(4);
+var util_ = __webpack_require__(3);
 
 // CONCATENATED MODULE: ./packages/pagination/src/pagination.js
 
@@ -926,20 +940,6 @@ pagination.install = function (Vue) {
 };
 
 /* harmony default export */ var packages_pagination = __webpack_exports__["default"] = (pagination);
-
-/***/ }),
-
-/***/ 7:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/mixins/locale");
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/input");
 
 /***/ })
 

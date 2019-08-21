@@ -83,7 +83,8 @@
       cascader: {
         noMatch: 'பொருத்தமான தரவு கிடைக்கவில்லை',
         loading: 'தயாராகிக்கொண்டிருக்கிறது',
-        placeholder: 'தேர்வு செய்'
+        placeholder: 'தேர்வு செய்',
+        noData: 'தரவு இல்லை'
       },
       pagination: {
         goto: 'தேவையான் பகுதிக்கு செல்',
@@ -123,6 +124,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

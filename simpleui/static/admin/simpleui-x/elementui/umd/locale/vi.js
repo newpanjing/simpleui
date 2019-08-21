@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'Dữ liệu không phù hợp',
         loading: 'Đang tải',
-        placeholder: 'Chọn'
+        placeholder: 'Chọn',
+        noData: 'Không tìm thấy dữ liệu'
       },
       pagination: {
         goto: 'Nhảy tới',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

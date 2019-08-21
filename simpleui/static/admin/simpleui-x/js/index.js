@@ -18,7 +18,7 @@
         for (var i = 0; i < app.menuData.length; i++) {
             var item = app.menuData[i]
             if ((item.url || '/') == hash) {
-                app.openTab(item, item.index)
+                app.openTab(item, item.index, true)
                 break;
             }
         }
@@ -71,9 +71,28 @@
         }
         return val
     }
+    window.simple_call = function (data) {
+        var oldVersion = parseInt(__simpleui_version.replace(/\./g, ''))
+        var newVersion=parseInt(data.data.name.replace(/\./g,''))
+        var body=data.data.body;
+        console.log(oldVersion)
+        console.log(newVersion)
+        if(oldVersion<newVersion){
+            app.upgrade.isUpdate = true;
+            app.upgrade.body = body;
+            app.upgrade.version = data.data.name;
+
+        }
+    }
     new Vue({
         el: '#main',
         data: {
+            upgrade: {
+                isUpdate: false,
+                body: '',
+                version:'',
+                dialogVisible:false
+            },
             isResize: false,
             searchInput: '',
             height: 1000,
@@ -255,14 +274,13 @@
 
             if (temp_tabs && temp_tabs != '') {
                 this.tabs = JSON.parse(temp_tabs);
-                console.log(this.tabs)
             }
             if (location.hash != '') {
                 openByHash();
             }
 
             //elementui布局问题，导致页面不能正常撑开，调用resize使其重新计算
-            if(window.onresize){
+            if (window.onresize) {
                 window.onresize();
             }
         },
@@ -375,14 +393,27 @@
                 }
             }
             ,
-            openTab: function (data, index) {
+            openTab: function (data, index, selected) {
 
+                if (selected) {
+                    //找到name，打开
+                    console.log(data)
+                    for (var i = 0; i < this.tabs.length; i++) {
+                        if (this.tabs[i].url == data.url) {
+                            this.tabModel = this.tabs[i].id;
+                            break;
+                        }
+                    }
+                    return;
+                }
+
+                console.log('打开tab')
                 this.breadcrumbs = data.breadcrumbs;
                 var exists = null;
                 //判断是否存在，存在就直接打开
                 for (var i = 0; i < this.tabs.length; i++) {
                     var tab = this.tabs[i];
-                    if (tab.name == data.name) {
+                    if (tab.id == data.id) {
                         exists = tab;
                         continue;
                     }

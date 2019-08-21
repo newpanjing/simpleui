@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'Няма намерени',
         loading: 'Зареждане',
-        placeholder: 'Избери'
+        placeholder: 'Избери',
+        noData: 'Няма данни'
       },
       pagination: {
         goto: 'Иди на',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

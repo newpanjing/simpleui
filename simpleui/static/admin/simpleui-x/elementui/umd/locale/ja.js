@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'データなし',
         loading: 'ロード中',
-        placeholder: '選択してください'
+        placeholder: '選択してください',
+        noData: 'データなし'
       },
       pagination: {
         goto: '',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

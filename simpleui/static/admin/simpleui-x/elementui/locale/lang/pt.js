@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'Sem correspondência',
       loading: 'A carregar',
-      placeholder: 'Selecione'
+      placeholder: 'Selecione',
+      noData: 'Sem dados'
     },
     pagination: {
       goto: 'Ir para',
@@ -110,6 +111,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'Hiçzat tapylmady',
       loading: 'Indirilýär',
-      placeholder: 'Saýlaň'
+      placeholder: 'Saýlaň',
+      noData: 'Hiçzat ýok'
     },
     pagination: {
       goto: 'Git',
@@ -110,6 +111,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

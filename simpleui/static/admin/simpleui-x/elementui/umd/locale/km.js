@@ -84,7 +84,8 @@
       cascader: {
         noMatch: 'គ្មានទិន្ន័យដូច',
         loading: 'កំពុងផ្ទុក',
-        placeholder: 'ជ្រើសរើស'
+        placeholder: 'ជ្រើសរើស',
+        noData: 'គ្មានទិន្ន័យ'
       },
       pagination: {
         goto: 'ទៅកាន់',
@@ -124,6 +125,9 @@
       },
       image: {
         error: 'FAILED' // to be translated
+      },
+      pageHeader: {
+        title: 'Back' // to be translated
       }
     }
   };

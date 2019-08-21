@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 116);
+/******/ 	return __webpack_require__(__webpack_require__.s = 123);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,13 +189,13 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 116:
+/***/ 123:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/tag/src/tag.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/tag/src/tag.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var tagvue_type_script_lang_js_ = ({
   name: 'ElTag',
@@ -206,7 +206,14 @@ __webpack_require__.r(__webpack_exports__);
     hit: Boolean,
     disableTransitions: Boolean,
     color: String,
-    size: String
+    size: String,
+    effect: {
+      type: String,
+      default: 'light',
+      validator: function validator(val) {
+        return ['dark', 'light', 'plain'].indexOf(val) !== -1;
+      }
+    }
   },
   methods: {
     handleClose: function handleClose(event) {
@@ -214,7 +221,6 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('close', event);
     },
     handleClick: function handleClick(event) {
-      event.stopPropagation();
       this.$emit('click', event);
     }
   },
@@ -224,10 +230,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   render: function render(h) {
-    var classes = ['el-tag', this.type ? 'el-tag--' + this.type : '', this.tagSize ? 'el-tag--' + this.tagSize : '', { 'is-hit': this.hit }];
+    var type = this.type,
+        tagSize = this.tagSize,
+        hit = this.hit,
+        effect = this.effect;
+
+    var classes = ['el-tag', type ? 'el-tag--' + type : '', tagSize ? 'el-tag--' + tagSize : '', effect ? 'el-tag--' + effect : '', hit && 'is-hit'];
     var tagEl = h(
       'span',
-      { 'class': classes, style: { backgroundColor: this.color }, on: {
+      {
+        'class': classes,
+        style: { backgroundColor: this.color },
+        on: {
           'click': this.handleClick
         }
       },
@@ -248,7 +262,7 @@ __webpack_require__.r(__webpack_exports__);
 });
 // CONCATENATED MODULE: ./packages/tag/src/tag.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_tagvue_type_script_lang_js_ = (tagvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./packages/tag/src/tag.vue

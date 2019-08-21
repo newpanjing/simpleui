@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 101);
+/******/ 	return __webpack_require__(__webpack_require__.s = 117);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,13 +189,13 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 101:
+/***/ 117:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./packages/link/src/main.vue?vue&type=template&id=01cf3b65&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/link/src/main.vue?vue&type=template&id=01cf3b65&
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -210,7 +210,7 @@ var render = function() {
           _vm.disabled && "is-disabled",
           _vm.underline && !_vm.disabled && "is-underline"
         ],
-        attrs: { href: _vm.href },
+        attrs: { href: _vm.disabled ? null : _vm.href },
         on: { click: _vm.handleClick }
       },
       "a",
@@ -218,7 +218,7 @@ var render = function() {
       false
     ),
     [
-      _vm.icon ? _c("el-icon", { class: _vm.icon }) : _vm._e(),
+      _vm.icon ? _c("i", { class: _vm.icon }) : _vm._e(),
       _vm.$slots.default
         ? _c("span", { staticClass: "el-link--inner" }, [_vm._t("default")], 2)
         : _vm._e(),
@@ -233,7 +233,7 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./packages/link/src/main.vue?vue&type=template&id=01cf3b65&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/link/src/main.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/link/src/main.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -288,7 +288,7 @@ render._withStripped = true
 });
 // CONCATENATED MODULE: ./packages/link/src/main.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_mainvue_type_script_lang_js_ = (mainvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./packages/link/src/main.vue

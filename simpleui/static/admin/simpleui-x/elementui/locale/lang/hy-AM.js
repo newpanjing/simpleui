@@ -70,7 +70,8 @@ exports.default = {
     cascader: {
       noMatch: 'Համապատասխան տուեալներ չկան',
       loading: 'Բեռնում',
-      placeholder: 'Ընտրել'
+      placeholder: 'Ընտրել',
+      noData: 'Տվյալներ չկան'
     },
     pagination: {
       goto: 'Անցնել',
@@ -110,6 +111,9 @@ exports.default = {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

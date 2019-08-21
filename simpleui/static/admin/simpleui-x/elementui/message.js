@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 70);
+/******/ 	return __webpack_require__(__webpack_require__.s = 76);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,38 +189,38 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 12:
+/***/ 14:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/utils/popup");
 
 /***/ }),
 
-/***/ 20:
+/***/ 23:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/utils/vdom");
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports) {
 
 module.exports = require("vue");
 
 /***/ }),
 
-/***/ 70:
+/***/ 76:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: external "vue"
-var external_vue_ = __webpack_require__(6);
+var external_vue_ = __webpack_require__(7);
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./packages/message/src/main.vue?vue&type=template&id=455b9f60&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/message/src/main.vue?vue&type=template&id=455b9f60&
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -250,6 +250,7 @@ var render = function() {
             _vm.showClose ? "is-closable" : "",
             _vm.customClass
           ],
+          style: _vm.positionStyle,
           attrs: { role: "alert" },
           on: { mouseenter: _vm.clearTimer, mouseleave: _vm.startTimer }
         },
@@ -285,7 +286,8 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./packages/message/src/main.vue?vue&type=template&id=455b9f60&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/message/src/main.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/message/src/main.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -331,6 +333,7 @@ var typeMap = {
       onClose: null,
       showClose: false,
       closed: false,
+      verticalOffset: 20,
       timer: null,
       dangerouslyUseHTMLString: false,
       center: false
@@ -341,6 +344,11 @@ var typeMap = {
   computed: {
     typeClass: function typeClass() {
       return this.type && !this.iconClass ? 'el-message__icon el-icon-' + typeMap[this.type] : '';
+    },
+    positionStyle: function positionStyle() {
+      return {
+        'top': this.verticalOffset + 'px'
+      };
     }
   },
 
@@ -396,7 +404,7 @@ var typeMap = {
 });
 // CONCATENATED MODULE: ./packages/message/src/main.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_mainvue_type_script_lang_js_ = (mainvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./packages/message/src/main.vue
@@ -423,10 +431,10 @@ if (false) { var api; }
 component.options.__file = "packages/message/src/main.vue"
 /* harmony default export */ var main = (component.exports);
 // EXTERNAL MODULE: external "element-ui/lib/utils/popup"
-var popup_ = __webpack_require__(12);
+var popup_ = __webpack_require__(14);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/vdom"
-var vdom_ = __webpack_require__(20);
+var vdom_ = __webpack_require__(23);
 
 // CONCATENATED MODULE: ./packages/message/src/main.js
 
@@ -461,13 +469,17 @@ var main_Message = function Message(options) {
     instance.$slots.default = [instance.message];
     instance.message = null;
   }
-  instance.vm = instance.$mount();
-  document.body.appendChild(instance.vm.$el);
-  instance.vm.visible = true;
-  instance.dom = instance.vm.$el;
-  instance.dom.style.zIndex = popup_["PopupManager"].nextZIndex();
+  instance.$mount();
+  document.body.appendChild(instance.$el);
+  var verticalOffset = options.offset || 20;
+  instances.forEach(function (item) {
+    verticalOffset += item.$el.offsetHeight + 16;
+  });
+  instance.verticalOffset = verticalOffset;
+  instance.visible = true;
+  instance.$el.style.zIndex = popup_["PopupManager"].nextZIndex();
   instances.push(instance);
-  return instance.vm;
+  return instance;
 };
 
 ['success', 'warning', 'info', 'error'].forEach(function (type) {
@@ -483,14 +495,23 @@ var main_Message = function Message(options) {
 });
 
 main_Message.close = function (id, userOnClose) {
-  for (var i = 0, len = instances.length; i < len; i++) {
+  var len = instances.length;
+  var index = -1;
+  for (var i = 0; i < len; i++) {
     if (id === instances[i].id) {
+      index = i;
       if (typeof userOnClose === 'function') {
         userOnClose(instances[i]);
       }
       instances.splice(i, 1);
       break;
     }
+  }
+  if (len <= 1 || index === -1 || index > instances.length - 1) return;
+  var removedHeight = instances[index].$el.offsetHeight;
+  for (var _i = index; _i < len - 1; _i++) {
+    var dom = instances[_i].$el;
+    dom.style['top'] = parseInt(dom.style['top'], 10) - removedHeight - 16 + 'px';
   }
 };
 
