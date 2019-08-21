@@ -164,6 +164,9 @@ a:visited {
 #changelist .actions {
   min-height: 38px;
 }
+.colM {
+  overflow: auto;
+}
 /*主题色*/
 .logo-wrap {
   background-color: #002140;

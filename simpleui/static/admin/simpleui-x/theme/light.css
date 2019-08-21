@@ -164,4 +164,7 @@ a:visited {
 #changelist .actions {
   min-height: 38px;
 }
+.colM {
+  overflow: auto;
+}
 /*# sourceMappingURL=light.css.map */

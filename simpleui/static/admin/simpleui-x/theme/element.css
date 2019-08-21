@@ -164,6 +164,9 @@ a:visited {
 #changelist .actions {
   min-height: 38px;
 }
+.colM {
+  overflow: auto;
+}
 .menu .el-menu .is-active {
   color: #409eff !important;
   background-color: #f2f3f7 !important;

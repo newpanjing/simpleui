@@ -164,6 +164,9 @@ a:visited {
 #changelist .actions {
   min-height: 38px;
 }
+.colM {
+  overflow: auto;
+}
 .navbar,
 .logo-wrap {
   color: #FFF !important;

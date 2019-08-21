@@ -164,6 +164,9 @@ a:visited {
 #changelist .actions {
   min-height: 38px;
 }
+.colM {
+  overflow: auto;
+}
 /*主题色*/
 /*菜单文本*/
 /*菜单背景*/
