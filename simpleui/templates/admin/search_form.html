@@ -196,8 +196,8 @@
                                                 this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd');
                                                 this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd');
                                             } else if (type == 'datetime') {
-                                                this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd hh:mm:ss+08:00');
-                                                this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd hh:mm:ss+08:00');
+                                                this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd hh:mm:ss{% get_tz_suffix %}');
+                                                this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd hh:mm:ss{% get_tz_suffix %}');
                                             }
                                         }
                                     } else {

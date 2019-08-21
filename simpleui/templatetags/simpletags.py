@@ -412,3 +412,14 @@ def _import_reload(_modules):
     _obj = __import__(_modules, fromlist=_modules.split('.'))
     reload(_obj)
     return _obj
+
+
+@register.simple_tag
+def get_tz_suffix():
+    # 判断settings.py中的TZ是否为false
+    tz = __get_config('USE_TZ')
+    # 必须明确指定为True的时候，才返回+8 的后缀
+    if tz:
+        return '+08:00'
+    else:
+        return ''
