@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import sys
+
 from setuptools import setup
 import simpleui
+
 
 if sys.version_info < (3, 0):
 
