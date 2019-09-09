@@ -463,6 +463,46 @@ class EmployeAdmin(admin.ModelAdmin):
 |type|按钮类型，参考：https://element.eleme.cn/#/zh-CN/component/button|
 |style|自定义css样式|
 
++ 链接按钮
+
+> 在2.9或以上版本中生效
+
+|字段|说明|
+|------|------|
+|action_type|按钮动作类型，0=当前页内打开，1=新tab打开，2=浏览器tab打开|
+|action_url|按钮访问链接|
+
+demo：
+```python
+  # 增加自定义按钮
+    actions = ['custom_button']
+
+    def custom_button(self, request, queryset):
+        pass
+
+    # 显示的文本，与django admin一致
+    custom_button.short_description = '测试按钮'
+    # icon，参考element-ui icon与https://fontawesome.com
+    custom_button.icon = 'fas fa-audio-description'
+
+    # 指定element-ui的按钮类型，参考https://element.eleme.cn/#/zh-CN/component/button
+    custom_button.type = 'danger'
+
+    # 给按钮追加自定义的颜色
+    custom_button.style = 'color:black;'
+
+    # 链接按钮，设置之后直接访问该链接
+    # 3中打开方式
+    # action_type 0=当前页内打开，1=新tab打开，2=浏览器tab打开
+    # 设置了action_type，不设置url，页面内将报错
+    # 设置成链接类型的按钮后，custom_button方法将不会执行。
+
+    custom_button.action_type = 0
+    custom_button.action_url = 'http://www.baidu.com'
+
+```
+
+
 ## 离线模式
 > 在2.1.3或以上的版本中生效
 在settings.py中加入
