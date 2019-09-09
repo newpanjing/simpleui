@@ -353,14 +353,19 @@ def custom_button(context):
     # if hasattr(admin, 'actions'):
     # actions = admin.actions
     # 输出自定义按钮的属性
+
     if actions:
+        id = 0
         for name in actions:
             values = {}
             fun = actions.get(name)[0]
             for key, v in fun.__dict__.items():
                 if key != '__len__' and key != '__wrapped__':
                     values[key] = v
+            values['eid'] = id
+            id += 1
             data[name] = values
+
     return json.dumps(data, cls=LazyEncoder)
 
 

@@ -431,6 +431,15 @@ Configuration compatible with native admin
 |type|Button type，Reference：https://element.eleme.cn/#/zh-CN/component/button|
 |style|Customize CSS styles|
 
++ Link Button
+
+> Requires version 2.9 or above
+
+|Field|Description|
+|------|------|
+|action_type|0=The current page, 1=Simpleui New tab，2=Browser new tab|
+|action_url|The url address|
+
 ## Offline
 
 > Requires version 2.1.3 or above
