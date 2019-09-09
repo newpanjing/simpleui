@@ -4,8 +4,6 @@
     }
 
     window.addEventListener('hashchange', function (e) {
-        // console.log(e)
-        // console.log('hash')
         if (e.newURL != e.oldURL) {
             openByHash()
         }
@@ -25,7 +23,9 @@
     }
 
     function changeUrl(data) {
-        location.href = '#' + (data.url || '/')
+        if(data.url.indexOf('http')!=0){
+            location.href = '#' + (data.url || '/')
+        }
     }
 
     window.callback = function () {
