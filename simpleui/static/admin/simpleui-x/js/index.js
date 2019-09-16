@@ -23,7 +23,7 @@
     }
 
     function changeUrl(data) {
-        if(data.url.indexOf('http')!=0){
+        if (data.url && data.url.indexOf('http') != 0) {
             location.href = '#' + (data.url || '/')
         }
     }
@@ -73,11 +73,11 @@
     }
     window.simple_call = function (data) {
         var oldVersion = parseInt(__simpleui_version.replace(/\./g, ''))
-        var newVersion=parseInt(data.data.name.replace(/\./g,''))
-        var body=data.data.body;
+        var newVersion = parseInt(data.data.name.replace(/\./g, ''))
+        var body = data.data.body;
         console.log(oldVersion)
         console.log(newVersion)
-        if(oldVersion<newVersion){
+        if (oldVersion < newVersion) {
             app.upgrade.isUpdate = true;
             app.upgrade.body = body;
             app.upgrade.version = data.data.name;
@@ -90,8 +90,8 @@
             upgrade: {
                 isUpdate: false,
                 body: '',
-                version:'',
-                dialogVisible:false
+                version: '',
+                dialogVisible: false
             },
             isResize: false,
             searchInput: '',
