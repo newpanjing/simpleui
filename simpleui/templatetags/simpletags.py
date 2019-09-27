@@ -165,17 +165,19 @@ def format_table(dict):
 
 
 @register.simple_tag(takes_context=True)
-def menus(context):
+def menus(context, _get_config=None):
     data = []
 
     # return request.user.has_perm("%s.%s" % (opts.app_label, codename))
+    if not _get_config:
+        _get_config = get_config
 
-    config = get_config('SIMPLEUI_CONFIG')
+    config = _get_config('SIMPLEUI_CONFIG')
     if not config:
         config = {}
 
     if config.get('dynamic', False) is True:
-        config = _import_reload(get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
+        config = _import_reload(_get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
 
     app_list = context.get('app_list')
     for app in app_list:

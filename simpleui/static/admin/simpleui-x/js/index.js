@@ -75,8 +75,8 @@
         var oldVersion = parseInt(__simpleui_version.replace(/\./g, ''))
         var newVersion = parseInt(data.data.name.replace(/\./g, ''))
         var body = data.data.body;
-        console.log(oldVersion)
-        console.log(newVersion)
+        // console.log(oldVersion)
+        // console.log(newVersion)
         if (oldVersion < newVersion) {
             app.upgrade.isUpdate = true;
             app.upgrade.body = body;
@@ -397,7 +397,7 @@
 
                 if (selected) {
                     //找到name，打开
-                    console.log(data)
+                    // console.log(data)
                     for (var i = 0; i < this.tabs.length; i++) {
                         if (this.tabs[i].url == data.url) {
                             this.tabModel = this.tabs[i].id;
@@ -407,7 +407,7 @@
                     return;
                 }
 
-                console.log('打开tab')
+                // console.log('打开tab')
                 this.breadcrumbs = data.breadcrumbs;
                 var exists = null;
                 //判断是否存在，存在就直接打开
