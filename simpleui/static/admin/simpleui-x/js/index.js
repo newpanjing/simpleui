@@ -24,7 +24,7 @@
 
     function changeUrl(data) {
         if (data.url && data.url.indexOf('http') != 0) {
-            location.href = '#' + (data.url || '/')
+            location.hash = '#' + (data.url || '/')
         }
     }
 

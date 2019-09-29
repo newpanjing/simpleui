@@ -70,7 +70,7 @@ def load_dates(context):
                 field_type = 'time'
 
             if field_type:
-                data[field.name] = field_type
+                data[spec.field_path] = field_type
     context['date_field'] = data
 
     return '<script type="text/javascript">var searchDates={}</script>'.format(json.dumps(data, cls=LazyEncoder))
