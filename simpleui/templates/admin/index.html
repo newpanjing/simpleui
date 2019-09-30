@@ -66,7 +66,11 @@
 {% endblock %}
 <div id="main" @click="mainClick($event)" v-block>
     {% block theme_css %}
-        <link v-if="theme!=''" rel="stylesheet" :href="theme">
+        <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+
+        {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
+        <link v-else rel="stylesheet" href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
+        {% endif %}
     {% endblock %}
 
     <el-container :style="{height: height+'px'}">

@@ -74,7 +74,11 @@
     {% endverbatim dynamicCss %}
 
     <div id="theme">
-        <link v-if="theme!=''" rel="stylesheet" :href="theme">
+        <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+
+        {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
+        <link v-else rel="stylesheet" href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
+        {% endif %}
     </div>
     <script type="text/javascript">
 
