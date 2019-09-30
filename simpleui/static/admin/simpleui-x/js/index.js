@@ -414,6 +414,12 @@
             }
             ,
             openTab: function (data, index, selected) {
+
+                //如果data没有eid，就直接打开或者添加，根据url
+                if (!data.eid) {
+                    data.eid = new Date().getTime() + "" + Math.random();
+                }
+
                 if (index) {
                     this.menuActive = String(index);
                 }
