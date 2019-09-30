@@ -36,7 +36,7 @@
                         {% if spec|get_date_type == 'date' or spec|get_date_type == 'datetime' %}
 
                             <el-date-picker class="simpleui-form-item"
-                                    v-model="{{ spec.field.name }}"
+                                    v-model="{{ spec.field_path }}"
                                     @change="change{{ spec|get_date_type|capfirst }}"
                                     type="{{ spec|get_date_type }}range"
                                     start-placeholder="{{ spec.title }}"
@@ -47,6 +47,7 @@
                                    name="{{ spec.field_generic }}gte"/>
                             <input type="hidden" v-model="{{ spec.field_generic }}lt"
                                    name="{{ spec.field_generic }}lt"/>
+
                         {% elif spec|has_filter %}
                             <input type="hidden" v-model="{{ spec.parameter_name }}" name="{{ spec.parameter_name }}"/>
                             <el-select class="simpleui-form-item" filterable v-model="{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}">

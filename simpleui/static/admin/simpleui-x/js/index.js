@@ -16,15 +16,32 @@
         for (var i = 0; i < app.menuData.length; i++) {
             var item = app.menuData[i]
             if ((item.url || '/') == hash) {
-                app.openTab(item, item.index, true)
+                app.openTab(item, item.eid, true);
+                //找到和item.eid同名的菜单
+                // var defaultIndex = '1';
+                //
+                // app.menus.forEach(n => {
+                //     if (n.eid == item.eid) {
+                //         console.log(n)
+                //         defaultIndex = n.index;
+                //     } else if (n.models) {
+                //         n.models.forEach(k => {
+                //             if (k.eid == item.eid) {
+                //                 console.log(k)
+                //                 defaultIndex = k.index;
+                //             }
+                //         })
+                //     }
+                // });
+                // console.log(defaultIndex)
                 break;
             }
         }
     }
 
     function changeUrl(data) {
-        if(data.url.indexOf('http')!=0){
-            location.href = '#' + (data.url || '/')
+        if (data.url && data.url.indexOf('http') != 0) {
+            location.hash = '#' + (data.url || '/')
         }
     }
 
@@ -73,11 +90,11 @@
     }
     window.simple_call = function (data) {
         var oldVersion = parseInt(__simpleui_version.replace(/\./g, ''))
-        var newVersion=parseInt(data.data.name.replace(/\./g,''))
-        var body=data.data.body;
-        console.log(oldVersion)
-        console.log(newVersion)
-        if(oldVersion<newVersion){
+        var newVersion = parseInt(data.data.name.replace(/\./g, ''))
+        var body = data.data.body;
+        // console.log(oldVersion)
+        // console.log(newVersion)
+        if (oldVersion < newVersion) {
             app.upgrade.isUpdate = true;
             app.upgrade.body = body;
             app.upgrade.version = data.data.name;
@@ -90,8 +107,8 @@
             upgrade: {
                 isUpdate: false,
                 body: '',
-                version:'',
-                dialogVisible:false
+                version: '',
+                dialogVisible: false
             },
             isResize: false,
             searchInput: '',
@@ -364,8 +381,11 @@
             tabClick: function (tab) {
                 var item = this.tabs[tab.index];
                 var index = item.index;
-                this.menuActive = index;
+                this.menuActive = String(index);
                 this.breadcrumbs = item.breadcrumbs;
+                if (index == '1') {
+                    item.url = '/'
+                }
                 changeUrl(item);
             },
             handleTabsEdit: function (targetName, action) {
@@ -394,10 +414,12 @@
             }
             ,
             openTab: function (data, index, selected) {
-
+                if (index) {
+                    this.menuActive = String(index);
+                }
                 if (selected) {
                     //找到name，打开
-                    console.log(data)
+                    // console.log(data)
                     for (var i = 0; i < this.tabs.length; i++) {
                         if (this.tabs[i].url == data.url) {
                             this.tabModel = this.tabs[i].id;
@@ -407,13 +429,12 @@
                     return;
                 }
 
-                console.log('打开tab')
                 this.breadcrumbs = data.breadcrumbs;
                 var exists = null;
                 //判断是否存在，存在就直接打开
                 for (var i = 0; i < this.tabs.length; i++) {
                     var tab = this.tabs[i];
-                    if (tab.id == data.id) {
+                    if (tab.id == data.eid) {
                         exists = tab;
                         continue;
                     }
@@ -423,11 +444,12 @@
                     this.tabModel = exists.id;
                 } else {
                     //其他的网址loading会一直转
-                    if (data.url.indexOf('http') != 0) {
+                    if (data.url && data.url.indexOf('http') != 0) {
                         data.loading = true;
                         this.loading = true;
                     }
-                    data.id = new Date().getTime() + "" + Math.random();
+                    // data.id = new Date().getTime() + "" + Math.random();
+                    data.id = data.eid;
                     data.index = index;
                     this.tabs.push(data);
                     this.tabModel = data.id;

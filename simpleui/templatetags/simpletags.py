@@ -70,7 +70,7 @@ def load_dates(context):
                 field_type = 'time'
 
             if field_type:
-                data[field.name] = field_type
+                data[spec.field_path] = field_type
     context['date_field'] = data
 
     return '<script type="text/javascript">var searchDates={}</script>'.format(json.dumps(data, cls=LazyEncoder))
@@ -165,17 +165,19 @@ def format_table(dict):
 
 
 @register.simple_tag(takes_context=True)
-def menus(context):
+def menus(context, _get_config=None):
     data = []
 
     # return request.user.has_perm("%s.%s" % (opts.app_label, codename))
+    if not _get_config:
+        _get_config = get_config
 
-    config = get_config('SIMPLEUI_CONFIG')
+    config = _get_config('SIMPLEUI_CONFIG')
     if not config:
         config = {}
 
     if config.get('dynamic', False) is True:
-        config = _import_reload(get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
+        config = _import_reload(_get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
 
     app_list = context.get('app_list')
     for app in app_list:
@@ -239,6 +241,16 @@ def menus(context):
             display_data.append(_app)
         display_data.sort(key=lambda x: x['_weight'])
         data = display_data
+
+    # 给每个菜单增加一个唯一标识，用于tab页判断
+    eid = 1000
+    for i in data:
+        eid += 1
+        i['eid'] = eid
+        if 'models' in i:
+            for k in i.get('models'):
+                eid += 1
+                k['eid'] = eid
 
     return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data, cls=LazyEncoder))
 

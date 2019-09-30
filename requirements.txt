@@ -1,0 +1,3 @@
+django
+django-import-export
+twine
