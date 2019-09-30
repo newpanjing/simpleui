@@ -89,23 +89,22 @@
                 </div>
             {% endblock %}
 
-            <el-menu unique-opened="true" default-active="1" :default-active="menuActive" :collapse="fold">
+            <el-menu unique-opened="true" :default-active="menuActive" :collapse="fold">
                 <div v-for="(item,i) in menus" :key="item">
-
-                    <el-menu-item v-if="!item.models" :index="(i+1)+''" @click="openTab(item,(i+1)+'')">
+                    <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
                         <i :class="item.icon"></i>
                         <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
                     </el-menu-item>
 
 
-                    <el-submenu v-else :index="(i+1)+''">
+                    <el-submenu v-else :index="item.eid+''">
                         <template slot="title">
                             <i :class="item.icon"></i>
                             <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
                         </template>
 
                         <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
-                            <el-menu-item :index="(i+1)+'-'+j" @click="openTab(sub,(i+1)+'-'+j)">
+                            <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
                                 <i :class="sub.icon"></i>
                                 <span slot="title" v-text="sub.name"></span>
                             </el-menu-item>
@@ -278,12 +277,14 @@
                 index: '1',
                 name: '{{ title }}',
                 icon: '{{ icon }}',
-                active: true
+                active: true,
+                eid:'1'
             }
         {% else %}
             var home = {
                 id: '0',
                 index: '1',
+                eid:'1',
                 name: "{% trans 'Home' %}",
                 icon: 'fas fa-home'
             };

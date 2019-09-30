@@ -242,6 +242,16 @@ def menus(context, _get_config=None):
         display_data.sort(key=lambda x: x['_weight'])
         data = display_data
 
+    # 给每个菜单增加一个唯一标识，用于tab页判断
+    eid = 1000
+    for i in data:
+        eid += 1
+        i['eid'] = eid
+        if 'models' in i:
+            for k in i.get('models'):
+                eid += 1
+                k['eid'] = eid
+
     return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data, cls=LazyEncoder))
 
 
