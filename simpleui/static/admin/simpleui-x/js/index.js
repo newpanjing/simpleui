@@ -506,6 +506,10 @@
                     cancelButtonText: language.no,
                     type: 'warning'
                 }).then(function () {
+                    //清除cookie主题设置和sessionStore数据
+                    delete sessionStorage['tabs'];
+                    setCookie('theme', '');
+                    setCookie('theme_name', '');
                     window.location.href = window.urls.logout;
                 }).catch(function () {
 
