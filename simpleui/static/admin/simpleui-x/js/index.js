@@ -17,23 +17,6 @@
             var item = app.menuData[i]
             if ((item.url || '/') == hash) {
                 app.openTab(item, item.eid, true);
-                //找到和item.eid同名的菜单
-                // var defaultIndex = '1';
-                //
-                // app.menus.forEach(n => {
-                //     if (n.eid == item.eid) {
-                //         console.log(n)
-                //         defaultIndex = n.index;
-                //     } else if (n.models) {
-                //         n.models.forEach(k => {
-                //             if (k.eid == item.eid) {
-                //                 console.log(k)
-                //                 defaultIndex = k.index;
-                //             }
-                //         })
-                //     }
-                // });
-                // console.log(defaultIndex)
                 break;
             }
         }
@@ -414,6 +397,9 @@
             }
             ,
             openTab: function (data, index, selected) {
+                if (data.breadcrumbs) {
+                    this.breadcrumbs = data.breadcrumbs;
+                }
 
                 //如果data没有eid，就直接打开或者添加，根据url
                 if (!data.eid) {
