@@ -33,9 +33,9 @@
     }
 
     var fontConfig = new Vue({
-        el: '#dynamicCss',
+        // el: '#dynamicCss',
         data: {
-            fontSize: 14
+            fontSize: null
         },
         created: function () {
             var val = getCookie('fontSize');
@@ -43,6 +43,26 @@
                 this.fontSize = parseInt(val);
             } else {
                 this.fontSize = 0;
+            }
+        },
+        watch: {
+            fontSize: function (newValue) {
+                if (newValue != 0) {
+                    var fontStyle = document.getElementById('fontStyle');
+                    if (!fontStyle) {
+                        fontStyle = document.createElement('style');
+                        fontStyle.id = 'fontStyle';
+                        fontStyle.type = 'text/css';
+                        document.head.append(fontStyle);
+                    }
+                    fontStyle.innerHTML = '*{font-size:' + newValue + 'px!important;}'
+
+                } else {
+                    var fontStyle = document.getElementById('fontStyle');
+                    if (fontStyle) {
+                        fontStyle.remove();
+                    }
+                }
             }
         },
         methods: {}
@@ -183,6 +203,13 @@
             menuData: []
         },
         watch: {
+            theme: function (newValue, oldValue) {
+                this.$nextTick(function () {
+                    if (window.renderCallback) {
+                        window.renderCallback(this);
+                    }
+                });
+            },
             fold: function (newValue, oldValue) {
                 // console.log(newValue)
             },
@@ -212,6 +239,7 @@
         },
         created: function () {
 
+            // this.watch.theme('');
 
             var val = getCookie('fold') == 'true';
             this.small = this.fold = val;
@@ -260,6 +288,7 @@
             this.theme = getCookie('theme');
             this.themeName = getCookie('theme_name');
 
+
             //接收子页面的事件注册
             window.themeEvents = [];
             window.fontEvents = [];
@@ -283,6 +312,11 @@
             if (window.onresize) {
                 window.onresize();
             }
+            this.$nextTick(function () {
+                if (window.renderCallback) {
+                    window.renderCallback(this);
+                }
+            });
         },
         methods: {
             syncTabs: function () {

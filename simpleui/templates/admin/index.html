@@ -52,11 +52,6 @@
 
 
 {% verbatim dynamicCss %}
-    <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
-        * {
-            font-size: {{ fontSize }}px;
-        }
-    </style>
 {% endverbatim dynamicCss %}
 
 {% block menus %}
@@ -69,7 +64,8 @@
         <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
 
         {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
-        <link v-else rel="stylesheet" href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
+            <link v-else rel="stylesheet"
+                  href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
         {% endif %}
     {% endblock %}
 
@@ -127,18 +123,18 @@
                             <el-button v-waves circle icon="fas fa-bars"
                                        style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
                             {% block breadcrumb %}
-                            <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
-                                {% verbatim myclode %}
-                                    <el-breadcrumb-item><i :class="menus[0].icon"
-                                                           :key="menus[0].name"></i>{{ menus[0].name }}
-                                    </el-breadcrumb-item>
-                                    <el-breadcrumb-item v-for="item in breadcrumbs"
-                                                        :key="item">
-                                        <span :class="getIcon(item.name,item.icon)"></span>
-                                        <span v-text="item.name"></span>
-                                    </el-breadcrumb-item>
-                                {% endverbatim myclode %}
-                            </el-breadcrumb>
+                                <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
+                                    {% verbatim myclode %}
+                                        <el-breadcrumb-item><i :class="menus[0].icon"
+                                                               :key="menus[0].name"></i>{{ menus[0].name }}
+                                        </el-breadcrumb-item>
+                                        <el-breadcrumb-item v-for="item in breadcrumbs"
+                                                            :key="item">
+                                            <span :class="getIcon(item.name,item.icon)"></span>
+                                            <span v-text="item.name"></span>
+                                        </el-breadcrumb-item>
+                                    {% endverbatim myclode %}
+                                </el-breadcrumb>
                             {% endblock %}
                         </div>
 
@@ -200,10 +196,10 @@
                             <span slot="label" @contextmenu.prevent="contextmenu(item,$event)">
                         {% endif %}
 
-                            {% block tab-item %}
+                        {% block tab-item %}
                             <i :class="item.loading?'el-icon-loading':item.icon"></i>
                             <span v-text="item.name"></span>
-                            {% endblock %}
+                        {% endblock %}
                         </span>
 
                         <div v-if="index==0" style="height:100%">
@@ -285,13 +281,13 @@
                 name: '{{ title }}',
                 icon: '{{ icon }}',
                 active: true,
-                eid:'1'
+                eid: '1'
             }
         {% else %}
             var home = {
                 id: '0',
                 index: '1',
-                eid:'1',
+                eid: '1',
                 name: "{% trans 'Home' %}",
                 icon: 'fas fa-home'
             };
@@ -339,11 +335,13 @@
     <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
     <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
     {% block index_js %}
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=3.1"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=3.2"></script>
     {% endblock %}
     {% block autoupdate %}
-    <script type="text/javascript" async
-            src="https://api.github.com/repos/newpanjing/simpleui/releases/latest?callback=simple_call"></script>
+        {% if not "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+            <script type="text/javascript" async
+                    src="https://api.github.com/repos/newpanjing/simpleui/releases/latest?callback=simple_call"></script>
+        {% endif %}
     {% endblock %}
 {% endblock %}
 {% load_analysis %}

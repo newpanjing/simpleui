@@ -10,7 +10,7 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
 
-         {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+        {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
             <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
             <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
         {% else %}
@@ -23,14 +23,14 @@
         <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
 
-    {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
-    {% else %}
-{#        <script src="https://cdn.jsdelivr.net/npm/vue"></script>#}
-        <script src="https://unpkg.com/vue@2.6.0/dist/vue.min.js"></script>
-        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    {% endif %}
+        {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+            <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+        {% else %}
+            {#        <script src="https://cdn.jsdelivr.net/npm/vue"></script>#}
+            <script src="https://unpkg.com/vue@2.6.0/dist/vue.min.js"></script>
+            <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        {% endif %}
 
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}?_=2.1.2"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
@@ -38,7 +38,8 @@
 
         {% if ""|get_language_code != 'zh-hans' %}
 
-            <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}?_=2.1.2"></script>
+            <script type="text/javascript"
+                    src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}?_=2.1.2"></script>
             <script type="text/javascript">
                 ELEMENT.locale(ELEMENT.lang.en)
             </script>
@@ -47,7 +48,8 @@
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
         {% block extrastyle %}{% endblock %}
         {% if LANGUAGE_BIDI %}
-            <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
+            <link rel="stylesheet" type="text/css" href="
+                    {% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
         {% block extrahead %}{% endblock %}
         {% block responsive %}
             <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -66,26 +68,41 @@
           data-admin-utc-offset="{% now "Z" %}">
 
     {% verbatim dynamicCss %}
-    <style type="text/css" id="dynamicCss" v-if="fontSize!=0">
-        *{
-            font-size: {{ fontSize }}px!important;
-        }
-    </style>
     {% endverbatim dynamicCss %}
 
     <div id="theme">
         <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
 
         {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
-        <link v-else rel="stylesheet" href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
+            <link v-else rel="stylesheet"
+                  href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
         {% endif %}
     </div>
     <script type="text/javascript">
 
-         var fontConfig = new Vue({
-            el: '#dynamicCss',
+        var fontConfig = new Vue({
             data: {
-                fontSize: 14
+                fontSize: null
+            },
+            watch: {
+                fontSize: function (newValue) {
+                    if (newValue != 0) {
+                        var fontStyle = document.getElementById('fontStyle');
+                        if (!fontStyle) {
+                            fontStyle = document.createElement('style');
+                            fontStyle.id = 'fontStyle';
+                            fontStyle.type = 'text/css';
+                            document.head.append(fontStyle);
+                        }
+                        fontStyle.innerHTML = '*{font-size:' + newValue + 'px!important;}'
+
+                    } else {
+                        var fontStyle = document.getElementById('fontStyle');
+                        if (fontStyle) {
+                            fontStyle.remove();
+                        }
+                    }
+                }
             },
             created: function () {
                 var val = getCookie('fontSize');
@@ -122,7 +139,7 @@
             }
         })
         window.addEventListener('beforeunload', () => {
-            if(window.beforeLoad){
+            if (window.beforeLoad) {
                 window.beforeLoad();
             }
         });
