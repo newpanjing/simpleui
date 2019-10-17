@@ -99,9 +99,12 @@ body {
 .simpleui-table tr {
   height: 35px;
 }
+.simpleui-table tr:hover th,
+.simpleui-table tr:hover td {
+  background-color: inherit!important;
+}
 .simpleui-table tr th {
   text-align: right;
-  width: 60px;
   border-bottom: #eaeef5 1px solid;
 }
 .simpleui-table tr td {
