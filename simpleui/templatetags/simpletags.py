@@ -149,6 +149,11 @@ def get_config(key):
 
 
 @register.simple_tag
+def get_version():
+    return simpleui.get_version()
+
+
+@register.simple_tag
 def get_app_info():
     dict = {
         'version': simpleui.get_version()

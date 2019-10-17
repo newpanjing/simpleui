@@ -568,8 +568,11 @@
             displayTimeline: function () {
                 this.timeline = !this.timeline;
             },
-            report: function () {
-                window.open('https://github.com/newpanjing/simpleui/issues')
+            report: function (url) {
+                if(!url){
+                    url = 'https://github.com/newpanjing/simpleui/issues';
+                }
+                window.open(url);
             }
         }
     })
