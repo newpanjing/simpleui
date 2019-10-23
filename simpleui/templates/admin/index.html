@@ -159,18 +159,26 @@
                                     <i class="fas fa-user"></i>
                                     {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
                                 </el-button>
-                                {% verbatim mycode %}
 
-                                    <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-menu slot="dropdown">
+                                    {% verbatim mycode %}
                                         <el-dropdown-item v-waves icon="far fa-edit"
                                                           @click.native="changePassword()">{{ language.change_password }}
                                         </el-dropdown-item>
-                                        </el-dropdown-item>
+                                    {% endverbatim mycode %}
+                                    {% has_enable_admindoc as has_admindoc %}
+                                    {% if has_admindoc %}
+                                        <el-dropdown-item icon="el-icon-document"
+                                                          @click.native="openTab({eid:100000,name:'{% trans 'Documentation' %}',icon:'el-icon-document',url:'{% url 'django-admindocs-docroot' %}'})"
+                                                          divided>{% trans 'Documentation' %}</el-dropdown-item>
+                                    {% endif %}
+
+                                    {% verbatim mycode %}
                                         <el-dropdown-item icon="el-icon-close"
                                                           @click.native="logout()"
                                                           divided>{{ language.logout }}</el-dropdown-item>
-                                    </el-dropdown-menu>
-                                {% endverbatim mycode %}
+                                    {% endverbatim mycode %}
+                                </el-dropdown-menu>
                             </el-dropdown>
                         </div>
                     </div>
