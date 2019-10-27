@@ -28,8 +28,10 @@
     <input type="hidden" name="actionName" value="actionValue" id="actionName">
 </div>
 <script type="text/javascript">
-    new Vue({
-        el: '.submit-row',
+    var submitrows=document.getElementsByClassName('submit-row');
+    for(var i=0;i<submitrows.length;i++){
+        new Vue({
+        el: submitrows[i],
         data: {},
         methods: {
             del: function (url) {
@@ -44,4 +46,6 @@
             }
         }
     })
+    }
+
 </script>
