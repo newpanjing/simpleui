@@ -16,7 +16,8 @@
         for (var i = 0; i < app.menuData.length; i++) {
             var item = app.menuData[i]
             if ((item.url || '/') == hash) {
-                app.openTab(item, item.eid, true);
+
+                app.openTab(item, item.eid, true, false);
                 break;
             }
         }
@@ -107,6 +108,8 @@
     new Vue({
         el: '#main',
         data: {
+            drawer: false,
+            mobile: false,
             upgrade: {
                 isUpdate: false,
                 body: '',
@@ -258,7 +261,8 @@
                         self.fold = width < 800;
                     })
                 }
-                self.isResize = true
+                self.isResize = true;
+                self.mobile = width < 800;
 
                 //判断全屏状态
                 try {
@@ -430,10 +434,11 @@
                 }
             }
             ,
-            openTab: function (data, index, selected) {
+            openTab: function (data, index, selected, loading) {
                 if (data.breadcrumbs) {
                     this.breadcrumbs = data.breadcrumbs;
                 }
+
 
                 //如果data没有eid，就直接打开或者添加，根据url
                 if (!data.eid) {
@@ -471,8 +476,13 @@
                 } else {
                     //其他的网址loading会一直转
                     if (data.url && data.url.indexOf('http') != 0) {
-                        data.loading = true;
-                        this.loading = true;
+                        if (loading) {
+                            data.loading = true;
+                            this.loading = true;
+                        }else{
+                            data.loading = false;
+                            this.loading = false;
+                        }
                     }
                     // data.id = new Date().getTime() + "" + Math.random();
                     data.id = data.eid;
@@ -486,6 +496,12 @@
             ,
             foldClick: function () {
 
+                //移动端浮动菜单
+                var width = document.documentElement.clientWidth || document.body.clientWidth;
+                if (width < 800) {
+                    this.drawer = !this.drawer;
+                    return;
+                }
                 this.menuTextShow = !this.menuTextShow;
                 this.$nextTick(() => {
                     this.fold = !this.fold;
@@ -569,7 +585,7 @@
                 this.timeline = !this.timeline;
             },
             report: function (url) {
-                if(!url){
+                if (!url) {
                     url = 'https://github.com/newpanjing/simpleui/issues';
                 }
                 window.open(url);
