@@ -438,8 +438,6 @@
                 if (data.breadcrumbs) {
                     this.breadcrumbs = data.breadcrumbs;
                 }
-
-
                 //如果data没有eid，就直接打开或者添加，根据url
                 if (!data.eid) {
                     data.eid = new Date().getTime() + "" + Math.random();
@@ -465,7 +463,7 @@
                 //判断是否存在，存在就直接打开
                 for (var i = 0; i < this.tabs.length; i++) {
                     var tab = this.tabs[i];
-                    if (tab.id == data.eid) {
+                    if (tab.eid == data.eid) {
                         exists = tab;
                         continue;
                     }
