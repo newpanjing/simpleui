@@ -38,6 +38,7 @@ Before starting，please take a minte to understand **settings.py**, because it'
   + [Custom Action](#Custom%2dAction)
   + [Offline](#Offline)
   + [Close Loading](#Close%2dLoading)
+  + [admindoc](#admindoc)
 # Common Problems
   + [settings.py](#Not%2dfound%2dsettings.py)
   + [python version problem](#python%2dversion%2dproblem)
@@ -654,6 +655,9 @@ settings.py:
 ```python
 SIMPLEUI_LOADING = False
 ```
+
+## admindoc
+Admindoc must be the simpleui3.3+ version
 
 ## Common Problems
   ### Not found settings.py

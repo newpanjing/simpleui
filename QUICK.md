@@ -40,6 +40,7 @@ simpleui 快速上手指南
   + [自定义按钮](#自定义按钮)
   + [离线模式](#离线模式)
   + [关闭Loading遮罩层](#关闭Loading遮罩层)
+  + [admindoc](#admindoc)
 # 常见问题
   + [settings.py](#settingspy-找不到)
   + [python版本问题](#python版本问题)
@@ -715,6 +716,9 @@ SIMPLEUI_STATIC_OFFLINE = True
 SIMPLEUI_LOADING = False
 ```
 True或None 默认显示加载遮罩层，指定为False 不显示遮罩层。默认显示
+
+## admindoc
+admindoc需要simpleui 3.3+ 版本
 
 ## 常见问题
   ### settings.py 找不到

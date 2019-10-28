@@ -68,10 +68,42 @@
                   href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
         {% endif %}
     {% endblock %}
+    <el-drawer
+            class="lite-menus"
+            title="{{site_header}}"
+            :visible.sync="drawer"
+            :show-close="false"
+            size="50%"
+            direction="ltr">
+            <el-menu unique-opened="true" :default-active="menuActive">
+                <div v-for="(item,i) in menus" :key="item">
+                    <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
+                        <i :class="item.icon"></i>
+                        <span slot="title" v-text="item.name"></span>
+                    </el-menu-item>
+
+
+                    <el-submenu v-else :index="item.eid+''">
+                        <template slot="title">
+                            <i :class="item.icon"></i>
+                            <span slot="title" v-text="item.name"></span>
+                        </template>
+
+                        <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
+                            <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
+                                <i :class="sub.icon"></i>
+                                <span slot="title" v-text="sub.name"></span>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+
+                </div>
+            </el-menu>
+    </el-drawer>
 
     <el-container :style="{height: height+'px'}">
 
-        <el-aside width="auto" class="menu" {% block menu_style %}{% endblock %}>
+        <el-aside v-if="!fold" width="auto" class="menu" {% block menu_style %}{% endblock %}>
             {% block logo %}
                 <div class="logo-wrap" v-if="!fold">
                     <div class="float-wrap">
@@ -115,6 +147,7 @@
             </el-menu>
 
         </el-aside>
+
         <el-container>
             {% block header %}
                 <el-header class="navbar" style="font-size: 12px;padding: 10px;height: auto">
@@ -123,7 +156,7 @@
                             <el-button v-waves circle icon="fas fa-bars"
                                        style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
                             {% block breadcrumb %}
-                                <el-breadcrumb v-if="!small" style="display: inline-block;" separator="/">
+                                <el-breadcrumb v-if="!mobile" style="display: inline-block;" separator="/">
                                     {% verbatim myclode %}
                                         <el-breadcrumb-item><i :class="menus[0].icon"
                                                                :key="menus[0].name"></i>{{ menus[0].name }}
@@ -159,18 +192,26 @@
                                     <i class="fas fa-user"></i>
                                     {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
                                 </el-button>
-                                {% verbatim mycode %}
 
-                                    <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-menu slot="dropdown">
+                                    {% verbatim mycode %}
                                         <el-dropdown-item v-waves icon="far fa-edit"
                                                           @click.native="changePassword()">{{ language.change_password }}
                                         </el-dropdown-item>
-                                        </el-dropdown-item>
+                                    {% endverbatim mycode %}
+                                    {% has_enable_admindoc as has_admindoc %}
+                                    {% if has_admindoc %}
+                                        <el-dropdown-item icon="el-icon-document"
+                                                          @click.native="openTab({eid:100000,name:'{% trans 'Documentation' %}',icon:'el-icon-document',url:'{% url 'django-admindocs-docroot' %}'})"
+                                                          divided>{% trans 'Documentation' %}</el-dropdown-item>
+                                    {% endif %}
+
+                                    {% verbatim mycode %}
                                         <el-dropdown-item icon="el-icon-close"
                                                           @click.native="logout()"
                                                           divided>{{ language.logout }}</el-dropdown-item>
-                                    </el-dropdown-menu>
-                                {% endverbatim mycode %}
+                                    {% endverbatim mycode %}
+                                </el-dropdown-menu>
                             </el-dropdown>
                         </div>
                     </div>
@@ -335,7 +376,7 @@
     <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
     <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
     {% block index_js %}
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=3.2"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=3.3"></script>
     {% endblock %}
     {% block autoupdate %}
         {% if not "SIMPLEUI_STATIC_OFFLINE"|get_config %}

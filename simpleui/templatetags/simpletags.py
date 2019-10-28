@@ -458,5 +458,18 @@ def get_model_url(context):
     # reverse()
     opts = context.get('opts')
     key = 'admin:{}_{}_changelist'.format(opts.app_label, opts.model_name)
-    print(context)
     return reverse(key)
+
+
+@register.simple_tag
+def has_enable_admindoc():
+    apps = settings.INSTALLED_APPS
+    return 'django.contrib.admindocs' in apps
+
+
+@register.simple_tag(takes_context=True)
+def has_admindoc_page(context):
+    if hasattr(context, 'template_name'):
+        return context.template_name.find('admin_doc') == 0
+    else:
+        return False
