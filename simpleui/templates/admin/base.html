@@ -154,12 +154,14 @@
                     var self = this;
 
                     messages.forEach(item => {
-                        self.$notify({
-                            title: getLanuage('Tips'),
-                            message: item.msg,
-                            type: item.tag,
-                            dangerouslyUseHTMLString: true
-                        });
+                        setTimeout(function () {
+                            self.$notify({
+                                title: getLanuage('Tips'),
+                                message: item.msg,
+                                type: item.tag,
+                                dangerouslyUseHTMLString: true
+                            });
+                        }, 200);
                     });
 
                 }
