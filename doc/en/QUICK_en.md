@@ -625,6 +625,18 @@ Configuration compatible with native admin
 |icon|Button icon，Reference：https://element.eleme.cn/#/zh-CN/component/icon and https://fontawesome.com，copy class|
 |type|Button type，Reference：https://element.eleme.cn/#/zh-CN/component/button|
 |style|Customize CSS styles|
+|confirm|Requires version 3.4 or above|
+
++ confirm demo
+
+```python
+    def message_test(self, request, queryset):
+        messages.add_message(request, messages.SUCCESS, 'Success')
+        
+    # Add confirmation to button
+    message_test.confirm = 'Are you sure?'
+```
+
 
 + Link Button
 
