@@ -57,11 +57,11 @@ The document describes in detail how to use the installation, as well as a descr
 
 👇👇👇👇👇👇👇👇👇👇👇
 
-👉 1.[simpleui Document](./QUICK_en.md) 👈
+👉 1.[simpleui Document](https://simpleui.88cto.com/docs/simpleui/en/quick.html) 👈
 
-👉 2.[simpleui Document](./QUICK_en.md)👈
+👉 2.[simpleui Document](https://simpleui.88cto.com/docs/simpleui/en/quick.html)👈
 
-👉  3.[simpleui Document](./QUICK_en.md)👈
+👉  3.[simpleui Document](https://simpleui.88cto.com/docs/simpleui/en/quick.html)👈
 
 👆👆👆👆👆👆👆👆👆👆👆
 
