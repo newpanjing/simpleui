@@ -244,10 +244,10 @@
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
-                }).then(() => done());
+                }).then(() => done.call(this));
 
             } else {
-                done();
+                done.call(this)
             }
 
             function done() {
@@ -291,11 +291,12 @@
                         }
                     }
                 }
-                console.log('执行了')
                 if (url) {
                     window.location.href = url;
                     return;
-                } else if ($(this).attr('data-name')) {
+                }
+
+                if ($(this).attr('data-name')) {
                     var name = $(this).attr("data-name");
                     $("#changelist-form input[name='action']").val(name);
 
@@ -307,10 +308,8 @@
                             obj.removeAttr('name');
                         }
                     });
-                    $("#changelist-form").submit();
-                } else {
-                    $("#changelist-form").submit();
                 }
+                $("#changelist-form").submit();
             }
         });
     });
