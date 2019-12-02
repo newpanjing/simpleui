@@ -10,7 +10,7 @@ import time
 import django
 import simpleui
 from django import template
-from django.conf import settings
+
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.urls import reverse
@@ -138,6 +138,7 @@ def home_page(context):
 
 
 def __get_config(name):
+    from django.conf import settings
     value = os.environ.get(name, getattr(settings, name, None))
 
     return value
@@ -311,11 +312,13 @@ def context_to_json(context):
 
 @register.simple_tag()
 def get_language():
+    from django.conf import settings
     return settings.LANGUAGE_CODE.lower()
 
 
 @register.filter
 def get_language_code(val):
+    from django.conf import settings
     return settings.LANGUAGE_CODE.lower()
 
 
@@ -463,6 +466,7 @@ def get_model_url(context):
 
 @register.simple_tag
 def has_enable_admindoc():
+    from django.conf import settings
     apps = settings.INSTALLED_APPS
     return 'django.contrib.admindocs' in apps
 
