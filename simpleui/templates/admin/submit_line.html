@@ -1,9 +1,11 @@
 {% load i18n admin_urls simpletags%}
 <div class="submit-row">
-    <el-button type="button" icon="el-icon-arrow-left" @click="prev()"
-               style="float: left;margin-right: 10px;margin-bottom: 10px;">
-        <span v-text="getLanuage('Go back')"></span>
-    </el-button>
+    {% if '_popup' not in request.GET %}
+        <el-button type="button" icon="el-icon-arrow-left" @click="prev()"
+                   style="float: left;margin-right: 10px;margin-bottom: 10px;">
+            <span v-text="getLanuage('Go back')"></span>
+        </el-button>
+    {% endif %}
     {% if show_delete_link %}
         {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
         <el-button icon="el-icon-delete" type="danger" @click="del('{% add_preserved_filters delete_url %}')"
