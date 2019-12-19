@@ -43,6 +43,8 @@ simpleui 特点
 
 ☕️ Element-UI + Vue 加持，让古老的django admin 焕然一新。
 
+🦀 新增支持Django3.0，Python3.8、Python3.9，敢于做第一个吃螃蟹的人。
+
 # 开发初衷
 Django Admin默认界面设计语言存在着的一些不足，比如色彩单一，大量线条的使用，分割化明显。将这些不足归类一下就是界面单调、雷同性明显、缺少惊喜。我们认为新的平台类视觉风格可以打破这些束缚，尝试一些新的探索，启发传统的设计认知,因此结合当下设计趋势，构思了Element+Django Admin的Simpleui。让Django Admin和Element产生完美的交互。配以最流行的后台设计风格，让Django Admin更加强大。
 
