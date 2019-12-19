@@ -80,8 +80,10 @@
                                         <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
                                     {% endfor %}
                                 {% else %}
-                                    <el-option label="True" value="True"></el-option>
-                                    <el-option label="False" value="False"></el-option>
+                                    {% get_boolean_choices as choices %}
+                                    {% for c in choices %}
+                                        <el-option label="{{ c.1 }}" value="{{ c.0 }}"></el-option>
+                                    {% endfor %}
                                 {% endif %}
                             </el-select>
 

@@ -22,6 +22,7 @@ from django.utils.safestring import mark_safe
 register = template.Library()
 
 PY_VER = sys.version[0]  # 2 or 3
+from django.utils.translation import gettext_lazy as _
 
 if PY_VER != '2':
     from importlib import reload
@@ -477,3 +478,11 @@ def has_admindoc_page(context):
         return context.template_name.find('admin_doc') == 0
     else:
         return False
+
+
+@register.simple_tag
+def get_boolean_choices():
+    return (
+        ('True', _('Yes')),
+        ('False', _('No'))
+    )

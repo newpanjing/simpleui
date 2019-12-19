@@ -477,7 +477,7 @@
                         if (loading) {
                             data.loading = true;
                             this.loading = true;
-                        }else{
+                        } else {
                             data.loading = false;
                             this.loading = false;
                         }

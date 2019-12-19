@@ -227,7 +227,6 @@
 
                         {% home_page %}
 
-
                         {% if home %}
                             <span v-if="index==0" slot="label"><i
                                     class="{{ icon }}"></i><span>{{ title }}</span>
@@ -376,7 +375,7 @@
     <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
     <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
     {% block index_js %}
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=3.4"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=3.9"></script>
     {% endblock %}
     {% block autoupdate %}
         {% if not "SIMPLEUI_STATIC_OFFLINE"|get_config %}
