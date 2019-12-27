@@ -542,8 +542,8 @@ ul.timelist, .timelist li {
 
 /* RELATED WIDGET WRAPPER */
 .related-widget-wrapper {
-    float: left;       /* display properly in form rows with multiple fields */
-    overflow: hidden;  /* clear floated contents */
+    float: left; /* display properly in form rows with multiple fields */
+    overflow: hidden; /* clear floated contents */
 }
 
 .related-widget-wrapper-link {

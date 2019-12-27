@@ -4,7 +4,6 @@ import sys
 from setuptools import setup
 import simpleui
 
-
 if sys.version_info < (3, 0):
 
     long_description = "\n".join([

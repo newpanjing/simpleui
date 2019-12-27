@@ -26,44 +26,44 @@ var _util = require('element-ui/lib/utils/util');
  *  },
  */
 exports.default = {
-  mounted: function mounted() {
-    if (process.env.NODE_ENV === 'production') return;
-    if (!this.$vnode) return;
+    mounted: function mounted() {
+        if (process.env.NODE_ENV === 'production') return;
+        if (!this.$vnode) return;
 
-    var _getMigratingConfig = this.getMigratingConfig(),
-        _getMigratingConfig$p = _getMigratingConfig.props,
-        props = _getMigratingConfig$p === undefined ? {} : _getMigratingConfig$p,
-        _getMigratingConfig$e = _getMigratingConfig.events,
-        events = _getMigratingConfig$e === undefined ? {} : _getMigratingConfig$e;
+        var _getMigratingConfig = this.getMigratingConfig(),
+            _getMigratingConfig$p = _getMigratingConfig.props,
+            props = _getMigratingConfig$p === undefined ? {} : _getMigratingConfig$p,
+            _getMigratingConfig$e = _getMigratingConfig.events,
+            events = _getMigratingConfig$e === undefined ? {} : _getMigratingConfig$e;
 
-    var _$vnode = this.$vnode,
-        data = _$vnode.data,
-        componentOptions = _$vnode.componentOptions;
+        var _$vnode = this.$vnode,
+            data = _$vnode.data,
+            componentOptions = _$vnode.componentOptions;
 
-    var definedProps = data.attrs || {};
-    var definedEvents = componentOptions.listeners || {};
+        var definedProps = data.attrs || {};
+        var definedEvents = componentOptions.listeners || {};
 
-    for (var propName in definedProps) {
-      propName = (0, _util.kebabCase)(propName); // compatible with camel case
-      if (props[propName]) {
-        console.warn('[Element Migrating][' + this.$options.name + '][Attribute]: ' + props[propName]);
-      }
+        for (var propName in definedProps) {
+            propName = (0, _util.kebabCase)(propName); // compatible with camel case
+            if (props[propName]) {
+                console.warn('[Element Migrating][' + this.$options.name + '][Attribute]: ' + props[propName]);
+            }
+        }
+
+        for (var eventName in definedEvents) {
+            eventName = (0, _util.kebabCase)(eventName); // compatible with camel case
+            if (events[eventName]) {
+                console.warn('[Element Migrating][' + this.$options.name + '][Event]: ' + events[eventName]);
+            }
+        }
+    },
+
+    methods: {
+        getMigratingConfig: function getMigratingConfig() {
+            return {
+                props: {},
+                events: {}
+            };
+        }
     }
-
-    for (var eventName in definedEvents) {
-      eventName = (0, _util.kebabCase)(eventName); // compatible with camel case
-      if (events[eventName]) {
-        console.warn('[Element Migrating][' + this.$options.name + '][Event]: ' + events[eventName]);
-      }
-    }
-  },
-
-  methods: {
-    getMigratingConfig: function getMigratingConfig() {
-      return {
-        props: {},
-        events: {}
-      };
-    }
-  }
 };
