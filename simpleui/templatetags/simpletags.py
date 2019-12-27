@@ -157,17 +157,13 @@ def get_version():
 
 @register.simple_tag
 def get_app_info():
-    dict = {
-        'version': simpleui.get_version()
-    }
-
-    return format_table(dict)
+    return format_table({version: simpleui.get_version()})
 
 
-def format_table(dict):
+def format_table(d):
     html = '<table class="simpleui-table"><tbody>'
-    for key in dict:
-        html += '<tr><th>{}</th><td>{}</td></tr>'.format(key, dict.get(key))
+    for key in d:
+        html += '<tr><th>{}</th><td>{}</td></tr>'.format(key, d.get(key))
     html += '</tbody></table>'
     return format_html(html)
 
@@ -375,15 +371,15 @@ def custom_button(context):
     # 输出自定义按钮的属性
 
     if actions:
-        id = 0
+        i = 0
         for name in actions:
             values = {}
             fun = actions.get(name)[0]
             for key, v in fun.__dict__.items():
                 if key != '__len__' and key != '__wrapped__':
                     values[key] = v
-            values['eid'] = id
-            id += 1
+            values['eid'] = i
+            i += 1
             data[name] = values
 
     return json.dumps(data, cls=LazyEncoder)
@@ -393,7 +389,7 @@ from django.db.models.fields.related import ForeignKey
 
 
 def get_model_fields(model, base=None):
-    list = []
+    field_list = []
     fields = model._meta.fields
     for f in fields:
         label = f.name
@@ -404,11 +400,11 @@ def get_model_fields(model, base=None):
             label = str(label)
 
         if base:
-            list.append(('{}__{}'.format(base, f.name), label))
+            field_list.append(('{}__{}'.format(base, f.name), label))
         else:
-            list.append((f.name, label))
+            field_list.append((f.name, label))
 
-    return list
+    return field_list
 
 
 @register.simple_tag(takes_context=True)
