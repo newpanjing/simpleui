@@ -427,7 +427,7 @@ var render = function() {
                     {
                       staticClass: "el-message-box__errormsg",
                       style: {
-                        visibility: !!_vm.editorErrorMessage
+                        visibility: _vm.editorErrorMessage
                           ? "visible"
                           : "hidden"
                       }

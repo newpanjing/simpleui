@@ -687,7 +687,7 @@ var Color = function () {
 }();
 
 /* harmony default export */ var src_color = (Color);
-;
+
 // CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/color-picker/src/components/picker-dropdown.vue?vue&type=template&id=06601625&
 var picker_dropdownvue_type_template_id_06601625_render = function() {
   var _vm = this

@@ -12,4 +12,3 @@ exports.default = function (ref) {
   };
 };
 
-;

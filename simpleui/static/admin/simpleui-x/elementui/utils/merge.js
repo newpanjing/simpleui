@@ -18,4 +18,3 @@ exports.default = function (target) {
   return target;
 };
 
-;

@@ -144,7 +144,7 @@ function renderThumbStyle(_ref) {
   style.webkitTransform = translate;
 
   return style;
-};
+}
 // CONCATENATED MODULE: ./packages/scrollbar/src/bar.js
 
 
