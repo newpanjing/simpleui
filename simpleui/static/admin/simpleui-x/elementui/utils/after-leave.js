@@ -25,7 +25,7 @@ exports.default = function (instance, callback) {
   }, speed + 100);
 };
 
-; /**
+ /**
    * Bind after-leave event for vue instance. Make sure after-leave is called in any browsers.
    *
    * @param {Vue} instance Vue instance.

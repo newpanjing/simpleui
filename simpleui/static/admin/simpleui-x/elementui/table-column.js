@@ -825,7 +825,7 @@ function parseMinWidth(minWidth) {
     }
   }
   return minWidth;
-};
+}
 
 function parseHeight(height) {
   if (typeof height === 'number') {

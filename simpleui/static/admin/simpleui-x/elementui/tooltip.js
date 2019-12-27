@@ -353,7 +353,7 @@ var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
       for (var index = 0; index < slots.length; index++) {
         if (slots[index] && slots[index].tag) {
           element = slots[index];
-        };
+        }
       }
       return element;
     }

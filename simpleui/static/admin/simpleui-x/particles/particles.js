@@ -1459,11 +1459,11 @@ function hexToRgb(hex){
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
   } : null;
-};
+}
 
 function clamp(number, min, max) {
   return Math.min(Math.max(number, min), max);
-};
+}
 
 function isInArray(value, array) {
   return array.indexOf(value) > -1;

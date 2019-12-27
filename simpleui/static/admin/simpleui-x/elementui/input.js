@@ -497,7 +497,7 @@ function calcTextareaHeight(targetElement) {
   hiddenTextarea.parentNode && hiddenTextarea.parentNode.removeChild(hiddenTextarea);
   hiddenTextarea = null;
   return result;
-};
+}
 // EXTERNAL MODULE: external "element-ui/lib/utils/merge"
 var merge_ = __webpack_require__(9);
 var merge_default = /*#__PURE__*/__webpack_require__.n(merge_);

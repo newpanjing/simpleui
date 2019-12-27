@@ -1257,7 +1257,7 @@ var tree_store_TreeStore = function () {
 }();
 
 /* harmony default export */ var tree_store = (tree_store_TreeStore);
-;
+
 // CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/tree/src/tree-node.vue?vue&type=template&id=3ba3ef0e&
 var tree_nodevue_type_template_id_3ba3ef0e_render = function() {
   var this$1 = this

@@ -413,7 +413,7 @@ function parseMinWidth(minWidth) {
     }
   }
   return minWidth;
-};
+}
 
 function parseHeight(height) {
   if (typeof height === 'number') {
@@ -2137,7 +2137,7 @@ function mapStates(mapper) {
     }
   });
   return res;
-};
+}
 // EXTERNAL MODULE: external "element-ui/lib/utils/scrollbar-width"
 var scrollbar_width_ = __webpack_require__(37);
 var scrollbar_width_default = /*#__PURE__*/__webpack_require__.n(scrollbar_width_);

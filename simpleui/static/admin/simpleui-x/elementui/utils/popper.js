@@ -31,7 +31,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 // Cross module loader
 // Supported: Node, AMD, Browser globals
 //
-;(function (root, factory) {
+(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(factory);

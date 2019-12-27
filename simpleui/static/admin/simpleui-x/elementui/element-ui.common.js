@@ -4482,7 +4482,7 @@ function calcTextareaHeight(targetElement) {
   hiddenTextarea.parentNode && hiddenTextarea.parentNode.removeChild(hiddenTextarea);
   hiddenTextarea = null;
   return result;
-};
+}
 // EXTERNAL MODULE: external "element-ui/lib/utils/merge"
 var merge_ = __webpack_require__(8);
 var merge_default = /*#__PURE__*/__webpack_require__.n(merge_);
@@ -10107,7 +10107,7 @@ function parseMinWidth(minWidth) {
     }
   }
   return minWidth;
-};
+}
 
 function parseHeight(height) {
   if (typeof height === 'number') {
@@ -11209,7 +11209,7 @@ function mapStates(mapper) {
     }
   });
   return res;
-};
+}
 // EXTERNAL MODULE: external "element-ui/lib/utils/scrollbar-width"
 var scrollbar_width_ = __webpack_require__(29);
 var scrollbar_width_default = /*#__PURE__*/__webpack_require__.n(scrollbar_width_);
@@ -21583,7 +21583,7 @@ main.directive = directive;
       for (var index = 0; index < slots.length; index++) {
         if (slots[index] && slots[index].tag) {
           element = slots[index];
-        };
+        }
       }
       return element;
     }
@@ -21777,7 +21777,7 @@ var mainvue_type_template_id_6b29b012_render = function() {
                     {
                       staticClass: "el-message-box__errormsg",
                       style: {
-                        visibility: !!_vm.editorErrorMessage
+                        visibility: _vm.editorErrorMessage
                           ? "visible"
                           : "hidden"
                       }
@@ -25460,7 +25460,7 @@ var tree_store_TreeStore = function () {
 }();
 
 /* harmony default export */ var tree_store = (tree_store_TreeStore);
-;
+
 // CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/tree/src/tree-node.vue?vue&type=template&id=3ba3ef0e&
 var tree_nodevue_type_template_id_3ba3ef0e_render = function() {
   var this$1 = this
@@ -32081,7 +32081,7 @@ function renderThumbStyle(_ref) {
   style.webkitTransform = translate;
 
   return style;
-};
+}
 // CONCATENATED MODULE: ./packages/scrollbar/src/bar.js
 
 
@@ -34435,7 +34435,7 @@ var Color = function () {
 }();
 
 /* harmony default export */ var src_color = (Color);
-;
+
 // CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/color-picker/src/components/picker-dropdown.vue?vue&type=template&id=06601625&
 var picker_dropdownvue_type_template_id_06601625_render = function() {
   var _vm = this
