@@ -71,57 +71,56 @@ function findPosY(obj) {
 //-----------------------------------------------------------------------------
 // Date object extensions
 // ----------------------------------------------------------------------------
-(function() {
+(function () {
     'use strict';
-    Date.prototype.getTwelveHours = function() {
+    Date.prototype.getTwelveHours = function () {
         var hours = this.getHours();
         if (hours === 0) {
             return 12;
-        }
-        else {
+        } else {
             return hours <= 12 ? hours : hours - 12;
         }
     };
 
-    Date.prototype.getTwoDigitMonth = function() {
+    Date.prototype.getTwoDigitMonth = function () {
         return (this.getMonth() < 9) ? '0' + (this.getMonth() + 1) : (this.getMonth() + 1);
     };
 
-    Date.prototype.getTwoDigitDate = function() {
+    Date.prototype.getTwoDigitDate = function () {
         return (this.getDate() < 10) ? '0' + this.getDate() : this.getDate();
     };
 
-    Date.prototype.getTwoDigitTwelveHour = function() {
+    Date.prototype.getTwoDigitTwelveHour = function () {
         return (this.getTwelveHours() < 10) ? '0' + this.getTwelveHours() : this.getTwelveHours();
     };
 
-    Date.prototype.getTwoDigitHour = function() {
+    Date.prototype.getTwoDigitHour = function () {
         return (this.getHours() < 10) ? '0' + this.getHours() : this.getHours();
     };
 
-    Date.prototype.getTwoDigitMinute = function() {
+    Date.prototype.getTwoDigitMinute = function () {
         return (this.getMinutes() < 10) ? '0' + this.getMinutes() : this.getMinutes();
     };
 
-    Date.prototype.getTwoDigitSecond = function() {
+    Date.prototype.getTwoDigitSecond = function () {
         return (this.getSeconds() < 10) ? '0' + this.getSeconds() : this.getSeconds();
     };
 
-    Date.prototype.getHourMinute = function() {
+    Date.prototype.getHourMinute = function () {
         return this.getTwoDigitHour() + ':' + this.getTwoDigitMinute();
     };
 
-    Date.prototype.getHourMinuteSecond = function() {
+    Date.prototype.getHourMinuteSecond = function () {
         return this.getTwoDigitHour() + ':' + this.getTwoDigitMinute() + ':' + this.getTwoDigitSecond();
     };
 
-    Date.prototype.getFullMonthName = function() {
+    Date.prototype.getFullMonthName = function () {
         return typeof window.CalendarNamespace === "undefined"
             ? this.getTwoDigitMonth()
             : window.CalendarNamespace.monthsOfYear[this.getMonth()];
     };
 
-    Date.prototype.strftime = function(format) {
+    Date.prototype.strftime = function (format) {
         var fields = {
             B: this.getFullMonthName(),
             c: this.toString(),
@@ -144,8 +143,7 @@ function findPosY(obj) {
             if (format.charAt(i) === '%') {
                 result = result + fields[format.charAt(i + 1)];
                 ++i;
-            }
-            else {
+            } else {
                 result = result + format.charAt(i);
             }
             ++i;
@@ -156,7 +154,7 @@ function findPosY(obj) {
 // ----------------------------------------------------------------------------
 // String object extensions
 // ----------------------------------------------------------------------------
-    String.prototype.pad_left = function(pad_length, pad_string) {
+    String.prototype.pad_left = function (pad_length, pad_string) {
         var new_string = this;
         for (var i = 0; new_string.length < pad_length; i++) {
             new_string = pad_string + new_string;
@@ -164,7 +162,7 @@ function findPosY(obj) {
         return new_string;
     };
 
-    String.prototype.strptime = function(format) {
+    String.prototype.strptime = function (format) {
         var split_format = format.split(/[.\-/]/);
         var date = this.split(/[.\-/]/);
         var i = 0;
@@ -199,11 +197,10 @@ function findPosY(obj) {
 function getStyle(oElm, strCssRule) {
     'use strict';
     var strValue = "";
-    if(document.defaultView && document.defaultView.getComputedStyle) {
+    if (document.defaultView && document.defaultView.getComputedStyle) {
         strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
-    }
-    else if(oElm.currentStyle) {
-        strCssRule = strCssRule.replace(/\-(\w)/g, function(strMatch, p1) {
+    } else if (oElm.currentStyle) {
+        strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1) {
             return p1.toUpperCase();
         });
         strValue = oElm.currentStyle[strCssRule];
