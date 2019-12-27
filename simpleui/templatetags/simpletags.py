@@ -278,8 +278,7 @@ def get_icon(obj, name=None):
         _default = __get_config('SIMPLEUI_DEFAULT_ICON')
         if _default is None or _default:
             return 'far fa-file'
-        else:
-            return ''
+        return ''
     return temp
 
 
@@ -291,8 +290,7 @@ def get_config_icon(name):
 
     if name in _config_icon:
         return _config_icon.get(name)
-    else:
-        return ''
+    return ''
 
 
 @register.simple_tag(takes_context=True)
@@ -448,8 +446,7 @@ def get_tz_suffix():
     # 必须明确指定为True的时候，才返回+8 的后缀
     if tz:
         return '+08:00'
-    else:
-        return ''
+    return ''
 
 
 @register.simple_tag
@@ -476,8 +473,7 @@ def has_enable_admindoc():
 def has_admindoc_page(context):
     if hasattr(context, 'template_name'):
         return context.template_name.find('admin_doc') == 0
-    else:
-        return False
+    return False
 
 
 @register.simple_tag
