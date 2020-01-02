@@ -157,17 +157,13 @@ def get_version():
 
 @register.simple_tag
 def get_app_info():
-    dict = {
-        'version': simpleui.get_version()
-    }
-
-    return format_table(dict)
+    return format_table({version: simpleui.get_version()})
 
 
-def format_table(dict):
+def format_table(d):
     html = '<table class="simpleui-table"><tbody>'
-    for key in dict:
-        html += '<tr><th>{}</th><td>{}</td></tr>'.format(key, dict.get(key))
+    for key in d:
+        html += '<tr><th>{}</th><td>{}</td></tr>'.format(key, d.get(key))
     html += '</tbody></table>'
     return format_html(html)
 
@@ -278,8 +274,7 @@ def get_icon(obj, name=None):
         _default = __get_config('SIMPLEUI_DEFAULT_ICON')
         if _default is None or _default:
             return 'far fa-file'
-        else:
-            return ''
+        return ''
     return temp
 
 
@@ -291,8 +286,7 @@ def get_config_icon(name):
 
     if name in _config_icon:
         return _config_icon.get(name)
-    else:
-        return ''
+    return ''
 
 
 @register.simple_tag(takes_context=True)
@@ -377,15 +371,15 @@ def custom_button(context):
     # 输出自定义按钮的属性
 
     if actions:
-        id = 0
+        i = 0
         for name in actions:
             values = {}
             fun = actions.get(name)[0]
             for key, v in fun.__dict__.items():
                 if key != '__len__' and key != '__wrapped__':
                     values[key] = v
-            values['eid'] = id
-            id += 1
+            values['eid'] = i
+            i += 1
             data[name] = values
 
     return json.dumps(data, cls=LazyEncoder)
@@ -395,7 +389,7 @@ from django.db.models.fields.related import ForeignKey
 
 
 def get_model_fields(model, base=None):
-    list = []
+    field_list = []
     fields = model._meta.fields
     for f in fields:
         label = f.name
@@ -406,11 +400,11 @@ def get_model_fields(model, base=None):
             label = str(label)
 
         if base:
-            list.append(('{}__{}'.format(base, f.name), label))
+            field_list.append(('{}__{}'.format(base, f.name), label))
         else:
-            list.append((f.name, label))
+            field_list.append((f.name, label))
 
-    return list
+    return field_list
 
 
 @register.simple_tag(takes_context=True)
@@ -448,8 +442,7 @@ def get_tz_suffix():
     # 必须明确指定为True的时候，才返回+8 的后缀
     if tz:
         return '+08:00'
-    else:
-        return ''
+    return ''
 
 
 @register.simple_tag
@@ -476,8 +469,7 @@ def has_enable_admindoc():
 def has_admindoc_page(context):
     if hasattr(context, 'template_name'):
         return context.template_name.find('admin_doc') == 0
-    else:
-        return False
+    return False
 
 
 @register.simple_tag
