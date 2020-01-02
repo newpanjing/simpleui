@@ -217,7 +217,7 @@ def menus(context, _get_config=None):
     # 如果有menu 就读取，没有就调用系统的
     key = 'system_keep'
     if config and 'menus' in config:
-        if key in config and config.get(key) != False:
+        if config.get(key, None):
             temp = config.get('menus')
             for i in temp:
                 # 处理面包屑
@@ -325,15 +325,15 @@ def get_language_code(val):
 
 def get_analysis_config():
     val = __get_config('SIMPLEUI_ANALYSIS')
-    if not val and val == False:
-        return False
-    return True
+    if val:
+        return True
+    return False
 
 
 @register.simple_tag(takes_context=True)
 def load_analysis(context):
     try:
-        if get_analysis_config() == False:
+        if not get_analysis_config():
             return ''
 
         # 理论上值一天只上报一次

@@ -1,9 +1,9 @@
 /*global gettext*/
-(function($) {
+(function ($) {
     'use strict';
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Add anchor tag for Show/Hide link
-        $("fieldset.collapse").each(function(i, elem) {
+        $("fieldset.collapse").each(function (i, elem) {
             // Don't hide if fields in this fieldset have errors
             if ($(elem).find("div.errors").length === 0) {
                 $(elem).addClass("collapsed").find("h2").first().append(' (<a id="fieldsetcollapser' +
@@ -12,7 +12,7 @@
             }
         });
         // Add toggle to anchor tag
-        $("fieldset.collapse a.collapse-toggle").click(function(ev) {
+        $("fieldset.collapse a.collapse-toggle").click(function (ev) {
             if ($(this).closest("fieldset").hasClass("collapsed")) {
                 // Show
                 $(this).text(gettext("Hide")).closest("fieldset").removeClass("collapsed").trigger("show.fieldset", [$(this).attr("id")]);

@@ -9,6 +9,7 @@ except ImportError:
 
 class SimpleMiddleware(MiddlewareMixin):
 
-    def process_response(self, request, response):
+    @staticmethod
+    def process_response(response):
         response['X-Frame-Options'] = 'ALLOW-FROM'
         return response
