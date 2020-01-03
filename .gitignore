@@ -1,3 +1,4 @@
 .idea/
 django_simpleui.egg-info
 dist
+/simpleui.egg-info/

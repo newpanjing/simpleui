@@ -40,6 +40,7 @@ simpleui 快速上手指南
   + [自定义按钮](#自定义按钮)
   + [离线模式](#离线模式)
   + [关闭Loading遮罩层](#关闭Loading遮罩层)
+  + [admindoc](#admindoc)
 # 常见问题
   + [settings.py](#settingspy-找不到)
   + [python版本问题](#python版本问题)
@@ -657,6 +658,19 @@ class EmployeAdmin(admin.ModelAdmin):
 |icon|按钮图标，参考https://element.eleme.cn/#/zh-CN/component/icon与https://fontawesome.com，把class 复制进来即可|
 |type|按钮类型，参考：https://element.eleme.cn/#/zh-CN/component/button|
 |style|自定义css样式|
+|confirm|弹出确认框，在3.4或以上版本中生效|
+
++ confirm 例子
+
+```python
+    def message_test(self, request, queryset):
+        messages.add_message(request, messages.SUCCESS, '操作成功123123123123')
+        
+    # 给按钮增加确认
+    message_test.confirm = '你是否执意要点击这个按钮？'
+```
+
+
 
 + 链接按钮
 
@@ -715,6 +729,9 @@ SIMPLEUI_STATIC_OFFLINE = True
 SIMPLEUI_LOADING = False
 ```
 True或None 默认显示加载遮罩层，指定为False 不显示遮罩层。默认显示
+
+## admindoc
+admindoc需要simpleui 3.3+ 版本
 
 ## 常见问题
   ### settings.py 找不到

@@ -1,5 +1,5 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_urls static admin_modify %}
+{% load i18n admin_urls static admin_modify simpletags%}
 
 {% block extrahead %}{{ block.super }}
     <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
@@ -19,9 +19,11 @@
 
     </style>
     <div id="content-main" class="form-main">
+        {% if '_popup' not in request.GET %}
         <div class="page-header">
             <el-page-header @back="goBack" content="{{title}}"/>
         </div>
+        {% endif %}
         {% block object-tools %}
             {% if change %}{% if not is_popup %}
                 <ul class="object-tools">
@@ -104,18 +106,7 @@
             el:'.page-header',
             methods:{
                 goBack:function () {
-                    //找到上级
-                    var array = location.pathname.split('/')
-                    if (array.length == 5||array.length==6) {
-                        window.location.href = '/' + array[1] + '/' + array[2];
-                    } else {
-                        var referrer = document.referrer;
-                        if (referrer && document.URL != referrer) {
-                            window.location.href = referrer;
-                        } else {
-                            window.history.go(-1);
-                        }
-                    }
+                    window.location.href='{% get_model_url %}'
                 }
             }
         })

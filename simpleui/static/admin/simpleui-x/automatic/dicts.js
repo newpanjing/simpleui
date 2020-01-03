@@ -93,7 +93,7 @@ var dicts = {
     //银行
     'fas fa-credit-card': ['银行卡', '银行', '信用卡', '储蓄卡'],
     //ad
-    'fas fa-ad': ['宣传', '广告', 'banner', 'Banner', 'ad', 'Ad'],
+    'fas fa-ad': ['宣传', '广告', 'banner', 'Banner', 'ad', 'Ad', '横幅', '轮播'],
     //hot
     'fab fa-hotjar': ['热搜', '热度', '火焰'],
     //info

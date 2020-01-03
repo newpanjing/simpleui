@@ -99,9 +99,12 @@ body {
 .simpleui-table tr {
   height: 35px;
 }
+.simpleui-table tr:hover th,
+.simpleui-table tr:hover td {
+  background-color: inherit !important;
+}
 .simpleui-table tr th {
   text-align: right;
-  width: 60px;
   border-bottom: #eaeef5 1px solid;
 }
 .simpleui-table tr td {
@@ -359,5 +362,9 @@ body {
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 0;
   background: rgba(0, 0, 0, 0.1);
+}
+.lite-menus .el-submenu__title:hover,
+.lite-menus .is-opened .el-submenu__title {
+  color: white !important;
 }
 /*# sourceMappingURL=index.css.map */

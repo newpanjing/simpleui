@@ -41,6 +41,8 @@ simpleui Characteristics
 
 ☕️ `Element-UI` and `Vue` ，Let the `django admin` be better.
 
+🦀 Add support for Django3.0 Python3.8, Python3.9, dares to do the first person to eat crab.
+
 # Original intention of development
 `Django Admin` default interface design language has some shortcomings, such as single color, the use of a large number of lines, and obvious segmentation. To classify these shortcomings is that the interface is monotonous, obvious similarity, and lack of surprises. We believe that the new platform-like visual style can break these constraints, try some new explorations, and inspire traditional design cognition, so combined with the current design trend, I have conceived `Element+Django Admin's` Simpleui. Let `Django Admin` and `Element` make the perfect interaction. With the most popular back-end design style, let `Django Admin` is even more powerful.
 
@@ -57,11 +59,11 @@ The document describes in detail how to use the installation, as well as a descr
 
 👇👇👇👇👇👇👇👇👇👇👇
 
-👉 1.[simpleui Document](./QUICK_en.md) 👈
+👉 1.[simpleui Document](https://simpleui.88cto.com/docs/simpleui/en/quick.html) 👈
 
-👉 2.[simpleui Document](./QUICK_en.md)👈
+👉 2.[simpleui Document](https://simpleui.88cto.com/docs/simpleui/en/quick.html)👈
 
-👉  3.[simpleui Document](./QUICK_en.md)👈
+👉  3.[simpleui Document](https://simpleui.88cto.com/docs/simpleui/en/quick.html)👈
 
 👆👆👆👆👆👆👆👆👆👆👆
 
