@@ -5,11 +5,9 @@
 @Author  : chise
 @Email   : chise123@live.com
 @Software: PyCharm
-@info    :
+@info    :simpleui自定义表单
 """
 from django import forms
-
-
 import uuid
 
 from django.core import validators

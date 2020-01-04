@@ -31,10 +31,8 @@ from django.utils.topological_sort import (
 from django.utils.translation import gettext_lazy as _
 
 __all__ = (
-    'SimpleTextInput',
+    'SimpleTextInput','SimplePasswordInput','SimpleURLInput','SimpleEmailInput','SimpleNumberInput'
 )
-
-
 class MediaDefiningClass(type):
     """
     元类：媒体定义。
@@ -151,18 +149,44 @@ class CInput(CWidget):
         context['widget']['type'] = self.input_type
         return context
 
-
+import typing
 class SimpleTextInput(CInput):
     input_type = "text"
     template_name = 'forms/widgets/text.html'
-
-    def __init__(self, attrs=None):
-        if attrs is not None:
-            attrs = attrs.copy()
-            if not attrs.get("style") and self.input_type == "text":
-                attrs['style'] = "width:180px "
-            self.input_type = attrs.pop('type', self.input_type)
+    def __init__(self, attrs:typing.Union[typing.Dict[str,str],None]=None):
+        if attrs is None:
+            attrs={}
+            attrs['style'] = "width:180px"
         else:
-            attrs = {}
-            attrs['style'] = "width:180px "
+            if not attrs.get('style'):
+                attrs['style'] = "width:180px "
         super().__init__(attrs)
+
+
+class SimpleNumberInput(CInput):
+    input_type = 'number'
+    template_name = 'forms/widgets/number.html'
+
+
+class SimpleEmailInput(CInput):
+    input_type = 'email'
+    template_name = 'forms/widgets/email.html'
+
+
+class SimpleURLInput(CInput):
+    input_type = 'url'
+    template_name = 'forms/widgets/url.html'
+
+
+class SimplePasswordInput(CInput):
+    input_type = 'password'
+    template_name = 'forms/widgets/password.html'
+
+    def __init__(self, attrs=None, render_value=False):
+        super().__init__(attrs)
+        self.render_value = render_value
+
+    def get_context(self, name, value, attrs):
+        if not self.render_value:
+            value = None
+        return super().get_context(name, value, attrs)
