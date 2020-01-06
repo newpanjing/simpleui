@@ -45,192 +45,7 @@ from django.utils.functional import cached_property
 from django.utils.html import conditional_escape, html_safe
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
-
-
-# class CField:
-#     widget = TextInput  # 呈现此类字段时使用的默认小部件。
-#     hidden_widget = HiddenInput  # 默认小部件使用时，渲染为“隐藏”。
-#     default_validators = []  # 默认验证器集
-#     # 如果您希望字段验证器不引发特定的字段错误消息，请在default_error_message中添加一个“无效”条目。
-#     default_error_messages = {
-#         'required': _('This field is required.'),
-#     }
-#     empty_values = list(validators.EMPTY_VALUES)
-#
-#     def __init__(self, *, required=True, widget=None, label=None, initial=None,
-#                  help_text='', error_messages=None, show_hidden_initial=False,
-#                  validators=(), localize=False, disabled=False, label_suffix=None, **kwargs):
-#         # required——指定字段是否是必需的布尔值，默认情况下为真。
-#         # widget——一个widget类，或者widget类的实例，在显示它时应该用于这个字段。每个字段都有一个默认的小部件，如果您不指定它，它将使用这个小部件。在大多数情况下，默认的小部件是TextInput。
-#         # label——此字段的详细名称，用于在表单中显示此字段。默认情况下，Django将使用表单字段名的“漂亮”版本(如果该字段是表单的一部分)。
-#         # initial——在该字段的初始显示中使用的值。如果没有提供数据，则*not*将此值用作回退。
-#         # help_text——一个可选的字符串，用作这个字段的“帮助文本”。
-#         # error_messages——一个可选的字典，用于覆盖字段将引发的默认消息。
-#         # show_hidden_initial——布尔值，用于指定是否需要在小部件之后呈现具有初始值的隐藏小部件。
-#         # 验证器——要使用的其他验证器的列表
-#         # localize——布尔值，指定字段是否应该本地化。
-#         # disabled——布尔值，指定字段是否被禁用，也就是说它的小部件显示在表单中，但不可编辑。
-#         # label_suffix——添加到标签的后缀。覆盖的label_suffix形式。
-#         self.required, self.label, self.initial = required, label, initial
-#         self.show_hidden_initial = show_hidden_initial
-#         self.help_text = help_text
-#         self.disabled = disabled
-#         self.label_suffix = label_suffix
-#         widget = widget or self.widget
-#         if isinstance(widget, type):
-#             widget = widget()
-#         else:
-#             widget = copy.deepcopy(widget)
-#
-#         # Trigger the localization machinery if needed.
-#         self.localize = localize
-#         if self.localize:
-#             widget.is_localized = True
-#
-#         # Let the widget know whether it should display as required.
-#         widget.is_required = self.required
-#
-#         # Hook into self.widget_attrs() for any Field-specific HTML attributes.
-#         extra_attrs = self.widget_attrs(widget)
-#         if extra_attrs:
-#             widget.attrs.update(extra_attrs)
-#         # simpleui 增加额外属性
-#         widget.attrs.update(kwargs)
-#
-#         self.widget = widget
-#
-#         messages = {}
-#         for c in reversed(self.__class__.__mro__):
-#             messages.update(getattr(c, 'default_error_messages', {}))
-#         messages.update(error_messages or {})
-#         self.error_messages = messages
-#
-#         self.validators = [*self.default_validators, *validators]
-#
-#         super().__init__()
-#
-#     def prepare_value(self, value):
-#         return value
-#
-#     def to_python(self, value):
-#         return value
-#
-#     def validate(self, value):
-#         if value in self.empty_values and self.required:
-#             raise ValidationError(self.error_messages['required'], code='required')
-#
-#     def run_validators(self, value):
-#         if value in self.empty_values:
-#             return
-#         errors = []
-#         for v in self.validators:
-#             try:
-#                 v(value)
-#             except ValidationError as e:
-#                 if hasattr(e, 'code') and e.code in self.error_messages:
-#                     e.message = self.error_messages[e.code]
-#                 errors.extend(e.error_list)
-#         if errors:
-#             raise ValidationError(errors)
-#
-#     def clean(self, value):
-#         """
-#         Validate the given value and return its "cleaned" value as an
-#         appropriate Python object. Raise ValidationError for any errors.
-#         """
-#         value = self.to_python(value)
-#         self.validate(value)
-#         self.run_validators(value)
-#         return value
-#
-#     def bound_data(self, data, initial):
-#         """
-#         Return the value that should be shown for this field on render of a
-#         bound form, given the submitted POST data for the field and the initial
-#         data, if any.
-#
-#         For most fields, this will simply be data; FileFields need to handle it
-#         a bit differently.
-#         """
-#         if self.disabled:
-#             return initial
-#         return data
-#
-#     def widget_attrs(self, widget):
-#         """
-#         给定一个小部件实例(*不是*小部件类)，根据这个字段返回应该添加到小部件的任何HTML属性的字典。
-#         """
-#         return {}
-#
-#     def has_changed(self, initial, data):
-#         """Return True if data differs from initial."""
-#         # Always return False if the field is disabled since self.bound_data
-#         # always uses the initial value in this case.
-#         if self.disabled:
-#             return False
-#         try:
-#             data = self.to_python(data)
-#             if hasattr(self, '_coerce'):
-#                 return self._coerce(data) != self._coerce(initial)
-#         except ValidationError:
-#             return True
-#         # For purposes of seeing whether something has changed, None is
-#         # the same as an empty string, if the data or initial value we get
-#         # is None, replace it with ''.
-#         initial_value = initial if initial is not None else ''
-#         data_value = data if data is not None else ''
-#         return initial_value != data_value
-#
-#     def get_bound_field(self, form, field_name):
-#         """
-#         Return a BoundField instance that will be used when accessing the form
-#         field in a template.
-#         """
-#         return BoundField(form, self, field_name)
-#
-#     def __deepcopy__(self, memo):
-#         result = copy.copy(self)
-#         memo[id(self)] = result
-#         result.widget = copy.deepcopy(self.widget, memo)
-#         result.error_messages = self.error_messages.copy()
-#         result.validators = self.validators[:]
-#         return result
-#
-#
-# class CCharField(CField):
-#     def __init__(self, *, max_length=None, min_length=None, strip=True, empty_value='', **kwargs):
-#         self.max_length = max_length
-#         self.min_length = min_length
-#         self.strip = strip
-#         self.empty_value = empty_value
-#         # 增加额外属性，可以通过kwargs传递给field
-#         super().__init__(**kwargs)
-#         if min_length is not None:
-#             self.validators.append(validators.MinLengthValidator(int(min_length)))
-#         if max_length is not None:
-#             self.validators.append(validators.MaxLengthValidator(int(max_length)))
-#         self.validators.append(validators.ProhibitNullCharactersValidator())
-#
-#     def to_python(self, value):
-#         """Return a string."""
-#         if value not in self.empty_values:
-#             value = str(value)
-#             if self.strip:
-#                 value = value.strip()
-#         if value in self.empty_values:
-#             return self.empty_value
-#         return value
-#
-#     def widget_attrs(self, widget):
-#         attrs = super().widget_attrs(widget)
-#         if self.max_length is not None and not widget.is_hidden:
-#             # The HTML attribute is maxlength, not max_length.
-#             attrs['maxlength'] = str(self.max_length)
-#         if self.min_length is not None and not widget.is_hidden:
-#             # The HTML attribute is minlength, not min_length.
-#             attrs['minlength'] = str(self.min_length)
-#         return attrs
-
+from widgets import *
 
 class SimpleForm(BaseForm, metaclass=DeclarativeFieldsMetaclass):
     def get_vue_app_js(self,app_id):
@@ -363,3 +178,25 @@ var %(app_name)s = new Vue({
             output.append('</div>')
             output.append(self.get_vue_app_js(app_id))
         return mark_safe('\n'.join(output))
+
+class SCharField(forms.CharField):
+    widget = STextInput
+class SIntegerField(forms.IntegerField):
+    def widget_attrs(self, widget):
+        """
+        解决max和min无法传递到widget的问题
+        """
+        attrs = super().widget_attrs(widget)
+        if isinstance(widget, NumberInput) or isinstance(widget,SNumberInput):
+            if self.min_value is not None:
+                attrs['min'] = self.min_value
+            if self.max_value is not None:
+                attrs['max'] = self.max_value
+        return attrs
+    widget = SNumberInput
+
+class SEmailField(forms.EmailField):
+    widget = SEmailInput
+
+class SURLField(forms.URLField):
+    widget = SURLInput
