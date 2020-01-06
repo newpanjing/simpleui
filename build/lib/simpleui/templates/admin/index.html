@@ -1,0 +1,392 @@
+{% load i18n static %}
+{% load simpletags %}
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!--
+   The project use: django-simpleui
+   source code：
+   https://github.com/newpanjing/simpleui
+-->
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    {% block title %}
+        <title>{{ site_title }}</title>
+    {% endblock %}
+    {% block icon %}
+<!--        <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">-->
+    {% endblock %}
+    {% block css %}
+        {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+            <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
+            <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
+        {% else %}
+            <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+            <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
+        {% endif %}
+
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=3.2">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/waves/waves.min.css' %}?_=2.1">
+    {% endblock %}
+    {% block head %}
+
+    {% endblock %}
+</head>
+<body>
+<style type="text/css">
+    .el-tabs__nav .el-tabs__item:nth-child(1) .el-icon-close {
+        display: none;
+    }
+
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    [v-block] {
+        display: none;
+    }
+</style>
+
+
+{% verbatim dynamicCss %}
+{% endverbatim dynamicCss %}
+
+{% block menus %}
+    {% autoescape off %}
+        {% menus %}
+    {% endautoescape %}
+{% endblock %}
+<div id="main" @click="mainClick($event)" v-block>
+    {% block theme_css %}
+        <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+
+        {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
+            <link v-else rel="stylesheet"
+                  href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
+        {% endif %}
+    {% endblock %}
+    <el-drawer
+            class="lite-menus"
+            title="{{site_header}}"
+            :visible.sync="drawer"
+            :show-close="false"
+            size="50%"
+            direction="ltr">
+            <el-menu unique-opened="true" :default-active="menuActive">
+                <div v-for="(item,i) in menus" :key="item">
+                    <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
+                        <i :class="item.icon"></i>
+                        <span slot="title" v-text="item.name"></span>
+                    </el-menu-item>
+
+
+                    <el-submenu v-else :index="item.eid+''">
+                        <template slot="title">
+                            <i :class="item.icon"></i>
+                            <span slot="title" v-text="item.name"></span>
+                        </template>
+
+                        <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
+                            <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
+                                <i :class="sub.icon"></i>
+                                <span slot="title" v-text="sub.name"></span>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+
+                </div>
+            </el-menu>
+    </el-drawer>
+
+    <el-container :style="{height: height+'px'}">
+
+        <el-aside v-if="!fold" width="auto" class="menu" {% block menu_style %}{% endblock %}>
+            {% block logo %}
+                <div class="logo-wrap" v-if="!fold">
+                    <div class="float-wrap">
+                        <div class="left">
+                            {% if "SIMPLEUI_LOGO"|get_config %}
+                                <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
+                            {% else %}
+                                <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
+                            {% endif %}
+                        </div>
+                        <div class="left">
+                            <span>{{ site_header }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
+            <el-menu unique-opened="true" :default-active="menuActive" :collapse="fold">
+                <div v-for="(item,i) in menus" :key="item">
+                    <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
+                        <i :class="item.icon"></i>
+                        <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
+                    </el-menu-item>
+
+
+                    <el-submenu v-else :index="item.eid+''">
+                        <template slot="title">
+                            <i :class="item.icon"></i>
+                            <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
+                        </template>
+
+                        <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
+                            <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
+                                <i :class="sub.icon"></i>
+                                <span slot="title" v-text="sub.name"></span>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+
+                </div>
+            </el-menu>
+
+        </el-aside>
+
+        <el-container>
+            {% block header %}
+                <el-header class="navbar" style="font-size: 12px;padding: 10px;height: auto">
+                    <div class="float-wrap">
+                        <div class="left">
+                            <el-button v-waves circle icon="fas fa-bars"
+                                       style="margin-right: 10px;border: none" @click="foldClick()"></el-button>
+                            {% block breadcrumb %}
+                                <el-breadcrumb v-if="!mobile" style="display: inline-block;" separator="/">
+                                    {% verbatim myclode %}
+                                        <el-breadcrumb-item><i :class="menus[0].icon"
+                                                               :key="menus[0].name"></i>{{ menus[0].name }}
+                                        </el-breadcrumb-item>
+                                        <el-breadcrumb-item v-for="item in breadcrumbs"
+                                                            :key="item">
+                                            <span :class="getIcon(item.name,item.icon)"></span>
+                                            <span v-text="item.name"></span>
+                                        </el-breadcrumb-item>
+                                    {% endverbatim myclode %}
+                                </el-breadcrumb>
+                            {% endblock %}
+                        </div>
+
+                        <div class="right">
+                            <el-button icon="fas fa-font" circle v-waves @click="fontClick()"></el-button>
+
+                            <el-button
+                                    :icon="this.zoom?'fas fa-compress-arrows-alt':'fas fa-expand-arrows-alt'"
+                                    @click="goZoom()" circle></el-button>
+                            <el-button icon="fas fa-home" @click="goIndex('{{ 'SIMPLEUI_INDEX'|get_config }}')" circle
+                                       v-waves></el-button>
+                            {% verbatim mycode %}
+                                <el-button @click="themeDialogVisible=true" v-waves>
+                                    <i class="fas fa-palette"></i>
+                                    <span v-text="getLanuage('Change theme')"></span><i
+                                        class="el-icon-arrow-down el-icon--right"></i>
+                                </el-button>
+
+                            {% endverbatim mycode %}
+                            <el-dropdown>
+                                <el-button v-waves>
+                                    <i class="fas fa-user"></i>
+                                    {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
+                                </el-button>
+
+                                <el-dropdown-menu slot="dropdown">
+                                    {% verbatim mycode %}
+                                        <el-dropdown-item v-waves icon="far fa-edit"
+                                                          @click.native="changePassword()">{{ language.change_password }}
+                                        </el-dropdown-item>
+                                    {% endverbatim mycode %}
+                                    {% has_enable_admindoc as has_admindoc %}
+                                    {% if has_admindoc %}
+                                        <el-dropdown-item icon="el-icon-document"
+                                                          @click.native="openTab({eid:100000,name:'{% trans 'Documentation' %}',icon:'el-icon-document',url:'{% url 'django-admindocs-docroot' %}'})"
+                                                          divided>{% trans 'Documentation' %}</el-dropdown-item>
+                                    {% endif %}
+
+                                    {% verbatim mycode %}
+                                        <el-dropdown-item icon="el-icon-close"
+                                                          @click.native="logout()"
+                                                          divided>{{ language.logout }}</el-dropdown-item>
+                                    {% endverbatim mycode %}
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                        </div>
+                    </div>
+                </el-header>
+            {% endblock %}
+            <el-main>
+                <el-tabs v-model="tabModel" {% block tabs_type %}type="border-card" {% endblock %} editable
+                         :style="isResize?'height:100%':'height: calc(100% - 97px)'" @edit="handleTabsEdit"
+                         @tab-click="tabClick">
+
+                    <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id"
+                                 :key="item.id" lazy="true">
+
+                        {% home_page %}
+
+                        {% if home %}
+                            <span v-if="index==0" slot="label"><i
+                                    class="{{ icon }}"></i><span>{{ title }}</span>
+                            </span>
+                            <span v-else slot="label" @contextmenu.prevent="contextmenu(item,$event)">
+                        {% else %}
+                            <span slot="label" @contextmenu.prevent="contextmenu(item,$event)">
+                        {% endif %}
+
+                        {% block tab-item %}
+                            <i :class="item.loading?'el-icon-loading':item.icon"></i>
+                            <span v-text="item.name"></span>
+                        {% endblock %}
+                        </span>
+
+                        <div v-if="index==0" style="height:100%">
+                            {% if home %}
+                                <iframe :src="'{{ home }}'"></iframe>
+                            {% else %}
+                                {% include './home.html' %}
+                            {% endif %}
+                        </div>
+                        <div v-else class="iframe-wrap">
+                            <iframe :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
+                            {% if "SIMPLEUI_LOADING"|get_config != False %}
+                                <div v-if="loading" class="loading" @dblclick="loading=false">
+                                    <div class="center">
+                                        <span class="el-icon-loading"></span>
+                                        <span>loading...</span>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </el-tab-pane>
+
+
+                </el-tabs>
+            </el-main>
+        </el-container>
+    </el-container>
+
+    <ul v-if="popup.show" class="el-dropdown-menu el-popper"
+        :style="{position: 'absolute',top: popup.top+'px',left: popup.left+'px'}" x-placement="top-end">
+        <li v-for="(item,index) in popup.menus" tabindex="-1" class="el-dropdown-menu__item"
+            @click="item.handler(popup.tab,item)"><i :class="item.icon"></i><span
+                v-text="item.text"></span>
+        </li>
+    </ul>
+    <el-dialog title="{% trans 'Change password' %}" :visible.sync="pwdDialog.show">
+        <iframe frameborder="0" :src="pwdDialog.url" width="100%" height="500"></iframe>
+    </el-dialog>
+
+    {% block theme_dialog %}
+        <el-dialog
+                :title="getLanuage('Change theme')"
+                :visible.sync="themeDialogVisible"
+                :width="small?'90%':'50%'">
+            {% block theme_body %}
+                <div class="change-theme clearfix">
+                    <div v-waves :class="{'theme-item':true,active:themeName==item.text}" v-for="(item,i) in themes"
+                         :key="item.text"
+                         :title="getLanuage(item.text)" @click="setTheme(item)">
+                        <div class="theme-menu" :style="{background:item.menu}">
+                            <div class="theme-logo" :style="{background: item.logo}"></div>
+                        </div>
+                        <div class="theme-top" :style="{background: item.top}"></div>
+                    </div>
+                </div>
+            {% endblock %}
+        </el-dialog>
+    {% endblock %}
+
+    {% block font_dialog %}
+        <el-dialog
+                :title="getLanuage('Set font size')"
+                :visible.sync="fontDialogVisible"
+                :width="small?'90%':'50%'">
+            <el-slider v-model="fontSlider" :min="12" :max="100" show-input @change="fontSlideChange"></el-slider>
+            <div style="text-align: right;padding-top: 20px">
+                <el-button type="primary" @click="reset()" v-text="getLanuage('Reset')"></el-button>
+            </div>
+        </el-dialog>
+    {% endblock %}
+</div>
+{% block base_script %}
+    <script type="text/javascript">
+        {% if home %}
+            var home = {
+                id: '0',
+                index: '1',
+                name: '{{ title }}',
+                icon: '{{ icon }}',
+                active: true,
+                eid: '1'
+            }
+        {% else %}
+            var home = {
+                id: '0',
+                index: '1',
+                eid: '1',
+                name: "{% trans 'Home' %}",
+                icon: 'fas fa-home'
+            };
+        {% endif %}
+        menus.unshift(home);
+        window.language = {
+            change_password: '{% trans 'Change password' %}',
+            logout: '{% trans 'Log out' %}',
+            yes: '{% trans 'Yes' %}',
+            no: '{% trans 'No' %}',
+            confirm: '{% trans 'Are you sure?' %}'
+        }
+        window.themeUrl = '{% static '/admin/simpleui-x/theme/' %}';
+        window.urls = {
+            changePassword: "{% url 'admin:password_change' %}",
+            logout: "{% url 'admin:logout' %}"
+        }
+        var lanuageCode = '{% get_language %}';
+
+        function localeError(e) {
+            console.warn("Please add the {% get_language %}.js language file to the '/simpleui-x/theme' directory.")
+            console.log("See simpleui i18n:https://github.com/newpanjing/simpleui/blob/master/i18n.md")
+            console.log("或者加入QQ群:786576510 (Join QQ Group.)")
+
+        }
+    </script>
+
+    {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+    {% else %}
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    {% endif %}
+
+    <script type="text/javascript">
+        __simpleui_version = '{% simple_version %}';
+    </script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}?_=2.1"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js?_=2.1.2"
+            onerror="localeError()"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_=2.0.5"></script>
+    {% block index_js %}
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_=3.9"></script>
+    {% endblock %}
+    {% block autoupdate %}
+        {% if not "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+            <script type="text/javascript" async
+                    src="https://api.github.com/repos/newpanjing/simpleui/releases/latest?callback=simple_call"></script>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+{% load_analysis %}
+{% block script %}
+    {#    预留脚本block 可以实现基础该页面，添加自定义脚本#}
+{% endblock %}
+</body>
+</html>

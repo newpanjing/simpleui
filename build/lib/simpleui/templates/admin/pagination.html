@@ -1,0 +1,34 @@
+{% load admin_list %}
+{% load i18n %}
+{% load simpletags %}
+<div id="pagination">
+    {% if pagination_required %}
+        <el-pagination
+                background
+                @current-change="handleCurrentChange"
+                :current-page="{{ cl.page_num }}+1"
+                :page-size="{{ cl.list_per_page }}"
+                layout="total,prev, pager, next, jumper"
+                :total="{{ cl.result_count }}">
+        </el-pagination>
+    {% endif %}
+</div>
+<script type="text/javascript">
+    $(function () {
+        new Vue({
+            el: "#pagination",
+            data: {},
+            methods: {
+                handleCurrentChange:function (page) {
+                    page_go(page-1);
+                }
+            }
+        })
+
+        function page_go(p) {
+            $("#changelist-search input[name='p']").val(p);
+            $("#changelist-search").submit();
+        }
+
+    });
+</script>

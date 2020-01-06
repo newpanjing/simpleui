@@ -1,0 +1,318 @@
+{% load i18n %}
+{% load admin_urls static admin_list simpletags %}
+<div class="actions">
+
+    <input type="hidden" name="action" value=""/>
+
+    {% if has_add_permission %}
+        {% url cl.opts|admin_urlname:'add' as add_url %}
+
+        <el-button type="primary" icon="el-icon-plus" url="{% add_preserved_filters add_url is_popup to_field %}">
+            {% trans 'Add' %}
+        </el-button>
+    {% endif %}
+
+    {% for field in action_form.fields.action.choices %}
+        {% if field.0 %}
+
+            {% if field.0 == 'delete_selected' %}
+                <el-button type="danger" data-name="{{ field.0 }}"
+                           icon="el-icon-delete" @click="delSelected('{{ field.0 }}')">{% trans 'Delete' %}</el-button>
+            {% else %}
+                <input type="hidden" name="select_across" v-model="select_across" value="0" class="select-across">
+                <input type="hidden" name="file_format" v-model="file_format">
+                {% if field.0 == 'export_admin_action' %}
+                    <el-select filterable v-model="file_format" style="width: 80px;">
+                        <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                    <el-button icon="fas fa-download" data-name="{{ field.0 }}">{{ field.1 }}</el-button>
+                {% else %}
+                    <el-button :eid="customButton.{{ field.0 }}.eid"
+                               :icon="customButton.{{ field.0 }}.icon" :style="customButton.{{ field.0 }}.style"
+                               :confirm="customButton.{{ field.0 }}.confirm"
+                               :type="customButton.{{ field.0 }}.type" data-name="{{ field.0 }}">{{ field.1 }}
+                    </el-button>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if cl.formset and cl.result_count %}
+        <input type="hidden" name="_save" value="{% trans 'Save' %}"/>
+        <el-button icon="el-icon-circle-check" type="success"
+                   @click="formSubmit()">{% trans 'Save' %}</el-button>
+    {% endif %}
+
+    <el-button data-name="delete_selected" v-for="item in exts" :key="item.name" @click="extClick(item)">
+        <span :class="getIcon(item.name)"></span>
+        <span v-text="item.name"></span>
+    </el-button>
+
+    {% block actions-counter %}
+        {% if actions_selection_counter %}
+            <span class="action-counter" data-actions-icnt="{{ cl.result_list|length }}">{{ selection_note }}</span>
+            {% if cl.result_count != cl.result_list|length %}
+                <span class="all">{{ selection_note_all }}</span>
+                <span class="question">
+            <a href="#"
+               title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}
+                Select all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
+        </span>
+                <span class="clear">
+            <a href="#" onclick="unSelect()">{% trans "Clear selection" %}</a>
+        </span>
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+
+    <el-button-group class="btn-group">
+        {% if cl.search_fields or cl.has_filters %}
+        <a href="javascript:;" @click="searchDisplay()" class="el-button el-button--default"><span
+                class="el-icon-search"></span></a>
+        {% endif %}
+        <a href="javascript:;" @click="reload()" class="el-button el-button--default"><span
+                class="el-icon-refresh"></span></a>
+        <a href="javascript:;" @click="openNewPage()" class="el-button el-button--default"><span
+                class="el-icon-news"></span></a>
+
+    </el-button-group>
+
+</div>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
+<script type="text/javascript">
+
+
+    var _action = new Vue({
+        el: '.actions',
+        data: {
+            select_across: 0,
+            file_format: 1,
+            show: true,
+            options: [{
+                value: 0,
+                label: 'csv'
+            }, {
+                value: 1,
+                label: 'xls'
+            }, {
+                value: 2,
+                label: 'xlsx'
+            }, {
+                value: 3,
+                label: 'tsv'
+            }, {
+                value: 4,
+                label: 'ods'
+            }, {
+                value: 5,
+                label: 'json'
+            }, {
+                value: 6,
+                label: 'yaml'
+            }, {
+                value: 7,
+                label: 'html'
+            }],
+            customButton:{% autoescape off %}{% custom_button %}{% endautoescape %},
+            exts: []
+        },
+        created() {
+            if (localStorage && typeof (localStorage.searchStatus) != 'undefined') {
+                this.show = localStorage.searchStatus == 'true';
+            }
+        },
+        watch: {
+            'show': function (newValue) {
+                obj = document.querySelector('.xfull')
+                if (!newValue) {
+                    //隐藏
+                    document.getElementById('toolbar').style.display = 'none';
+                    if (obj) {
+                        obj.style.display = 'none';
+                    }
+                } else {
+                    //显示
+                    document.getElementById('toolbar').style.display = 'inherit';
+                    if (obj) {
+                        obj.style.display = 'inherit';
+                    }
+                }
+                if (localStorage) {
+                    localStorage['searchStatus'] = newValue;
+                }
+            }
+        },
+        methods: {
+            searchDisplay: function () {
+
+                this.show = !this.show;
+
+            },
+            reload: function () {
+                window.location.reload()
+            },
+            openNewPage: function () {
+                window.open(window.location.href)
+            },
+            getIcon: getIcon,
+            extClick: function (item) {
+                window.location.href = item.url;
+            },
+            formSubmit: function () {
+                $("#changelist-form").submit();
+            },
+            delSelected: function (name) {
+
+                $("#changelist-form input[name='action']").val(name);
+
+                $("#changelist-form [name='_save']").removeAttr('name');
+
+                $("#changelist-form [name!='']").each(function () {
+                    var obj = $(this);
+                    if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
+                        obj.removeAttr('name');
+                    }
+                });
+
+
+                var self = this;
+
+                function showMessage(msgs) {
+                    msgs.forEach(item => {
+                        this.$notify({
+                            title: getLanuage('Tips'),
+                            message: item.msg,
+                            type: item.tag,
+                            dangerouslyUseHTMLString: true
+                        });
+                    });
+                }
+
+
+                //#67 #66 修复删除问题，改为弹出确认
+
+                this.$confirm(getLanuage('Are you sure you want to delete the selected?'))
+                    .then(_ => {
+                        $.ajax({
+                            type: "POST",//方法类型
+                            url: "",//url
+                            data: $("#changelist-form").serialize() + '&post=yes',
+                            success: function (result) {
+                                var msgs = $(result).find('#out_message').html().replace('var messages=', '');
+                                showMessage.call(self, JSON.parse(msgs));
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 1000);
+                            },
+                            error: function () {
+                                this.$notify({
+                                    title: getLanuage('Tips'),
+                                    message: 'Network error',
+                                    type: 'error',
+                                    dangerouslyUseHTMLString: true
+                                });
+                            }
+                        });
+                    }).catch(_ => {
+
+                });
+            }
+        }
+    });
+
+    function selectAll() {
+        _action.select_across = 1;
+    }
+
+    function unSelect() {
+        _action.select_across = 0;
+    }
+
+
+    $(function () {
+        $(".actions button[data-name!='delete_selected']").click(function () {
+            var url = $(this).attr("url");
+            var eid = $(this).attr('eid');
+            var confirm = $(this).attr('confirm');
+
+            if (confirm) {
+                new Vue().$confirm(confirm, '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => done.call(this));
+
+            } else {
+                done.call(this)
+            }
+
+            function done() {
+
+                if (eid) {
+                    for (var i in _action.customButton) {
+                        var temp = _action.customButton[i];
+                        if (temp.eid == eid) {
+
+                            if (typeof (temp.action_type) != 'undefined') {
+
+                                if (!temp.action_url) {
+                                    this.$notify({
+                                        title: 'error',
+                                        message: 'action must contain attributes:action_url! ',
+                                        type: 'error',
+                                        dangerouslyUseHTMLString: true
+                                    });
+                                    return;
+                                }
+
+                                switch (temp.action_type) {
+                                    case 0:
+                                        window.location.href = temp.action_url;
+                                        break;
+                                    case 1:
+                                        parent.window.app.openTab({
+                                            url: temp.action_url,
+                                            icon: temp.icon || 'fa fa-file',
+                                            name: temp.short_description,
+                                            breadcrumbs: []
+                                        });
+                                        break;
+                                    case 2:
+                                        window.open(temp.action_url)
+                                        break;
+                                }
+                                console.log('中断后续操作')
+                                return;
+                            }
+                        }
+                    }
+                }
+                if (url) {
+                    window.location.href = url;
+                    return;
+                }
+
+                if ($(this).attr('data-name')) {
+                    var name = $(this).attr("data-name");
+                    $("#changelist-form input[name='action']").val(name);
+
+                    $("#changelist-form [name='_save']").removeAttr('name');
+
+                    $("#changelist-form [name!='']").each(function () {
+                        var obj = $(this);
+                        if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
+                            obj.removeAttr('name');
+                        }
+                    });
+                }
+                $("#changelist-form").submit();
+            }
+        });
+    });
+</script>
