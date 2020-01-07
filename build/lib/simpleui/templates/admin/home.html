@@ -1,0 +1,119 @@
+{% load i18n static simpletags %}
+
+<div id="home">
+
+    <el-row class="info-card">
+
+        {% if "SIMPLEUI_HOME_QUICK"|get_config != False%}
+
+        {% if "SIMPLEUI_HOME_INFO"|get_config != False %}
+        <el-col :span="18">
+            {% else %}
+            <el-col :span="24">
+                {% endif %}
+
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <i class="fas fa-link"></i>
+                        <span v-text="getLanuage('Quick navigation')"></span>
+                    </div>
+                    <div class="clearfix">
+                        {% if "SIMPLEUI_HOME_QUICK"|get_config != False %}
+
+
+                        <div v-for="(c,j) in models" :key="c.name" class="quick-wrap">
+                            <a href="javascript:;" @click="openTab(c,(j+1)+'')">
+                                <span class="icon" :class="c.icon"></span>
+                                <span class="card-name" v-text="c.name"></span>
+                            </a>
+                        </div>
+
+                        {% endif %}
+                    </div>
+                </el-card>
+            </el-col>
+            {% endif %}
+
+            {% if "SIMPLEUI_HOME_INFO"|get_config != False %}
+            <el-col :span="6">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+
+                        <span><i class="fab fa-stripe-s"></i>Simpleui <span
+                                v-text="getLanuage('Home page')"></span></span>
+                        <el-button style="float: right; padding: 3px 0" type="text" @click="report()"><span
+                                v-text="getLanuage('Report issue')"></span></el-button>
+                    </div>
+                    <div class="float-wrap clearfix">
+                        <div style="text-align: center">
+                            {% get_app_info %}
+                            <a v-if="upgrade.isUpdate" href="javascript:;" @click="upgrade.dialogVisible=true"
+                               class="upgrade"><span class="el-icon-top"></span><span
+                                    v-text="upgrade.version"></span></a>
+                        </div>
+                        <el-button icon="fas fa-code" @click="openUrl('https://gitee.com/tompeppa/simpleui')">Gitee
+                        </el-button>
+                        <el-button icon="fab fa-github" @click="openUrl('https://github.com/newpanjing/simpleui')">
+                            Github
+                        </el-button>
+                    </div>
+                </el-card>
+            </el-col>
+
+            {% endif %}
+    </el-row>
+
+
+    {% if "SIMPLEUI_HOME_ACTION"|get_config != False %}
+    <el-card class="timeline">
+        <div slot="header" class="clearfix">
+            <span>{% trans 'Recent actions' %}</span>
+            <el-button v-waves style="float: right; padding: 3px 0" type="text"
+                       :icon="timeline?'el-icon-arrow-up':'el-icon-arrow-down'"
+                       @click="displayTimeline()"></el-button>
+        </div>
+        {% load log %}
+        {% get_admin_log 10 as admin_log for_user user %}
+        {% if admin_log %}
+        <transition name="el-zoom-in-top">
+            <div class="block" v-if="timeline">
+                <el-timeline>
+                    {% for entry in admin_log %}
+                    <el-timeline-item timestamp="{{ entry.action_time }}" placement="top">
+                        <el-card>
+                            <p>{{ entry.user }} {{ entry.action_time }}</p>
+                            <h4>{{ entry.content_type }}: {{ entry }}</h4>
+                        </el-card>
+                    </el-timeline-item>
+                    {% endfor %}
+                </el-timeline>
+            </div>
+        </transition>
+        {% endif %}
+    </el-card>
+    {% endif %}
+</div>
+
+<el-dialog
+        title="Upgrade Simpleui"
+        :visible.sync="upgrade.dialogVisible"
+        width="50%">
+    <el-alert
+            :title="'You can upgrade to '+upgrade.version"
+            type="success">
+    </el-alert>
+    <div style="padding: 10px">
+        <div>
+            <h3>
+            Run Command:
+            </h3>
+            <el-alert
+                title="pip install django-simpleui -U"
+                type="info">
+              </el-alert>
+
+        </div>
+        <div><h3>Change logs:</h3></div>
+        <div v-text="upgrade.body"></div>
+    </div>
+</el-dialog>
