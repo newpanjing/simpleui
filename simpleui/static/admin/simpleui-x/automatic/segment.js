@@ -39,7 +39,7 @@ function Segment() {
 var segment = new Segment();
 
 function getIcon(name, icon) {
-    if(!name){
+    if (!name) {
         return;
     }
     var value = 'far fa-file';

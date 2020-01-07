@@ -1,10 +1,10 @@
 /*global showAddAnotherPopup, showRelatedObjectLookupPopup showRelatedObjectPopup updateRelatedObjectLinks*/
 
-(function($) {
+(function ($) {
     'use strict';
-    $(document).ready(function() {
+    $(document).ready(function () {
         var modelName = $('#django-admin-form-add-constants').data('modelName');
-        $('body').on('click', '.add-another', function(e) {
+        $('body').on('click', '.add-another', function (e) {
             e.preventDefault();
             var event = $.Event('django:add-another-related');
             $(this).trigger(event);

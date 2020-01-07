@@ -4,7 +4,7 @@ calendar.js - Calendar functions by Adrian Holovaty
 depends on core.js for utility functions like removeChildren or quickElement
 */
 
-(function() {
+(function () {
     'use strict';
     // CalendarNamespace -- Provides a collection of HTML calendar-related helper functions
     var CalendarNamespace = {
@@ -32,26 +32,23 @@ depends on core.js for utility functions like removeChildren or quickElement
             pgettext('one letter Saturday', 'S')
         ],
         firstDayOfWeek: parseInt(get_format('FIRST_DAY_OF_WEEK')),
-        isLeapYear: function(year) {
-            return (((year % 4) === 0) && ((year % 100) !== 0 ) || ((year % 400) === 0));
+        isLeapYear: function (year) {
+            return (((year % 4) === 0) && ((year % 100) !== 0) || ((year % 400) === 0));
         },
-        getDaysInMonth: function(month, year) {
+        getDaysInMonth: function (month, year) {
             var days;
             if (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12) {
                 days = 31;
-            }
-            else if (month === 4 || month === 6 || month === 9 || month === 11) {
+            } else if (month === 4 || month === 6 || month === 9 || month === 11) {
                 days = 30;
-            }
-            else if (month === 2 && CalendarNamespace.isLeapYear(year)) {
+            } else if (month === 2 && CalendarNamespace.isLeapYear(year)) {
                 days = 29;
-            }
-            else {
+            } else {
                 days = 28;
             }
             return days;
         },
-        draw: function(month, year, div_id, callback, selected) { // month = 1-12, year = 1-9999
+        draw: function (month, year, div_id, callback, selected) { // month = 1-12, year = 1-9999
             var today = new Date();
             var todayDay = today.getDate();
             var todayMonth = today.getMonth() + 1;
@@ -105,6 +102,7 @@ depends on core.js for utility functions like removeChildren or quickElement
                     e.preventDefault();
                     callback(y, m, this.textContent);
                 }
+
                 return onClick;
             }
 
@@ -160,45 +158,44 @@ depends on core.js for utility functions like removeChildren or quickElement
             this.selected = selected;
         }
     }
+
     Calendar.prototype = {
-        drawCurrent: function() {
+        drawCurrent: function () {
             CalendarNamespace.draw(this.currentMonth, this.currentYear, this.div_id, this.callback, this.selected);
         },
-        drawDate: function(month, year, selected) {
+        drawDate: function (month, year, selected) {
             this.currentMonth = month;
             this.currentYear = year;
 
-            if(selected) {
+            if (selected) {
                 this.selected = selected;
             }
 
             this.drawCurrent();
         },
-        drawPreviousMonth: function() {
+        drawPreviousMonth: function () {
             if (this.currentMonth === 1) {
                 this.currentMonth = 12;
                 this.currentYear--;
-            }
-            else {
+            } else {
                 this.currentMonth--;
             }
             this.drawCurrent();
         },
-        drawNextMonth: function() {
+        drawNextMonth: function () {
             if (this.currentMonth === 12) {
                 this.currentMonth = 1;
                 this.currentYear++;
-            }
-            else {
+            } else {
                 this.currentMonth++;
             }
             this.drawCurrent();
         },
-        drawPreviousYear: function() {
+        drawPreviousYear: function () {
             this.currentYear--;
             this.drawCurrent();
         },
-        drawNextYear: function() {
+        drawNextYear: function () {
             this.currentYear++;
             this.drawCurrent();
         }
