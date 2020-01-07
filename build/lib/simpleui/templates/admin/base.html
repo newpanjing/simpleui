@@ -1,0 +1,208 @@
+{% load i18n static simpletags %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
+    {% endif %}
+
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.7">
+    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
+
+
+    {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+    {% else %}
+        {#        <script src="https://cdn.jsdelivr.net/npm/vue"></script>#}
+        <script src="https://unpkg.com/vue@2.6.0/dist/vue.min.js"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    {% endif %}
+
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}?_=2.1.2"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
+
+    {% if ""|get_language_code != 'zh-hans' %}
+
+        <script type="text/javascript"
+                src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}?_=2.1.2"></script>
+        <script type="text/javascript">
+            ELEMENT.locale(ELEMENT.lang.en)
+        </script>
+
+    {% endif %}
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
+    {% block extrastyle %}{% endblock %}
+    {% if LANGUAGE_BIDI %}
+        <link rel="stylesheet" type="text/css" href="
+                    {% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
+    {% block extrahead %}{% endblock %}
+    {% block responsive %}
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}?_=20180905"/>
+        {% if LANGUAGE_BIDI %}
+            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>
+        {% endif %}
+    {% endblock %}
+    {% block blockbots %}
+        <meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
+    <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+      data-admin-utc-offset="{% now "Z" %}">
+
+{% verbatim dynamicCss %}
+{% endverbatim dynamicCss %}
+
+<div id="theme">
+    <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+
+    {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
+        <link v-else rel="stylesheet"
+              href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
+    {% endif %}
+</div>
+<script type="text/javascript">
+
+    var fontConfig = new Vue({
+        data: {
+            fontSize: null
+        },
+        watch: {
+            fontSize: function (newValue) {
+                if (newValue != 0) {
+                    var fontStyle = document.getElementById('fontStyle');
+                    if (!fontStyle) {
+                        fontStyle = document.createElement('style');
+                        fontStyle.id = 'fontStyle';
+                        fontStyle.type = 'text/css';
+                        document.head.append(fontStyle);
+                    }
+                    fontStyle.innerHTML = '*{font-size:' + newValue + 'px!important;}'
+
+                } else {
+                    var fontStyle = document.getElementById('fontStyle');
+                    if (fontStyle) {
+                        fontStyle.remove();
+                    }
+                }
+            }
+        },
+        created: function () {
+            var val = getCookie('fontSize');
+            if (val) {
+                this.fontSize = parseInt(val);
+            } else {
+                this.fontSize = 0;
+            }
+        },
+        methods: {}
+    });
+
+
+    new Vue({
+        el: '#theme',
+        data: {
+            theme: '',
+        },
+        created: function () {
+            this.theme = getCookie('theme');
+
+            var self = this;
+            //向父组件注册事件
+            if (parent.addEvent) {
+                parent.addEvent('theme', function (theme) {
+                    self.theme = theme;
+                });
+
+                parent.addEvent('font', function (font) {
+                    fontConfig.fontSize = font;
+                });
+            }
+
+        }
+    })
+    window.addEventListener('beforeunload', () => {
+        if (window.beforeLoad) {
+            window.beforeLoad();
+        }
+    });
+
+</script>
+<!-- Container -->
+<div id="container">
+
+    {% block messages %}
+        {% autoescape off %}
+            {% load_message %}
+        {% endautoescape %}
+        <script type="text/javascript">
+
+            new Vue({
+                created: function () {
+                    var self = this;
+
+                    messages.forEach(item => {
+                        setTimeout(function () {
+                            self.$notify({
+                                title: getLanuage('Tips'),
+                                message: item.msg,
+                                type: item.tag,
+                                dangerouslyUseHTMLString: true
+                            });
+                        }, 200);
+                    });
+
+                }
+            })
+        </script>
+
+    {% endblock messages %}
+
+    <div class="menu-content">
+        {% for app in app_list %}
+            {{ app }}
+        {% endfor %}
+    </div>
+    <!-- Content -->
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
+        {% has_admindoc_page as has_page %}
+        {% if has_page %}
+            {% url 'django-admindocs-docroot' as rooturl %}
+            {% if request.path != rooturl %}
+                <a href="{% url 'django-admindocs-docroot' %}">{% trans 'Back to View documentation' %}</a>
+            {% endif %}
+        {% endif %}
+
+        {% block pretitle %}{% endblock %}
+        {% block content_title %}
+            {% if title %}
+                <div style="display: none">{{ title }}</div>
+            {% endif %}
+        {% endblock %}
+        {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear"/>
+    </div>
+    <!-- END Content -->
+
+    {% block footer %}
+        <div id="footer"></div>{% endblock %}
+</div>
+<!-- END Container -->
+</body>
+</html>

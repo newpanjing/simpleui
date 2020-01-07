@@ -1,0 +1,5 @@
+{% if not widget.flag %}
+ <input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
+{% else %}
+ <el-input {% include 'forms/widgets/attrs.html' %} type="{{ widget.type }}" name="{{ widget.name }}" v-model="{{ widget.name }}" {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %} ></el-input>
+{% endif %}

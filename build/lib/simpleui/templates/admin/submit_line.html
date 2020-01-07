@@ -1,0 +1,53 @@
+{% load i18n admin_urls simpletags%}
+<div class="submit-row">
+    {% if '_popup' not in request.GET %}
+        <el-button type="button" icon="el-icon-arrow-left" @click="prev()"
+                   style="float: left;margin-right: 10px;margin-bottom: 10px;">
+            <span v-text="getLanuage('Go back')"></span>
+        </el-button>
+    {% endif %}
+    {% if show_delete_link %}
+        {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
+        <el-button icon="el-icon-delete" type="danger" @click="del('{% add_preserved_filters delete_url %}')"
+                   style="float: left">{% trans "Delete" %}</el-button>
+    {% endif %}
+    {% if show_save_as_new %}
+        <el-button type="primary"
+                   @click="formSubmit('_saveasnew','{% trans 'Save as new' %}',$event)">{% trans 'Save as new' %}</el-button>
+    {% endif %}
+    {% if show_save_and_add_another %}
+        <input type="submit" class="el-button el-button--primary" value="{% trans 'Save and add another' %}"
+               name="_addanother">
+    {% endif %}
+    {% if show_save_and_continue %}
+
+        <input type="submit" class="el-button el-button--primary" value="{% trans 'Save and continue editing' %}"
+               name="_continue">
+    {% endif %}
+    {% if show_save %}
+        <input type="submit" class="el-button el-button--primary" value="{% trans 'Save' %}" name="_save">
+    {% endif %}
+    <input type="hidden" name="actionName" value="actionValue" id="actionName">
+</div>
+<script type="text/javascript">
+    var submitrows=document.getElementsByClassName('submit-row');
+    for(var i=0;i<submitrows.length;i++){
+        new Vue({
+        el: submitrows[i],
+        data: {},
+        methods: {
+            del: function (url) {
+                window.location.href = url;
+            },
+            formSubmit: function (name, v, e) {
+                $("#actionName").attr('name', name).val(v);
+                $("form").submit();
+            },
+            prev: function () {
+             window.location.href='{% get_model_url %}'
+            }
+        }
+    })
+    }
+
+</script>
