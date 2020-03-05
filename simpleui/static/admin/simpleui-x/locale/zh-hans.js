@@ -38,5 +38,7 @@ var Lanuages = {
 
     'Set font size': '设置字体大小',
     'Reset': '重置',
-    'Are you sure you want to delete the selected?': '你确定要删除选中的吗？'
+    'Are you sure you want to delete the selected?': '你确定要删除选中的吗？',
+    "Please select at least one option!": "请选中至少一个选项！",
+    "Please enter your username or password!": "请输入您的用户名或密码！"
 }

@@ -28,10 +28,10 @@ if PY_VER != '2':
     from importlib import reload
 
 
-def unicode_to_str(u):
+def unicode_to_str(u, encoding='utf-8'):
     if PY_VER != '2':
         return u
-    return u.encode()
+    return u.encode(encoding)
 
 
 class LazyEncoder(DjangoJSONEncoder):

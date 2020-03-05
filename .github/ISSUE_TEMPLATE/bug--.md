@@ -1,6 +1,6 @@
 ---
 name: bug报告
-about: 创建一个bug报告来帮助我们改进
+about: Create a bug report to help us improve
 title: ''
 labels: bug
 assignees: ''
@@ -8,20 +8,29 @@ assignees: ''
 ---
 
 **bug描述**
+* *Bug description * * 
+
 简单的描述下遇到的bug：
+Briefly describe the bugs encountered:
 
 
 **重现步骤**
+** repeat step **
 1.
 2.
 3.
 
 **环境**
+** environment**
 
-1.操作系统：
-2.python版本：
-3.django版本：
-4.simpleui版本：
+1.Operating System：
+(Windows/Linux/MacOS)....
+
+2.Python Version：
+
+3.Django Version：
+
+4.SimpleUI Version：
 
 
-**其他描述**
+**Description**

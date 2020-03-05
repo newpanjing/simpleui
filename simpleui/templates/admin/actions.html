@@ -219,7 +219,12 @@
                 });
             }
 
-
+            // 增加非空判断！
+            if ($("#changelist-form").serializeArray().length <= 2) {
+                this.$message.error(getLanuage("Please select at least one option!"));
+                return ;
+            }
+            
             //#67 #66 修复删除问题，改为弹出确认
 
             this.$confirm(getLanuage('Are you sure you want to delete the selected?'))
