@@ -193,6 +193,7 @@ The development of simpleui is supported by the following excellent contributors
 
 |Github|Scope|
 |------|------|
+|[@Abraverman666](https://github.com/Abraverman666)|Developers|
 |[@zhangzhibo1014](https://github.com/zhangzhibo1014)|Translate English document|
 |[@liaogx](https://github.com/liaogx)|Bug fix|
 |[@shouyong](https://github.com/shouyong)|Bug fix|
