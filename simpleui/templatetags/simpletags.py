@@ -157,7 +157,7 @@ def get_version():
 
 @register.simple_tag
 def get_app_info():
-    return format_table({version: simpleui.get_version()})
+    return format_table({"version": simpleui.get_version()})
 
 
 def format_table(d):
