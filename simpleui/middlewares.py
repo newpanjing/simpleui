@@ -1,5 +1,3 @@
-import os
-
 try:
 
     from django.utils.deprecation import MiddlewareMixin  # Django 1.10.x
@@ -11,5 +9,6 @@ class SimpleMiddleware(MiddlewareMixin):
 
     @staticmethod
     def process_response(response):
-        response['X-Frame-Options'] = 'ALLOW-FROM'
+        if response:
+            response['X-Frame-Options'] = 'ALLOW-ALL'
         return response
