@@ -12,5 +12,5 @@ class SimpleMiddleware(MiddlewareMixin):
     @staticmethod
     def process_response(self, response):
         if response and isinstance(response, HttpResponse):
-            response['X-Frame-Options'] = 'ALLOW-ALL'
+            response['X-Frame-Options'] = '*'
         return response

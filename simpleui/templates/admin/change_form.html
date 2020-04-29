@@ -30,8 +30,7 @@
     <ul class="object-tools">
         {% block object-tools-items %}
         <li>
-            <el-dialog title="{% trans " History
-            " %}" :visible.sync="dialogTableVisible">
+            <el-dialog title="{% trans "History" %}" :visible.sync="dialogTableVisible">
             <iframe frameborder="0" :src="url" width="100%" height="300"></iframe>
             </el-dialog>
             {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
@@ -59,8 +58,7 @@
             <div id="alert">
                 <el-alert
                         title="{% if errors|length == 1 %}
-                            {% trans " Please correct the error below.
-                " %}
+                            {% trans " Please correct the error below." %}
                 {% else %}
                 {% trans "Please correct the errors below." %}
                 {% endif %}"

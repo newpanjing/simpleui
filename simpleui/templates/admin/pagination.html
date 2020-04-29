@@ -3,14 +3,14 @@
 {% load simpletags %}
 <div id="pagination">
     {% if pagination_required %}
-    <el-pagination
-            background
-            @current-change="handleCurrentChange"
-            :current-page="{{ cl.page_num }}+1"
-            :page-size="{{ cl.list_per_page }}"
-            layout="total,prev, pager, next, jumper"
-            :total="{{ cl.result_count }}">
-    </el-pagination>
+        <el-pagination
+                background
+                @current-change="handleCurrentChange"
+                :current-page="{{ cl.page_num }}+1"
+                :page-size="{{ cl.list_per_page }}"
+                layout="total,prev, pager, next, jumper"
+                :total="{{ cl.result_count }}">
+        </el-pagination>
     {% endif %}
 </div>
 <script type="text/javascript">
@@ -19,8 +19,8 @@
             el: "#pagination",
             data: {},
             methods: {
-                handleCurrentChange: function (page) {
-                    page_go(page - 1);
+                handleCurrentChange:function (page) {
+                    page_go(page-1);
                 }
             }
         })
