@@ -3,12 +3,11 @@
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-    &rsaquo; {{ title }}
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; {{ title }}
 </div>
 {% endblock %}
 
 {% block content %}
-<p>{% trans "Something's wrong with your database installation. Make sure the appropriate database tables have been created, and make sure the
-    database is readable by the appropriate user." %}</p>
+<p>{% trans "Something's wrong with your database installation. Make sure the appropriate database tables have been created, and make sure the database is readable by the appropriate user." %}</p>
 {% endblock %}
