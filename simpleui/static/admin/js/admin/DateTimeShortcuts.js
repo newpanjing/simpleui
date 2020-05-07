@@ -379,14 +379,14 @@
 
             // Recalculate the clockbox position
             // is it left-to-right or right-to-left layout ?
-            if (getStyle(document.body, 'direction') !== 'rtl') {
+            if (getStyle(document.body, 'direction') !== 'rtl' && document.body.clientWidth - findPosX(cal_link) > 230) {
                 cal_box.style.left = findPosX(cal_link) + 17 + 'px';
             } else {
                 // since style's width is in em, it'd be tough to calculate
                 // px value of it. let's use an estimated px for now
                 // TODO: IE returns wrong value for findPosX when in rtl mode
                 //       (it returns as it was left aligned), needs to be fixed.
-                cal_box.style.left = findPosX(cal_link) - 180 + 'px';
+                cal_box.style.left = findPosX(cal_link) - 230 + 'px';
             }
             cal_box.style.top = Math.max(0, findPosY(cal_link) - 75) + 'px';
 
