@@ -392,7 +392,7 @@
                 var index = item.index;
                 this.menuActive = String(index);
                 this.breadcrumbs = item.breadcrumbs;
-                if (index == '1') {
+                if (tab.index == '0') {
                     item.url = '/'
                 }
                 changeUrl(item);
