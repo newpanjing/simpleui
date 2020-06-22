@@ -263,7 +263,7 @@
         </el-container>
     </el-container>
 
-    <ul v-if="popup.show" class="el-dropdown-menu el-popper"
+    <ul v-if="popup.show" class="el-dropdown-menu el-popper" ref="popupmenu"
         :style="{position: 'absolute',top: popup.top+'px',left: popup.left+'px'}" x-placement="top-end">
         <li v-for="(item,index) in popup.menus" tabindex="-1" class="el-dropdown-menu__item"
             @click="item.handler(popup.tab,item)"><i :class="item.icon"></i><span

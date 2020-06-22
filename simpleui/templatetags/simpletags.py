@@ -478,3 +478,7 @@ def get_boolean_choices():
         ('True', _('Yes')),
         ('False', _('No'))
     )
+
+@register.simple_tag(takes_context=True)
+def get_previous_url(context):
+    return context.request.META.get('HTTP_REFERER')
