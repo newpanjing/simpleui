@@ -584,7 +584,7 @@
             },
             report: function (url) {
                 if (!url) {
-                    if ($("html").lang) {
+                    if (document.querySelector('html').lang) {
                         url = 'https://simpleui.88cto.com';
                     } else {
                         url = 'https://github.com/newpanjing/simpleui/issues';
