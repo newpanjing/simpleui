@@ -1,34 +1,19 @@
-{% load i18n static simpletags %}
 <!DOCTYPE html>
+{% load i18n static simpletags %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:" en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <title>{% block title %}{% endblock %}</title>
 
-    {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
-    {% else %}
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.min.css">
-    {% endif %}
+    {% include 'admin/includes/css-part.html' %}
 
-    <link rel="stylesheet" type="text/css" href="{% static " admin
-    /css/base.css" %}">
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.7">
-    <link rel="stylesheet" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/admin/css/base.css' %}?_=2.7">
+    <link rel="stylesheet" type="text/css" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.7">
+    <link rel="stylesheet" type="text/css" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
 
 
-    {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
-    {% else %}
-    {#
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    #}
-    <script src="https://unpkg.com/vue@2.6.0/dist/vue.min.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    {% endif %}
+
+    {% include 'admin/includes/js-part.html' %}
 
     <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}?_=2.1.2"></script>
     <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
@@ -46,17 +31,13 @@
     <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
     {% block extrastyle %}{% endblock %}
     {% if LANGUAGE_BIDI %}
-    <link rel="stylesheet" type="text/css" href="
-                    {% block stylesheet_rtl %}{% static " admin
-    /css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
+    <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}?_=20180905"/>{% endif %}
     {% block extrahead %}{% endblock %}
     {% block responsive %}
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static " admin
-    /css/responsive.css" %}?_=20180905"/>
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}?_=20180905"/>
     {% if LANGUAGE_BIDI %}
-    <link rel="stylesheet" type="text/css" href="{% static " admin
-    /css/responsive_rtl.css" %}?_=20180905"/>
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}?_=20180905"/>
     {% endif %}
     {% endblock %}
     {% block blockbots %}
@@ -77,8 +58,7 @@
 
     {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
     <link v-else rel="stylesheet"
-          href="{% static 'admin/simpleui-x/theme/' %}{{ " SIMPLEUI_DEFAULT_THEME
-    "|get_config }}">
+          href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
     {% endif %}
 </div>
 <script type="text/javascript">
