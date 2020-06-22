@@ -1,14 +1,14 @@
 {% load i18n admin_urls simpletags%}
 <div class="submit-row">
     {% if '_popup' not in request.GET %}
-        <el-button type="button" icon="el-icon-arrow-left" @click="prev()"
+        <el-button type="button" icon="el-icon-arrow-left" onclick="prev()"
                    style="float: left;margin-right: 10px;margin-bottom: 10px;">
             <span v-text="getLanuage('Go back')"></span>
         </el-button>
     {% endif %}
     {% if show_delete_link %}
         {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
-        <el-button icon="el-icon-delete" type="danger" @click="del('{% add_preserved_filters delete_url %}')"
+        <el-button icon="el-icon-delete" type="danger" onclick="del('{% add_preserved_filters delete_url %}')"
                    style="float: left">{% trans "Delete" %}</el-button>
     {% endif %}
     {% if show_save_as_new %}
@@ -31,20 +31,21 @@
 </div>
 <script type="text/javascript">
     var submitrows=document.getElementsByClassName('submit-row');
+    function del(url){
+         window.location.href = url;
+    }
+    function prev() {
+         window.location.href='{% get_model_url %}'
+    }
+
     for(var i=0;i<submitrows.length;i++){
         new Vue({
         el: submitrows[i],
         data: {},
         methods: {
-            del: function (url) {
-                window.location.href = url;
-            },
             formSubmit: function (name, v, e) {
                 $("#actionName").attr('name', name).val(v);
                 $("form").submit();
-            },
-            prev: function () {
-             window.location.href='{% get_model_url %}'
             }
         }
     })
