@@ -273,7 +273,7 @@ def get_icon(obj, name=None):
     if not temp:
         _default = __get_config('SIMPLEUI_DEFAULT_ICON')
         if _default is None or _default:
-            return 'far fa-file'
+            return 'fa fa-bars'
         return ''
     return temp
 
