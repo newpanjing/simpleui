@@ -168,7 +168,7 @@ python setup.py sdist install
 
 
 # 登录页
-![](https://github.com/newpanjing/simpleui/raw/master/images/%E6%95%B0%E6%8D%AE%E9%A1%B5.png)
+![](https://github.com/newpanjing/simpleui/raw/master/images/%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2.png)
 
 # 主页
 ![](https://github.com/newpanjing/simpleui/raw/master/images/%E4%B8%BB%E9%A1%B5.png)
