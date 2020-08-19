@@ -269,12 +269,11 @@ def get_icon(obj, name=None):
         'User': 'far fa-user',
         'Group': 'fas fa-users-cog'
     }
+
     temp = _dict.get(obj)
     if not temp:
-        _default = __get_config('SIMPLEUI_DEFAULT_ICON')
-        if _default is None or _default:
-            return 'far fa-circle'
-        return ''
+        return 'far fa-circle'
+
     return temp
 
 
