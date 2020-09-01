@@ -7,7 +7,7 @@
     {% if has_add_permission %}
         {% url cl.opts|admin_urlname:'add' as add_url %}
 
-        <el-button type="primary" icon="el-icon-plus" url="{% add_preserved_filters add_url is_popup to_field %}">
+        <el-button type="primary" icon="el-icon-plus" data-name="add_item" url="{% add_preserved_filters add_url is_popup to_field %}">
             {% trans 'Add' %}
         </el-button>
     {% endif %}
@@ -244,9 +244,18 @@
             var url = $(this).attr("url");
             var eid = $(this).attr('eid');
             var confirm = $(this).attr('confirm');
-
-            if (confirm) {
-                new Vue().$confirm(confirm, '提示', {
+            var checkbox_checked = $(".action-checkbox input:checked").length;
+            var data_name = $(this).attr('data-name');
+            var _vue = new Vue();
+            
+            if (checkbox_checked == 0 && data_name != "add_item") {
+                _vue.$alert("没有选中任何Item, 请选中后再重新提交.", '提示', {
+                    confirmButtonText: '确定',
+                    type: 'warning'
+                })
+            }
+            else if (confirm) {
+                _vue.$confirm(confirm, '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
