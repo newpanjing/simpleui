@@ -14,18 +14,19 @@ var weights = {
 var dicts = {
     //系统
     'fab fa-microsoft': ['系统', '微软'],
+    'el-icon-help': ['demo', 'Demo', '例子', '演示', '展示'],
     //组
     'fas fa-users-cog': ['分组', '组合', '组队', '队伍', '队列'],
     //权限
-    'fas fa-shield-alt': ['权限', '权利'],
+    'fas fa-shield-alt': ['权限', '权利', 'Permission', '安全', 'safe'],
     //人
     'far fa-user': ['管理员', '用户', '员工', '成员', '工人', '职员', '职工', '农民', '清洁工', '客户', '账户', '会员', '供应商', '教师', '老师'],
     //医生
     'fas fa-user-md': ['医生', '护士', '大夫'],
     //配置
-    'fas fa-cog': ['配置', '设置', '设立', '设定'],
+    'fas fa-cog': ['配置', '设置', '设立', '设定', '管理', 'manage'],
     //日志
-    'far fa-bookmark': ['日志', '记录'],
+    'far fa-bookmark': ['日志', '记录', 'log', 'record'],
     //终端
     'fas fa-terminal': ['终端', '命令', '命令行', '控制台'],
     //机构
@@ -37,7 +38,7 @@ var dicts = {
     //数据
     'fas fa-database': ['数据', '数据库'],
     //分析
-    'far fa-chart-bar': ['分析', '图表', '统计', '统计图'],
+    'far fa-chart-bar': ['分析', '图表', '统计', '统计图', 'chart'],
     //蜘蛛
     'fas fa-spider': ['采集', '收集', '爬虫', '调试'],
     //异常
@@ -45,7 +46,7 @@ var dicts = {
     //产品
     'fas fa-shopping-cart': ['产品', '货物', '商品', '购物车', '销售', '售卖'],
     //分类
-    'fas fa-list': ['类别', '类目', '分类', '列表', '集合', '排行'],
+    'fas fa-list': ['类别', '类目', '分类', '列表', '集合', '排行', '收支', '收入', '支出'],
     //职位
     'fas fa-chalkboard-teacher': ['职位', '职能', '职称'],
     //车
@@ -55,15 +56,15 @@ var dicts = {
     //仓库
     'fas fa-warehouse': ['库存', '仓库', '房子'],
     //订单
-    'fas fa-shopping-bag': ['订单'],
+    'fas fa-shopping-bag': ['订单', '单据', '发票', '彩票', '票据', 'order'],
     //导入
-    'fas fa-upload': ['导入', '上传'],
+    'fas fa-upload': ['导入', '上传', 'import'],
     //导出
-    'fas fa-download': ['导出', '下载'],
+    'fas fa-download': ['导出', '下载', 'export'],
     //网站
     'fas fa-globe-americas': ['网站', '网址', '站点', '官网'],
     //评论
-    'far fa-comments': ['评论', '评价', '点评', '留言', '消息'],
+    'far fa-comments': ['评论', '评价', '点评', '留言', '消息', 'COMMENT', '聊天'],
     //文章
     'fas fa-book-open': ['文章', '博文', '日记'],
     //字典
@@ -105,7 +106,7 @@ var dicts = {
     //交易
     'fab fa-paypal': ['交易', '支付', '贝付', 'paypal'],
     //收藏
-    'far fa-star': ['收藏', '星星', '五角星', '中国'],
+    'far fa-star': ['收藏', '星星', '五角星', '中国', '收集'],
     //短信
     'far fa-comment-dots': ['短信', '消息', '提示'],
     //审核
@@ -121,7 +122,7 @@ var dicts = {
     //版本
     'fas fa-code-branch': ['版本', '历史', '分支'],
     //问题
-    'fas fa-question': ['提问', '问题', '询问', '疑问', '解答', '帮助', 'question', 'ask'],
+    'fas fa-question': ['提问', '问题', '询问', '疑问', '解答', '帮助', 'question', 'ask', '未知'],
     //tag
     'fas fa-tags': ['tag', '标签'],
     //开发
@@ -137,5 +138,12 @@ var dicts = {
     //桌面
     'fas fa-desktop': ['通用', '屏幕', '显示器', '综合'],
     //职务
-    'fas fa-user-secret': ['职务', '职业', '职称', '职务']
+    'fas fa-user-secret': ['职务', '职业', '职称', '职务'],
+    //内容、类型
+    'el-icon-document-remove': ['内容', 'content', '类型', 'type'],
+    //预览
+    'el-icon-view': ['预览', '浏览', '查看', 'view', 'browser'],
+    //测试、日期
+    'el-icon-timer': ['日期', '时间', '年份', '月份', '测试', 'test', 'date', 'time']
+
 }

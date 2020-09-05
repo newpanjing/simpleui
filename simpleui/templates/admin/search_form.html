@@ -45,8 +45,8 @@
 
                             <input type="hidden" v-model="{{ spec.field_generic }}gte"
                                    name="{{ spec.field_generic }}gte"/>
-                            <input type="hidden" v-model="{{ spec.field_generic }}lt"
-                                   name="{{ spec.field_generic }}lt"/>
+                            <input type="hidden" v-model="{{ spec.field_generic }}lte"
+                                   name="{{ spec.field_generic }}lte"/>
 
                         {% elif spec|has_filter %}
                             <input type="hidden" v-model="{{ spec.parameter_name }}" name="{{ spec.parameter_name }}"/>
@@ -150,7 +150,7 @@
                         {% if spec.links %}
                             '{{ spec.field_path }}': '',
                             '{{ spec.field_generic }}gte': '',
-                            '{{ spec.field_generic }}lt': '',
+                            '{{ spec.field_generic }}lte': '',
                         {% elif spec|has_filter %}
                             '{{ spec.parameter_name }}':'',
                         {% else %}
@@ -177,7 +177,7 @@
                 try {
                     date_field.forEach(key => {
                         var start = self[key + "__gte"];
-                        var end = self[key + "__lt"];
+                        var end = self[key + "__lte"];
                         self[key] = [start, end];
                     });
                 } catch (e) {
@@ -197,19 +197,19 @@
 
                                             if (type == 'date') {
                                                 this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd');
-                                                this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd');
+                                                this['{{ spec.field_generic }}lte'] = newValue[1].format('yyyy-MM-dd');
                                             } else if (type == 'datetime') {
                                                 this['{{ spec.field_generic }}gte'] = newValue[0].format('yyyy-MM-dd hh:mm:ss{% get_tz_suffix %}');
-                                                this['{{ spec.field_generic }}lt'] = newValue[1].format('yyyy-MM-dd hh:mm:ss{% get_tz_suffix %}');
+                                                this['{{ spec.field_generic }}lte'] = newValue[1].format('yyyy-MM-dd hh:mm:ss{% get_tz_suffix %}');
                                             }
                                         }
                                     } else {
                                         if (type == 'date') {
                                             this['{{ spec.field_generic }}gte'] = '';
-                                            this['{{ spec.field_generic }}lt'] = '';
+                                            this['{{ spec.field_generic }}lte'] = '';
                                         } else if (type == 'datetime') {
                                             this['{{ spec.field_generic }}gte'] = '';
-                                            this['{{ spec.field_generic }}lt'] = '';
+                                            this['{{ spec.field_generic }}lte'] = '';
                                         }
                                     }
                                 } catch (e) {
