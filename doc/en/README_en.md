@@ -49,7 +49,7 @@ simpleui Characteristics
 ## QQ Group
 + QQ group : 873469913
 
-<img src='https://github.com/newpanjing/simpleui/raw/master/images/QQ%E7%BE%A4.jpg' width='200'>
+<img src='https://github.com/newpanjing/simpleui/raw/master/images/QQ2.jpg' width='200'>
 
 
 ## Document

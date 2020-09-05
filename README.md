@@ -51,7 +51,7 @@ Django Admin默认界面设计语言存在着的一些不足，比如色彩单�
 ## QQ群
 + QQ群号:873469913
 
-<img src='https://github.com/newpanjing/simpleui/raw/master/images/QQ%E7%BE%A4.jpg' width='200'>
+<img src='https://github.com/newpanjing/simpleui/raw/master/images/QQ2.jpg' width='200'>
 
 
 ## 文档
