@@ -256,7 +256,13 @@ def menus(context, _get_config=None):
                 eid += 1
                 k['eid'] = eid
 
-    return '<script type="text/javascript">var menus={}</script>'.format(json.dumps(data, cls=LazyEncoder))
+    menus_string = json.dumps(data, cls=LazyEncoder)
+
+    # 把data放入session中，其他地方可以调用
+    if not isinstance(context, dict) and context.request:
+        context.request.session['_menus'] = menus_string
+
+    return '<script type="text/javascript">var menus={}</script>'.format(menus_string)
 
 
 def get_icon(obj, name=None):
@@ -478,6 +484,12 @@ def get_boolean_choices():
         ('False', _('No'))
     )
 
+
 @register.simple_tag(takes_context=True)
 def get_previous_url(context):
     return context.request.META.get('HTTP_REFERER')
+
+
+@register.simple_tag(takes_context=True)
+def get_verbose_name_plural(context):
+    return context['cl'].model._meta.verbose_name_plural

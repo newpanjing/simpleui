@@ -1,10 +1,6 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-    return typeof obj;
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /**
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -35,7 +31,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 // Cross module loader
 // Supported: Node, AMD, Browser globals
 //
-(function (root, factory) {
+;(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(factory);
@@ -167,8 +163,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }
         // otherwise, use the given HTMLElement as popper
         else {
-            this._popper = popper.jquery ? popper[0] : popper;
-        }
+                this._popper = popper.jquery ? popper[0] : popper;
+            }
 
         // with {} we create a new object with the options inside it
         this._options = Object.assign({}, DEFAULTS, options);
@@ -190,7 +186,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         // make sure to apply the popper position before any computation
         this.state.position = this._getPosition(this._popper, this._reference);
-        setStyle(this._popper, {position: this.state.position, top: 0});
+        setStyle(this._popper, { position: this.state.position, top: 0 });
 
         // fire the first update to position the popper in the right place
         this.update();
@@ -229,7 +225,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @memberof Popper
      */
     Popper.prototype.update = function () {
-        var data = {instance: this, styles: {}};
+        var data = { instance: this, styles: {} };
 
         // store placement inside the data object, modifiers will be able to edit `placement` if needed
         // and refer to _originalPlacement to know the original value
@@ -635,9 +631,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }
         // othwerise, we use the standard `left` and `top` properties
         else {
-            styles.left = left;
-            styles.top = top;
-        }
+                styles.left = left;
+                styles.top = top;
+            }
 
         // any property present in `data.styles` will be applied to the popper,
         // in this way we can make the 3rd party modifiers add custom styles to it
@@ -678,12 +674,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var shiftOffsets = {
                 y: {
-                    start: {top: reference.top},
-                    end: {top: reference.top + reference.height - popper.height}
+                    start: { top: reference.top },
+                    end: { top: reference.top + reference.height - popper.height }
                 },
                 x: {
-                    start: {left: reference.left},
-                    end: {left: reference.left + reference.width - popper.width}
+                    start: { left: reference.left },
+                    end: { left: reference.left + reference.width - popper.width }
                 }
             };
 
@@ -712,28 +708,28 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 if (popper.left < data.boundaries.left) {
                     left = Math.max(popper.left, data.boundaries.left);
                 }
-                return {left: left};
+                return { left: left };
             },
             right: function right() {
                 var left = popper.left;
                 if (popper.right > data.boundaries.right) {
                     left = Math.min(popper.left, data.boundaries.right - popper.width);
                 }
-                return {left: left};
+                return { left: left };
             },
             top: function top() {
                 var top = popper.top;
                 if (popper.top < data.boundaries.top) {
                     top = Math.max(popper.top, data.boundaries.top);
                 }
-                return {top: top};
+                return { top: top };
             },
             bottom: function bottom() {
                 var top = popper.top;
                 if (popper.bottom > data.boundaries.bottom) {
                     top = Math.min(popper.top, data.boundaries.bottom - popper.height);
                 }
-                return {top: top};
+                return { top: top };
             }
         };
 
@@ -950,19 +946,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         // NOTE: 1 DOM access here
         var _display = element.style.display,
             _visibility = element.style.visibility;
-        element.style.display = 'block';
-        element.style.visibility = 'hidden';
+        element.style.display = 'block';element.style.visibility = 'hidden';
         var calcWidthToForceRepaint = element.offsetWidth;
 
         // original method
         var styles = root.getComputedStyle(element);
         var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
         var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-        var result = {width: element.offsetWidth + y, height: element.offsetHeight + x};
+        var result = { width: element.offsetWidth + y, height: element.offsetHeight + x };
 
         // reset element styles
-        element.style.display = _display;
-        element.style.visibility = _visibility;
+        element.style.display = _display;element.style.visibility = _visibility;
         return result;
     }
 
@@ -974,7 +968,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @returns {String} flipped placement
      */
     function getOppositePlacement(placement) {
-        var hash = {left: 'right', right: 'left', bottom: 'top', top: 'bottom'};
+        var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
         return placement.replace(/left|right|bottom|top/g, function (matched) {
             return hash[matched];
         });
@@ -1103,7 +1097,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         function is_numeric(n) {
             return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
         }
-
         Object.keys(styles).forEach(function (prop) {
             var unit = '';
             // add unit if the value is numeric and is one of the following

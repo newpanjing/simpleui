@@ -94,6 +94,10 @@
             var o = new Option(newRepr, newId);
             SelectBox.add_to_cache(toId, o);
             SelectBox.redisplay(toId);
+
+            if (SelectBox.add) {
+                SelectBox.add(name, newRepr, newId)
+            }
         }
         win.close();
     }
@@ -108,6 +112,9 @@
                 this.value = newId;
             }
         });
+        if(SelectBox.change){
+            SelectBox.change(id, newRepr, newId,objId);
+        }
         selects.next().find('.select2-selection__rendered').each(function () {
             // The element can have a clear button as a child.
             // Use the lastChild to modify only the displayed value.
@@ -126,6 +133,9 @@
                 $(this).remove();
             }
         }).trigger('change');
+        if(SelectBox.remove){
+            SelectBox.remove(id,objId);
+        }
         win.close();
     }
 

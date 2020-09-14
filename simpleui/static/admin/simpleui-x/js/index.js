@@ -289,6 +289,13 @@
                     themeEvents.push(handler);
                 } else if (name == 'font') {
                     fontEvents.push(handler);
+                }else if(name=='title'){
+                    console.log(handler)
+                    app.tabs.forEach(item=>{
+                        if(item.eid==app.tabModel){
+                            item.name = handler;
+                        }
+                    })
                 }
             }
             var temp_tabs = sessionStorage['tabs'];

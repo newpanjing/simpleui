@@ -1,8 +1,8 @@
 {% load static simpletags %}
 {% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}?_={% get_version %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}?_={% get_version %}"></script>
 {% else %}
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/element-ui@2.13.1/lib/index.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/element-ui@2.13.2/lib/index.js"></script>
 {% endif %}
