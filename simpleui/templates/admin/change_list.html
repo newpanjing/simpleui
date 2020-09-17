@@ -1,5 +1,5 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_urls static admin_list %}
+{% load i18n admin_urls static admin_list simpletags %}
 
 {% block extrastyle %}
     {{ block.super }}
@@ -111,6 +111,8 @@
                 url: $(this).attr('href')
             })
         })
-
+        if(parent.addEvent){
+            parent.addEvent('title','{% get_verbose_name_plural %}')
+        }
     </script>
 {% endblock %}

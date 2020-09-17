@@ -64,40 +64,40 @@
     {% endblock %}
     <el-drawer
             class="lite-menus"
-            title="{{site_header}}"
+            title="{{ site_header }}"
             :visible.sync="drawer"
             :show-close="false"
             size="50%"
             direction="ltr">
-            <el-menu unique-opened="true" :default-active="menuActive">
-                <div v-for="(item,i) in menus" :key="item">
-                    <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
+        <el-menu unique-opened="true" :default-active="menuActive">
+            <div v-for="(item,i) in menus" :key="item">
+                <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
+                    <i :class="item.icon"></i>
+                    <span slot="title" v-text="item.name"></span>
+                </el-menu-item>
+
+
+                <el-submenu v-else :index="item.eid+''">
+                    <template slot="title">
                         <i :class="item.icon"></i>
                         <span slot="title" v-text="item.name"></span>
-                    </el-menu-item>
+                    </template>
 
+                    <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
+                        <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
+                            <i :class="sub.icon"></i>
+                            <span slot="title" v-text="sub.name"></span>
+                        </el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
 
-                    <el-submenu v-else :index="item.eid+''">
-                        <template slot="title">
-                            <i :class="item.icon"></i>
-                            <span slot="title" v-text="item.name"></span>
-                        </template>
-
-                        <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
-                            <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
-                                <i :class="sub.icon"></i>
-                                <span slot="title" v-text="sub.name"></span>
-                            </el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
-
-                </div>
-            </el-menu>
+            </div>
+        </el-menu>
     </el-drawer>
 
     <el-container :style="{height: height+'px'}">
 
-        <el-aside v-if="!fold" width="auto" class="menu" {% block menu_style %}{% endblock %}>
+        <el-aside v-if="!mobile" width="auto" class="menu" {% block menu_style %}{% endblock %}>
             {% block logo %}
                 <div class="logo-wrap" v-if="!fold">
                     <div class="float-wrap">
@@ -220,7 +220,6 @@
                                  :key="item.id" lazy="true">
 
                         {% home_page %}
-
                         {% if home %}
                             <span v-if="index==0" slot="label"><i
                                     class="{{ icon }}"></i><span>{{ title }}</span>
@@ -237,11 +236,13 @@
                         </span>
 
                         <div v-if="index==0" style="height:100%">
-                            {% if home %}
-                                <iframe :src="'{{ home }}'"></iframe>
-                            {% else %}
-                                {% include './home.html' %}
-                            {% endif %}
+                            {% block home_content %}
+                                {% if home %}
+                                    <iframe :src="'{{ home }}'"></iframe>
+                                {% else %}
+                                    {% include './home.html' %}
+                                {% endif %}
+                            {% endblock %}
                         </div>
                         <div v-else class="iframe-wrap">
                             <iframe :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
@@ -354,14 +355,18 @@
     <script type="text/javascript">
         __simpleui_version = '{% simple_version %}';
     </script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}?_={% get_version %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}?_={% get_version %}"></script>
+    <script type="text/javascript"
+            src="{% static '/admin/simpleui-x/automatic/dicts.js' %}?_={% get_version %}"></script>
+    <script type="text/javascript"
+            src="{% static '/admin/simpleui-x/automatic/segment.js' %}?_={% get_version %}"></script>
     <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_={% get_version %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js?_={% get_version %}"
+    <script type="text/javascript"
+            src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js?_={% get_version %}"
             onerror="localeError()"></script>
     <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}?_={% get_version %}"></script>
     <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}?_={% get_version %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_={% get_version %}"></script>
+    <script type="text/javascript"
+            src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_={% get_version %}"></script>
     {% block index_js %}
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_={% get_version %}"></script>
     {% endblock %}

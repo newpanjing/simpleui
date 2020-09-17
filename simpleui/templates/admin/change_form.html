@@ -59,7 +59,7 @@
             <div id="alert">
                 <el-alert
                         title="{% if errors|length == 1 %}
-                            {% trans " Please correct the error below." %}
+                            {% trans "Please correct the error below." %}
                 {% else %}
                 {% trans "Please correct the errors below." %}
                 {% endif %}"
@@ -109,7 +109,7 @@
         el: '.page-header',
         methods: {
             goBack: function () {
-                window.location.href = '{% get_previous_url %}'
+                window.location.href = '{% get_model_url %}'
             }
         }
     })
