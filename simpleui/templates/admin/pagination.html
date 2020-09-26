@@ -9,7 +9,7 @@
                 :current-page="{{ cl.page_num }}+1"
                 :page-size="{{ cl.list_per_page }}"
                 layout="total,prev, pager, next, jumper"
-                :total="{{ cl.result_count }}">
+                :total="{{ cl.result_count|to_str }}">
         </el-pagination>
     {% endif %}
 </div>
