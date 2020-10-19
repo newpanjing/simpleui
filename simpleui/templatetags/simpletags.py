@@ -18,6 +18,7 @@ from django.utils.encoding import force_text
 from django.utils.functional import Promise
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
+from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 
 register = template.Library()
 
@@ -26,6 +27,9 @@ from django.utils.translation import gettext_lazy as _
 
 if PY_VER != '2':
     from importlib import reload
+    from urllib.parse import parse_qsl
+else:
+    from urlparse import parse_qsl
 
 
 def unicode_to_str(u, encoding='utf-8'):
@@ -458,9 +462,14 @@ def simple_version():
 @register.simple_tag(takes_context=True)
 def get_model_url(context):
     # reverse()
-    opts = context.get('opts')
-    key = 'admin:{}_{}_changelist'.format(opts.app_label, opts.model_name)
-    return reverse(key)
+    opts = context.get("opts")
+    key = "admin:{}_{}_changelist".format(opts.app_label, opts.model_name)
+    url = reverse(key)
+    preserved_filters = dict(parse_qsl(context.get("preserved_filters")))
+    if "_changelist_filters" in preserved_filters:
+        preserved_filters = preserved_filters["_changelist_filters"]
+        url = add_preserved_filters({"preserved_filters": preserved_filters, "opts": opts}, url)
+    return url
 
 
 @register.simple_tag
@@ -487,7 +496,11 @@ def get_boolean_choices():
 
 @register.simple_tag(takes_context=True)
 def get_previous_url(context):
-    return context.request.META.get('HTTP_REFERER')
+    referer = context.request.META.get("HTTP_REFERER")
+    if not referer or context.request.META.get("PATH_INFO") in referer:
+        # return to model list
+        return get_model_url(context)
+    return context.request.META.get("HTTP_REFERER")
 
 
 @register.simple_tag(takes_context=True)
