@@ -16,7 +16,7 @@
         {% if field.0 %}
 
             {% if field.0 == 'delete_selected' %}
-                <el-button type="danger" data-name="{{ field.0 }}"
+                <el-button type="danger" data-name="{{ field.0 }}" class="stop-submit"
                            icon="el-icon-delete" @click="delSelected('{{ field.0 }}')">{% trans 'Delete' %}</el-button>
             {% else %}
                 <input type="hidden" name="select_across" v-model="select_across" value="0" class="select-across">
@@ -71,8 +71,8 @@
 
     <el-button-group class="btn-group">
         {% if cl.search_fields or cl.has_filters %}
-        <a href="javascript:;" @click="searchDisplay()" class="el-button el-button--default"><span
-                class="el-icon-search"></span></a>
+            <a href="javascript:;" @click="searchDisplay()" class="el-button el-button--default"><span
+                    class="el-icon-search"></span></a>
         {% endif %}
         <a href="javascript:;" @click="reload()" class="el-button el-button--default"><span
                 class="el-icon-refresh"></span></a>
@@ -85,7 +85,16 @@
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
 <script type="text/javascript">
-
+    function actionsCleaning(name) {
+        $("#changelist-form input[name='action']").val(name);
+        $("#changelist-form [name='_save']").removeAttr('name');
+        $("#changelist-form [name!='']").each(function () {
+            var obj = $(this);
+            if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
+                obj.removeAttr('name');
+            }
+        });
+    }
 
     var _action = new Vue({
         el: '.actions',
@@ -149,9 +158,7 @@
         },
         methods: {
             searchDisplay: function () {
-
                 this.show = !this.show;
-
             },
             reload: function () {
                 window.location.reload()
@@ -167,62 +174,20 @@
                 $("#changelist-form").submit();
             },
             delSelected: function (name) {
-
-                $("#changelist-form input[name='action']").val(name);
-
-                $("#changelist-form [name='_save']").removeAttr('name');
-
-                $("#changelist-form [name!='']").each(function () {
-                    var obj = $(this);
-                    if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
-                        obj.removeAttr('name');
-                    }
-                });
-
-
+                actionsCleaning(name);
                 var self = this;
-
-                function showMessage(msgs) {
-                    msgs.forEach(item => {
-                        this.$notify({
-                            title: getLanuage('Tips'),
-                            message: item.msg,
-                            type: item.tag,
-                            dangerouslyUseHTMLString: true
-                        });
-                    });
-                }
 
                 // 增加非空判断！
                 if ($("#changelist-form").serializeArray().length <= 2) {
                     this.$message.error(getLanuage("Please select at least one option!"));
-                    return ;
+                    return;
                 }
 
                 //#67 #66 修复删除问题，改为弹出确认
 
                 this.$confirm(getLanuage('Are you sure you want to delete the selected?'))
                     .then(_ => {
-                        $.ajax({
-                            type: "POST",//方法类型
-                            url: "",//url
-                            data: $("#changelist-form").serialize() + '&post=yes',
-                            success: function (result) {
-                                var msgs = $(result).find('#out_message').html().replace('var messages=', '');
-                                showMessage.call(self, JSON.parse(msgs));
-                                setTimeout(() => {
-                                    window.location.reload();
-                                }, 1000);
-                            },
-                            error: function () {
-                                this.$notify({
-                                    title: getLanuage('Tips'),
-                                    message: 'Network error',
-                                    type: 'error',
-                                    dangerouslyUseHTMLString: true
-                                });
-                            }
-                        });
+                        self.formSubmit();
                     }).catch(_ => {
 
                 });
@@ -240,7 +205,8 @@
 
 
     $(function () {
-        $(".actions button[data-name!='delete_selected']").click(function () {
+        action_btns = $(".actions button").not('.stop-submit');
+        action_btns.click(function () {
             var url = $(this).attr("url");
             var eid = $(this).attr('eid');
             var confirm = $(this).attr('confirm');
@@ -288,10 +254,10 @@
                                         });
                                         break;
                                     case 2:
-                                        window.open(temp.action_url)
+                                        window.open(temp.action_url);
                                         break;
                                 }
-                                console.log('中断后续操作')
+                                console.log('中断后续操作');
                                 return;
                             }
                         }
@@ -304,16 +270,7 @@
 
                 if ($(this).attr('data-name')) {
                     var name = $(this).attr("data-name");
-                    $("#changelist-form input[name='action']").val(name);
-
-                    $("#changelist-form [name='_save']").removeAttr('name');
-
-                    $("#changelist-form [name!='']").each(function () {
-                        var obj = $(this);
-                        if (obj.attr('name') && obj.attr('name').indexOf('form-') == 0) {
-                            obj.removeAttr('name');
-                        }
-                    });
+                    actionsCleaning(name);
                 }
                 $("#changelist-form").submit();
             }
