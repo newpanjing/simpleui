@@ -21,7 +21,7 @@
 
                 {% if cl.search_fields %}
 
-                    <el-input class="simpleui-form-item"
+                    <el-input size="small" class="simpleui-form-item"
                               clearable
                               name="{{ search_var }}"
                               :placeholder="placeholder"
@@ -36,6 +36,7 @@
                         {% if spec|get_date_type == 'date' or spec|get_date_type == 'datetime' %}
 
                             <el-date-picker class="simpleui-form-item"
+                                    size="small"
                                     v-model="{{ spec.field_path }}"
                                     @change="change{{ spec|get_date_type|capfirst }}"
                                     type="{{ spec|get_date_type }}range"
@@ -50,7 +51,7 @@
 
                         {% elif spec|has_filter %}
                             <input type="hidden" v-model="{{ spec.parameter_name }}" name="{{ spec.parameter_name }}"/>
-                            <el-select class="simpleui-form-item" filterable v-model="{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}">
+                            <el-select size="small" class="simpleui-form-item" filterable v-model="{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}">
                                 {% for option in spec.lookup_choices %}
                                     <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
                                 {% endfor %}
@@ -59,7 +60,7 @@
                         {% else %}
 
                             <input type="hidden" v-model="{{ spec.lookup_kwarg }}" name="{{ spec.lookup_kwarg }}"/>
-                            <el-select class="simpleui-form-item" filterable v-model="{{ spec.lookup_kwarg }}" clearable
+                            <el-select size="small" class="simpleui-form-item" filterable v-model="{{ spec.lookup_kwarg }}" clearable
                                        placeholder="{{ spec.title }}">
                                 {% if spec|get_date_type == 'time' %}
                                     {% for option in spec.lookup_choices %}
@@ -91,7 +92,7 @@
 
                     {% endfor %}
                 {% endif %}
-                <el-button type="primary" icon="el-icon-search" @click="formSubmit()">{% trans 'Search' %}</el-button>
+                <el-button size="small" type="primary" icon="el-icon-search" @click="formSubmit()">{% trans 'Search' %}</el-button>
 
 
             {% if show_result_count %}
