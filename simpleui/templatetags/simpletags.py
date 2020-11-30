@@ -13,7 +13,7 @@ from django import template
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, is_valid_path
 from django.utils.encoding import force_text
 from django.utils.functional import Promise
 from django.utils.html import format_html
@@ -470,6 +470,16 @@ def get_model_url(context):
         preserved_filters = preserved_filters["_changelist_filters"]
         url = add_preserved_filters({"preserved_filters": preserved_filters, "opts": opts}, url)
     return url
+
+
+@register.simple_tag(takes_context=True)
+def get_model_ajax_url(context):
+    opts = context.get("opts")
+    key = "admin:{}_{}_ajax".format(opts.app_label, opts.model_name)
+    try:
+        return reverse(key)
+    except:
+        pass
 
 
 @register.simple_tag

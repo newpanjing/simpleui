@@ -7,7 +7,8 @@
     {% if has_add_permission %}
         {% url cl.opts|admin_urlname:'add' as add_url %}
 
-        <el-button size="small" type="primary" icon="el-icon-plus" data-name="add_item" url="{% add_preserved_filters add_url is_popup to_field %}">
+        <el-button size="small" type="primary" icon="el-icon-plus" data-name="add_item"
+                   url="{% add_preserved_filters add_url is_popup to_field %}">
             {% trans 'Add' %}
         </el-button>
     {% endif %}
@@ -32,7 +33,13 @@
                     </el-select>
                     <el-button size="small" icon="fas fa-download" data-name="{{ field.0 }}">{{ field.1 }}</el-button>
                 {% else %}
-                    <el-button size="small" :eid="customButton.{{ field.0 }}.eid"
+
+                    <el-button v-if="customButton.{{ field.0 }}.layer" size="small"
+                               :eid="customButton.{{ field.0 }}.eid"
+                               :icon="customButton.{{ field.0 }}.icon" :style="customButton.{{ field.0 }}.style"
+                               :type="customButton.{{ field.0 }}.type" data-name="{{ field.0 }}">{{ field.1 }}
+                    </el-button>
+                    <el-button v-else size="small" :eid="customButton.{{ field.0 }}.eid"
                                :icon="customButton.{{ field.0 }}.icon" :style="customButton.{{ field.0 }}.style"
                                :confirm="customButton.{{ field.0 }}.confirm"
                                :type="customButton.{{ field.0 }}.type" data-name="{{ field.0 }}">{{ field.1 }}
@@ -60,7 +67,8 @@
                 <span class="all">{{ selection_note_all }}</span>
                 <span class="question">
             <a href="#"
-               title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
+               title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}
+                Select all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
         </span>
                 <span class="clear">
             <a href="#" onclick="unSelect()">{% trans "Clear selection" %}</a>
@@ -82,9 +90,177 @@
     </el-button-group>
 
 </div>
+<div id="layer_app">
+    <el-dialog
+            :title="title"
+            :visible.sync="visible"
+            :width="layer.width||'50%'">
+        <el-form ref="form" :model="params" :label-width="layer.labelWidth||'80px'" size="small">
+            <el-form-item v-for="item in params" :label="item.label"
+                          :rules="[{ required: item.require||false, trigger: 'blur' }]">
+                <el-select v-if="item.type=='select'" :style="{width:item.width}" :size="item.size"
+                           v-model="item.value">
+                    <el-option
+                            v-for="node in item.options"
+                            :key="node.key"
+                            :label="node.label"
+                            :value="node.key">
+                    </el-option>
+                </el-select>
+
+                <el-date-picker
+                        v-else-if="item.type=='date'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value"
+                        type="date">
+                </el-date-picker>
+
+                <el-date-picker
+                        v-else-if="item.type=='datetime'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value"
+                        type="datetime">
+                </el-date-picker>
+
+                <el-rate
+                        v-else-if="item.type=='rate'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value">
+                </el-rate>
+                <el-color-picker
+                        v-else-if="item.type=='color'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value">
+                </el-color-picker>
+                <el-slider
+                        v-else-if="item.type=='slider'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value">
+                </el-slider>
+                <el-switch
+                        v-else-if="item.type=='switch'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value">
+                </el-switch>
+                <el-input-number
+                        v-else-if="item.type=='input_number'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value">
+                </el-input-number>
+
+                <el-checkbox-group
+                        v-else-if="item.type=='checkbox'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value">
+
+                    <el-checkbox v-for="node in item.options" v-model="node.key" :label="node.label"
+                                 :key="node.key"></el-checkbox>
+
+                </el-checkbox-group>
+
+                <el-radio-group
+                        v-else-if="item.type=='radio'"
+                        :style="{width:item.width}"
+                        :size="item.size"
+                        v-model="item.value">
+
+                    <el-radio v-for="node in item.options" v-model="node.key" :label="node.label"
+                              :key="node.key"></el-radio>
+
+                </el-radio-group>
+
+                <el-input v-else v-model="item.value" :type="item.type" :style="{width:item.width}"
+                          :size="item.size"></el-input>
+            </el-form-item>
+        </el-form>
+
+        <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="layerSubmit()" v-text="layer.confirm_button||'确定'"></el-button>
+            <el-button @click="visible = false" v-text="layer.cancel_button||'取消'"></el-button>
+        </span>
+    </el-dialog>
+</div>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
 <script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
+<script type="text/javascript" src="{% static '/admin/simpleui-x/js/axios.min.js' %}"></script>
 <script type="text/javascript">
+
+    const layerApp = new Vue({
+        el: '#layer_app',
+        data: {
+            visible: false,
+            title: '弹出层',
+            params: [],
+            layer: {},
+            rules: [],
+            action:''
+        },
+        methods: {
+            layerSubmit() {
+                const self = this;
+                //校验
+                for (let key in self.params) {
+                    let item = self.params[key];
+                    if (item.require) {
+                        if (!item.value || item.value == '' || item.length == 0) {
+                            self.$message.error(`"${item.label}" Can't be empty.`)
+                            return;
+                        }
+                    }
+                }
+
+                //开始提交
+                let data = new FormData();
+                //方法名
+                data.append('_action', self.action);
+                let selecteds = [];
+                $("#result_list .selected input[name='_selected_action']").each((index, item) => selecteds.push(item.value));
+                data.append('_selected', selecteds.join(','));
+                //获取选中的数据
+
+                data.append('csrfmiddlewaretoken', document.querySelector('[name="csrfmiddlewaretoken"]').value);
+                for (let key in self.params) {
+                    let item = self.params[key];
+                    if (item.value) {
+                        data.append(item.key, item.value);
+                    }
+                }
+
+                axios.post('{% get_model_ajax_url %}', data).then(res => {
+                    if(res.data.status=='success'){
+                        self.visible = false;
+                    }
+
+                    self.$message({
+                      message: res.data.msg,
+                      type: res.data.status
+                    });
+                }).catch(err => self.$message.error(err));
+            }
+        }
+    })
+
+    //弹出层处理
+    function layer(data,action) {
+        layerApp.layer = data.layer;
+        layerApp.title = data.layer.title;
+        layerApp.params = data.layer.params;
+        layerApp.action = action;
+
+        layerApp.$nextTick(() => {
+            layerApp.visible = true;
+        });
+
+    }
+
     function actionsCleaning(name) {
         $("#changelist-form input[name='action']").val(name);
         $("#changelist-form [name='_save']").removeAttr('name');
@@ -213,14 +389,24 @@
             var checkbox_checked = $(".action-checkbox input:checked").length;
             var data_name = $(this).attr('data-name');
             var _vue = new Vue();
-            
+
+            //这边处理弹出层对话框
+            if (eid) {
+                for (var i in _action.customButton) {
+                    var temp = _action.customButton[i];
+                    if (temp.eid == eid && temp.layer) {
+                        layer(temp,i);
+                        return;
+                    }
+                }
+            }
+
             if (checkbox_checked == 0 && data_name != "add_item") {
                 _vue.$alert("没有选中任何Item, 请选中后再重新提交.", '提示', {
                     confirmButtonText: '确定',
                     type: 'warning'
                 })
-            }
-            else if (confirm) {
+            } else if (confirm) {
                 _vue.$confirm(confirm, '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -237,7 +423,6 @@
                     for (var i in _action.customButton) {
                         var temp = _action.customButton[i];
                         if (temp.eid == eid) {
-
                             if (typeof (temp.action_type) != 'undefined') {
 
                                 if (!temp.action_url) {
@@ -269,6 +454,8 @@
                                 console.log('中断后续操作');
                                 return;
                             }
+                            //终止执行
+                            break;
                         }
                     }
                 }
