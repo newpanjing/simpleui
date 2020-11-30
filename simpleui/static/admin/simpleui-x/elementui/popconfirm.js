@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 97);
+/******/ 	return __webpack_require__(__webpack_require__.s = 123);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -156,7 +156,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 
@@ -165,7 +170,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functioal component in vue file
+      // register for functional component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
@@ -189,102 +194,114 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 97:
+/***/ 123:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/alert/src/main.vue?vue&type=template&id=6e53341b&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./packages/popconfirm/src/main.vue?vue&type=template&id=048de730&
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "el-alert-fade" } }, [
-    _c(
-      "div",
+  return _c(
+    "el-popover",
+    _vm._b(
       {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.visible,
-            expression: "visible"
-          }
-        ],
-        staticClass: "el-alert",
-        class: [
-          _vm.typeClass,
-          _vm.center ? "is-center" : "",
-          "is-" + _vm.effect
-        ],
-        attrs: { role: "alert" }
+        attrs: { trigger: "click" },
+        model: {
+          value: _vm.visible,
+          callback: function($$v) {
+            _vm.visible = $$v
+          },
+          expression: "visible"
+        }
       },
-      [
-        _vm.showIcon
-          ? _c("i", {
-              staticClass: "el-alert__icon",
-              class: [_vm.iconClass, _vm.isBigIcon]
-            })
-          : _vm._e(),
-        _c("div", { staticClass: "el-alert__content" }, [
-          _vm.title || _vm.$slots.title
-            ? _c(
-                "span",
-                { staticClass: "el-alert__title", class: [_vm.isBoldTitle] },
-                [_vm._t("title", [_vm._v(_vm._s(_vm.title))])],
-                2
-              )
+      "el-popover",
+      _vm.$attrs,
+      false
+    ),
+    [
+      _c("div", { staticClass: "el-popconfirm" }, [
+        _c("p", { staticClass: "el-popconfirm__main" }, [
+          !_vm.hideIcon
+            ? _c("i", {
+                staticClass: "el-popconfirm__icon",
+                class: _vm.icon,
+                style: { color: _vm.iconColor }
+              })
             : _vm._e(),
-          _vm.$slots.default && !_vm.description
-            ? _c(
-                "p",
-                { staticClass: "el-alert__description" },
-                [_vm._t("default")],
-                2
-              )
-            : _vm._e(),
-          _vm.description && !_vm.$slots.default
-            ? _c("p", { staticClass: "el-alert__description" }, [
-                _vm._v(_vm._s(_vm.description))
-              ])
-            : _vm._e(),
-          _c(
-            "i",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.closable,
-                  expression: "closable"
-                }
-              ],
-              staticClass: "el-alert__closebtn",
-              class: {
-                "is-customed": _vm.closeText !== "",
-                "el-icon-close": _vm.closeText === ""
+          _vm._v("\n      " + _vm._s(_vm.title) + "\n    ")
+        ]),
+        _c(
+          "div",
+          { staticClass: "el-popconfirm__action" },
+          [
+            _c(
+              "el-button",
+              {
+                attrs: { size: "mini", type: _vm.cancelButtonType },
+                on: { click: _vm.cancel }
               },
-              on: {
-                click: function($event) {
-                  _vm.close()
-                }
-              }
-            },
-            [_vm._v(_vm._s(_vm.closeText))]
-          )
-        ])
-      ]
-    )
-  ])
+              [_vm._v("\n        " + _vm._s(_vm.cancelButtonText) + "\n      ")]
+            ),
+            _c(
+              "el-button",
+              {
+                attrs: { size: "mini", type: _vm.confirmButtonType },
+                on: { click: _vm.confirm }
+              },
+              [
+                _vm._v(
+                  "\n        " + _vm._s(_vm.confirmButtonText) + "\n      "
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._t("reference", null, { slot: "reference" })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
 
 
-// CONCATENATED MODULE: ./packages/alert/src/main.vue?vue&type=template&id=6e53341b&
+// CONCATENATED MODULE: ./packages/popconfirm/src/main.vue?vue&type=template&id=048de730&
 
-// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.7.1@vue-loader/lib??vue-loader-options!./packages/alert/src/main.vue?vue&type=script&lang=js&
+// EXTERNAL MODULE: external "element-ui/lib/popover"
+var popover_ = __webpack_require__(52);
+var popover_default = /*#__PURE__*/__webpack_require__.n(popover_);
+
+// EXTERNAL MODULE: external "element-ui/lib/button"
+var button_ = __webpack_require__(13);
+var button_default = /*#__PURE__*/__webpack_require__.n(button_);
+
+// EXTERNAL MODULE: external "element-ui/lib/locale"
+var locale_ = __webpack_require__(19);
+
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./packages/popconfirm/src/main.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -307,81 +324,72 @@ render._withStripped = true
 //
 //
 
-var TYPE_CLASSES_MAP = {
-  'success': 'el-icon-success',
-  'warning': 'el-icon-warning',
-  'error': 'el-icon-error'
-};
+
+
+
+
 /* harmony default export */ var mainvue_type_script_lang_js_ = ({
-  name: 'ElAlert',
-
+  name: 'ElPopconfirm',
   props: {
     title: {
-      type: String,
-      default: ''
+      type: String
     },
-    description: {
+    confirmButtonText: {
       type: String,
-      default: ''
+      default: Object(locale_["t"])('el.popconfirm.confirmButtonText')
     },
-    type: {
+    cancelButtonText: {
       type: String,
-      default: 'info'
+      default: Object(locale_["t"])('el.popconfirm.cancelButtonText')
     },
-    closable: {
+    confirmButtonType: {
+      type: String,
+      default: 'primary'
+    },
+    cancelButtonType: {
+      type: String,
+      default: 'text'
+    },
+    icon: {
+      type: String,
+      default: 'el-icon-question'
+    },
+    iconColor: {
+      type: String,
+      default: '#f90'
+    },
+    hideIcon: {
       type: Boolean,
-      default: true
-    },
-    closeText: {
-      type: String,
-      default: ''
-    },
-    showIcon: Boolean,
-    center: Boolean,
-    effect: {
-      type: String,
-      default: 'light',
-      validator: function validator(value) {
-        return ['light', 'dark'].indexOf(value) !== -1;
-      }
+      default: false
     }
   },
-
+  components: {
+    ElPopover: popover_default.a,
+    ElButton: button_default.a
+  },
   data: function data() {
     return {
-      visible: true
+      visible: false
     };
   },
 
-
   methods: {
-    close: function close() {
+    confirm: function confirm() {
       this.visible = false;
-      this.$emit('close');
-    }
-  },
-
-  computed: {
-    typeClass: function typeClass() {
-      return 'el-alert--' + this.type;
+      this.$emit('onConfirm');
     },
-    iconClass: function iconClass() {
-      return TYPE_CLASSES_MAP[this.type] || 'el-icon-info';
-    },
-    isBigIcon: function isBigIcon() {
-      return this.description || this.$slots.default ? 'is-big' : '';
-    },
-    isBoldTitle: function isBoldTitle() {
-      return this.description || this.$slots.default ? 'is-bold' : '';
+    cancel: function cancel() {
+      this.visible = false;
+      this.$emit('onCancel');
     }
   }
 });
-// CONCATENATED MODULE: ./packages/alert/src/main.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./packages/popconfirm/src/main.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_mainvue_type_script_lang_js_ = (mainvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/_vue-loader@15.7.1@vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.9.3@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(0);
 
-// CONCATENATED MODULE: ./packages/alert/src/main.vue
+// CONCATENATED MODULE: ./packages/popconfirm/src/main.vue
 
 
 
@@ -402,9 +410,9 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "packages/alert/src/main.vue"
+component.options.__file = "packages/popconfirm/src/main.vue"
 /* harmony default export */ var main = (component.exports);
-// CONCATENATED MODULE: ./packages/alert/index.js
+// CONCATENATED MODULE: ./packages/popconfirm/index.js
 
 
 /* istanbul ignore next */
@@ -412,7 +420,28 @@ main.install = function (Vue) {
   Vue.component(main.name, main);
 };
 
-/* harmony default export */ var packages_alert = __webpack_exports__["default"] = (main);
+/* harmony default export */ var popconfirm = __webpack_exports__["default"] = (main);
+
+/***/ }),
+
+/***/ 13:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/button");
+
+/***/ }),
+
+/***/ 19:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/locale");
+
+/***/ }),
+
+/***/ 52:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/popover");
 
 /***/ })
 

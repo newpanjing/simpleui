@@ -26,6 +26,12 @@ Django admin theme the simpleui
 
 ---
 
+---
+<p align="center">
+<a href="https://simpleui.88cto.com/docs/simpleui" target="_blank">文档</a> |
+<a href="https://simpleui.88cto.com/docs/simpleui" target="_blank">Documents</a>
+</p>
+---
 <a href="https://www.88cto.com/admin/">
   <img alt="demo" src="https://github.com/newpanjing/simpleui/raw/master/images/%E4%B8%BB%E9%A1%B5.png" width="420" align="right" style="max-width: 50%">
 </a>

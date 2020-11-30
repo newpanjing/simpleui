@@ -1,31 +1,31 @@
 {% load i18n admin_urls simpletags%}
 <div class="submit-row">
     {% if '_popup' not in request.GET %}
-        <el-button type="button" icon="el-icon-arrow-left" onclick="prev()"
+        <el-button size="small" type="button" icon="el-icon-arrow-left" onclick="prev()"
                    style="float: left;margin-right: 10px;margin-bottom: 10px;">
             <span v-text="getLanuage('Go back')"></span>
         </el-button>
     {% endif %}
     {% if show_delete_link %}
         {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
-        <el-button icon="el-icon-delete" type="danger" onclick="del('{% add_preserved_filters delete_url %}')"
+        <el-button size="small" icon="el-icon-delete" type="danger" onclick="del('{% add_preserved_filters delete_url %}')"
                    style="float: left">{% trans "Delete" %}</el-button>
     {% endif %}
     {% if show_save_as_new %}
-        <el-button type="primary"
+        <el-button size="small" type="primary"
                    @click="formSubmit('_saveasnew','{% trans 'Save as new' %}',$event)">{% trans 'Save as new' %}</el-button>
     {% endif %}
     {% if show_save_and_add_another %}
-        <input type="submit" class="el-button el-button--primary" value="{% trans 'Save and add another' %}"
+        <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save and add another' %}"
                name="_addanother">
     {% endif %}
     {% if show_save_and_continue %}
 
-        <input type="submit" class="el-button el-button--primary" value="{% trans 'Save and continue editing' %}"
+        <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save and continue editing' %}"
                name="_continue">
     {% endif %}
     {% if show_save %}
-        <input type="submit" class="el-button el-button--primary" value="{% trans 'Save' %}" name="_save">
+        <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save' %}" name="_save">
     {% endif %}
     <input type="hidden" name="actionName" value="actionValue" id="actionName">
 </div>
