@@ -95,6 +95,7 @@
             :title="title"
             :visible.sync="visible"
             :width="layer.width||'50%'">
+        <el-alert v-if="layer.tips" :title="layer.tips" type="success" :closable="false"></el-alert>
         <el-form ref="form" :model="params" :label-width="layer.labelWidth||'80px'" size="small">
             <el-form-item v-for="item in params" :label="item.label"
                           :rules="[{ required: item.require||false, trigger: 'blur' }]">
