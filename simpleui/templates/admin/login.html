@@ -84,7 +84,7 @@
             {% csrf_token %}
             <div class="simpleui-input-inline">
                 <el-input prefix-icon="fas fa-user" v-model="username" name="username"
-                          placeholder="{% trans 'username' %}"></el-input>
+                          placeholder="{% trans 'username' %}" autofocus></el-input>
             </div>
             <div class="simpleui-input-inline">
                 <el-input prefix-icon="fas fa-lock" type="password" v-model="password" name="password"
