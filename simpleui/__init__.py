@@ -2,4 +2,4 @@ default_app_config = 'simpleui.apps.SimpleApp'
 
 
 def get_version():
-    return '2021.1.0'
+    return '2021.1.1'

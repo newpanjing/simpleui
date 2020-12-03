@@ -238,8 +238,9 @@
                 axios.post('{% get_model_ajax_url %}', data).then(res => {
                     if(res.data.status=='success'){
                         self.visible = false;
+                        //1.5s 后刷新
+                        setTimeout(() => window.location.reload(), 1000);
                     }
-
                     self.$message({
                       message: res.data.msg,
                       type: res.data.status
