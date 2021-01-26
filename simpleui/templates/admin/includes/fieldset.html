@@ -1,3 +1,4 @@
+{% load simpletags %}
 <fieldset class="module aligned {{ fieldset.classes }}">
     {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
     {% if fieldset.description %}
@@ -16,7 +17,7 @@
                         {% if field.is_readonly %}
                             <div class="readonly">{{ field.contents }}</div>
                         {% else %}
-                            {{ field.field }}
+                            {{ field.field|get_value }}
                         {% endif %}
                     {% endif %}
                     {% if field.field.help_text %}

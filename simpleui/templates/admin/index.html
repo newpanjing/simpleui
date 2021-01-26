@@ -115,30 +115,15 @@
                 </div>
             {% endblock %}
 
-            <el-menu unique-opened="true" :default-active="menuActive" :collapse="fold">
-                <div v-for="(item,i) in menus" :key="item">
-                    <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
-                        <i :class="item.icon"></i>
-                        <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
-                    </el-menu-item>
-
-
-                    <el-submenu v-else :index="item.eid+''">
-                        <template slot="title">
-                            <i :class="item.icon"></i>
-                            <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
-                        </template>
-
-                        <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
-                            <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
-                                <i :class="sub.icon"></i>
-                                <span slot="title" v-text="sub.name"></span>
-                            </el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
-
-                </div>
-            </el-menu>
+        <!-- menu -->
+        <multiple-menu
+                :menus="menus"
+                :openTab="openTab"
+                :menuTextShow="menuTextShow||true"
+                :menuActive="menuActive"
+                :fold="fold"
+                :app="app"
+        ></multiple-menu>
 
         </el-aside>
 
@@ -368,6 +353,7 @@
     <script type="text/javascript"
             src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_={% get_version %}"></script>
     {% block index_js %}
+        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/menu.js' %}?_={% get_version %}"></script>
         <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_={% get_version %}"></script>
     {% endblock %}
     {% block autoupdate %}
