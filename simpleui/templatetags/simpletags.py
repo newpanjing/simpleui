@@ -258,14 +258,14 @@ def menus(context, _get_config=None):
 
     # 给每个菜单增加一个唯一标识，用于tab页判断
     eid = 1000
-    for i in data:
-        eid += 1
-        i['eid'] = eid
-        if 'models' in i:
-            for k in i.get('models'):
-                eid += 1
-                k['eid'] = eid
-
+    # for i in data:
+    #     eid += 1
+    #     i['eid'] = eid
+    #     if 'models' in i:
+    #         for k in i.get('models'):
+    #             eid += 1
+    #             k['eid'] = eid
+    handler_eid(data, eid)
     menus_string = json.dumps(data, cls=LazyEncoder)
 
     # 把data放入session中，其他地方可以调用
@@ -273,6 +273,14 @@ def menus(context, _get_config=None):
         context.request.session['_menus'] = menus_string
 
     return '<script type="text/javascript">var menus={}</script>'.format(menus_string)
+
+
+def handler_eid(data, eid):
+    for i in data:
+        eid += 1
+        i['eid'] = eid
+        if 'models' in i:
+            handler_eid(i.get('models'),eid)
 
 
 def get_icon(obj, name=None):

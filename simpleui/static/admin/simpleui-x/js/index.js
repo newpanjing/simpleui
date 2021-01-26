@@ -262,18 +262,7 @@
             window.app = this;
 
 
-            window.menus.forEach(item => {
-                item.icon = getIcon(item.name, item.icon);
-
-                if (item.models) {
-                    item.models.forEach(mItem => {
-                        mItem.icon = getIcon(mItem.name, mItem.icon);
-                        self.menuData.push(mItem)
-                    });
-                } else {
-                    self.menuData.push(item)
-                }
-            });
+            menus = this.handlerMenus(menus);
 
             this.menus = window.menus
 
@@ -311,6 +300,25 @@
             });
         },
         methods: {
+            handlerMenus(menus) {
+                let self = this;
+                menus.forEach(item => {
+                    item.icon = getIcon(item.name, item.icon);
+
+                    if (item.models) {
+                        item.models.forEach(mItem => {
+                            mItem.icon = getIcon(mItem.name, mItem.icon);
+                            self.menuData.push(mItem)
+                            if(mItem.models){
+                                self.handlerMenus(mItem.models);
+                            }
+                        });
+                    } else {
+                        self.menuData.push(item)
+                    }
+                });
+                return menus;
+            },
             syncTabs: function () {
                 if (window.sessionStorage) {
                     sessionStorage['tabs'] = JSON.stringify(this.tabs);
@@ -384,11 +392,11 @@
                 this.popup.show = true;
                 this.$nextTick(function () {
                     let el = this.$refs.popupmenu;
-                    el.style.width='150px';
+                    el.style.width = '150px';
                     let x = e.clientX;
 
-                    let w= document.body.offsetWidth
-                    if(x+150>w){
+                    let w = document.body.offsetWidth
+                    if (x + 150 > w) {
                         x = w - 160;
                     }
 
