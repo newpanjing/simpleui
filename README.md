@@ -28,8 +28,8 @@ Django admin theme the simpleui
 
 ---
 <p align="center">
-<a href="https://simpleui.88cto.com/docs/simpleui" target="_blank">文档</a> |
-<a href="https://simpleui.88cto.com/docs/simpleui" target="_blank">Documents</a>
+<a href="https://simpleui.72wo.com/docs/simpleui" target="_blank">文档</a> |
+<a href="https://simpleui.72wo.com/docs/simpleui" target="_blank">Documents</a>
 </p>
 ---
 <a href="https://www.88cto.com/admin/">
@@ -67,11 +67,11 @@ Django Admin默认界面设计语言存在着的一些不足，比如色彩单�
 
 👇👇👇👇👇👇👇👇👇👇👇
 
-👉 1.[simpleui文档教程使用说明](https://simpleui.88cto.com/docs/simpleui) 👈
+👉 1.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui) 👈
 
-👉 2.[simpleui文档教程使用说明](https://simpleui.88cto.com/docs/simpleui)👈
+👉 2.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui)👈
 
-👉  3.[simpleui文档教程使用说明](https://simpleui.88cto.com/docs/simpleui)👈
+👉  3.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui)👈
 
 👆👆👆👆👆👆👆👆👆👆👆
 
