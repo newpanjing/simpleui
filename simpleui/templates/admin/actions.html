@@ -403,12 +403,13 @@
                 }
             }
 
-            if (checkbox_checked == 0 && data_name != "add_item") {
-                _vue.$alert("没有选中任何Item, 请选中后再重新提交.", '提示', {
-                    confirmButtonText: '确定',
+            //TODO 需要做国际化
+            if (checkbox_checked == 0 && data_name != "add_item"&&!_action.customButton[data_name].action_url) {
+                _vue.$alert(getLanuage("Please select at least one option!"), '', {
                     type: 'warning'
                 })
-            } else if (confirm) {
+            } else
+            if (confirm) {
                 _vue.$confirm(confirm, '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',

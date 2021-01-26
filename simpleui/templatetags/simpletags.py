@@ -154,6 +154,12 @@ def get_config(key):
     return __get_config(key)
 
 
+@register.filter
+def get_value(value):
+    print(value)
+    return value
+
+
 @register.simple_tag
 def get_version():
     return simpleui.get_version()
