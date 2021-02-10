@@ -156,7 +156,6 @@ def get_config(key):
 
 @register.filter
 def get_value(value):
-    print(value)
     return value
 
 
