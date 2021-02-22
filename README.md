@@ -3,7 +3,7 @@
     <img alt="Simpleui" src="https://github.com/newpanjing/simpleui/raw/master/images/logo.png" width="140">
   </a>
 </p>
-<p align="center">让Django Admin简单而友好</p>
+<p align="center">让Django Admin简单而友好，20000+网站共同选择</p>
 <p align="center">
 Simple and friendly.
 Django admin theme the simpleui
