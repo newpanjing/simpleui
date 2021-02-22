@@ -279,7 +279,8 @@ def handler_eid(data, eid):
         eid += 1
         i['eid'] = eid
         if 'models' in i:
-            handler_eid(i.get('models'),eid)
+            eid = handler_eid(i.get('models'), eid)
+    return eid
 
 
 def get_icon(obj, name=None):
