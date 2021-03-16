@@ -55,7 +55,7 @@
                    @click="formSubmit()">{% trans 'Save' %}</el-button>
     {% endif %}
 
-    <el-button size="small" data-name="delete_selected" v-for="item in exts" :key="item.name" @click="extClick(item)">
+    <el-button size="small" data-name="import_admin_action" v-for="item in exts" :key="item.name" @click="extClick(item)">
         <span :class="getIcon(item.name)"></span>
         <span v-text="item.name"></span>
     </el-button>
