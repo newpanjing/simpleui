@@ -80,6 +80,14 @@ If you don't have any `python django` basics, you can download a `demo` that can
 + username：demo
 + password：demo123456
 
+## Docker
+```shell
+docker pull newpanjing/simpleui_demo
+
+docker run -p 8080:8080 newpanjing/simpleui_demo
+```
+Open a browser and visit: http://127.0.0.1:8080
+
 # What is simpleui？
 🚀`simpleui` is django admin's theme. It is a page based on `element-ui` + `vue` development, rewriting and optimizing over `90%`. 
 It is the same product as the suit. We are a theme that is more in line with the aesthetic and usage habits of Chinese people.
