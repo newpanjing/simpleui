@@ -16,16 +16,20 @@
                    @click="formSubmit('_saveasnew','{% trans 'Save as new' %}',$event)">{% trans 'Save as new' %}</el-button>
     {% endif %}
     {% if show_save_and_add_another %}
-        <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save and add another' %}"
-               name="_addanother">
+        <button type="submit" class="el-button el-button--primary el-button--small" name="_addanother">
+            {% trans 'Save and add another' %}
+        </button>
     {% endif %}
     {% if show_save_and_continue %}
 
-        <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save and continue editing' %}"
-               name="_continue">
+        <button type="submit" class="el-button el-button--primary el-button--small" name="_continue">
+            {% trans 'Save and continue editing' %}
+        </button>
     {% endif %}
     {% if show_save %}
-        <input type="submit" class="el-button el-button--primary el-button--small" value="{% trans 'Save' %}" name="_save">
+        <button type="submit" class="el-button el-button--primary el-button--small" name="_save">
+        {% trans 'Save' %}
+        </button>
     {% endif %}
     <input type="hidden" name="actionName" value="actionValue" id="actionName">
 </div>
