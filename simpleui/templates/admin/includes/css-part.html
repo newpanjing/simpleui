@@ -1,8 +1,3 @@
 {% load static simpletags %}
-{% if "SIMPLEUI_STATIC_OFFLINE"|get_config %}
-    <link rel="stylesheet" type="text/css" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
-{% else %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/element-ui@2.13.2/lib/theme-chalk/index.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css">
-{% endif %}
+<link rel="stylesheet" type="text/css" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css' %}">
