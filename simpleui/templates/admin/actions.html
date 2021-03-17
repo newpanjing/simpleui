@@ -19,6 +19,7 @@
             {% if field.0 == 'delete_selected' %}
                 <el-button size="small" type="danger" data-name="{{ field.0 }}" class="stop-submit"
                            icon="el-icon-delete" @click="delSelected('{{ field.0 }}')">{% trans 'Delete' %}</el-button>
+                <input type="hidden" name="select_across" v-model="select_across" value="0" class="select-across">
             {% else %}
                 <input type="hidden" name="select_across" v-model="select_across" value="0" class="select-across">
                 <input type="hidden" name="file_format" v-model="file_format">
@@ -67,6 +68,7 @@
                 <span class="all">{{ selection_note_all }}</span>
                 <span class="question">
             <a href="#"
+               onclick="selectAll()"
                title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}
                 Select all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
         </span>
