@@ -8,7 +8,7 @@ Vue.component('sub-menu', {
     template: `
         <div>
             <template v-for="(item,i) in menus" :key="item.eid">
-                <el-menu-item :index="item.eid" v-if="!item.models">
+                <el-menu-item :index="item.eid" v-if="!item.models" @click="openTab(item,item.eid)">
                     <i :class="item.icon"></i>
                     <span slot="title" v-text="item.name"></span>
                 </el-menu-item>
