@@ -88,7 +88,7 @@ exports.default = {
     upload: {
       deleteTip: 'Нажмите [Удалить] для удаления',
       delete: 'Удалить',
-      preview: 'Превью',
+      preview: 'Предпросмотр',
       continue: 'Продолжить'
     },
     table: {
@@ -110,10 +110,10 @@ exports.default = {
       hasCheckedFormat: '{checked}/{total} выбрано'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Произошла ошибка'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Назад'
     },
     popconfirm: {
       confirmButtonText: 'OK',
