@@ -7,38 +7,18 @@ Vue.component('sub-menu', {
     },
     template: `
         <div>
-        <template v-for="(item,i) in menus" :key="item.eid">
-                <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
+            <template v-for="(item,i) in menus" :key="item.eid">
+                <el-menu-item :index="item.eid" v-if="!item.models">
                     <i :class="item.icon"></i>
-                    <span v-if="!fold" slot="title" v-text="item.name"></span>
+                    <span slot="title" v-text="item.name"></span>
                 </el-menu-item>
-    
-                <el-submenu v-else :index="item.eid+''">
+                <el-submenu :index="item.eid" v-else>
                     <template slot="title">
                         <i :class="item.icon"></i>
-                        <span v-if="!fold" slot="title" v-text="item.name"></span>
+                        <span v-text="item.name"></span>
                     </template>
-                        
-                     <template v-for="(sub,j) in item.models">
-                     
-                    <el-menu-item-group  v-if="!sub.models" :title="sub.name" :key="sub.name">
-                        <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
-                            <i :class="sub.icon"></i>
-                            <span slot="title" v-text="sub.name"></span>
-                        </el-menu-item>
-                    </el-menu-item-group>
-                    
-                    <el-submenu  v-else>
-                       <template slot="title">
-                            <i :class="sub.icon"></i>
-                            <span v-if="!fold" slot="title" v-text="sub.name"></span>
-                        </template>
-                        <sub-menu :menus="sub.models" :fold="fold"></sub-menu>
-                    </el-submenu>
-                    </template>
-                    
+                   <sub-menu :menus="item.models"></sub-menu>
                 </el-submenu>
-    
             </template>
         </div>
     `
