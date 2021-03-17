@@ -36,7 +36,7 @@
             </el-dialog>
             {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
 
-            <el-button @click="go_url('{% add_preserved_filters history_url %}')" class="historylink"
+            <el-button @click="go_url('{% add_preserved_filters history_url %}')" class="historylink el-button--small"
                        icon="fas fa-history">{% trans "History" %}
             </el-button>
         </li>
