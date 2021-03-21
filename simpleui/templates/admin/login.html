@@ -16,19 +16,19 @@
         <title>{{ site_title }}-{% trans 'Log in' %}</title>
     {% endblock %}
     {% block icon %}
-{#        <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">#}
+{#        <link rel="icon" href="{% static 'admin/simpleui-x/img/favicon.png' %}">#}
     {% endblock %}
 
     {% include 'admin/includes/css-part.html' %}
 
     {% block css %}
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/login.css' %}?_=2.1">
+        <link rel="stylesheet" href="{% static 'admin/simpleui-x/css/login.css' %}?_=2.1">
     {% endblock %}
     {% block bg %}
         <style type="text/css">
             .bg {
                 background: #f0f2f5;
-                background-image: url('{% static '/admin/simpleui-x/img/bg.svg' %}');
+                background-image: url('{% static 'admin/simpleui-x/img/bg.svg' %}');
                 min-height: 100%;
                 background-repeat: no-repeat;
                 background-position: 50%;
@@ -51,7 +51,7 @@
             {% if "SIMPLEUI_LOGO"|get_config %}
                 <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
             {% else %}
-                <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
+                <img src="{% static 'admin/simpleui-x/img/logo.png' %}">
             {% endif %}
         </div>
     {% endblock %}
@@ -103,7 +103,7 @@
 
 {% include 'admin/includes/js-part.html' %}
 
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}?_=3.3"></script>
+<script type="text/javascript" src="{% static 'admin/simpleui-x/js/login.js' %}?_=3.3"></script>
 
 {% block  particles %}
     {% if 'SIMPLEUI_LOGIN_PARTICLES'|get_config != False %}
@@ -124,8 +124,8 @@
         </style>
         <!-- particles.js container -->
         <div id="particles-js"></div>
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/particles/particles.js' %}"></script>
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/particles/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'admin/simpleui-x/particles/particles.js' %}"></script>
+        <script type="text/javascript" src="{% static 'admin/simpleui-x/particles/app.js' %}"></script>
     {% endif %}
 {% endblock %}
 
