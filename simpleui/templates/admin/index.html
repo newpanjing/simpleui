@@ -62,6 +62,7 @@
                   href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
         {% endif %}
     {% endblock %}
+    <!-- mobile -->
     <el-drawer
             class="lite-menus"
             title="{{ site_header }}"
@@ -97,7 +98,7 @@
 
     <el-container :style="{height: height+'px'}">
 
-        <el-aside v-if="!mobile" width="auto" class="menu" {% block menu_style %}{% endblock %}>
+        <el-aside v-show="!mobile" width="auto" class="menu" {% block menu_style %}{% endblock %}>
             {% block logo %}
                 <div class="logo-wrap" v-if="!fold">
                     <div class="float-wrap">
@@ -116,6 +117,7 @@
             {% endblock %}
 
         <!-- menu -->
+        <el-collapse-transition>
         <multiple-menu
                 :menus="menus"
                 :openTab="openTab"
@@ -124,6 +126,7 @@
                 :fold="fold"
                 :app="app"
         ></multiple-menu>
+        </el-collapse-transition>
 
         </el-aside>
 

@@ -1,11 +1,15 @@
 #changelist {
-  display: block!important;
+  display: block !important;
 }
 .change-list .filtered .results,
 .change-list .filtered .paginator,
 .filtered #toolbar,
 .filtered div.xfull {
-  margin-right: 0px!important;
+  margin-right: 0px !important;
+}
+.submit-row {
+  background: inherit!important;
+  border: none!important;
 }
 #content {
   padding: 20px;
