@@ -117,7 +117,8 @@
             {% endblock %}
 
         <!-- menu -->
-        <el-collapse-transition>
+
+        <transition name="el-zoom-in-center">
         <multiple-menu
                 :menus="menus"
                 :openTab="openTab"
@@ -126,7 +127,7 @@
                 :fold="fold"
                 :app="app"
         ></multiple-menu>
-        </el-collapse-transition>
+        </transition>
 
         </el-aside>
 

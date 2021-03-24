@@ -44,8 +44,8 @@
     {% endblock %}
 </head>
 <body class="bg">
-
-<div class="login-main">
+{% block main %}
+    <div class="login-main">
     {% block logo %}
         <div class="logo">
             {% if "SIMPLEUI_LOGO"|get_config %}
@@ -100,7 +100,7 @@
         </form>
     {% endblock %}
 </div>
-
+{% endblock %}
 {% include 'admin/includes/js-part.html' %}
 
 <script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}?_=3.3"></script>
