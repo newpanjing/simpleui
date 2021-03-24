@@ -25,9 +25,9 @@ Vue.component('sub-menu', {
 
 });
 Vue.component('multiple-menu', {
-    props: ['menus', 'openTab', 'menuActive', 'fold'],
+    props: ['menus', 'menuActive', 'fold'],
     template: `
-     <el-menu :unique-opened="true" :default-active="menuActive+''" :collapse="fold" :collapse-transition="true">
+     <el-menu :unique-opened="true" :default-active="menuActive" :collapse="fold" :collapse-transition="true">
         <sub-menu :menus="menus" :fold="fold"></sub-menu>
     </el-menu>
     `

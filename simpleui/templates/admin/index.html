@@ -117,15 +117,11 @@
             {% endblock %}
 
         <!-- menu -->
-
         <transition name="el-zoom-in-center">
         <multiple-menu
                 :menus="menus"
-                :openTab="openTab"
-                :menuTextShow="menuTextShow||true"
-                :menuActive="menuActive"
+                :menu-active="menuActive"
                 :fold="fold"
-                :app="app"
         ></multiple-menu>
         </transition>
 
