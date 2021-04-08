@@ -91,6 +91,13 @@
                           @keyup.enter.native="login()"
                           placeholder="{% trans 'password' %}" show-password></el-input>
             </div>
+            {% url 'admin_password_reset' as password_reset_url %}
+              {% if password_reset_url %}
+
+             <div class="password-reset-link">
+                <a class="forgot-password" href="{{ password_reset_url }}">{% translate 'Forgotten your password or username?' %}</a>
+              </div>
+              {% endif %}
             <div class="simpleui-input-inline login-btn">
                 <el-button :icon="loading?'el-icon-loading':''" @click="login()"
                            type="primary">{% trans 'Log in' %}</el-button>
@@ -121,6 +128,16 @@
                 bottom: 0px;
                 z-index: -1;
             }
+            .forgot-password {
+                  margin-top: 10px;
+                  color: #3a8ee6;
+                  text-decoration: none;
+                  &:hover,
+                  &:active,
+                  &:focus {
+                    color: lighten($teal, 7);
+                  }
+                }
         </style>
         <!-- particles.js container -->
         <div id="particles-js"></div>
