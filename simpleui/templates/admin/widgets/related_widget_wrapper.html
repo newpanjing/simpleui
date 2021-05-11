@@ -1,0 +1,8 @@
+{% extends 'admin/widgets/related_widget_wrapper.html' %}
+{% load i18n static simpletags %}
+
+{% block links %}
+    {% if not "SIMPLEUI_ADMIN_HIDE_RELATED"|get_config %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}

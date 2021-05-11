@@ -22,8 +22,8 @@
 
     {% block css %}
         {% include 'admin/includes/css-part.html' %}
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/css/index.css' %}?_=3.2">
-        <link rel="stylesheet" href="{% static '/admin/simpleui-x/waves/waves.min.css' %}?_=2.1">
+        <link rel="stylesheet" href="{% static 'admin/simpleui-x/css/index.css' %}?_=3.2">
+        <link rel="stylesheet" href="{% static 'admin/simpleui-x/waves/waves.min.css' %}?_=2.1">
     {% endblock %}
     {% block head %}
 
@@ -62,6 +62,7 @@
                   href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
         {% endif %}
     {% endblock %}
+    <!-- mobile -->
     <el-drawer
             class="lite-menus"
             title="{{ site_header }}"
@@ -97,7 +98,7 @@
 
     <el-container :style="{height: height+'px'}">
 
-        <el-aside v-if="!mobile" width="auto" class="menu" {% block menu_style %}{% endblock %}>
+        <el-aside v-show="!mobile" width="auto" class="menu" {% block menu_style %}{% endblock %}>
             {% block logo %}
                 <div class="logo-wrap" v-if="!fold">
                     <div class="float-wrap">
@@ -105,7 +106,7 @@
                             {% if "SIMPLEUI_LOGO"|get_config %}
                                 <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
                             {% else %}
-                                <img src="{% static '/admin/simpleui-x/img/logo.png' %}">
+                                <img src="{% static 'admin/simpleui-x/img/logo.png' %}">
                             {% endif %}
                         </div>
                         <div class="left">
@@ -116,14 +117,13 @@
             {% endblock %}
 
         <!-- menu -->
+        <transition name="el-zoom-in-center">
         <multiple-menu
                 :menus="menus"
-                :openTab="openTab"
-                :menuTextShow="menuTextShow||true"
-                :menuActive="menuActive"
+                :menu-active="menuActive"
                 :fold="fold"
-                :app="app"
         ></multiple-menu>
+        </transition>
 
         </el-aside>
 
@@ -320,7 +320,7 @@
             no: '{% trans 'No' %}',
             confirm: '{% trans 'Are you sure?' %}'
         }
-        window.themeUrl = '{% static '/admin/simpleui-x/theme/' %}';
+        window.themeUrl = '{% static 'admin/simpleui-x/theme/' %}';
         window.urls = {
             changePassword: "{% url 'admin:password_change' %}",
             logout: "{% url 'admin:logout' %}"
@@ -341,20 +341,20 @@
         __simpleui_version = '{% simple_version %}';
     </script>
     <script type="text/javascript"
-            src="{% static '/admin/simpleui-x/automatic/dicts.js' %}?_={% get_version %}"></script>
+            src="{% static 'admin/simpleui-x/automatic/dicts.js' %}?_={% get_version %}"></script>
     <script type="text/javascript"
-            src="{% static '/admin/simpleui-x/automatic/segment.js' %}?_={% get_version %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_={% get_version %}"></script>
+            src="{% static 'admin/simpleui-x/automatic/segment.js' %}?_={% get_version %}"></script>
+    <script type="text/javascript" src="{% static 'admin/simpleui-x/locale/en-us.js' %}?_={% get_version %}"></script>
     <script type="text/javascript"
-            src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js?_={% get_version %}"
+            src="{% static 'admin/simpleui-x/locale/' %}{% get_language %}.js?_={% get_version %}"
             onerror="localeError()"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}?_={% get_version %}"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/theme/theme.js' %}?_={% get_version %}"></script>
+    <script type="text/javascript" src="{% static 'admin/simpleui-x/js/cookie.js' %}?_={% get_version %}"></script>
+    <script type="text/javascript" src="{% static 'admin/simpleui-x/theme/theme.js' %}?_={% get_version %}"></script>
     <script type="text/javascript"
-            src="{% static '/admin/simpleui-x/waves/waves.min.js' %}?_={% get_version %}"></script>
+            src="{% static 'admin/simpleui-x/waves/waves.min.js' %}?_={% get_version %}"></script>
     {% block index_js %}
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/menu.js' %}?_={% get_version %}"></script>
-        <script type="text/javascript" src="{% static '/admin/simpleui-x/js/index.js' %}?_={% get_version %}"></script>
+        <script type="text/javascript" src="{% static 'admin/simpleui-x/js/menu.js' %}?_={% get_version %}"></script>
+        <script type="text/javascript" src="{% static 'admin/simpleui-x/js/index.js' %}?_={% get_version %}"></script>
     {% endblock %}
     {% block autoupdate %}
 

@@ -56,7 +56,8 @@
                    @click="formSubmit()">{% trans 'Save' %}</el-button>
     {% endif %}
 
-    <el-button size="small" data-name="import_admin_action" v-for="item in exts" :key="item.name" @click="extClick(item)">
+    <el-button size="small" data-name="import_admin_action" v-for="item in exts" :key="item.name"
+               @click="extClick(item)">
         <span :class="getIcon(item.name)"></span>
         <span v-text="item.name"></span>
     </el-button>
@@ -180,6 +181,8 @@
 
                 </el-radio-group>
 
+                <input v-else-if="item.type=='file'" type="file" :ref="item.key"/>
+
                 <el-input v-else v-model="item.value" :type="item.type" :style="{width:item.width}"
                           :size="item.size"></el-input>
             </el-form-item>
@@ -191,9 +194,9 @@
         </span>
     </el-dialog>
 </div>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/dicts.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/automatic/segment.js' %}"></script>
-<script type="text/javascript" src="{% static '/admin/simpleui-x/js/axios.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/simpleui-x/automatic/dicts.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/simpleui-x/automatic/segment.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/simpleui-x/js/axios.min.js' %}"></script>
 <script type="text/javascript">
 
     const layerApp = new Vue({
@@ -204,7 +207,7 @@
             params: [],
             layer: {},
             rules: [],
-            action:''
+            action: ''
         },
         methods: {
             layerSubmit() {
@@ -232,20 +235,22 @@
                 data.append('csrfmiddlewaretoken', document.querySelector('[name="csrfmiddlewaretoken"]').value);
                 for (let key in self.params) {
                     let item = self.params[key];
-                    if (item.value) {
+                    if (item.type === "file") {
+                        data.append(item.key, self.$refs[item.key][0].files[0]);
+                    } else if (item.value) {
                         data.append(item.key, item.value);
                     }
                 }
 
                 axios.post('{% get_model_ajax_url %}', data).then(res => {
-                    if(res.data.status=='success'){
+                    if (res.data.status == 'success') {
                         self.visible = false;
                         //1.5s 后刷新
                         setTimeout(() => window.location.reload(), 1000);
                     }
                     self.$message({
-                      message: res.data.msg,
-                      type: res.data.status
+                        message: res.data.msg,
+                        type: res.data.status
                     });
                 }).catch(err => self.$message.error(err));
             }
@@ -253,7 +258,7 @@
     })
 
     //弹出层处理
-    function layer(data,action) {
+    function layer(data, action) {
         layerApp.layer = data.layer;
         layerApp.title = data.layer.title;
         layerApp.params = data.layer.params;
@@ -399,19 +404,18 @@
                 for (var i in _action.customButton) {
                     var temp = _action.customButton[i];
                     if (temp.eid == eid && temp.layer) {
-                        layer(temp,i);
+                        layer(temp, i);
                         return;
                     }
                 }
             }
 
             //TODO 需要做国际化
-            if (checkbox_checked == 0 && data_name != "add_item"&&!_action.customButton[data_name].action_url) {
+            if (checkbox_checked == 0 && data_name != "add_item" && !_action.customButton[data_name].action_url) {
                 _vue.$alert(getLanuage("Please select at least one option!"), '', {
                     type: 'warning'
                 })
-            } else
-            if (confirm) {
+            } else if (confirm) {
                 _vue.$confirm(confirm, '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',

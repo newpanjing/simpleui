@@ -524,3 +524,11 @@ def get_previous_url(context):
 def get_verbose_name_plural(context):
     return context['cl'].model._meta.verbose_name_plural
 
+
+@register.simple_tag
+def django_version_is_gte_32x():
+    arrays = django.get_version().split(".")
+    version = []
+    for s in arrays:
+        version.append(int(s))
+    return tuple(version) >= (3, 2, 0)

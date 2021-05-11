@@ -1,11 +1,15 @@
 #changelist {
-  display: block!important;
+  display: block !important;
 }
 .change-list .filtered .results,
 .change-list .filtered .paginator,
 .filtered #toolbar,
 .filtered div.xfull {
-  margin-right: 0px;
+  margin-right: 0px !important;
+}
+.submit-row {
+  background: inherit!important;
+  border: none!important;
 }
 #content {
   padding: 20px;
@@ -19,7 +23,9 @@
   margin-right: 10px;
 }
 #changelist #toolbar form input {
-  /*padding-left: 30px!important;*/
+  padding-left: 30px!important;
+  padding-top: 0px!important;
+  padding-bottom: 0px!important;
 }
 .el-link-btn {
   text-decoration: none !important;

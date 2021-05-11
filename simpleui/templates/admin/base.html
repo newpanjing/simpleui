@@ -7,42 +7,42 @@
 
     {% include 'admin/includes/css-part.html' %}
 
-    <link rel="stylesheet" type="text/css" href="{% static '/admin/css/base.css' %}?_=2.7">
-    <link rel="stylesheet" type="text/css" href="{% static '/admin/simpleui-x/css/base.css' %}?_=2.7">
-    <link rel="stylesheet" type="text/css" href="{% static '/admin/simpleui-x/theme/simpleui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}?_=2.7">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/simpleui-x/css/base.css' %}?_=2.7">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/simpleui-x/theme/simpleui.css' %}">
 
 
     {% include 'admin/includes/js-part.html' %}
 
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/language.js' %}?_=2.1.2"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
+    <script type="text/javascript" src="{% static 'admin/simpleui-x/js/language.js' %}?_=2.1.2"></script>
+    <script type="text/javascript" src="{% static 'admin/simpleui-x/locale/en-us.js' %}?_=2.1.2"></script>
+    <script type="text/javascript" src="{% static 'admin/simpleui-x/locale/' %}{% get_language %}.js"></script>
 
     {% if ""|get_language_code != 'zh-hans' %}
 
     <script type="text/javascript"
-            src="{% static '/admin/simpleui-x/elementui/umd/locale/en.js' %}?_=2.1.2"></script>
+            src="{% static 'admin/simpleui-x/elementui/umd/locale/en.js' %}?_=2.1.2"></script>
     <script type="text/javascript">
         ELEMENT.locale(ELEMENT.lang.en)
     </script>
 
     {% endif %}
-    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/simpleui-x/js/cookie.js' %}"></script>
     {% block extrastyle %}{% endblock %}
     {% if LANGUAGE_BIDI %}
-    <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static '/admin/css/rtl.css' %}{% endblock %}?_=20180905"/>{% endif %}
+    <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static 'admin/css/rtl.css' %}{% endblock %}?_=20180905"/>{% endif %}
     {% block extrahead %}{% endblock %}
     {% block responsive %}
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static '/admin/css/responsive.css' %}?_=20180905"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive.css' %}?_=20180905"/>
     {% if LANGUAGE_BIDI %}
-    <link rel="stylesheet" type="text/css" href="{% static '/admin/css/responsive_rtl.css' %}?_=20180905"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive_rtl.css' %}?_=20180905"/>
     {% endif %}
     {% endblock %}
     {% block blockbots %}
     <meta name="robots" content="NONE,NOARCHIVE"/>
     {% endblock %}
-    <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.min.js' %}"></script>
 </head>
 {% load i18n %}
 
@@ -57,7 +57,7 @@
 
     {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
     <link v-else rel="stylesheet"
-          href="{% static 'admin/simpleui-x/theme/' %}{{ SIMPLEUI_DEFAULT_THEME|get_config }}">
+          href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
     {% endif %}
 </div>
 <script type="text/javascript">
