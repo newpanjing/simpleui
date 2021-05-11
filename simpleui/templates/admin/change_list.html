@@ -87,6 +87,8 @@
 
             <form id="changelist-form" method="post" {% if cl.formset.is_multipart %}
                   enctype="multipart/form-data" {% endif %} novalidate>{% csrf_token %}
+                <!--Compatible with django 3.2 x-->
+                <button style="display:none" name="index"></button>
                 {% if cl.formset %}
                     <div>{{ cl.formset.management_form }}</div>
                 {% endif %}
