@@ -45,7 +45,7 @@ from django.utils.functional import cached_property
 from django.utils.html import conditional_escape, html_safe
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
-from widgets import *
+from simpleui.widgets import *
 
 class SimpleForm(BaseForm, metaclass=DeclarativeFieldsMetaclass):
     def get_vue_app_js(self,app_id):
