@@ -94,6 +94,7 @@ docker pull newpanjing/simpleui_demo
 
 docker run -p 8080:8080 newpanjing/simpleui_demo
 ```
+
 启动成功后访问：http://127.0.0.1:8080
 
 # simpleui 是什么？

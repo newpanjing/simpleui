@@ -531,4 +531,4 @@ def django_version_is_gte_32x():
     version = []
     for s in arrays:
         version.append(int(s))
-    return tuple(version) >= (3, 2, 0)
+    return tuple(version) >= (3, 2)

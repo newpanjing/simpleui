@@ -42,7 +42,7 @@
         </li>
         {% if has_absolute_url %}
         <li>
-            <el-button @click="window.open('{{ absolute_url }}')" class="viewsitelink" icon="fas fa-globe-asia">{% trans "View on site" %}</el-button>
+            <el-button size="small" @click="window.open('{{ absolute_url }}')" class="viewsitelink" icon="fas fa-globe-asia">{% trans "View on site" %}</el-button>
         </li>
         {% endif %}
         {% endblock %}
