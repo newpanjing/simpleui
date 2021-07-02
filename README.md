@@ -216,7 +216,7 @@ simpleui的发展离不开以下优秀贡献者的支持。如果您想为simple
 |[@shouyong](https://github.com/shouyong)|bug修复|
 |[@Roddy1219](https://github.com/Roddy1219)|bug修复|
 |[@WalkerWang731](https://github.com/WalkerWang731)|优质代码贡献|
-|[@初学者](https://www.seejoke.com)|223450427@qq.com，最low技术顾问|
+|[@初学者](https://www.seejoke.com)|223450427@qq.com，顶级技术顾问|
   
 
 # 致谢
