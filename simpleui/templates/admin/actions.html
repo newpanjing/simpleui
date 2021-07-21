@@ -230,6 +230,7 @@
                 let selecteds = [];
                 $("#result_list .selected input[name='_selected_action']").each((index, item) => selecteds.push(item.value));
                 data.append('_selected', selecteds.join(','));
+                data.append('select_across',document.querySelector("input[name='select_across']").value)
                 //获取选中的数据
 
                 data.append('csrfmiddlewaretoken', document.querySelector('[name="csrfmiddlewaretoken"]').value);
