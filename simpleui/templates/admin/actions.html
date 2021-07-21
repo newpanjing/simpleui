@@ -70,8 +70,7 @@
                 <span class="question">
             <a href="#"
                onclick="selectAll()"
-               title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}
-                Select all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
+               title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
         </span>
                 <span class="clear">
             <a href="#" onclick="unSelect()">{% trans "Clear selection" %}</a>
@@ -230,6 +229,7 @@
                 let selecteds = [];
                 $("#result_list .selected input[name='_selected_action']").each((index, item) => selecteds.push(item.value));
                 data.append('_selected', selecteds.join(','));
+                data.append('select_across',document.querySelector("input[name='select_across']").value)
                 //获取选中的数据
 
                 data.append('csrfmiddlewaretoken', document.querySelector('[name="csrfmiddlewaretoken"]').value);
