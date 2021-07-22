@@ -55,9 +55,10 @@ simpleui 特点
 Django Admin默认界面设计语言存在着的一些不足，比如色彩单一，大量线条的使用，分割化明显。将这些不足归类一下就是界面单调、雷同性明显、缺少惊喜。我们认为新的平台类视觉风格可以打破这些束缚，尝试一些新的探索，启发传统的设计认知,因此结合当下设计趋势，构思了Element+Django Admin的Simpleui。让Django Admin和Element产生完美的交互。配以最流行的后台设计风格，让Django Admin更加强大。
 
 ## QQ群
-+ QQ群号:873469913
++ QQ群号:722755389
++ QQ群号:873469913(满)
++ QQ群号:786576510(满)
 
-<img src='https://github.com/newpanjing/simpleui/raw/master/images/QQ2.jpg' width='200'>
 
 
 ## 文档
