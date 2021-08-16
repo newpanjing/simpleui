@@ -10,15 +10,14 @@ import time
 import django
 import simpleui
 from django import template
-
+from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
-from django.urls import reverse, is_valid_path
+from django.urls import is_valid_path, reverse
 from django.utils.encoding import force_text
 from django.utils.functional import Promise
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 
 register = template.Library()
 
@@ -470,7 +469,11 @@ def simple_version():
 def get_model_url(context):
     # reverse()
     opts = context.get("opts")
-    key = "admin:{}_{}_changelist".format(opts.app_label, opts.model_name)
+    request = context.get("request")
+
+    key = "{}:{}_{}_changelist".format(
+        request.current_app, opts.app_label, opts.model_name
+    )
     url = reverse(key)
     preserved_filters = dict(parse_qsl(context.get("preserved_filters")))
     if "_changelist_filters" in preserved_filters:
@@ -482,7 +485,11 @@ def get_model_url(context):
 @register.simple_tag(takes_context=True)
 def get_model_ajax_url(context):
     opts = context.get("opts")
-    key = "admin:{}_{}_ajax".format(opts.app_label, opts.model_name)
+    request = context.get("request")
+
+    key = "{}:{}_{}_changelist".format(
+        request.current_app, opts.app_label, opts.model_name
+    )
     try:
         return reverse(key)
     except:
