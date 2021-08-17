@@ -122,7 +122,7 @@ tbody tr:hover th {
 }
 body,
 #container {
-  background-color: #f1f1f1;
+  background-color: #f1f1f1 !important;
 }
 @media (max-width: 767px) {
   .change-list #content {
@@ -189,5 +189,32 @@ body,
 }
 .inline-group .tabular td.original p {
   margin-top: -42px !important;
+}
+/*django新特性 主题适配*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: inherit;
+    --primary-fg: inherit;
+    --body-fg: inherit;
+    --body-bg: inherit;
+    --body-quiet-color: inherit;
+    --body-loud-color: inherit;
+    --breadcrumbs-link-fg: inherit;
+    --breadcrumbs-bg: inherit;
+    --link-fg: inherit;
+    --link-hover-color: inherit;
+    --link-selected-fg: #FFF;
+    --hairline-color: inherit;
+    --border-color: #ccc;
+    --error-fg: inherit;
+    --message-success-bg: inherit;
+    --message-warning-bg: inherit;
+    --message-error-bg: inherit;
+    --darkened-bg: inherit;
+    --selected-bg: inherit;
+    --selected-row: inherit;
+    --close-button-bg: inherit;
+    --close-button-hover-bg: inherit;
+  }
 }
 /*# sourceMappingURL=base.css.map */

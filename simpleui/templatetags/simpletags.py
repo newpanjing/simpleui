@@ -472,7 +472,7 @@ def get_model_url(context):
     request = context.get("request")
 
     key = "{}:{}_{}_changelist".format(
-        request.current_app, opts.app_label, opts.model_name
+        get_current_app(request), opts.app_label, opts.model_name
     )
     url = reverse(key)
     preserved_filters = dict(parse_qsl(context.get("preserved_filters")))
@@ -482,13 +482,25 @@ def get_model_url(context):
     return url
 
 
+def get_current_app(request):
+    app = None
+    if hasattr(request, 'current_app'):
+        app = getattr(request, 'current_app')
+    elif hasattr(request, 'model_admin'):
+        model_admin = getattr(request, 'model_admin')
+        if hasattr(model_admin, 'opts'):
+            opts = getattr(model_admin, 'opts')
+            app = opts.app_config.name
+    return app
+
+
 @register.simple_tag(takes_context=True)
 def get_model_ajax_url(context):
     opts = context.get("opts")
     request = context.get("request")
 
     key = "{}:{}_{}_changelist".format(
-        request.current_app, opts.app_label, opts.model_name
+        get_current_app(request), opts.app_label, opts.model_name
     )
     try:
         return reverse(key)
