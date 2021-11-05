@@ -499,9 +499,7 @@ def get_model_ajax_url(context):
     opts = context.get("opts")
     request = context.get("request")
 
-    key = "{}:{}_{}_ajax".format(
-        get_current_app(request), opts.app_label, opts.model_name
-    )
+    key = "admin:{}_{}_ajax".format(opts.app_label, opts.model_name)
     try:
         return reverse(key)
     except:
