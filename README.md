@@ -28,6 +28,7 @@ Django admin theme the simpleui
 
 ---
 <p align="center">
+<a href="https://simpleui.72wo.com/" target="_blank">社区</a> |
 <a href="https://simpleui.72wo.com/docs/simpleui" target="_blank">文档</a> |
 <a href="https://simpleui.72wo.com/docs/simpleui" target="_blank">Documents</a>
 </p>
