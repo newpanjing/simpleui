@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 111);
+/******/ 	return __webpack_require__(__webpack_require__.s = 119);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,7 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 111:
+/***/ 119:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -349,6 +349,7 @@ var CARD_SCALE = 0.83;
         this.active = index === activeIndex;
         var isVertical = parentDirection === 'vertical';
         this.translate = this.calcTranslate(index, activeIndex, isVertical);
+        this.scale = 1;
       }
       this.ready = true;
     },

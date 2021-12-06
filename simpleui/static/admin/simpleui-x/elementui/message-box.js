@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 77);
+/******/ 	return __webpack_require__(__webpack_require__.s = 74);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -199,14 +199,14 @@ module.exports = require("element-ui/lib/input");
 /***/ 13:
 /***/ (function(module, exports) {
 
-module.exports = require("element-ui/lib/button");
+module.exports = require("element-ui/lib/utils/popup");
 
 /***/ }),
 
-/***/ 15:
+/***/ 14:
 /***/ (function(module, exports) {
 
-module.exports = require("element-ui/lib/utils/popup");
+module.exports = require("element-ui/lib/button");
 
 /***/ }),
 
@@ -252,7 +252,7 @@ module.exports = require("vue");
 
 /***/ }),
 
-/***/ 77:
+/***/ 74:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -557,7 +557,7 @@ render._withStripped = true
 // CONCATENATED MODULE: ./packages/message-box/src/main.vue?vue&type=template&id=6b29b012&
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/popup"
-var popup_ = __webpack_require__(15);
+var popup_ = __webpack_require__(13);
 var popup_default = /*#__PURE__*/__webpack_require__.n(popup_);
 
 // EXTERNAL MODULE: external "element-ui/lib/mixins/locale"
@@ -569,7 +569,7 @@ var input_ = __webpack_require__(10);
 var input_default = /*#__PURE__*/__webpack_require__.n(input_);
 
 // EXTERNAL MODULE: external "element-ui/lib/button"
-var button_ = __webpack_require__(13);
+var button_ = __webpack_require__(14);
 var button_default = /*#__PURE__*/__webpack_require__.n(button_);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/dom"

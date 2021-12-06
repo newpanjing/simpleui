@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 79);
+/******/ 	return __webpack_require__(__webpack_require__.s = 112);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,14 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 4:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/mixins/emitter");
-
-/***/ }),
-
-/***/ 79:
+/***/ 112:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -275,7 +268,9 @@ var keyCode = Object.freeze({
       return (this.elFormItem || {}).elFormItemSize;
     },
     _elTag: function _elTag() {
-      return (this.$vnode.data || {}).tag || 'div';
+      var tag = (this.$vnode.data || {}).tag;
+      if (!tag || tag === 'component') tag = 'div';
+      return tag;
     },
     radioGroupSize: function radioGroupSize() {
       return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
@@ -382,6 +377,13 @@ radio_group.install = function (Vue) {
 };
 
 /* harmony default export */ var packages_radio_group = __webpack_exports__["default"] = (radio_group);
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/emitter");
 
 /***/ })
 

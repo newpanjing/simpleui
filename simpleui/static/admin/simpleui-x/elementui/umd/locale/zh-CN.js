@@ -132,6 +132,9 @@
       popconfirm: {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
+      },
+      empty: {
+        description: '暂无数据'
       }
     }
   };

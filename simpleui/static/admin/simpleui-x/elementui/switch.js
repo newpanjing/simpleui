@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 88);
+/******/ 	return __webpack_require__(__webpack_require__.s = 114);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -196,21 +196,7 @@ module.exports = require("element-ui/lib/mixins/migrating");
 
 /***/ }),
 
-/***/ 22:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/mixins/focus");
-
-/***/ }),
-
-/***/ 4:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/mixins/emitter");
-
-/***/ }),
-
-/***/ 88:
+/***/ 114:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -545,6 +531,20 @@ src_component.install = function (Vue) {
 };
 
 /* harmony default export */ var packages_switch = __webpack_exports__["default"] = (src_component);
+
+/***/ }),
+
+/***/ 22:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/focus");
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/emitter");
 
 /***/ })
 

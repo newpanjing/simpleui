@@ -105,7 +105,7 @@ function addClass(el, cls) {
     }
   }
   if (!el.classList) {
-    el.className = curClass;
+    el.setAttribute('class', curClass);
   }
 };
 
@@ -126,7 +126,7 @@ function removeClass(el, cls) {
     }
   }
   if (!el.classList) {
-    el.className = trim(curClass);
+    el.setAttribute('class', trim(curClass));
   }
 };
 
@@ -190,10 +190,10 @@ function setStyle(element, styleName, value) {
 var isScroll = exports.isScroll = function isScroll(el, vertical) {
   if (isServer) return;
 
-  var determinedDirection = vertical !== null || vertical !== undefined;
+  var determinedDirection = vertical !== null && vertical !== undefined;
   var overflow = determinedDirection ? vertical ? getStyle(el, 'overflow-y') : getStyle(el, 'overflow-x') : getStyle(el, 'overflow');
 
-  return overflow.match(/(scroll|auto)/);
+  return overflow.match(/(scroll|auto|overlay)/);
 };
 
 var getScrollContainer = exports.getScrollContainer = function getScrollContainer(el, vertical) {

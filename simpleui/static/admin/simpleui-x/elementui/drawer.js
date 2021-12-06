@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 96);
+/******/ 	return __webpack_require__(__webpack_require__.s = 127);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,21 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 15:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/utils/popup");
-
-/***/ }),
-
-/***/ 4:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/mixins/emitter");
-
-/***/ }),
-
-/***/ 96:
+/***/ 127:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -333,7 +319,7 @@ render._withStripped = true
 // CONCATENATED MODULE: ./packages/drawer/src/main.vue?vue&type=template&id=a4885264&
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/popup"
-var popup_ = __webpack_require__(15);
+var popup_ = __webpack_require__(13);
 var popup_default = /*#__PURE__*/__webpack_require__.n(popup_);
 
 // EXTERNAL MODULE: external "element-ui/lib/mixins/emitter"
@@ -482,7 +468,12 @@ var emitter_default = /*#__PURE__*/__webpack_require__.n(emitter_);
         }
         this.prevActiveElement = document.activeElement;
       } else {
-        if (!this.closed) this.$emit('close');
+        if (!this.closed) {
+          this.$emit('close');
+          if (this.destroyOnClose === true) {
+            this.rendered = false;
+          }
+        }
         this.$nextTick(function () {
           if (_this.prevActiveElement) {
             _this.prevActiveElement.focus();
@@ -531,6 +522,9 @@ var emitter_default = /*#__PURE__*/__webpack_require__.n(emitter_);
     if (this.visible) {
       this.rendered = true;
       this.open();
+      if (this.appendToBody) {
+        document.body.appendChild(this.$el);
+      }
     }
   },
   destroyed: function destroyed() {
@@ -577,6 +571,20 @@ main.install = function (Vue) {
 };
 
 /* harmony default export */ var drawer = __webpack_exports__["default"] = (main);
+
+/***/ }),
+
+/***/ 13:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/utils/popup");
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/emitter");
 
 /***/ })
 

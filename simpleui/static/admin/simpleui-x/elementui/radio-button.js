@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 81);
+/******/ 	return __webpack_require__(__webpack_require__.s = 116);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,14 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 4:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/mixins/emitter");
-
-/***/ }),
-
-/***/ 81:
+/***/ 116:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -252,7 +245,8 @@ var render = function() {
           type: "radio",
           name: _vm.name,
           disabled: _vm.isDisabled,
-          tabindex: "-1"
+          tabindex: "-1",
+          autocomplete: "off"
         },
         domProps: { value: _vm.label, checked: _vm._q(_vm.value, _vm.label) },
         on: {
@@ -301,6 +295,7 @@ var emitter_ = __webpack_require__(4);
 var emitter_default = /*#__PURE__*/__webpack_require__.n(emitter_);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/radio/src/radio-button.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -454,6 +449,13 @@ radio_button.install = function (Vue) {
 };
 
 /* harmony default export */ var packages_radio_button = __webpack_exports__["default"] = (radio_button);
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/emitter");
 
 /***/ })
 

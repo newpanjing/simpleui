@@ -118,6 +118,9 @@ exports.default = {
     popconfirm: {
       confirmButtonText: 'ھەئە',
       cancelButtonText: 'ياق'
+    },
+    empty: {
+      description: 'ئۇچۇر يوق'
     }
   }
 };

@@ -118,6 +118,9 @@ exports.default = {
     popconfirm: {
       confirmButtonText: 'Ya',
       cancelButtonText: 'Tidak'
+    },
+    empty: {
+      description: 'Tidak ada data'
     }
   }
 };

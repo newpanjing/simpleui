@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 91);
+/******/ 	return __webpack_require__(__webpack_require__.s = 122);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,28 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 28:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/transitions/collapse-transition");
-
-/***/ }),
-
-/***/ 3:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/utils/util");
-
-/***/ }),
-
-/***/ 4:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/mixins/emitter");
-
-/***/ }),
-
-/***/ 91:
+/***/ 122:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -490,6 +469,27 @@ collapse_item.install = function (Vue) {
 };
 
 /* harmony default export */ var packages_collapse_item = __webpack_exports__["default"] = (collapse_item);
+
+/***/ }),
+
+/***/ 28:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/transitions/collapse-transition");
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/utils/util");
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/emitter");
 
 /***/ })
 

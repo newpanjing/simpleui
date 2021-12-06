@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 68);
+/******/ 	return __webpack_require__(__webpack_require__.s = 71);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,7 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 15:
+/***/ 13:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/utils/popup");
@@ -210,7 +210,14 @@ module.exports = require("element-ui/lib/utils/after-leave");
 
 /***/ }),
 
-/***/ 68:
+/***/ 7:
+/***/ (function(module, exports) {
+
+module.exports = require("vue");
+
+/***/ }),
+
+/***/ 71:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -355,7 +362,7 @@ component.options.__file = "packages/loading/src/loading.vue"
 var dom_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/popup"
-var popup_ = __webpack_require__(15);
+var popup_ = __webpack_require__(13);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/after-leave"
 var after_leave_ = __webpack_require__(41);
@@ -610,13 +617,6 @@ var src_Loading = function Loading() {
   directive: directive,
   service: src
 });
-
-/***/ }),
-
-/***/ 7:
-/***/ (function(module, exports) {
-
-module.exports = require("vue");
 
 /***/ }),
 

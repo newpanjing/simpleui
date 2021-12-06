@@ -203,7 +203,7 @@ module.exports = require("element-ui/lib/utils/clickoutside");
 
 /***/ }),
 
-/***/ 14:
+/***/ 15:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/scrollbar");
@@ -217,7 +217,7 @@ module.exports = require("element-ui/lib/utils/resize-event");
 
 /***/ }),
 
-/***/ 17:
+/***/ 18:
 /***/ (function(module, exports) {
 
 module.exports = require("throttle-debounce/debounce");
@@ -803,11 +803,12 @@ var render = function() {
             "validate-event": false,
             tabindex: _vm.multiple && _vm.filterable ? "-1" : null
           },
-          on: { focus: _vm.handleFocus, blur: _vm.handleBlur },
+          on: {
+            focus: _vm.handleFocus,
+            blur: _vm.handleBlur,
+            input: _vm.debouncedOnInputChange
+          },
           nativeOn: {
-            keyup: function($event) {
-              return _vm.debouncedOnInputChange($event)
-            },
             keydown: [
               function($event) {
                 if (
@@ -871,9 +872,6 @@ var render = function() {
                 _vm.visible = false
               }
             ],
-            paste: function($event) {
-              return _vm.debouncedOnInputChange($event)
-            },
             mouseenter: function($event) {
               _vm.inputHovering = true
             },
@@ -1166,11 +1164,11 @@ var tag_ = __webpack_require__(37);
 var tag_default = /*#__PURE__*/__webpack_require__.n(tag_);
 
 // EXTERNAL MODULE: external "element-ui/lib/scrollbar"
-var scrollbar_ = __webpack_require__(14);
+var scrollbar_ = __webpack_require__(15);
 var scrollbar_default = /*#__PURE__*/__webpack_require__.n(scrollbar_);
 
 // EXTERNAL MODULE: external "throttle-debounce/debounce"
-var debounce_ = __webpack_require__(17);
+var debounce_ = __webpack_require__(18);
 var debounce_default = /*#__PURE__*/__webpack_require__.n(debounce_);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/clickoutside"
@@ -1255,7 +1253,6 @@ var util_ = __webpack_require__(3);
 var shared_ = __webpack_require__(21);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/select/src/select.vue?vue&type=script&lang=js&
-//
 //
 //
 //
@@ -1772,7 +1769,7 @@ var shared_ = __webpack_require__(21);
         }
       }
       if (option) return option;
-      var label = !isObject && !isNull && !isUndefined ? value : '';
+      var label = !isObject && !isNull && !isUndefined ? String(value) : '';
       var newOption = {
         value: value,
         currentLabel: label
@@ -1889,8 +1886,9 @@ var shared_ = __webpack_require__(21);
           return item.tagName === 'INPUT';
         })[0];
         var tags = _this10.$refs.tags;
+        var tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
         var sizeInMap = _this10.initialInputHeight || 40;
-        input.style.height = _this10.selected.length === 0 ? sizeInMap + 'px' : Math.max(tags ? tags.clientHeight + (tags.clientHeight > sizeInMap ? 6 : 0) : 0, sizeInMap) + 'px';
+        input.style.height = _this10.selected.length === 0 ? sizeInMap + 'px' : Math.max(tags ? tagsHeight + (tagsHeight > sizeInMap ? 6 : 0) : 0, sizeInMap) + 'px';
         if (_this10.visible && _this10.emptyText !== false) {
           _this10.broadcast('ElSelectDropdown', 'updatePopper');
         }

@@ -189,10 +189,17 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 15:
+/***/ 13:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/utils/popup");
+
+/***/ }),
+
+/***/ 17:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/utils/types");
 
 /***/ }),
 
@@ -431,12 +438,18 @@ if (false) { var api; }
 component.options.__file = "packages/message/src/main.vue"
 /* harmony default export */ var main = (component.exports);
 // EXTERNAL MODULE: external "element-ui/lib/utils/popup"
-var popup_ = __webpack_require__(15);
+var popup_ = __webpack_require__(13);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/vdom"
 var vdom_ = __webpack_require__(23);
 
+// EXTERNAL MODULE: external "element-ui/lib/utils/types"
+var types_ = __webpack_require__(17);
+
 // CONCATENATED MODULE: ./packages/message/src/main.js
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
 
 
 
@@ -484,13 +497,15 @@ var main_Message = function Message(options) {
 
 ['success', 'warning', 'info', 'error'].forEach(function (type) {
   main_Message[type] = function (options) {
-    if (typeof options === 'string') {
-      options = {
-        message: options
-      };
+    if (Object(types_["isObject"])(options) && !Object(vdom_["isVNode"])(options)) {
+      return main_Message(_extends({}, options, {
+        type: type
+      }));
     }
-    options.type = type;
-    return main_Message(options);
+    return main_Message({
+      type: type,
+      message: options
+    });
   };
 });
 

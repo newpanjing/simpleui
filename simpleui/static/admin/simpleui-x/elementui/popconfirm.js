@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 80);
+/******/ 	return __webpack_require__(__webpack_require__.s = 118);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,28 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 13:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/button");
-
-/***/ }),
-
-/***/ 20:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/locale");
-
-/***/ }),
-
-/***/ 52:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/popover");
-
-/***/ }),
-
-/***/ 80:
+/***/ 118:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -302,7 +281,7 @@ var popover_ = __webpack_require__(52);
 var popover_default = /*#__PURE__*/__webpack_require__.n(popover_);
 
 // EXTERNAL MODULE: external "element-ui/lib/button"
-var button_ = __webpack_require__(13);
+var button_ = __webpack_require__(14);
 var button_default = /*#__PURE__*/__webpack_require__.n(button_);
 
 // EXTERNAL MODULE: external "element-ui/lib/locale"
@@ -450,6 +429,27 @@ main.install = function (Vue) {
 };
 
 /* harmony default export */ var popconfirm = __webpack_exports__["default"] = (main);
+
+/***/ }),
+
+/***/ 14:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/button");
+
+/***/ }),
+
+/***/ 20:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/locale");
+
+/***/ }),
+
+/***/ 52:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/popover");
 
 /***/ })
 

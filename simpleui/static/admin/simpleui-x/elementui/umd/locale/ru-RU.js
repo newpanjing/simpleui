@@ -132,6 +132,9 @@
       popconfirm: {
         confirmButtonText: 'OK',
         cancelButtonText: 'Отмена'
+      },
+      empty: {
+        description: 'Нет данных'
       }
     }
   };

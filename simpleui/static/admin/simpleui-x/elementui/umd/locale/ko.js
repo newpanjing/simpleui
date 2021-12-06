@@ -132,6 +132,9 @@
       popconfirm: {
         confirmButtonText: 'Yes', // to be translated
         cancelButtonText: 'No' // to be translated
+      },
+      empty: {
+        description: '데이터 없음'
       }
     }
   };

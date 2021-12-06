@@ -82,12 +82,12 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 130);
+/******/ 	return __webpack_require__(__webpack_require__.s = 135);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 130:
+/***/ 135:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -275,7 +275,7 @@ function treeCellPrefix(h, _ref8) {
 var util = __webpack_require__(8);
 
 // EXTERNAL MODULE: external "element-ui/lib/checkbox"
-var checkbox_ = __webpack_require__(18);
+var checkbox_ = __webpack_require__(19);
 var checkbox_default = /*#__PURE__*/__webpack_require__.n(checkbox_);
 
 // CONCATENATED MODULE: ./packages/table/src/table-column.js
@@ -616,7 +616,7 @@ table_column.install = function (Vue) {
 
 /***/ }),
 
-/***/ 18:
+/***/ 19:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/checkbox");

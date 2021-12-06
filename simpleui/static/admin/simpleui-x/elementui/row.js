@@ -82,12 +82,12 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 132);
+/******/ 	return __webpack_require__(__webpack_require__.s = 136);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 132:
+/***/ 136:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,10 +110,7 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       default: 'start'
     },
-    align: {
-      type: String,
-      default: 'top'
-    }
+    align: String
   },
 
   computed: {
@@ -131,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 
   render: function render(h) {
     return h(this.tag, {
-      class: ['el-row', this.justify !== 'start' ? 'is-justify-' + this.justify : '', this.align !== 'top' ? 'is-align-' + this.align : '', { 'el-row--flex': this.type === 'flex' }],
+      class: ['el-row', this.justify !== 'start' ? 'is-justify-' + this.justify : '', this.align ? 'is-align-' + this.align : '', { 'el-row--flex': this.type === 'flex' }],
       style: this.style
     }, this.$slots.default);
   }

@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 85);
+/******/ 	return __webpack_require__(__webpack_require__.s = 117);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,21 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 16:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/utils/resize-event");
-
-/***/ }),
-
-/***/ 25:
-/***/ (function(module, exports) {
-
-module.exports = require("throttle-debounce/throttle");
-
-/***/ }),
-
-/***/ 85:
+/***/ 117:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -518,6 +504,10 @@ var resize_event_ = __webpack_require__(16);
     },
     loop: function loop() {
       this.setActiveItem(this.activeIndex);
+    },
+    interval: function interval() {
+      this.pauseTimer();
+      this.startTimer();
     }
   },
 
@@ -584,6 +574,10 @@ var resize_event_ = __webpack_require__(16);
       if (this.interval <= 0 || !this.autoplay || this.timer) return;
       this.timer = setInterval(this.playSlides, this.interval);
     },
+    resetTimer: function resetTimer() {
+      this.pauseTimer();
+      this.startTimer();
+    },
     setActiveItem: function setActiveItem(index) {
       if (typeof index === 'string') {
         var filteredItems = this.items.filter(function (item) {
@@ -610,6 +604,7 @@ var resize_event_ = __webpack_require__(16);
       if (oldIndex === this.activeIndex) {
         this.resetItemPosition(oldIndex);
       }
+      this.resetTimer();
     },
     prev: function prev() {
       this.setActiveItem(this.activeIndex - 1);
@@ -691,6 +686,20 @@ main.install = function (Vue) {
 };
 
 /* harmony default export */ var carousel = __webpack_exports__["default"] = (main);
+
+/***/ }),
+
+/***/ 16:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/utils/resize-event");
+
+/***/ }),
+
+/***/ 25:
+/***/ (function(module, exports) {
+
+module.exports = require("throttle-debounce/throttle");
 
 /***/ })
 

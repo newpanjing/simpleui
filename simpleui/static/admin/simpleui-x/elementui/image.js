@@ -189,7 +189,14 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 19:
+/***/ 13:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/utils/popup");
+
+/***/ }),
+
+/***/ 17:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/utils/types");
@@ -305,7 +312,7 @@ var image_viewervue_type_template_id_5e73b307_render = function() {
       {
         ref: "el-image-viewer__wrapper",
         staticClass: "el-image-viewer__wrapper",
-        style: { "z-index": _vm.zIndex },
+        style: { "z-index": _vm.viewerZIndex },
         attrs: { tabindex: "-1" }
       },
       [
@@ -432,6 +439,9 @@ var dom_ = __webpack_require__(2);
 // EXTERNAL MODULE: external "element-ui/lib/utils/util"
 var util_ = __webpack_require__(3);
 
+// EXTERNAL MODULE: external "element-ui/lib/utils/popup"
+var popup_ = __webpack_require__(13);
+
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/image/src/image-viewer.vue?vue&type=script&lang=js&
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -488,6 +498,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+
 
 
 
@@ -589,6 +600,10 @@ var mousewheelEventName = Object(util_["isFirefox"])() ? 'DOMMouseScroll' : 'mou
         style.maxWidth = style.maxHeight = '100%';
       }
       return style;
+    },
+    viewerZIndex: function viewerZIndex() {
+      var nextZIndex = popup_["PopupManager"].nextZIndex();
+      return this.zIndex > nextZIndex ? this.zIndex : nextZIndex;
     }
   },
   watch: {
@@ -617,7 +632,8 @@ var mousewheelEventName = Object(util_["isFirefox"])() ? 'DOMMouseScroll' : 'mou
     deviceSupportInstall: function deviceSupportInstall() {
       var _this2 = this;
 
-      this._keyDownHandler = Object(util_["rafThrottle"])(function (e) {
+      this._keyDownHandler = function (e) {
+        e.stopPropagation();
         var keyCode = e.keyCode;
         switch (keyCode) {
           // ESC
@@ -645,7 +661,7 @@ var mousewheelEventName = Object(util_["isFirefox"])() ? 'DOMMouseScroll' : 'mou
             _this2.handleActions('zoomOut');
             break;
         }
-      });
+      };
       this._mouseWheelHandler = Object(util_["rafThrottle"])(function (e) {
         var delta = e.wheelDelta ? e.wheelDelta : -e.detail;
         if (delta > 0) {
@@ -816,7 +832,7 @@ var locale_ = __webpack_require__(6);
 var locale_default = /*#__PURE__*/__webpack_require__.n(locale_);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/types"
-var types_ = __webpack_require__(19);
+var types_ = __webpack_require__(17);
 
 // EXTERNAL MODULE: external "throttle-debounce/throttle"
 var throttle_ = __webpack_require__(25);

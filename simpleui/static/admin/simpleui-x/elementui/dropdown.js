@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 128);
+/******/ 	return __webpack_require__(__webpack_require__.s = 129);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -203,7 +203,7 @@ module.exports = require("element-ui/lib/utils/clickoutside");
 
 /***/ }),
 
-/***/ 128:
+/***/ 129:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -222,7 +222,7 @@ var migrating_ = __webpack_require__(11);
 var migrating_default = /*#__PURE__*/__webpack_require__.n(migrating_);
 
 // EXTERNAL MODULE: external "element-ui/lib/button"
-var button_ = __webpack_require__(13);
+var button_ = __webpack_require__(14);
 var button_default = /*#__PURE__*/__webpack_require__.n(button_);
 
 // EXTERNAL MODULE: external "element-ui/lib/button-group"
@@ -295,6 +295,10 @@ var util_ = __webpack_require__(3);
     tabindex: {
       type: Number,
       default: 0
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -352,7 +356,7 @@ var util_ = __webpack_require__(3);
     show: function show() {
       var _this = this;
 
-      if (this.triggerElm.disabled) return;
+      if (this.disabled) return;
       clearTimeout(this.timeout);
       this.timeout = setTimeout(function () {
         _this.visible = true;
@@ -361,7 +365,7 @@ var util_ = __webpack_require__(3);
     hide: function hide() {
       var _this2 = this;
 
-      if (this.triggerElm.disabled) return;
+      if (this.disabled) return;
       this.removeTabindex();
       if (this.tabindex >= 0) {
         this.resetTabindex(this.triggerElm);
@@ -372,7 +376,7 @@ var util_ = __webpack_require__(3);
       }, this.trigger === 'click' ? 0 : this.hideTimeout);
     },
     handleClick: function handleClick() {
-      if (this.triggerElm.disabled) return;
+      if (this.disabled) return;
       if (this.visible) {
         this.hide();
       } else {
@@ -516,7 +520,8 @@ var util_ = __webpack_require__(3);
     var hide = this.hide,
         splitButton = this.splitButton,
         type = this.type,
-        dropdownSize = this.dropdownSize;
+        dropdownSize = this.dropdownSize,
+        disabled = this.disabled;
 
 
     var handleMainButtonClick = function handleMainButtonClick(event) {
@@ -524,30 +529,45 @@ var util_ = __webpack_require__(3);
       hide();
     };
 
-    var triggerElm = !splitButton ? this.$slots.default : h('el-button-group', [h(
-      'el-button',
-      {
-        attrs: { type: type, size: dropdownSize },
-        nativeOn: {
-          'click': handleMainButtonClick
-        }
-      },
-      [this.$slots.default]
-    ), h(
-      'el-button',
-      { ref: 'trigger', attrs: { type: type, size: dropdownSize },
-        'class': 'el-dropdown__caret-button' },
-      [h('i', { 'class': 'el-dropdown__icon el-icon-arrow-down' })]
-    )]);
+    var triggerElm = null;
+    if (splitButton) {
+      triggerElm = h('el-button-group', [h(
+        'el-button',
+        {
+          attrs: { type: type, size: dropdownSize, disabled: disabled },
+          nativeOn: {
+            'click': handleMainButtonClick
+          }
+        },
+        [this.$slots.default]
+      ), h(
+        'el-button',
+        { ref: 'trigger', attrs: { type: type, size: dropdownSize, disabled: disabled },
+          'class': 'el-dropdown__caret-button' },
+        [h('i', { 'class': 'el-dropdown__icon el-icon-arrow-down' })]
+      )]);
+    } else {
+      triggerElm = this.$slots.default;
+      var vnodeData = triggerElm[0].data || {};
+      var _vnodeData$attrs = vnodeData.attrs,
+          attrs = _vnodeData$attrs === undefined ? {} : _vnodeData$attrs;
+
+      if (disabled && !attrs.disabled) {
+        attrs.disabled = true;
+        vnodeData.attrs = attrs;
+      }
+    }
+    var menuElm = disabled ? null : this.$slots.dropdown;
 
     return h(
       'div',
       { 'class': 'el-dropdown', directives: [{
           name: 'clickoutside',
           value: hide
-        }]
+        }],
+        attrs: { 'aria-disabled': disabled }
       },
-      [triggerElm, this.$slots.dropdown]
+      [triggerElm, menuElm]
     );
   }
 });
@@ -591,7 +611,7 @@ dropdown.install = function (Vue) {
 
 /***/ }),
 
-/***/ 13:
+/***/ 14:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/button");

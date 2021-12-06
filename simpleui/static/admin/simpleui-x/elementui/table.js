@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 56);
+/******/ 	return __webpack_require__(__webpack_require__.s = 57);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -534,17 +534,17 @@ module.exports = require("element-ui/lib/mixins/migrating");
 module.exports = require("element-ui/lib/utils/clickoutside");
 
 /***/ }),
-/* 13 */,
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/scrollbar");
-
-/***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/utils/popup");
+
+/***/ }),
+/* 14 */,
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/scrollbar");
 
 /***/ }),
 /* 16 */
@@ -553,19 +553,19 @@ module.exports = require("element-ui/lib/utils/popup");
 module.exports = require("element-ui/lib/utils/resize-event");
 
 /***/ }),
-/* 17 */
+/* 17 */,
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = require("throttle-debounce/debounce");
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/checkbox");
 
 /***/ }),
-/* 19 */,
 /* 20 */,
 /* 21 */,
 /* 22 */,
@@ -627,7 +627,8 @@ module.exports = require("normalize-wheel");
 /* 53 */,
 /* 54 */,
 /* 55 */,
-/* 56 */
+/* 56 */,
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1076,7 +1077,7 @@ render._withStripped = true
 // CONCATENATED MODULE: ./packages/table/src/table.vue?vue&type=template&id=493fe34e&
 
 // EXTERNAL MODULE: external "element-ui/lib/checkbox"
-var checkbox_ = __webpack_require__(18);
+var checkbox_ = __webpack_require__(19);
 var checkbox_default = /*#__PURE__*/__webpack_require__.n(checkbox_);
 
 // EXTERNAL MODULE: external "throttle-debounce"
@@ -1498,16 +1499,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this = this;
 
       var load = this.table.load;
-      var _states6 = this.states,
-          lazyTreeNodeMap = _states6.lazyTreeNodeMap,
-          treeData = _states6.treeData;
+      var rawTreeData = this.states.treeData;
 
-      if (load && !treeData[key].loaded) {
-        treeData[key].loading = true;
+      if (load && !rawTreeData[key].loaded) {
+        rawTreeData[key].loading = true;
         load(row, treeNode, function (data) {
           if (!Array.isArray(data)) {
             throw new Error('[ElTable] data must be an array');
           }
+          var _states6 = _this.states,
+              lazyTreeNodeMap = _states6.lazyTreeNodeMap,
+              treeData = _states6.treeData;
+
           treeData[key].loading = false;
           treeData[key].loaded = true;
           treeData[key].expanded = true;
@@ -2095,7 +2098,7 @@ watcher.prototype.updateTableScrollY = function () {
 
 /* harmony default export */ var src_store = (watcher);
 // EXTERNAL MODULE: external "throttle-debounce/debounce"
-var debounce_ = __webpack_require__(17);
+var debounce_ = __webpack_require__(18);
 var debounce_default = /*#__PURE__*/__webpack_require__.n(debounce_);
 
 // CONCATENATED MODULE: ./packages/table/src/store/helper.js
@@ -2741,6 +2744,8 @@ var table_body_extends = Object.assign || function (target) { for (var i = 1; i 
         }));
       }
 
+      classes.push('el-table__cell');
+
       return classes.join(' ');
     },
     getColspanRealWidth: function getColspanRealWidth(columns, colspan, index) {
@@ -2958,7 +2963,7 @@ var table_body_extends = Object.assign || function (target) { for (var i = 1; i 
             'td',
             {
               attrs: { colspan: this.columnsCount },
-              'class': 'el-table__expanded-cell' },
+              'class': 'el-table__cell el-table__expanded-cell' },
             [renderExpanded(this.$createElement, { row: row, $index: $index, store: this.store })]
           )]
         )]];
@@ -3189,7 +3194,7 @@ var vue_popper_ = __webpack_require__(5);
 var vue_popper_default = /*#__PURE__*/__webpack_require__.n(vue_popper_);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/popup"
-var popup_ = __webpack_require__(15);
+var popup_ = __webpack_require__(13);
 
 // EXTERNAL MODULE: external "element-ui/lib/utils/clickoutside"
 var clickoutside_ = __webpack_require__(12);
@@ -3228,7 +3233,7 @@ var checkbox_group_ = __webpack_require__(39);
 var checkbox_group_default = /*#__PURE__*/__webpack_require__.n(checkbox_group_);
 
 // EXTERNAL MODULE: external "element-ui/lib/scrollbar"
-var scrollbar_ = __webpack_require__(14);
+var scrollbar_ = __webpack_require__(15);
 var scrollbar_default = /*#__PURE__*/__webpack_require__.n(scrollbar_);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./packages/table/src/filter-panel.vue?vue&type=script&lang=js&
@@ -3627,7 +3632,7 @@ var convertToRows = function convertToRows(originColumns) {
                   ) : '']
                 )]
               );
-            }), _this.hasGutter ? h('th', { 'class': 'gutter' }) : '']
+            }), _this.hasGutter ? h('th', { 'class': 'el-table__cell gutter' }) : '']
           );
         })]
       )]
@@ -3777,6 +3782,8 @@ var convertToRows = function convertToRows(originColumns) {
           column: column
         }));
       }
+
+      classes.push('el-table__cell');
 
       return classes.join(' ');
     },
@@ -4074,14 +4081,14 @@ var table_footer_extends = Object.assign || function (target) { for (var i = 1; 
               attrs: { colspan: column.colSpan,
                 rowspan: column.rowSpan
               },
-              'class': _this.getRowClasses(column, cellIndex) },
+              'class': [].concat(_this.getRowClasses(column, cellIndex), ['el-table__cell']) },
             [h(
               'div',
               { 'class': ['cell', column.labelClassName] },
               [sums[cellIndex]]
             )]
           );
-        }), this.hasGutter ? h('th', { 'class': 'gutter' }) : ''])]
+        }), this.hasGutter ? h('th', { 'class': 'el-table__cell gutter' }) : ''])]
       )]
     );
   },
