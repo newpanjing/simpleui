@@ -14,7 +14,11 @@ from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.urls import is_valid_path, reverse
-from django.utils.encoding import force_text
+
+try:
+    from django.utils.encoding import force_text
+except:
+    from django.utils.encoding import force_str as force_text
 from django.utils.functional import Promise
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
