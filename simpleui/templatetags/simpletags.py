@@ -152,6 +152,15 @@ def __get_config(name):
     return value
 
 
+@register.simple_tag
+def get_setting(name):
+    """
+    获取设置项，默认为None
+    自2022.1版本开始增加该方法
+    """
+    return __get_config(name)
+
+
 @register.filter
 def get_config(key):
     return __get_config(key)
