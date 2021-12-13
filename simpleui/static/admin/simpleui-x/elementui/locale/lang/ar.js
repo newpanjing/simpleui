@@ -117,6 +117,9 @@ exports.default = {
     popconfirm: {
       confirmButtonText: 'تأكيد',
       cancelButtonText: 'إلغاء'
+    },
+    empty: {
+      description: 'لايوجد بيانات'
     }
   }
 };

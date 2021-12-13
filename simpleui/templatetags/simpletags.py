@@ -14,7 +14,11 @@ from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.urls import is_valid_path, reverse
-from django.utils.encoding import force_text
+
+try:
+    from django.utils.encoding import force_text
+except:
+    from django.utils.encoding import force_str as force_text
 from django.utils.functional import Promise
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -146,6 +150,15 @@ def __get_config(name):
     value = os.environ.get(name, getattr(settings, name, None))
 
     return value
+
+
+@register.simple_tag
+def get_setting(name):
+    """
+    获取设置项，默认为None
+    自2022.1版本开始增加该方法
+    """
+    return __get_config(name)
 
 
 @register.filter
