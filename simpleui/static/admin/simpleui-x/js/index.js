@@ -593,7 +593,7 @@
             report: function (url) {
                 if (!url) {
                     if (document.querySelector('html').lang) {
-                        url = 'https://simpleui.88cto.com';
+                        url = 'https://simpleui.72wo.com';
                     } else {
                         url = 'https://github.com/newpanjing/simpleui/issues';
                     }

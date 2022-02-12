@@ -1,8 +1,3 @@
 {% load static simpletags %}
-<!-- 开发环境版本，包含了有帮助的命令行警告 -->
-{#{% if "DEBUG"|get_config %}#}
-{#<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>#}
-{#{% else %}#}
 <script type="text/javascript" src="{% static 'admin/simpleui-x/js/vue.min.js' %}?_={% get_version %}"></script>
-{#{% endif %}#}
 <script type="text/javascript" src="{% static 'admin/simpleui-x/elementui/index.js' %}?_={% get_version %}"></script>
