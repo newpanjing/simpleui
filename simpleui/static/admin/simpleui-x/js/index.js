@@ -212,13 +212,22 @@
                         return;
                     }
 
-                    if (item.models) {
-                        item.models.forEach(child => {
-                            self.models.push(child);
-                        });
-                    } else {
-                        self.models.push(item);
+                    let models = [];
+
+                    function deep(menus) {
+                        menus.forEach(item => {
+                            models.push(item);
+                            if (item.models) {
+                                deep(item.models);
+                            }
+                        })
+
                     }
+
+                    deep(newValue);
+
+                    self.models = models;
+
                 });
             }
             /*,
@@ -309,7 +318,7 @@
                         item.models.forEach(mItem => {
                             mItem.icon = getIcon(mItem.name, mItem.icon);
                             self.menuData.push(mItem)
-                            if(mItem.models){
+                            if (mItem.models) {
                                 self.handlerMenus(mItem.models);
                             }
                         });
@@ -593,7 +602,7 @@
             report: function (url) {
                 if (!url) {
                     if (document.querySelector('html').lang) {
-                        url = 'https://simpleui.88cto.com';
+                        url = 'https://simpleui.72wo.com';
                     } else {
                         url = 'https://github.com/newpanjing/simpleui/issues';
                     }

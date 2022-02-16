@@ -379,7 +379,7 @@ def load_analysis(context):
 
         b64 = base64.b64encode(str(j).encode('utf-8'))
 
-        url = '//simpleui.88cto.com/analysis'
+        url = '//simpleui.72wo.com/analysis'
         b64 = b64.decode('utf-8')
         html = '<script async type="text/javascript" src="{}/{}"></script>'.format(url, b64);
         context.request.session[key] = True
