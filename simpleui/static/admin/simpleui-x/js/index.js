@@ -216,10 +216,18 @@
 
                     function deep(menus) {
                         menus.forEach(item => {
-                            models.push(item);
+                            //这是首页，不显示
+                            if (item.eid === "1") {
+                                return;
+                            }
+
                             if (item.models) {
                                 deep(item.models);
+                            } else {
+                                //没有子级的时候，才加入到首页菜单中去
+                                models.push(item);
                             }
+
                         })
 
                     }
