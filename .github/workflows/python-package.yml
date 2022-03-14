@@ -1,0 +1,43 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python package
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Deploy Django-SimpleUI
+      # You may pin to the exact commit or the version.
+      # uses: remorses/pypi@c5a97a333f4d4d59cea6ec2e6a17c15e3241be29
+      uses: remorses/pypi@v3
+      with:
+        # setup file
+        setup_file: ./setup.py
+        # username
+        username: newpanjing
+        # password
+        password: Jing19930204
