@@ -510,8 +510,6 @@ def get_current_app(request):
 @register.simple_tag(takes_context=True)
 def get_model_ajax_url(context):
     opts = context.get("opts")
-    request = context.get("request")
-
     key = "admin:{}_{}_ajax".format(opts.app_label, opts.model_name)
     try:
         return reverse(key)
