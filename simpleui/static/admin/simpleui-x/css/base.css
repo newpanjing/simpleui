@@ -190,6 +190,9 @@ body,
 .inline-group .tabular td.original p {
   margin-top: -42px !important;
 }
+:root {
+  --error-fg: red!important;
+}
 /*django新特性 主题适配*/
 @media (prefers-color-scheme: dark) {
   :root {
@@ -217,4 +220,3 @@ body,
     --close-button-hover-bg: inherit;
   }
 }
-/*# sourceMappingURL=base.css.map */
