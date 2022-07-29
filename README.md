@@ -233,5 +233,7 @@ simpleui的发展离不开以下优秀贡献者的支持。如果您想为simple
 |[@初学者](https://www.seejoke.com)|223450427@qq.com，顶级技术顾问|
   
 
+<a href="https://github.com/newpanjing/simpleui/contributors"><img src="https://opencollective.com/simpleui/contributors.svg?width=890&button=false"></a>
+
 # 致谢
 开发工具由[Jetbrains](https://www.jetbrains.com/)赞助的Pycharm
