@@ -13,18 +13,12 @@ class AjaxAdmin(admin.ModelAdmin):
     This class is used to add ajax functionality to the admin interface.
     """
 
-    def callback(self, request):
-        """
-        This method is used to handle ajax requests.
-        """
+    def _get_queryset(self, request):
         post = request.POST
         action = post.get("_action")
         selected = post.get("_selected")
         select_across = post.get("select_across")
-
-        # call admin
         if hasattr(self, action):
-            func, action, description = self.get_action(action)
             # 这里的queryset 会有数据过滤，只包含选中的数据
             queryset = self.get_changelist_instance(request).get_queryset(request)
 
@@ -59,18 +53,39 @@ class AjaxAdmin(admin.ModelAdmin):
                     if _filter:
                         filter_value = json.loads(_filter)
                         queryset = queryset.filter(**filter_value)
+            return queryset
+        else:
+            raise Exception("action not found")
 
-            return func(self, request, queryset)
+    def callback(self, request):
+        """
+        This method is used to handle ajax requests.
+        """
+        post = request.POST
+        action = post.get("_action")
+
+        # call admin
+        if hasattr(self, action):
+            func, action, description = self.get_action(action)
+            qs = self._get_queryset(request)
+            return func(self, request, qs)
 
     def get_layer(self, request):
         """
         This method is used to get the layer of the admin interface.
         """
-        _action = request.GET.get("_action")
+        _action = request.POST.get("_action")
         if hasattr(self, _action):
             func, action, description = self.get_action(_action)
             if hasattr(func, "layer"):
-                result = func.layer(self, request)
+                arg_count = func.layer.__code__.co_argcount
+                if arg_count == 2:
+                    result = func.layer(self, request)
+                elif arg_count == 3:
+                    # 兼容老版本
+                    qs = self._get_queryset(request)
+                    result = func.layer(self, request, qs)
+
                 return JsonResponse(data=result, safe=False)
         else:
             raise Exception(f'action "{_action}" not found')
