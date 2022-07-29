@@ -63,6 +63,17 @@ Django Admin默认界面设计语言存在着的一些不足，比如色彩单�
 
 > 我们推荐在[Simple社区](https://simpleui.72wo.com)提问，方便以后大家有问题的时候直接查找。
 
+## 专业版
+> 如果免费版无法满足您的需求，我们还提供了一个功能更强大的pro版，可以满足更多的需求
+
+> 提供了数十个自定义组件+拖拽式首页设计和图表设计
+
+Demo：[https://simplepro.demo.72wo.com/](https://simplepro.demo.72wo.com/)
+
+官网：[https://simpleui.72wo.com/simplepro](https://simpleui.72wo.com/simplepro)
+
+
+
 ## 文档
 文档详细的描述了安装使用方法，以及各种配置项的说明，请点击以下链接查阅。
  
