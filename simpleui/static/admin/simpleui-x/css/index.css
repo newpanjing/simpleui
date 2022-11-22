@@ -19,6 +19,20 @@ body {
 .menu .el-menu {
   border-right: 0px;
 }
+.menu .el-menu .fas,
+.menu .el-menu .far,
+.menu .el-menu .fab,
+.menu .el-menu .fa {
+  margin: 0px;
+  margin-right: 5px;
+  text-align: left;
+  width: auto;
+}
+.menu .el-menu [class^=el-icon-] {
+  margin: 0px;
+  text-align: left;
+  width: auto;
+}
 .menu .el-menu .is-active {
   color: #409eff !important;
 }
