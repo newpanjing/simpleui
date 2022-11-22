@@ -4,10 +4,10 @@ if (!window.dicts) {
 
 function Segment() {
     //初始化词库
-    var mappers = {}
+    let mappers = {}
 
-    for (key in dicts) {
-        var array = dicts[key];
+    for (let key in dicts) {
+        let array = dicts[key];
         array.map((value, index) => {
             mappers[value.toUpperCase()] = key;
         });
@@ -16,16 +16,16 @@ function Segment() {
         return mappers;
     }
     this.cut = function (sentence) {
-        var start = 0, end = sentence.length - 1;
-        while (start != end) {
-            var str = [];
-            for (var i = start; i <= end; i++) {
-                var s = sentence.substring(i, i + 1);
+        let start = 0, end = sentence.length - 1;
+        while (start !== end) {
+            let str = [];
+            for (let i = start; i <= end; i++) {
+                let s = sentence.substring(i, i + 1);
 
                 str.push(s);
                 // 如果在字典中，则添加到分词结果集
 
-                var val = mappers[str.join('').toUpperCase().replace(/ /g, '')];
+                let val = mappers[str.join('').toUpperCase().replace(/ /g, '')];
                 if (val) {
                     return val;
                 }
@@ -38,16 +38,16 @@ function Segment() {
     }
 }
 
-var segment = new Segment();
+const segment = new Segment();
 
 function getIcon(name, icon) {
     if(!name){
         return;
     }
-    var value = 'far fa-circle';
+    let value = 'far fa-circle';
     if (icon) {
         //有默认图标的
-        if (icon != value) {
+        if (icon !== value) {
             return icon;
         }
     }
