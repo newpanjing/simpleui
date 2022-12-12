@@ -4,7 +4,7 @@ import traceback
 
 from django.contrib import admin
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import path
 
 
@@ -68,7 +68,24 @@ class AjaxAdmin(admin.ModelAdmin):
         if hasattr(self, action):
             func, action, description = self.get_action(action)
             qs = self._get_queryset(request)
-            return func(self, request, qs)
+            r = func(self, request, qs)
+            if r is None:
+                return JsonResponse(data={
+                    "status": "success",
+                    "msg": "Success!"
+                })
+            if isinstance(r, HttpResponseRedirect):
+                return JsonResponse(data={
+                    "status": "redirect",
+                    "url": r.url
+                })
+            elif isinstance(r, JsonResponse):
+                return r
+            elif isinstance(r, dict):
+                return JsonResponse(data=r)
+            else:
+                logging.warning(f"action {action} return type is {type(r)}")
+                return JsonResponse(data={"status": "error", "msg": r})
 
     def get_layer(self, request):
         """
