@@ -52,10 +52,21 @@ class AjaxAdmin(admin.ModelAdmin):
                     _filter = post.get("_filter")
                     if _filter:
                         filter_value = json.loads(_filter)
-                        queryset = queryset.filter(**filter_value)
+                        new_filter = self.__clean_filter(filter_value)
+                        queryset = queryset.filter(**new_filter)
             return queryset
         else:
             raise Exception("action not found")
+
+    def __clean_filter(self, _filter):
+        new_filter = {}
+        for k, v in _filter.items():
+            if "__exact" in k and isinstance(v, list):
+                new_filter[k.replace('__exact', '__in')] = v[0]
+            else:
+                new_filter[k] = v
+
+        return new_filter
 
     def callback(self, request):
         """
