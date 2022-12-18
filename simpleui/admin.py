@@ -4,7 +4,7 @@ import traceback
 
 from django.contrib import admin
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import path
 
 
@@ -52,10 +52,21 @@ class AjaxAdmin(admin.ModelAdmin):
                     _filter = post.get("_filter")
                     if _filter:
                         filter_value = json.loads(_filter)
-                        queryset = queryset.filter(**filter_value)
+                        new_filter = self.__clean_filter(filter_value)
+                        queryset = queryset.filter(**new_filter)
             return queryset
         else:
             raise Exception("action not found")
+
+    def __clean_filter(self, _filter):
+        new_filter = {}
+        for k, v in _filter.items():
+            if "__exact" in k and isinstance(v, list):
+                new_filter[k.replace('__exact', '__in')] = v[0]
+            else:
+                new_filter[k] = v
+
+        return new_filter
 
     def callback(self, request):
         """
@@ -68,7 +79,24 @@ class AjaxAdmin(admin.ModelAdmin):
         if hasattr(self, action):
             func, action, description = self.get_action(action)
             qs = self._get_queryset(request)
-            return func(self, request, qs)
+            r = func(self, request, qs)
+            if r is None:
+                return JsonResponse(data={
+                    "status": "success",
+                    "msg": "Success!"
+                })
+            if isinstance(r, HttpResponseRedirect):
+                return JsonResponse(data={
+                    "status": "redirect",
+                    "url": r.url
+                })
+            elif isinstance(r, JsonResponse):
+                return r
+            elif isinstance(r, dict):
+                return JsonResponse(data=r)
+            else:
+                logging.warning(f"action {action} return type is {type(r)}")
+                return JsonResponse(data={"status": "error", "msg": r})
 
     def get_layer(self, request):
         """
