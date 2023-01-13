@@ -38,5 +38,7 @@ var Lanuages = {
 
     'Set font size': 'Seleccionar tamaño de fuente',
     'Reset': 'Resetear',
-    'Are you sure you want to delete the selected?': '¿Seguro que desea borrar lo seleccionado?'
+    'Are you sure you want to delete the selected?': '¿Seguro que desea borrar lo seleccionado?',
+    'Please select at least one option!': '¡Elige al menos una opción!',
+    'Please enter your username or password!': 'Introduce tu correo electrónico y contraseña'
 }
