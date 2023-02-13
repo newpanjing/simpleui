@@ -115,6 +115,8 @@
                         v-else-if="item.type=='date'"
                         :style="{width:item.width}"
                         :size="item.size"
+                        :format="item.format"
+                        :value-format="item.value_format"
                         v-model="item.value"
                         type="date">
                 </el-date-picker>
@@ -123,6 +125,8 @@
                         v-else-if="item.type=='datetime'"
                         :style="{width:item.width}"
                         :size="item.size"
+                        :format="item.format"
+                        :value-format="item.value_format"
                         v-model="item.value"
                         type="datetime">
                 </el-date-picker>
