@@ -109,14 +109,14 @@ exports.default = {
       hasCheckedFormat: '{checked}/{total} coché(s)'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Échec'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Retour'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non'
     },
     empty: {
       description: 'Aucune donnée'
