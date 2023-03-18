@@ -95,13 +95,6 @@ Demo：[https://simplepro.demo.72wo.com/](https://simplepro.demo.72wo.com/)
 如果你没有任何python django基础，可以下载一个可以直接运行的demo进行体验。
 [😝DEMO源码](https://github.com/newpanjing/simpleui_demo)
 
-## 在线Demo
-> 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
-
-+ 地址：[https://www.88cto.com/admin/](https://www.88cto.com/admin/)
-+ 用户名：demo
-+ 密码：demo123456
-
 ## Docker
 ```shell
 docker pull newpanjing/simpleui_demo
