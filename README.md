@@ -64,6 +64,22 @@ Django Admin默认界面设计语言存在着的一些不足，比如色彩单�
 
 > 我们推荐在[Simple社区](https://simpleui.72wo.com)提问，方便以后大家有问题的时候直接查找。
 
+## 社区APP
+
+为了让大家方便快捷的查找遇到的相关问题，我们开发了iOS与macOS的app
+
++ macOS APP
+
+https://apps.apple.com/cn/app/simple%E7%A4%BE%E5%8C%BA/id1630714801?mt=12
+
+或者Mac App Store中搜索 `Simple社区`
+
++ iOS APP
+
+https://apps.apple.com/cn/app/%E7%8C%BF%E5%A0%86%E5%A0%86/id6443633238
+
+或者iOS App Store中搜索 `猿堆堆`
+
 ## 专业版
 > 如果免费版无法满足您的需求，我们还提供了一个功能更强大的pro版，可以满足更多的需求
 
