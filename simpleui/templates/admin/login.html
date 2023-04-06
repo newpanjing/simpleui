@@ -91,6 +91,12 @@
                           @keyup.enter.native="login()"
                           placeholder="{% trans 'password' %}" show-password></el-input>
             </div>
+            <!-- 自定义静态验证码 -->
+            <div class="simpleui-input-inline">
+                <el-input prefix-icon="fas fa-shield-alt" v-model="code" name="code"  @keyup.enter.native="login()"
+                          placeholder="请输入验证码" maxlength="6" required></el-input>
+                <canvas id="s-canvas" width="150px" height="40px" @click="makeCode(6)"></canvas>
+            </div>
             {% url 'admin_password_reset' as password_reset_url %}
               {% if password_reset_url %}
 
