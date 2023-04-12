@@ -460,6 +460,11 @@
             }
             ,
             openTab: function (data, index, selected, loading) {
+                //support version: 2022.6.13
+                if (data.newTab) {
+                    window.open(data.url);
+                    return;
+                }
                 if (data.breadcrumbs) {
                     this.breadcrumbs = data.breadcrumbs;
                 }

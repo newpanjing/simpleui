@@ -23,7 +23,7 @@
 <div id="content-main" class="form-main">
     {% if '_popup' not in request.GET %}
     <div class="page-header">
-        <el-page-header @back="goBack" content="{{title}}"/>
+        <el-page-header title="{% trans 'Back' %}" @back="goBack" content="{{title}}"/>
     </div>
     {% endif %}
     {% block object-tools %}
