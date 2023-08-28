@@ -21,16 +21,16 @@ Django admin theme the simpleui
 
 ---
 <p align="center">
-中文 | <a href="./doc/en/README_en.md">English</a>
+中文 | <a href="https://newpanjing.github.io/simpleui_docs/en/">English</a>
 </p>
 
 ---
 
 ---
 <p align="center">
-<a href="https://simpleui.72wo.com/" target="_blank">社区</a> |
-<a href="https://simpleui.72wo.com/docs/simpleui" target="_blank">文档</a> |
-<a href="https://simpleui.72wo.com/docs/simpleui" target="_blank">Documents</a>
+<a href="https://www.mldoo.com" target="_blank">社区</a> |
+<a href="https://newpanjing.github.io/simpleui_docs/" target="_blank">文档</a> |
+<a href="https://newpanjing.github.io/simpleui_docs/en/" target="_blank">Documents</a>
 </p>
 ---
 <a href="https://www.88cto.com/admin/">
@@ -62,23 +62,8 @@ Django Admin默认界面设计语言存在着的一些不足，比如色彩单�
 + QQ群号:873469913(满)
 + QQ群号:786576510(满)
 
-> 我们推荐在[Simple社区](https://simpleui.72wo.com)提问，方便以后大家有问题的时候直接查找。
+> 我们推荐在[猿堆堆社区](https://www.mldoo.com)提问，方便以后大家有问题的时候直接查找。
 
-## 社区APP
-
-为了让大家方便快捷的查找遇到的相关问题，我们开发了iOS与macOS的app
-
-+ macOS APP
-
-https://apps.apple.com/cn/app/simple%E7%A4%BE%E5%8C%BA/id1630714801?mt=12
-
-或者Mac App Store中搜索 `Simple社区`
-
-+ iOS APP
-
-https://apps.apple.com/cn/app/%E7%8C%BF%E5%A0%86%E5%A0%86/id6443633238
-
-或者iOS App Store中搜索 `猿堆堆`
 
 ## 专业版
 > 如果免费版无法满足您的需求，我们还提供了一个功能更强大的pro版，可以满足更多的需求
@@ -87,7 +72,7 @@ https://apps.apple.com/cn/app/%E7%8C%BF%E5%A0%86%E5%A0%86/id6443633238
 
 Demo：[https://www.mldoo.com/demo/simplepro](https://www.mldoo.com/demo/simplepro)
 
-官网：[https://simpleui.72wo.com/simplepro](https://www.mldoo.com/docs/simplepro)
+官网：[https://www.mldoo.com/simplepro](https://www.mldoo.com/docs/simplepro)
 
 
 
@@ -126,7 +111,7 @@ docker run -p 8080:8080 newpanjing/simpleui_demo
 与suit是同类产品。我们是一个更符合国人审美和使用习惯的一个主题。
 
 # 开始使用
-详细步骤请浏览 [使用文档](./QUICK.md)。 也可以参考[Demo](#在线Demo)
+详细步骤请浏览 [使用文档](https://newpanjing.github.io/simpleui_docs/config.html)。 也可以参考[Demo](#在线Demo)
 
 + 安装
 ```python
