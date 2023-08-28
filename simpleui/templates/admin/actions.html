@@ -115,6 +115,8 @@
                         v-else-if="item.type=='date'"
                         :style="{width:item.width}"
                         :size="item.size"
+                        :format="item.format"
+                        :value-format="item.value_format"
                         v-model="item.value"
                         type="date">
                 </el-date-picker>
@@ -123,6 +125,8 @@
                         v-else-if="item.type=='datetime'"
                         :style="{width:item.width}"
                         :size="item.size"
+                        :format="item.format"
+                        :value-format="item.value_format"
                         v-model="item.value"
                         type="datetime">
                 </el-date-picker>
@@ -180,7 +184,7 @@
 
                 </el-radio-group>
 
-                <input v-else-if="item.type=='file'" type="file" :ref="item.key"/>
+                <input v-else-if="item.type=='file'" type="file" :ref="item.key" :accept="item.accept?item.accept:'*'"/>
 
                 <el-input v-else v-model="item.value" :type="item.type" :style="{width:item.width}"
                           :size="item.size"></el-input>
