@@ -85,9 +85,9 @@ https://apps.apple.com/cn/app/%E7%8C%BF%E5%A0%86%E5%A0%86/id6443633238
 
 > 提供了数十个自定义组件+拖拽式首页设计和图表设计
 
-Demo：[https://simplepro.demo.72wo.com/](https://simplepro.demo.72wo.com/)
+Demo：[https://www.mldoo.com/demo/simplepro](https://www.mldoo.com/demo/simplepro)
 
-官网：[https://simpleui.72wo.com/simplepro](https://simpleui.72wo.com/simplepro)
+官网：[https://simpleui.72wo.com/simplepro](https://www.mldoo.com/docs/simplepro)
 
 
 
