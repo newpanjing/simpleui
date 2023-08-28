@@ -92,19 +92,7 @@
         }
         return val
     }
-    window.simple_call = function (data) {
-        var oldVersion = parseInt(__simpleui_version.replace(/\./g, ''))
-        var newVersion = parseInt(data.data.name.replace(/\./g, ''))
-        var body = data.data.body;
-        // console.log(oldVersion)
-        // console.log(newVersion)
-        if (oldVersion < newVersion) {
-            app.upgrade.isUpdate = true;
-            app.upgrade.body = body;
-            app.upgrade.version = data.data.name;
 
-        }
-    }
     new Vue({
         el: '#main',
         data: {
@@ -224,13 +212,30 @@
                         return;
                     }
 
-                    if (item.models) {
-                        item.models.forEach(child => {
-                            self.models.push(child);
-                        });
-                    } else {
-                        self.models.push(item);
+                    let models = [];
+
+                    function deep(menus) {
+                        menus.forEach(item => {
+                            //这是首页，不显示
+                            if (item.eid === "1") {
+                                return;
+                            }
+
+                            if (item.models) {
+                                deep(item.models);
+                            } else {
+                                //没有子级的时候，才加入到首页菜单中去
+                                models.push(item);
+                            }
+
+                        })
+
                     }
+
+                    deep(newValue);
+
+                    self.models = models;
+
                 });
             }
             /*,
@@ -274,18 +279,7 @@
             window.app = this;
 
 
-            window.menus.forEach(item => {
-                item.icon = getIcon(item.name, item.icon);
-
-                if (item.models) {
-                    item.models.forEach(mItem => {
-                        mItem.icon = getIcon(mItem.name, mItem.icon);
-                        self.menuData.push(mItem)
-                    });
-                } else {
-                    self.menuData.push(item)
-                }
-            });
+            menus = this.handlerMenus(menus);
 
             this.menus = window.menus
 
@@ -323,6 +317,25 @@
             });
         },
         methods: {
+            handlerMenus(menus) {
+                let self = this;
+                menus.forEach(item => {
+                    item.icon = getIcon(item.name, item.icon);
+
+                    if (item.models) {
+                        item.models.forEach(mItem => {
+                            mItem.icon = getIcon(mItem.name, mItem.icon);
+                            self.menuData.push(mItem)
+                            if (mItem.models) {
+                                self.handlerMenus(mItem.models);
+                            }
+                        });
+                    } else {
+                        self.menuData.push(item)
+                    }
+                });
+                return menus;
+            },
             syncTabs: function () {
                 if (window.sessionStorage) {
                     sessionStorage['tabs'] = JSON.stringify(this.tabs);
@@ -386,15 +399,27 @@
                 window.open(url);
             },
             contextmenu: function (item, e) {
+                //右键菜单，如果x+菜单宽度超过屏幕宽度，就默认为屏幕宽度-10-菜单宽度
 
                 //home没有popup menu
                 if (item.id == '0') {
                     return;
                 }
                 this.popup.tab = item;
-                this.popup.left = e.clientX;
-                this.popup.top = e.clientY;
                 this.popup.show = true;
+                this.$nextTick(function () {
+                    let el = this.$refs.popupmenu;
+                    el.style.width = '150px';
+                    let x = e.clientX;
+
+                    let w = document.body.offsetWidth
+                    if (x + 150 > w) {
+                        x = w - 160;
+                    }
+
+                    this.popup.left = x;
+                    this.popup.top = e.clientY;
+                });
             },
             mainClick: function (e) {
                 this.popup.show = false;
@@ -404,7 +429,7 @@
                 var index = item.index;
                 this.menuActive = String(index);
                 this.breadcrumbs = item.breadcrumbs;
-                if (index == '1') {
+                if (tab.index == '0') {
                     item.url = '/'
                 }
                 changeUrl(item);
@@ -435,6 +460,11 @@
             }
             ,
             openTab: function (data, index, selected, loading) {
+                //support version: 2022.6.13
+                if (data.newTab) {
+                    window.open(data.url);
+                    return;
+                }
                 if (data.breadcrumbs) {
                     this.breadcrumbs = data.breadcrumbs;
                 }
@@ -584,7 +614,11 @@
             },
             report: function (url) {
                 if (!url) {
-                    url = 'https://github.com/newpanjing/simpleui/issues';
+                    if (document.querySelector('html').lang) {
+                        url = 'https://simpleui.72wo.com';
+                    } else {
+                        url = 'https://github.com/newpanjing/simpleui/issues';
+                    }
                 }
                 window.open(url);
             }

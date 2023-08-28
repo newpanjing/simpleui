@@ -2,15 +2,20 @@
 {% load i18n %}
 {% load simpletags %}
 <div id="pagination">
+    {% django_version_is_gte_32x as is_32x %}
     {% if pagination_required %}
-    <el-pagination
-            background
-            @current-change="handleCurrentChange"
-            :current-page="{{ cl.page_num }}+1"
-            :page-size="{{ cl.list_per_page }}"
-            layout="total,prev, pager, next, jumper"
-            :total="{{ cl.result_count }}">
-    </el-pagination>
+        <el-pagination
+                background
+                @current-change="handleCurrentChange"
+                {% if is_32x %}
+                :current-page="{{ cl.page_num }}"
+                {% else %}
+                :current-page="{{ cl.page_num }}+1"
+                {% endif %}
+                :page-size="{{ cl.list_per_page }}"
+                layout="total,prev, pager, next, jumper"
+                :total="{{ cl.result_count|to_str }}">
+        </el-pagination>
     {% endif %}
 </div>
 <script type="text/javascript">
@@ -20,7 +25,11 @@
             data: {},
             methods: {
                 handleCurrentChange: function (page) {
-                    page_go(page - 1);
+                    {% if is_32x %}
+                        page_go(page);
+                    {% else %}
+                        page_go(page - 1);
+                    {% endif %}
                 }
             }
         })
@@ -30,5 +39,5 @@
             $("#changelist-search").submit();
         }
 
-    });
+    })
 </script>

@@ -12,9 +12,10 @@ class SimpleApp(AppConfig):
             version = django.get_version()
             if int(version.split('.')[0]) >= 3:
                 from django.conf import settings
-                mname = 'simpleui.middlewares.SimpleMiddleware'
-                if mname not in settings.MIDDLEWARE:
-                    settings.MIDDLEWARE.append(mname)
+                for index, item in enumerate(settings.MIDDLEWARE):
+                    if item == 'django.middleware.clickjacking.XFrameOptionsMiddleware':
+                        settings.MIDDLEWARE.pop(index)
+
         except Exception as e:
             pass
         pass

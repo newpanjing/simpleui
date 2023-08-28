@@ -82,7 +82,7 @@
                     <el-timeline-item timestamp="{{ entry.action_time }}" placement="top">
                         <el-card>
                             <p>{{ entry.user }} {{ entry.action_time }}</p>
-                            <h4>{{ entry.content_type }}: {{ entry }}</h4>
+                            <h4 v-pre="true">{{ entry.content_type }}: {{ entry }}</h4>
                         </el-card>
                     </el-timeline-item>
                     {% endfor %}
@@ -105,12 +105,12 @@
     <div style="padding: 10px">
         <div>
             <h3>
-                Run Command:
+            Run Command:
             </h3>
             <el-alert
-                    title="pip install django-simpleui -U"
-                    type="info">
-            </el-alert>
+                title="pip install django-simpleui -U"
+                type="info">
+              </el-alert>
 
         </div>
         <div><h3>Change logs:</h3></div>

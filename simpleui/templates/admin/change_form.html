@@ -7,11 +7,12 @@
 
 {% endblock %}
 {% block extrastyle %}{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static " admin/css/forms.css" %}"/>{% endblock %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>{% endblock %}
 {% block content %}
 <style type="text/css">
     .inline-group .tabular td.original p {
-        margin-top: -33px;
+        margin-top: -50px;
+        height: 1.2em;
     }
 
     .page-header {
@@ -22,7 +23,7 @@
 <div id="content-main" class="form-main">
     {% if '_popup' not in request.GET %}
     <div class="page-header">
-        <el-page-header @back="goBack" content="{{title}}"/>
+        <el-page-header title="{% trans 'Back' %}" @back="goBack" content="{{title}}"/>
     </div>
     {% endif %}
     {% block object-tools %}
@@ -30,19 +31,18 @@
     <ul class="object-tools">
         {% block object-tools-items %}
         <li>
-            <el-dialog title="{% trans " History
-            " %}" :visible.sync="dialogTableVisible">
+            <el-dialog title="{% trans 'History' %}" :visible.sync="dialogTableVisible">
             <iframe frameborder="0" :src="url" width="100%" height="300"></iframe>
             </el-dialog>
             {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
 
-            <el-button @click="go_url('{% add_preserved_filters history_url %}')" class="historylink"
+            <el-button @click="go_url('{% add_preserved_filters history_url %}')" class="historylink el-button--small"
                        icon="fas fa-history">{% trans "History" %}
             </el-button>
         </li>
         {% if has_absolute_url %}
         <li>
-            <el-button @click="window.open('{{ absolute_url }}')" class="viewsitelink" icon="fas fa-globe-asia">{% trans "View on site" %}</el-button>
+            <el-button size="small" @click="window.open('{{ absolute_url }}')" class="viewsitelink" icon="fas fa-globe-asia">{% trans "View on site" %}</el-button>
         </li>
         {% endif %}
         {% endblock %}
@@ -59,10 +59,9 @@
             <div id="alert">
                 <el-alert
                         title="{% if errors|length == 1 %}
-                            {% trans " Please correct the error below.
-                " %}
+                            {% trans 'Please correct the error below.' %}
                 {% else %}
-                {% trans "Please correct the errors below." %}
+                {% trans 'Please correct the errors below.' %}
                 {% endif %}"
                 type="error">
                 </el-alert>
@@ -110,7 +109,7 @@
         el: '.page-header',
         methods: {
             goBack: function () {
-                window.location.href = '{% get_model_url %}'
+                window.location.href = '{% get_previous_url %}'
             }
         }
     })
