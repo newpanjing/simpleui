@@ -144,7 +144,7 @@
             el: '#toolbar',
             data: {
                 placeholder: '{% trans 'Search' %}{% autoescape off %}{% search_placeholder %}'{% endautoescape %},
-                searchInput: '{{ cl.query }}',
+                searchInput: '{{ cl.query | safe }}',
                 {% if cl.has_filters %}
                     {% for spec in cl.filter_specs %}
                         {% if spec.links %}
