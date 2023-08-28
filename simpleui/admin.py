@@ -3,6 +3,7 @@ import logging
 import traceback
 
 from django.contrib import admin
+from django.contrib.admin import ListFilter
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import path
@@ -13,12 +14,42 @@ class AjaxAdmin(admin.ModelAdmin):
     This class is used to add ajax functionality to the admin interface.
     """
 
+    def _get_and_clear_simple_filter(self, request):
+
+        sfs = []
+        _filter = {}
+        if "_filter" in request.POST:
+            _filter = json.loads(request.POST.get("_filter"))
+            lls = self.get_list_filter(request)
+            if lls:
+                for ll in lls:
+                    try:
+                        name = ll.parameter_name
+                        if issubclass(ll, ListFilter):
+                            val = _filter[name]
+
+                            def value(*args, **kwargs):
+                                return val
+
+                            # 用lambda表达式，重写value 返回val
+                            ll.value = value
+
+                            if name in _filter:
+                                # 删除
+                                del _filter[name]
+                            sfs.append(ll)
+                    except Exception as e:
+                        pass
+        return _filter, sfs
+
     def _get_queryset(self, request):
         post = request.POST
         action = post.get("_action")
         selected = post.get("_selected")
         select_across = post.get("select_across")
         if hasattr(self, action):
+            # 过滤simplefilter的key
+            _filter, sfs = self._get_and_clear_simple_filter(request)
             # 这里的queryset 会有数据过滤，只包含选中的数据
             queryset = self.get_changelist_instance(request).get_queryset(request)
 
@@ -49,10 +80,12 @@ class AjaxAdmin(admin.ModelAdmin):
 
                 # filter条件过滤
                 if "_filter" in post:
-                    _filter = post.get("_filter")
                     if _filter:
-                        filter_value = json.loads(_filter)
-                        new_filter = self.__clean_filter(filter_value)
+                        new_filter = self.__clean_filter(_filter)
+                        # 过滤simplefilter
+                        if sfs:
+                            for sf in sfs:
+                                queryset = sf.queryset.__call__(sf, request, queryset)
                         queryset = queryset.filter(**new_filter)
             return queryset
         else:
@@ -67,6 +100,22 @@ class AjaxAdmin(admin.ModelAdmin):
                 new_filter[k] = v
 
         return new_filter
+
+    def __handler_simple_filter(self, queryset, _filter):
+        # 判断_filter里面的字段是否是simplefilter
+        # 如果是simplefilter，就调用simplefilter的过滤方法
+        # 如果不是simplefilter，就返回原来的queryset
+
+        sf = self.get_list_filter()
+        if sf:
+            for f in sf:
+                if f.__class__.__name__ == "SimpleListFilter":
+                    if f.parameter_name in _filter:
+                        return f.queryset(request=None, queryset=queryset, value=_filter[f.parameter_name])
+
+        # for k, v in _filter.items():
+
+        return queryset
 
     def callback(self, request):
         """

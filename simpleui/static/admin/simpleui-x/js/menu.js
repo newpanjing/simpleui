@@ -9,12 +9,12 @@ Vue.component('sub-menu', {
         <div>
             <template v-for="(item,i) in menus" :key="item.eid">
                 <el-menu-item  :index="item.eid" v-if="!item.models" @click="openTab(item,item.eid)">
-                    <i :class="item.icon"></i>
+                    <i :class="'menu-icon '+item.icon"></i>
                     <span v-show="!fold" slot="title" v-text="item.name"></span>
                 </el-menu-item>
                 <el-submenu :index="item.eid" v-else>
                     <template slot="title">
-                        <i :class="item.icon"></i>
+                        <i :class="'menu-icon '+item.icon"></i>
                         <span v-show="!fold" v-text="item.name"></span>
                     </template>
                    <sub-menu :menus="item.models"></sub-menu>
