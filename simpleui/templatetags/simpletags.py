@@ -189,6 +189,36 @@ def format_table(d):
     return format_html(html)
 
 
+def has_permission_in_config(config):
+    """
+    Recursively check if any menu or sub-menu in the configuration is configured with permissions.
+    """
+    if 'menus' in config:
+        for menu in config['menus']:
+            if has_permission_in_config(menu):
+                return True
+    if 'models' in config:
+        for model in config['models']:
+            if has_permission_in_config(model):
+                return True
+    if 'permission' in config:
+        return True
+    return
+
+
+def get_filtered_menus(menus, user_permissions):
+    def filter_menu(menu, permissions):
+        if 'models' in menu:
+            menu['models'] = [sub_menu for sub_menu in menu['models'] if 'permission' not in sub_menu or
+                              sub_menu['permission'] in permissions]
+            for sub_menu in menu['models']:
+                filter_menu(sub_menu, permissions)
+    menu_configs = [menu for menu in menus if 'permission' not in menu or menu['permission'] in user_permissions]
+    for menu in menu_configs:
+        filter_menu(menu, user_permissions)
+    return menu_configs
+
+
 @register.simple_tag(takes_context=True)
 def menus(context, _get_config=None):
     data = []
@@ -230,6 +260,9 @@ def menus(context, _get_config=None):
             'models': _models
         }
         data.append(module)
+
+    if has_permission_in_config(config):
+        config["menus"] = get_filtered_menus(config["menus"], context.request.user.get_all_permissions())
 
     # 如果有menu 就读取，没有就调用系统的
     key = 'system_keep'
