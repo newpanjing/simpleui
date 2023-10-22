@@ -188,7 +188,8 @@
         </el-form>
 
         <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="layerSubmit()" v-text="layer.confirm_button||'确定'"></el-button>
+            <el-button type="primary" @click="layerSubmit()" v-text="layer.confirm_button||'确定'"
+                       :disabled="dialogConfirmDisabled" v-loading="dialogConfirmDisabled"></el-button>
             <el-button @click="visible = false" v-text="layer.cancel_button||'取消'"></el-button>
         </span>
     </el-dialog>
@@ -206,7 +207,8 @@
             params: [],
             layer: {},
             rules: [],
-            action: ''
+            action: '',
+            dialogConfirmDisabled: false
         },
         methods: {
             layerSubmit() {
@@ -241,11 +243,12 @@
                         data.append(item.key, item.value);
                     }
                 }
-
+                this.dialogConfirmDisabled = true;
                 axios.post('{% get_model_ajax_url %}'+window.location.search, data).then(res => {
                     if (res.data.status === 'redirect') {
                         self.visible = false;
                         window.location.href = res.data.url;
+                        this.dialogConfirmDisabled = false;
                         return;
                     }
                     if (res.data.status == 'success') {
@@ -257,6 +260,7 @@
                         message: res.data.msg,
                         type: res.data.status
                     });
+                    this.dialogConfirmDisabled = false;
                 }).catch(err => self.$message.error(err));
             }
         }
