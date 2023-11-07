@@ -17,12 +17,15 @@
         body, #container {
             background: #FFF!important;
         }
+        .history-table{
+            width: 100%;
+        }
     </style>
     <div id="content-main">
         <div class="module">
 
             {% if action_list %}
-                <table id="change-history" class="layui-table">
+                <table id="change-history" class="history-table">
                     <thead>
                     <tr>
                         <th scope="col">{% trans 'Date/time' %}</th>
