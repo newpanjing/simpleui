@@ -83,11 +83,11 @@ Demo：[https://www.mldoo.com/demo/simplepro](https://www.mldoo.com/demo/simplep
 
 👇👇👇👇👇👇👇👇👇👇👇
 
-👉 1.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui) 👈
+👉 1.[https://newpanjing.github.io/simpleui_docs/](https://newpanjing.github.io/simpleui_docs/)👈
 
-👉 2.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui)👈
+👉 2.[https://newpanjing.github.io/simpleui_docs/](https://newpanjing.github.io/simpleui_docs/)👈
 
-👉  3.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui)👈
+👉 3.[https://newpanjing.github.io/simpleui_docs/](https://newpanjing.github.io/simpleui_docs/)👈
 
 👆👆👆👆👆👆👆👆👆👆👆
 
