@@ -2,7 +2,7 @@
 
 github:
 
-https://github.com/newpanjing/django-simpleui
+https://github.com/newpanjing/simpleui
 
 gitee:
 

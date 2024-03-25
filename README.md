@@ -21,16 +21,16 @@ Django admin theme the simpleui
 
 ---
 <p align="center">
-中文 | <a href="./doc/en/README_en.md">English</a>
+中文 | <a href="https://newpanjing.github.io/simpleui_docs/en/">English</a>
 </p>
 
 ---
 
 ---
 <p align="center">
-<a href="https://simpleui.72wo.com/" target="_blank">社区</a> |
-<a href="https://simpleui.72wo.com/docs/simpleui" target="_blank">文档</a> |
-<a href="https://simpleui.72wo.com/docs/simpleui" target="_blank">Documents</a>
+<a href="https://www.mldoo.com" target="_blank">社区</a> |
+<a href="https://newpanjing.github.io/simpleui_docs/" target="_blank">文档</a> |
+<a href="https://newpanjing.github.io/simpleui_docs/en/" target="_blank">Documents</a>
 </p>
 ---
 <a href="https://www.88cto.com/admin/">
@@ -58,19 +58,21 @@ Django Admin默认界面设计语言存在着的一些不足，比如色彩单�
 
 ## QQ群
 + QQ群号:722755389
++ QQ群号:747695956
 + QQ群号:873469913(满)
 + QQ群号:786576510(满)
 
-> 我们推荐在[Simple社区](https://simpleui.72wo.com)提问，方便以后大家有问题的时候直接查找。
+> 我们推荐在[猿堆堆社区](https://www.mldoo.com)提问，方便以后大家有问题的时候直接查找。
+
 
 ## 专业版
 > 如果免费版无法满足您的需求，我们还提供了一个功能更强大的pro版，可以满足更多的需求
 
 > 提供了数十个自定义组件+拖拽式首页设计和图表设计
 
-Demo：[https://simplepro.demo.72wo.com/](https://simplepro.demo.72wo.com/)
+Demo：[https://www.mldoo.com/demo/simplepro](https://www.mldoo.com/demo/simplepro)
 
-官网：[https://simpleui.72wo.com/simplepro](https://simpleui.72wo.com/simplepro)
+官网：[https://www.mldoo.com/simplepro](https://www.mldoo.com/docs/simplepro)
 
 
 
@@ -81,11 +83,11 @@ Demo：[https://simplepro.demo.72wo.com/](https://simplepro.demo.72wo.com/)
 
 👇👇👇👇👇👇👇👇👇👇👇
 
-👉 1.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui) 👈
+👉 1.[https://newpanjing.github.io/simpleui_docs/](https://newpanjing.github.io/simpleui_docs/)👈
 
-👉 2.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui)👈
+👉 2.[https://newpanjing.github.io/simpleui_docs/](https://newpanjing.github.io/simpleui_docs/)👈
 
-👉  3.[simpleui文档教程使用说明](https://simpleui.72wo.com/docs/simpleui)👈
+👉 3.[https://newpanjing.github.io/simpleui_docs/](https://newpanjing.github.io/simpleui_docs/)👈
 
 👆👆👆👆👆👆👆👆👆👆👆
 
@@ -94,13 +96,6 @@ Demo：[https://simplepro.demo.72wo.com/](https://simplepro.demo.72wo.com/)
 ## 本地Demo下载
 如果你没有任何python django基础，可以下载一个可以直接运行的demo进行体验。
 [😝DEMO源码](https://github.com/newpanjing/simpleui_demo)
-
-## 在线Demo
-> 权限受限，只能查看模块的相关数据，不能操作。如果要体验全部功能，请在自己的系统安装simpleui查看效果。
-
-+ 地址：[https://www.88cto.com/admin/](https://www.88cto.com/admin/)
-+ 用户名：demo
-+ 密码：demo123456
 
 ## Docker
 ```shell
@@ -116,7 +111,7 @@ docker run -p 8080:8080 newpanjing/simpleui_demo
 与suit是同类产品。我们是一个更符合国人审美和使用习惯的一个主题。
 
 # 开始使用
-详细步骤请浏览 [使用文档](./QUICK.md)。 也可以参考[Demo](#在线Demo)
+详细步骤请浏览 [使用文档](https://newpanjing.github.io/simpleui_docs/config.html)。 也可以参考[Demo](#在线Demo)
 
 + 安装
 ```python
@@ -232,6 +227,8 @@ simpleui的发展离不开以下优秀贡献者的支持。如果您想为simple
 |[@WalkerWang731](https://github.com/WalkerWang731)|优质代码贡献|
 |[@初学者](https://www.seejoke.com)|223450427@qq.com，顶级技术顾问|
   
+
+<a href="https://github.com/newpanjing/simpleui/contributors"><img src="https://opencollective.com/simpleui/contributors.svg?width=890&button=false"></a>
 
 # 致谢
 开发工具由[Jetbrains](https://www.jetbrains.com/)赞助的Pycharm

@@ -12,10 +12,25 @@
   border: none !important;
 }
 #content {
-  padding: 20px;
+  padding: 0;
+}
+#content-main .page-header {
+  margin-top: 0;
+  margin-bottom: 20px;
   background-color: white;
+  padding: 20px;
+}
+#content-main .module {
   margin: 20px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 0;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+#content-main .submit-row {
+  margin: 20px;
+  margin-top: 0;
+  background-color: white!important;
+  padding: 10px;
 }
 .simpleui-form-item {
   display: inline-block;
@@ -66,9 +81,9 @@ a:visited {
   text-decoration: none;
 }
 .object-tools {
-  margin-top: 0px;
+  margin-top: 0;
   position: absolute;
-  top: 30px;
+  top: 13px;
   right: 30px;
 }
 .vTextField {
@@ -88,6 +103,11 @@ tbody tr:hover th {
 }
 .form-row {
   border-bottom: none !important;
+}
+.submit-row {
+  padding-bottom: 20px!important;
+  display: flex;
+  justify-content: space-between;
 }
 .submit-row input[type='submit'] {
   height: auto;
@@ -122,7 +142,7 @@ tbody tr:hover th {
 }
 body,
 #container {
-  background-color: #f1f1f1 !important;
+  background-color: #f1f4f6 !important;
 }
 @media (max-width: 767px) {
   .change-list #content {
@@ -193,6 +213,12 @@ body,
 :root {
   --error-fg: red!important;
 }
+#user_form {
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  color: #5a9cf8;
+}
 /*django新特性 主题适配*/
 @media (prefers-color-scheme: dark) {
   :root {
@@ -220,3 +246,4 @@ body,
     --close-button-hover-bg: inherit;
   }
 }
+/*# sourceMappingURL=base.css.map */
