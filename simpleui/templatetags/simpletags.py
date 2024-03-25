@@ -148,7 +148,6 @@ def home_page(context):
 def __get_config(name):
     from django.conf import settings
     value = os.environ.get(name, getattr(settings, name, None))
-
     return value
 
 
@@ -213,6 +212,7 @@ def get_filtered_menus(menus, user_permissions):
                               sub_menu['permission'] in permissions]
             for sub_menu in menu['models']:
                 filter_menu(sub_menu, permissions)
+
     menu_configs = [menu for menu in menus if 'permission' not in menu or menu['permission'] in user_permissions]
     for menu in menu_configs:
         filter_menu(menu, user_permissions)
@@ -231,8 +231,8 @@ def menus(context, _get_config=None):
     if not config:
         config = {}
 
-    if config.get('dynamic', False) is True:
-        config = _import_reload(_get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
+    # if config.get('dynamic', False) is True:
+    #     config = _import_reload(_get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
 
     app_list = context.get('app_list')
     for app in app_list:
