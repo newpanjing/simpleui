@@ -574,7 +574,10 @@
                     delete sessionStorage['tabs'];
                     setCookie('theme', '');
                     setCookie('theme_name', '');
-                    window.location.href = window.urls.logout;
+
+                    //创建一个form post方式提交
+                    document.querySelector("#logout_form").submit();
+                    // window.location.href = window.urls.logout;
                 }).catch(function () {
 
                 });

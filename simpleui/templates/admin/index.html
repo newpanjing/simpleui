@@ -291,6 +291,9 @@
             </div>
         </el-dialog>
     {% endblock %}
+    <form style="display: none" id="logout_form" method="post" action="{% url 'admin:logout' %}">
+        {% csrf_token %}
+    </form>
 </div>
 {% block base_script %}
     <script type="text/javascript">
