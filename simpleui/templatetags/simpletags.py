@@ -230,6 +230,8 @@ def menus(context, _get_config=None):
     config = _get_config('SIMPLEUI_CONFIG')
     if not config:
         config = {}
+    else:
+        config = config.copy()
 
     if config.get('dynamic', False) is True:
         config = _import_reload(_get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
