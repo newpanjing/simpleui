@@ -44,7 +44,10 @@
     {% endblock %}
 </head>
 <body class="bg">
+{% block left %}
+{% endblock %}
 {% block main %}
+    <div class="login-decorator">
     <div class="login-main">
     {% block logo %}
         <div class="logo">
@@ -106,6 +109,7 @@
             <input type="hidden" name="next" value="{{ next }}"/>
         </form>
     {% endblock %}
+    </div>
 </div>
 {% endblock %}
 {% include 'admin/includes/js-part.html' %}
