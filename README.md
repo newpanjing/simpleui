@@ -20,6 +20,7 @@ Django admin theme the simpleui
 
 
 ---
+
 <p align="center">
 中文 | <a href="https://newpanjing.github.io/simpleui_docs/en/">English</a>
 </p>
@@ -226,9 +227,13 @@ simpleui的发展离不开以下优秀贡献者的支持。如果您想为simple
 |[@Roddy1219](https://github.com/Roddy1219)|bug修复|
 |[@WalkerWang731](https://github.com/WalkerWang731)|优质代码贡献|
 |[@初学者](https://www.seejoke.com)|223450427@qq.com，顶级技术顾问|
+
   
 
 <a href="https://github.com/newpanjing/simpleui/contributors"><img src="https://opencollective.com/simpleui/contributors.svg?width=890&button=false"></a>
 
-# 致谢
-开发工具由[Jetbrains](https://www.jetbrains.com/)赞助的Pycharm
+## 其他项目
+
+基于SimpleUI 打造的专业版：[Simple Pro](https://www.mldoo.com/simplepro)
+
+基于vue3和element-plus 打造的纯前端Admin： [Simple Admin](https://github.com/newpanjing/simple-admin)
