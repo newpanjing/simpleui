@@ -27,20 +27,24 @@ Django admin theme the simpleui
 
 ---
 
----
+
 <p align="center">
-<a href="https://www.mldoo.com" target="_blank">社区</a> |
+<a href="https://www.noondot.com" target="_blank">社区</a> |
 <a href="https://newpanjing.github.io/simpleui_docs/" target="_blank">文档</a> |
 <a href="https://newpanjing.github.io/simpleui_docs/en/" target="_blank">Documents</a>
 </p>
+
 ---
-<a href="https://www.88cto.com/admin/">
+
+
   <img alt="demo" src="https://github.com/newpanjing/simpleui/raw/master/images/%E4%B8%BB%E9%A1%B5.png" width="420" align="right" style="max-width: 50%">
-</a>
+
 
 
 simpleui 特点
+
 -----
+
 👍 内置28款流行的主题
 
 ⚡️ pip闪电安装100%兼容原生admin无需修改代码
