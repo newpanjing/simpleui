@@ -144,6 +144,9 @@ body,
 #container {
   background-color: #f1f4f6 !important;
 }
+.aligned label {
+  display: inline-block !important;
+}
 @media (max-width: 767px) {
   .change-list #content {
     margin: 0px;
