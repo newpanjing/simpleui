@@ -388,43 +388,6 @@ def get_analysis_config():
 
 
 @register.simple_tag(takes_context=True)
-def load_analysis(context):
-    try:
-        if not get_analysis_config():
-            return ''
-
-        # 理论上值一天只上报一次
-        key = 'simpleui_' + time.strftime('%Y%m%d', time.localtime())
-
-        if key in context.request.session:
-            return ''
-
-        b64 = ""
-        j = {
-            "n": platform.node(),
-            "o": platform.platform(),
-            "p": platform.python_version(),
-            "d": django.get_version(),
-            "s": simpleui.get_version(),
-        }
-        if 'theme_name' in context.request.COOKIES:
-            j['t'] = context.request.COOKIES['theme_name']
-        else:
-            j['t'] = 'Default'
-
-        b64 = base64.b64encode(str(j).encode('utf-8'))
-
-        url = '//simpleui.72wo.com/analysis'
-        b64 = b64.decode('utf-8')
-        html = '<script async type="text/javascript" src="{}/{}"></script>'.format(url, b64);
-        context.request.session[key] = True
-
-        return mark_safe(html)
-    except:
-        return ''
-
-
-@register.simple_tag(takes_context=True)
 def custom_button(context):
     admin = context.get('cl').model_admin
     data = {}
