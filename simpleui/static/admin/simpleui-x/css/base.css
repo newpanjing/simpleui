@@ -20,11 +20,15 @@
   background-color: white;
   padding: 20px;
 }
+#content-main .related-widget-wrapper {
+  display: inline-flex;
+}
 #content-main .module {
   margin: 20px;
   margin-bottom: 0;
   padding: 10px;
   border-radius: 10px 10px 0 0;
+  background-color: white!important;
 }
 #content-main .submit-row {
   margin: 20px;
@@ -220,7 +224,9 @@ body,
   background-color: white;
   margin: 10px;
   padding: 10px;
-  color: #5a9cf8;
+}
+#id_password .button {
+  color: white!important;
 }
 /*django新特性 主题适配*/
 @media (prefers-color-scheme: dark) {
