@@ -2,12 +2,17 @@
 
 import base64
 import json
+import logging
 import os
 import platform
 import sys
 import time
+import traceback
+from inspect import isfunction
 
 import django
+from django.contrib.auth.models import Permission
+
 import simpleui
 from django import template
 from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
@@ -390,26 +395,80 @@ def get_analysis_config():
 @register.simple_tag(takes_context=True)
 def custom_button(context):
     admin = context.get('cl').model_admin
+    request = context.request
+    data=get_custom_button(request, admin)
+    return json.dumps(data, cls=LazyEncoder)
+
+def get_layer_url(admin):
+    """
+    获取url配置
+    """
+    try:
+        opts = admin.opts
+        key = "admin:{}_{}_layer".format(opts.app_label, opts.model_name)
+    except Exception:
+        # 输出警告
+        logging.warning(f"使用异步获取layer配置，需要让Admin继承AjaxAdmin")
+        print(f"使用异步获取layer配置，需要让Admin继承AjaxAdmin")
+        traceback.print_exc()
+    return reverse(key)
+
+def get_custom_button(request, admin):
     data = {}
-    actions = admin.get_actions(context.request)
+    actions = admin.get_actions(request)
     # if hasattr(admin, 'actions'):
     # actions = admin.actions
     # 输出自定义按钮的属性
 
+    app_label = admin.opts.app_label
     if actions:
-        i = 0
+        id = 0
         for name in actions:
             values = {}
             fun = actions.get(name)[0]
             for key, v in fun.__dict__.items():
                 if key != '__len__' and key != '__wrapped__':
-                    values[key] = v
-            values['eid'] = i
-            i += 1
-            data[name] = values
+                    if key == 'layer' and isfunction(v):
+                        # 直接返回url到前台
+                        values['layer'] = {
+                            'is_fun': True,
+                            'url': get_layer_url(admin)
+                        }
+                    else:
+                        values[key] = v
+            values['eid'] = id
+            id += 1
+            if name == 'export_admin_action':
+                values['label'] = '选中导出'
+                values['isExport'] = True
+                values['icon'] = 'el-icon-finished'
+                formats = []
+                for i in enumerate(admin.get_export_formats()):
+                    formats.append({
+                        'value': i[0],
+                        'label': i[1]().get_title()
+                    })
 
-    return json.dumps(data, cls=LazyEncoder)
+                values['formats'] = formats
+            else:
+                values['label'] = actions.get(name)[2]
 
+            # 判断权限，如果数据库中有才进行判断
+            # ContentType.objects.first()
+            # 不是超级用户才开始判断
+            if not request.user.is_superuser:
+                exists = Permission.objects.filter(codename=name, content_type__app_label=app_label,
+                                                   content_type__model=admin.opts.model_name).exists()
+                if exists:
+                    if request.user.has_perm('{}.{}'.format(app_label, name)):
+                        data[name] = values
+                else:
+                    data[name] = values
+            else:
+                data[name] = values
+    if 'delete_selected' in data:
+        del data['delete_selected']
+    return data
 
 from django.db.models.fields.related import ForeignKey
 
