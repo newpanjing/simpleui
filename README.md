@@ -249,3 +249,7 @@ simpleui的发展离不开以下优秀贡献者的支持。如果您想为simple
 基于SimpleUI 打造的专业版：[Simple Pro](https://www.mldoo.com/simplepro)
 
 基于vue3和element-plus 打造的纯前端Admin： [Simple Admin](https://github.com/newpanjing/simple-admin)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=newpanjing/simpleui&type=Date)](https://star-history.com/#newpanjing/simpleui&Date)
