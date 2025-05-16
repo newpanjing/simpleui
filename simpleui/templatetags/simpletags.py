@@ -39,6 +39,7 @@ if PY_VER != '2':
 else:
     from urlparse import parse_qsl
 
+import copy
 
 def unicode_to_str(u, encoding='utf-8'):
     if PY_VER != '2':
@@ -236,7 +237,8 @@ def menus(context, _get_config=None):
     if not config:
         config = {}
     else:
-        config = config.copy()
+        # config = config.copy()
+        config = copy.deepcopy(config)
 
     # if config.get('dynamic', False) is True:
     #     config = _import_reload(_get_config('DJANGO_SETTINGS_MODULE')).SIMPLEUI_CONFIG
