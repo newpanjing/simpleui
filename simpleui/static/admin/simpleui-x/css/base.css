@@ -107,6 +107,16 @@ tbody tr:hover th {
 }
 .form-row {
   border-bottom: none !important;
+  display: flex;
+  align-items: center;
+}
+.form-row div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.form-row .fileBox {
+  flex: 1;
 }
 .submit-row {
   padding-bottom: 20px!important;
@@ -255,4 +265,3 @@ body,
     --close-button-hover-bg: inherit;
   }
 }
-/*# sourceMappingURL=base.css.map */

@@ -4,6 +4,7 @@
 <script type="text/javascript" src="{% static 'admin/simpleui-x/elementui/index.js' %}?_={% get_version %}"></script>
 <script type="text/javascript" src="{% static 'admin/simpleui-x/elementui/umd/locale/en.js' %}?_={% get_version %}"></script>
 <script type="text/javascript">
+ // 2025.05.16 fix
  let LANGUAGE_CODE = '{{ 'LANGUAGE_CODE'|get_config }}';
   if (LANGUAGE_CODE.split('-')[0] !== 'zh') {
     ELEMENT.locale(ELEMENT.lang.en);

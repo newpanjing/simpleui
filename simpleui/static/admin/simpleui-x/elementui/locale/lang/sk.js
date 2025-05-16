@@ -112,14 +112,14 @@ exports.default = {
       hasCheckedFormat: '{checked}/{total} označených'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Chyba načítania'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Späť'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'Potvrdiť',
+      cancelButtonText: 'Zrušiť'
     },
     empty: {
       description: 'Žiadne dáta'

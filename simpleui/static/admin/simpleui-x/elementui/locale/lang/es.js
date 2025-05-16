@@ -5,13 +5,13 @@ exports.default = {
   el: {
     colorpicker: {
       confirm: 'Confirmar',
-      clear: 'Despejar'
+      clear: 'Limpiar'
     },
     datepicker: {
       now: 'Ahora',
       today: 'Hoy',
       cancel: 'Cancelar',
-      clear: 'Despejar',
+      clear: 'Limpiar',
       confirm: 'Confirmar',
       selectDate: 'Seleccionar fecha',
       selectTime: 'Seleccionar hora',
@@ -94,7 +94,7 @@ exports.default = {
       emptyText: 'Sin Datos',
       confirmFilter: 'Confirmar',
       resetFilter: 'Reiniciar',
-      clearFilter: 'Despejar',
+      clearFilter: 'Limpiar',
       sumText: 'Suma'
     },
     tree: {
