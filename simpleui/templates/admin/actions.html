@@ -184,7 +184,7 @@
 
                 </el-radio-group>
 
-                <input v-else-if="item.type=='file'" type="file" :ref="item.key" :accept="item.accept?item.accept:'*'"/>
+                <input v-else-if="item.type=='file'" type="file" :ref="item.key" :accept="item.accept?item.accept:'*'" :multiple="item.multiple"/>
 
                 <el-input v-else v-model="item.value" :type="item.type" :style="{width:item.width}"
                           :size="item.size"></el-input>
