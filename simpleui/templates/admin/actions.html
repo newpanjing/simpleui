@@ -412,6 +412,13 @@
             var data_name = $(this).attr('data-name');
             var _vue = new Vue();
 
+            // 解决勾选记录后，点击 导入/导出 按钮，触发 action 请求，导致 导入/导出 请求中断，并提示 未选择动作
+            if (data_name === 'export_admin_action' || data_name === 'import_admin_action' ||
+                data_name === 'export_admin_action') {
+                e.preventDefault(); // 阻止默认的表单提交
+                return;
+            }
+
             //这边处理弹出层对话框
             if (eid) {
                 for (var i in _action.customButton) {
