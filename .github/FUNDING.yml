@@ -1,4 +1,4 @@
 # These are supported funding model platforms
 
-github: newpanjing
-noondot: https://oms.noondot.com/checkout?payment=alipay&amount=50
+github: 
+custom: https://oms.noondot.com/checkout?payment=alipay&amount=50
