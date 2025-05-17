@@ -2,3 +2,4 @@ recursive-include simpleui/ *
 recursive-include simpleui/static *
 recursive-include simpleui/templates *
 recursive-include simpleui/templatetags *
+include README.md
