@@ -110,11 +110,6 @@ tbody tr:hover th {
   display: flex;
   align-items: center;
 }
-.form-row div:not(.edui-default):not(.wmd-wrapper) {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
 .form-row .fileBox {
   flex: 1;
 }
