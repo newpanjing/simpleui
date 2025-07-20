@@ -110,6 +110,27 @@ tbody tr:hover th {
   display: flex;
   align-items: center;
 }
+.form-row.has_original p{
+  display:none
+}
+tbody .has_original td{
+  padding-top: 0.5em !important;
+}
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;   
+    transform: scale(1.2); 
+    transform-origin: left center; 
+}
+.form-row .delete{
+  display: flex;
+}
+.form-row.has_original .delete{
+  padding-left: 0.7em;
+  padding-top: 1em !important;
+  padding-bottom: 1em !important;
+
+}
 .form-row .fileBox {
   flex: 1;
 }
