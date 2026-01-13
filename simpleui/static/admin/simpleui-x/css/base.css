@@ -1,5 +1,11 @@
 #changelist {
   display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-bottom: 20px !important;
+}
+#changelist .actions {
+  width: auto !important;
 }
 .change-list .filtered .results,
 .change-list .filtered .paginator,
@@ -28,12 +34,12 @@
   margin-bottom: 0;
   padding: 10px;
   border-radius: 10px 10px 0 0;
-  background-color: white!important;
+  background-color: white !important;
 }
 #content-main .submit-row {
   margin: 20px;
   margin-top: 0;
-  background-color: white!important;
+  background-color: white !important;
   padding: 10px;
 }
 .simpleui-form-item {
@@ -64,7 +70,7 @@
   background-color: white;
 }
 #content #changelist-form {
-  padding: 0px 20px;
+  padding: 0px;
 }
 #changelist #toolbar {
   margin-bottom: 0px !important;
@@ -114,7 +120,7 @@ tbody tr:hover th {
   flex: 1;
 }
 .submit-row {
-  padding-bottom: 20px!important;
+  padding-bottom: 20px !important;
   display: flex;
   justify-content: space-between;
 }
@@ -195,7 +201,6 @@ body,
   .el-dialog {
     width: 90%;
   }
-  
 }
 @media (max-width: 1024px) {
   .change-list .filtered .results,
@@ -224,7 +229,7 @@ body,
   margin-top: -42px !important;
 }
 :root {
-  --error-fg: red!important;
+  --error-fg: red !important;
 }
 #user_form {
   background-color: white;
@@ -232,7 +237,7 @@ body,
   padding: 10px;
 }
 #id_password .button {
-  color: white!important;
+  color: white !important;
 }
 /*django新特性 主题适配*/
 @media (prefers-color-scheme: dark) {

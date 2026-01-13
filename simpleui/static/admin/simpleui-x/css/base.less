@@ -1,8 +1,18 @@
 #changelist {
   display: block !important;
+  .actions{
+    width: auto !important;
+  }
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-bottom: 20px !important;
 }
 
-.change-list .filtered .results, .change-list .filtered .paginator, .filtered #toolbar, .filtered div.xfull {
+
+.change-list .filtered .results,
+.change-list .filtered .paginator,
+.filtered #toolbar,
+.filtered div.xfull {
   margin-right: 0px !important;
 }
 
@@ -15,32 +25,36 @@
   padding: 0;
 }
 
-#content-main{
+#content-main {
 
-  .page-header{
+  .page-header {
     margin-top: 0;
     margin-bottom: 20px;
     background-color: white;
     padding: 20px;
   }
-  .related-widget-wrapper{
+
+  .related-widget-wrapper {
     display: inline-flex;
   }
-  .module{
-    margin:20px;
+
+  .module {
+    margin: 20px;
     margin-bottom: 0;
     padding: 10px;
     //顶部圆角
     border-radius: 10px 10px 0 0;
-    background-color: white!important;
+    background-color: white !important;
   }
-  .submit-row{
-    margin:20px;
+
+  .submit-row {
+    margin: 20px;
     margin-top: 0;
-    background-color: white!important;
+    background-color: white !important;
     padding: 10px;
   }
 }
+
 .simpleui-form-item {
   display: inline-block;
   width: auto;
@@ -75,8 +89,10 @@
 }
 
 #content #changelist-form {
-  padding: 0px 20px;
+  padding: 0px;
 }
+
+
 
 #changelist #toolbar {
   margin-bottom: 0px !important;
@@ -96,7 +112,8 @@
   margin-bottom: 0px !important;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: #3f9eff;
   text-decoration: none;
 }
@@ -112,7 +129,8 @@ a:link, a:visited {
   outline: none;
 }
 
-td, th {
+td,
+th {
   vertical-align: inherit;
   border-bottom: none;
 }
@@ -121,14 +139,16 @@ td, th {
   background: #fafafa;
 }
 
-tbody tr:hover td, tbody tr:hover th {
+tbody tr:hover td,
+tbody tr:hover th {
   background-color: #ebf5ff;
 }
 
 .form-row {
   border-bottom: none !important;
-  display:flex;
+  display: flex;
   align-items: center;
+
   // div:first-child{
   //   display: flex;
   //   align-items: center;
@@ -143,16 +163,18 @@ tbody tr:hover td, tbody tr:hover th {
   //     gap: 10px;
   //     align-items: center;
   // }
-  .fileBox{
-      flex:1;
+  .fileBox {
+    flex: 1;
   }
 }
-.submit-row{
-  padding-bottom: 20px!important;
+
+.submit-row {
+  padding-bottom: 20px !important;
   display: flex;
   justify-content: space-between;
 
 }
+
 .submit-row input[type='submit'] {
   height: auto;
 }
@@ -162,7 +184,7 @@ tbody tr:hover td, tbody tr:hover th {
 }
 
 @media (max-width: 767px) {
-  .submit-row > * {
+  .submit-row>* {
     margin-left: 0px !important;
     margin-bottom: 10px;
   }
@@ -206,7 +228,11 @@ body,
     }
   }
 }
-.aligned label{display: inline-block!important;}
+
+.aligned label {
+  display: inline-block !important;
+}
+
 @media (max-width: 767px) {
   .change-list #content {
     margin: 0px;
@@ -220,7 +246,8 @@ body,
     box-shadow: none;
   }
 
-  body, #container {
+  body,
+  #container {
     background-color: white;
   }
 
@@ -259,11 +286,16 @@ body,
 }
 
 @media (max-width: 1024px) {
-  .change-list .filtered .results, .change-list .filtered .paginator, .filtered #toolbar, .filtered .actions, .filtered div.xfull {
+
+  .change-list .filtered .results,
+  .change-list .filtered .paginator,
+  .filtered #toolbar,
+  .filtered .actions,
+  .filtered div.xfull {
     margin-right: 0px !important;
   }
 
-  #changelist-search > div {
+  #changelist-search>div {
     max-width: 100% !important;
   }
 
@@ -287,19 +319,22 @@ body,
 }
 
 :root {
-  --error-fg: red!important;
+  --error-fg: red !important;
 }
-#user_form{
+
+#user_form {
   background-color: white;
   margin: 10px;
   padding: 10px;
   //color: #5a9cf8;
 }
-#id_password{
-  .button{
-    color: white!important;
+
+#id_password {
+  .button {
+    color: white !important;
   }
 }
+
 /*django新特性 主题适配*/
 @media (prefers-color-scheme: dark) {
   :root {
@@ -334,3 +369,4 @@ body,
     --close-button-hover-bg: inherit;
   }
 }
+
