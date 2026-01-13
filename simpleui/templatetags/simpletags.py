@@ -191,7 +191,7 @@ def format_table(d):
     for key in d:
         html += '<tr><th>{}</th><td>{}</td></tr>'.format(key, d.get(key))
     html += '</tbody></table>'
-    return format_html(html)
+    return mark_safe(html)
 
 
 def has_permission_in_config(config):

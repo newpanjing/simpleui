@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 echo 'delete cache'
-rm -rf simpleui/templatetags/__pycache__
+find . -type d -name "__pycache__" -exec rm -rf {} +
 echo 'release django-simpleui...'
 rm -rf dist/*
 python3 setup.py sdist
