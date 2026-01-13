@@ -281,6 +281,9 @@ body {
   }
 }
 @media screen and (max-width: 800px) {
+  .el-message-box {
+    width: 80%!important;
+  }
   #home .el-col-6 {
     width: 100%;
   }
@@ -389,4 +392,3 @@ body {
 .lite-menus .is-opened .el-submenu__title {
   color: white !important;
 }
-/*# sourceMappingURL=index.css.map */

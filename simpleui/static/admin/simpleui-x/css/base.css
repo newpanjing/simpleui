@@ -195,6 +195,7 @@ body,
   .el-dialog {
     width: 90%;
   }
+  
 }
 @media (max-width: 1024px) {
   .change-list .filtered .results,
