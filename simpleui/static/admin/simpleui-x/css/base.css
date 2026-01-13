@@ -113,7 +113,6 @@ tbody tr:hover th {
 }
 .form-row {
   border-bottom: none !important;
-  display: flex;
   align-items: center;
 }
 .form-row .fileBox {
