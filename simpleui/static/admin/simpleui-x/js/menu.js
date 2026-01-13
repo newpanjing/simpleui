@@ -10,7 +10,7 @@ Vue.component('sub-menu', {
             <template v-for="(item,i) in menus" :key="item.eid">
                 <el-menu-item  :index="item.eid" v-if="!item.models" @click="openTab(item,item.eid)">
                     <i :class="'menu-icon '+item.icon"></i>
-                    <span>{{item.name}}</span>
+                    <span v-show="!fold">{{item.name}}</span>
                 </el-menu-item>
                 <el-submenu :index="item.eid" v-else>
                     <template slot="title">
